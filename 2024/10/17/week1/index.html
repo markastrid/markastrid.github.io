@@ -50,17 +50,22 @@
 <meta property="og:image" content="http://example.com/2024/10/17/week1/4668349e04cf0c4489865e133d112e98.png">
 <meta property="og:image" content="http://example.com/2024/10/17/week1/5eb364cc5732428c695e2aa90138b01b.png">
 <meta property="og:image" content="http://example.com/2024/10/17/week1/image-20241018173640667.png">
-<meta property="og:image" content="d:\blog\source_posts\week1\ffddfddfdfd.png">
-<meta property="og:image" content="d:\blog\source_posts\week1\fdddddd.png">
+<meta property="og:image" content="http://example.com/2024/10/17/week1/ffddfddfdfd.png">
+<meta property="og:image" content="http://example.com/2024/10/17/week1/fdddddd.png">
 <meta property="og:image" content="http://example.com/2024/10/17/week1/437ae2333f00286141abe181a1b7c44a.png">
 <meta property="og:image" content="http://example.com/2024/10/17/week1/b2069e4b3e12618f5405500d058118d7.png">
 <meta property="og:image" content="http://example.com/2024/10/17/week1/1a9f98df1560724713f6580de27a0bde.jpg">
 <meta property="og:image" content="http://example.com/2024/10/17/week1/5ec35206e8ae22668d4b4a3c3ea7b292.jpg">
 <meta property="article:published_time" content="2024-10-17T07:12:45.000Z">
-<meta property="article:modified_time" content="2024-10-19T10:03:43.704Z">
+<meta property="article:modified_time" content="2024-10-23T07:07:40.362Z">
 <meta property="article:author" content="markastrid">
 <meta property="article:tag" content="机器学习概念">
+<meta property="article:tag" content="监督学习">
+<meta property="article:tag" content="无监督学习">
+<meta property="article:tag" content="单变量线性回归">
 <meta property="article:tag" content="梯度下降">
+<meta property="article:tag" content="线性代数回顾">
+<meta property="article:tag" content="矩阵乘法">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/10/17/week1/2d99281dfc992452c9d32e022ce71161-17292447578802.png">
 
@@ -223,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-10-19 18:03:43" itemprop="dateModified" datetime="2024-10-19T18:03:43+08:00">2024-10-19</time>
+                <time title="修改时间：2024-10-23 15:07:40" itemprop="dateModified" datetime="2024-10-23T15:07:40+08:00">2024-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,7 +252,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="引言-Introduction"><a href="#引言-Introduction" class="headerlink" title="引言(Introduction)"></a>引言(Introduction)</h2><h3 id="1-1-欢迎"><a href="#1-1-欢迎" class="headerlink" title="1.1 欢迎"></a>1.1 欢迎</h3><p>机器学习是目前信息技术中最激动人心的方向之一。在这门课中，你将学习到这门技术的前沿，并可以自己实现学习机器学习的算法。</p>
+        <p>[TOC]</p>
+<h2 id="引言-Introduction"><a href="#引言-Introduction" class="headerlink" title="引言(Introduction)"></a>引言(Introduction)</h2><h3 id="1-1-欢迎"><a href="#1-1-欢迎" class="headerlink" title="1.1 欢迎"></a>1.1 欢迎</h3><p>机器学习是目前信息技术中最激动人心的方向之一。在这门课中，你将学习到这门技术的前沿，并可以自己实现学习机器学习的算法。</p>
 <p>这里有一些机器学习的案例。</p>
 <ul>
 <li><p>数据库挖掘:机器学习被用于数据挖掘的原因之一是网络和自动化技术的增长，这意味着，我们有史上最大的数据集</p>
@@ -397,7 +403,10 @@
 <ul>
 <li>一些类别：<strong>聚类；异常检测；降维</strong></li>
 </ul>
-<h2 id="二、单变量线性回归-Linear-Regression-with-One-Variable"><a href="#二、单变量线性回归-Linear-Regression-with-One-Variable" class="headerlink" title="二、单变量线性回归(Linear Regression with One Variable)"></a>二、单变量线性回归(Linear Regression with One Variable)</h2><h3 id="2-1-模型表示"><a href="#2-1-模型表示" class="headerlink" title="2.1 模型表示"></a>2.1 模型表示</h3><p>通过一个例子来开始：预测住房价格的，我们要使用一个数据集，数据集包含俄勒冈州波特兰市的住房价格。在这里，我要根据不同房屋尺寸所售出的价格，画出我的数据集。比方说，如果你朋友的房子是1250平方尺大小，你要告诉他们这房子能卖多少钱。那么，你可以做的一件事就是构建一个模型，也许是条直线，从这个数据模型上来看，也许你可以告诉你的朋友，他能以大约220000(美元)左右的价格卖掉这个房子。</p>
+<h2 id="二、单变量线性回归"><a href="#二、单变量线性回归" class="headerlink" title="二、单变量线性回归"></a>二、单变量线性回归</h2><ul>
+<li>Linear Regression with One Variable</li>
+</ul>
+<h3 id="2-1-模型表示"><a href="#2-1-模型表示" class="headerlink" title="2.1 模型表示"></a>2.1 模型表示</h3><p>通过一个例子来开始：预测住房价格的，我们要使用一个数据集，数据集包含俄勒冈州波特兰市的住房价格。在这里，我要根据不同房屋尺寸所售出的价格，画出我的数据集。比方说，如果你朋友的房子是1250平方尺大小，你要告诉他们这房子能卖多少钱。那么，你可以做的一件事就是构建一个模型，也许是条直线，从这个数据模型上来看，也许你可以告诉你的朋友，他能以大约220000(美元)左右的价格卖掉这个房子。</p>
 <img src="/2024/10/17/week1/8e76e65ca7098b74a2e9bc8e9577adfc.png" class="">
 
 <p>它被称作监督学习是因为对于每个数据来说，我们给出了“正确的答案”，即告诉我们：根据我们的数据来说，房子实际的价格是多少，而且，更具体来说，这是一个回归问题。回归一词指的是，我们根据之前的数据预测出一个准确的输出值，对于这个例子就是价格，同时，还有另一种最常见的监督学习方式，叫做分类问题，当我们想要预测离散的输出值，例如，我们正在寻找癌症肿瘤，并想要确定肿瘤是良性的还是恶性的，这就是0&#x2F;1离散输出的问题。更进一步来说，在监督学习中我们有一个数据集，这个数据集被称训练集。</p>
@@ -415,7 +424,7 @@
 </li>
 <li><p><strong>$\left( x,y \right)$代表训练集中的实例</strong></p>
 </li>
-<li><p><strong>$({ {x}^{(i)} },{ {y}^{(i)} })$代表第$i$个观察实例</strong>，例如第一个就是**(2104,460)**</p>
+<li><p><strong>$({ {x}^{(i)} },{ {y}^{(i)} })$代表第$i$个观察实例</strong>，例如第一个就是(2104,460)</p>
 </li>
 <li><p><strong>$h$代表学习算法的解决方案或函数也称为假设（hypothesis）</strong></p>
 </li>
@@ -441,7 +450,7 @@
 
 <p>我们的目标便是选择出可以使得建模误差的平方和能够最小的模型参数。</p>
 <p>这里的代价函数:$\sum_{i&#x3D;1}^m(\hat{y}^{(i)}-y^{(i)})^2$,进一步除以二除以m</p>
-<p> 即使得代价函数 $J \left( w, b \right) &#x3D; \frac{1}{2m}\sum\limits_{i&#x3D;1}^m \left( f_{w,b}(x^{(i)})-y^{(i)} \right)^{2}$最小。</p>
+<p>即使得代价函数 $J \left( w, b \right) &#x3D; \frac{1}{2m}\sum\limits_{i&#x3D;1}^m \left( f_{w,b}(x^{(i)})-y^{(i)} \right)^{2}$最小。</p>
 <p>我们绘制一个等高线图，三个坐标分别为$w$和$b$ 和$J(w, b)$：</p>
 <img src="/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png" class="">
 
@@ -453,13 +462,22 @@
 <img src="/2024/10/17/week1/10ba90df2ada721cf1850ab668204dc9.png" class="">
 
 <ul>
-<li>Hypothesis即是model</li>
-<li>J：度量所用<ul>
-<li>三个例子：$(1,1),(2,2),(3,3)$</li>
-<li>$h_{\theta}(x)&#x3D;\theta x$</li>
-<li>$J(\theta)&#x3D;\frac{1}{2m}\sum_{i&#x3D;1}^m(h_{\theta}(x)-y)^2$<ul>
-<li>$J(1)&#x3D;0$-w&#x3D;1的情况:$J(2)&#x3D;\frac{1}{2\times3}(0+0+0)$</li>
-<li>$J(2)&#x3D;\frac{1}{2}$-w&#x3D;0.5的情况：$J(2)&#x3D;\frac{1}{2\times3}(0.25+1+2.25)$</li>
+<li><p>Hypothesis即是model</p>
+</li>
+<li><p>J：度量所用</p>
+<ul>
+<li><p>三个例子：$(1,1),(2,2),(3,3)$</p>
+</li>
+<li><p>$h_{\theta}(x)&#x3D;\theta x$</p>
+</li>
+<li><p>$J(\theta)&#x3D;\frac{1}{2m}\sum_{i&#x3D;1}^m(h_{\theta}(x)-y)^2$</p>
+<ul>
+<li><p>$J(1)&#x3D;0$-w&#x3D;1的情况：</p>
+<p>$J(2)&#x3D;\frac{1}{2\times3}(0+0+0)$</p>
+</li>
+<li><p>$J(2)&#x3D;\frac{1}{2}$-w&#x3D;0.5的情况：</p>
+<p>$J(2)&#x3D;\frac{1}{2\times3}(0.25+1+2.25)$</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -468,7 +486,7 @@
 <img src="/2024/10/17/week1/2c9fe871ca411ba557e65ac15d55745d.png" class="">
 
 <ul>
-<li>参数w的每个**值(点)**对应左边图上不同的直线去f of x的情况</li>
+<li>参数w的每个值(点)对应左边图上不同的直线去拟合x的情况</li>
 </ul>
 <h3 id="2-4-代价函数的直观理解II"><a href="#2-4-代价函数的直观理解II" class="headerlink" title="2.4 代价函数的直观理解II"></a>2.4 代价函数的直观理解II</h3><img src="/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png" class="">
 
@@ -486,8 +504,10 @@
 <ul>
 <li>可视化：想象一下你正站立在山的这一点上，站立在你想象的公园这座红色山上，在梯度下降算法中，我们要做的就是旋转360度，看看我们的周围，并问自己要在某个方向上，用小碎步尽快下山。这些小碎步需要朝什么方向？如果我们站在山坡上的这一点，你看一下周围，你会发现最佳的下山方向，你再看看周围，然后再一次想想，我应该从什么方向迈着小碎步下山？然后你按照自己的判断又迈出一步，重复上面的步骤，从这个新的点，你环顾四周，并决定从什么方向将会最快下山，然后又迈进了一小步，并依此类推，直到你接近局部最低点的位置。</li>
 </ul>
-<p>批量梯度下降（<strong>batch gradient descent</strong>）算法的公式为：			<br>$$<br>repeat \thinspace   until\thinspace   convergence { \<br>\theta_j:&#x3D;\theta_j-\alpha\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,…)(for\thinspace  j &#x3D; 0,1,2,…)</p>
-<p>\ }<br>$$</p>
+<p>批量梯度下降（<strong>batch gradient descent</strong>）算法的公式为：</p>
+<p><strong>repeat until convergence{</strong></p>
+<p>$\theta_j:&#x3D;\theta_j-\alpha\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,…)(for\thinspace  j &#x3D; 0,1,2,…)$</p>
+<p><strong>}</strong>			</p>
 <ul>
 <li>$a$是学习率（<strong>learning rate</strong>），决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都<strong>同时让所有的参数减去学习速率乘以代价函数的导数</strong>。</li>
 </ul>
@@ -549,7 +569,7 @@
 <li>更新到这个绿色的点，会发现导数，也即斜率，是没那么陡的。</li>
 <li>接近最低点，导数越来越接近零，所以梯度下降后，新的导数会变小一点点。</li>
 <li>再梯度下降一步，在这个绿点，用一个稍微跟刚才在那个点时比，再小一点的一步，到了新的红色点，更接近全局最低点了，因此这点的导数会比在绿点时更小。所以，我再进行一步梯度下降时，我的导数项是更小的，${\theta_{1}}$ 更新的幅度就会更小。</li>
-<li>所以随着梯度下降法的运行，**移动的幅度会自动变得越来越小，直到最终移动幅度非常小，你会发现，已经收敛到局部极小值（一般是更新幅度少于多少多少） **。</li>
+<li>所以随着梯度下降法的运行，<strong>移动的幅度会自动变得越来越小，直到最终移动幅度非常小，你会发现，已经收敛到局部极小值（一般是更新幅度少于多少多少）</strong>。</li>
 </ul>
 </li>
 </ul>
@@ -558,7 +578,7 @@
 <img src="/2024/10/17/week1/5eb364cc5732428c695e2aa90138b01b.png" class="">
 
 <p>对之前的线性回归问题运用梯度下降法，关键在于求出代价函数的导数，即：</p>
-<p>$$<br>\frac{\partial}{\partial{ {\theta}<em>{j} } }J({ {\theta}</em>{0} },{ {\theta}<em>{1} })&#x3D;\frac{\partial}{\partial{ {\theta}</em>{j} } }\frac{1}{2m}{ {\sum\limits_{i&#x3D;1}^{m}{\left({ {h}<em>{\theta} }({ {x}^{(i)} })-{ {y}^{(i)} }\right)} }^{2} }<br>$$<br>$j&#x3D;0$  时：$\frac{\partial }{\partial { {\theta }</em>{0} } }J( { {\theta }<em>{0} },{ {\theta }</em>{1} })&#x3D;\frac{1}{m}{ {\sum\limits_{i&#x3D;1}^{m}{\left( { {h}_{\theta } }({ {x}^{(i)} })-{ {y}^{(i)} } \right)} } }$</p>
+<p>$$<br>\frac{\partial} {\partial{ {\theta} _ {j} } }J({ {\theta} _ {0 } } , { {\theta}<em>{1} })&#x3D; \frac {\partial} {\partial{ {\theta} _ {j} } }\frac {1} {2m} { {\sum\limits</em> {i&#x3D;1} ^ {m} {\left( { {h} _ {\theta} }( { {x}^{ (i) } } )-{ {y } ^ { (i) } }\right) } }^{2} }<br>$$<br>$j&#x3D;0$  时：$\frac{\partial }{\partial { {\theta }<em>{0} } }J( { {\theta }</em>{0} },{ {\theta }<em>{1} })&#x3D;\frac{1}{m}{ {\sum\limits</em>{i&#x3D;1}^{m}{\left( { {h}_{\theta } }({ {x}^{(i)} })-{ {y}^{(i)} } \right)} } }$</p>
 <p>$j&#x3D;1$  时：$\frac{\partial } {\partial { {\theta }<em>{1} } }J ( { {\theta }</em>{0} },{ {\theta }<em>{1} } )&#x3D;\frac{1}{m}\sum\limits</em>{i&#x3D;1}^{m} {\left( \left( { {h}_{\theta } }({ {x}^{(i)} })-{ {y}^{(i)}} \right)\cdot { {x}^{(i)} } \right)}$</p>
 <p>则算法改写成：</p>
 <p><strong>Repeat {</strong></p>
@@ -586,9 +606,11 @@
 <p>如右为1索引向量和0索引向量，一般我们用1索引向量。$y&#x3D;\left[ \begin{matrix}   { {y}<em>{1} }  \   { {y}</em>{2} }  \   { {y}<em>{3} }  \   { {y}</em>{4} }  \\end{matrix} \right]$，$y&#x3D;\left[ \begin{matrix}   { {y}<em>{0} }  \   { {y}</em>{1} }  \   { {y}<em>{2} }  \   { {y}</em>{3} }  \\end{matrix} \right]$</p>
 <h3 id="3-2-加法和标量乘法"><a href="#3-2-加法和标量乘法" class="headerlink" title="3.2 加法和标量乘法"></a>3.2 加法和标量乘法</h3><p>矩阵的加法：行列数相等的可以加。</p>
 <p>例：</p>
-<p><img src="D:\blog\source_posts\week1\ffddfddfdfd.png"></p>
+<img src="/2024/10/17/week1/ffddfddfdfd.png" class="">
+
 <p>矩阵的乘法：每个元素都要乘</p>
-<p><img src="D:\blog\source_posts\week1\fdddddd.png"></p>
+<img src="/2024/10/17/week1/fdddddd.png" class="">
+
 <p>组合算法也类似。</p>
 <h3 id="3-3-矩阵向量乘法"><a href="#3-3-矩阵向量乘法" class="headerlink" title="3.3 矩阵向量乘法"></a>3.3 矩阵向量乘法</h3><p>矩阵和向量的乘法如图：$m×n$的矩阵乘以$n×1$的向量，得到的是$m×1$的向量</p>
 <img src="/2024/10/17/week1/437ae2333f00286141abe181a1b7c44a.png" class="">
@@ -614,7 +636,7 @@
 <p>定义$A$的转置为这样一个$n×m$阶矩阵$B$，满足$B&#x3D;a(j,i)$，即 $b (i,j)&#x3D;a(j,i)$（$B$的第$i$行第$j$列元素是$A$的第$j$行第$i$列元素），记${ {A}^{T} }&#x3D;B$。(有些书记为A’&#x3D;B）</p>
 <p>直观来看，将$A$的所有元素绕着一条从第1行第1列元素出发的右下方45度的射线作镜面反转，即得到$A$的转置。</p>
 <p>例：</p>
-<p>${ {\left| \begin{matrix}   a&amp; b  \   c&amp; d  \   e&amp; f  \\end{matrix} \right|}^{T} }&#x3D;\left|\begin{matrix}   a&amp; c &amp; e  \   b&amp; d &amp; f  \\end{matrix} \right|$</p>
+<p>${ { \left | \begin{matrix}   a &amp; b  \   c &amp; d  \   e&amp; f  \\end{matrix} \right|}^{T} }&#x3D;\left |\begin{matrix}   a&amp; c &amp; e  \   b&amp; d &amp; f  \\end{matrix} \right |$</p>
 <p>矩阵的转置基本性质:</p>
 <p>$ { {\left( A\pm B \right)}^{T} }&#x3D;{ {A}^{T}}\pm { {B}^{T} } $<br>${ {\left( A\times B \right)}^{T} }&#x3D;{ {B}^{T} }\times { {A}^{T} }$<br>${ {\left( { {A}^{T} } \right)}^{T} }&#x3D;A $<br>${ {\left( KA \right)}^{T} }&#x3D;K{ {A}^{T} } $</p>
 <p><strong>matlab</strong>中矩阵转置：直接打一撇，<code>x=y&#39;</code>。</p>
@@ -646,7 +668,12 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5/" rel="tag"># 机器学习概念</a>
+              <a href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"># 监督学习</a>
+              <a href="/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"># 无监督学习</a>
+              <a href="/tags/%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag"># 单变量线性回归</a>
               <a href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/" rel="tag"># 梯度下降</a>
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9B%9E%E9%A1%BE/" rel="tag"># 线性代数回顾</a>
+              <a href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" rel="tag"># 矩阵乘法</a>
           </div>
 
         
@@ -717,7 +744,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80-Introduction"><span class="nav-number">1.</span> <span class="nav-text">引言(Introduction)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%AC%A2%E8%BF%8E"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 欢迎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 机器学习是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 无监督学习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-Linear-Regression-with-One-Variable"><span class="nav-number">2.</span> <span class="nav-text">二、单变量线性回归(Linear Regression with One Variable)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A8%A1%E5%9E%8B%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 模型表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%88cost-function%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 代价函数（cost function）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3I"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 代价函数的直观理解I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3II"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 代价函数的直观理解II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 梯度下降的直观理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 梯度下降的线性回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9B%9E%E9%A1%BE-Linear-Algebra-Review"><span class="nav-number">3.</span> <span class="nav-text">三、线性代数回顾(Linear Algebra Review)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%9F%A9%E9%98%B5%E5%92%8C%E5%90%91%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 矩阵和向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%8A%A0%E6%B3%95%E5%92%8C%E6%A0%87%E9%87%8F%E4%B9%98%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 加法和标量乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E7%9F%A9%E9%98%B5%E5%90%91%E9%87%8F%E4%B9%98%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 矩阵向量乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 矩阵乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 矩阵乘法的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E9%80%86%E3%80%81%E8%BD%AC%E7%BD%AE"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 逆、转置</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80-Introduction"><span class="nav-number">1.</span> <span class="nav-text">引言(Introduction)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%AC%A2%E8%BF%8E"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 欢迎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 机器学习是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 无监督学习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">2.</span> <span class="nav-text">二、单变量线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A8%A1%E5%9E%8B%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 模型表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%EF%BC%88cost-function%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 代价函数（cost function）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3I"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 代价函数的直观理解I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3II"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 代价函数的直观理解II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 梯度下降的直观理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 梯度下降的线性回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9B%9E%E9%A1%BE-Linear-Algebra-Review"><span class="nav-number">3.</span> <span class="nav-text">三、线性代数回顾(Linear Algebra Review)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%9F%A9%E9%98%B5%E5%92%8C%E5%90%91%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 矩阵和向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%8A%A0%E6%B3%95%E5%92%8C%E6%A0%87%E9%87%8F%E4%B9%98%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 加法和标量乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E7%9F%A9%E9%98%B5%E5%90%91%E9%87%8F%E4%B9%98%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 矩阵向量乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 矩阵乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 矩阵乘法的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E9%80%86%E3%80%81%E8%BD%AC%E7%BD%AE"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 逆、转置</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -732,7 +759,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -745,7 +772,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
