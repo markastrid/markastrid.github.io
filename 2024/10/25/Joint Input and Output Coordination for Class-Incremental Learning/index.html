@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="读论文的笔记说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Joint Input and Output Coordination for Class-Incremental Learning">
+<meta property="og:url" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/index.html">
+<meta property="og:site_name" content="Resume">
+<meta property="og:description" content="读论文的笔记说明">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025143258263-17298379801951.png">
+<meta property="article:published_time" content="2024-10-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-25T07:33:18.429Z">
+<meta property="article:author" content="markastrid">
+<meta property="article:tag" content="论文">
+<meta property="article:tag" content="Incremental Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025143258263-17298379801951.png">
+
+<link rel="canonical" href="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Joint Input and Output Coordination for Class-Incremental Learning | Resume</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Resume</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Show yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Joint Input and Output Coordination for Class-Incremental Learning
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-10-25 00:00:00 / 修改时间：15:33:18" itemprop="dateCreated datePublished" datetime="2024-10-25T00:00:00+08:00">2024-10-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">论文</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">读论文的笔记说明</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>增量学习遇到的问题：</p>
+<ol>
+<li><p>adequately address the class bias problem</p>
+<p>类别不平衡</p>
+</li>
+<li><p>alleviate the mutual interference between new and old tasks</p>
+</li>
+</ol>
+<p>   新旧任务之间的干扰</p>
+<ol start="3">
+<li><p>consider the problem of class bias within tasks.</p>
+<p>任务内的偏差</p>
+</li>
+</ol>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>可能解决增量学习的方法：</p>
+<p>memory storage replay [Ahn et al., 2021; Li and Hoiem, 2017; Wu et al., 2019; Rebuffi et al., 2017; Yan et al., 2021]</p>
+<ul>
+<li>储存过去的记忆或者模拟人类的记忆</li>
+<li>由于隐私限制和内存规模优先，旧数据的访问稀缺</li>
+<li>出现问题：任务类间偏差\类别不平衡问题</li>
+<li>severe inter-task class bias, or known as the class imbalance issue between old and new tasks.</li>
+<li>recent approaches [Ahn et al., 2021; Rebuffi et al., 2017; Yan et al., 2021]<ul>
+<li>utilizing rescaling 重新缩放</li>
+<li>balanced scoring 平衡分数</li>
+<li>softmax separating softmax分离</li>
+<li>类别不平衡的问题依然存在，新旧任务之间的干扰没有解决…</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025143258263-17298379801951.png" class="" title="image-20241025143258263">
+
+<p>深度学习模型在面对<strong>类不平衡</strong>和<strong>互相干扰</strong>问题时的情况图中通过图像和文字说明了以下几个关键点：</p>
+<ol>
+<li><p><strong>类不平衡问题（Class Imbalance Issues）</strong>：</p>
+<ul>
+<li>左边的图展示了两个数据集 $ D^t $（新任务的训练数据）和 $D^{t-1}$（旧任务的训练数据）。在新任务中，不同类别的数据分布不均，比如类别 G 拥有较多样本（绿色圆圈），而类别 A 样本较少（红色三角形）。这类不平衡会导致模型的神经元对数据量多的类别有偏向性。</li>
+<li>类不平衡也体现在每个任务内部和任务之间，这会导致完全连接层（图中的右侧层）中的权重偏差，进而影响模型的学习效果。</li>
+</ul>
+</li>
+<li><p><strong>互相干扰问题（Mutual Interference Issues）</strong>：</p>
+<ul>
+<li>右侧展示了卷积神经网络的多层特征提取过程，包括卷积层（Convolution+ReLU）、池化层（Pooling），并最终通过<strong>全连接层（Flatten Layer）</strong>进行分类。</li>
+<li>图中蓝色的线条表示了在更新新任务模型时，旧任务的输出结果应趋近于 0（旧任务的输出应不再影响新任务的分类），但实际中，旧任务的分类头（classification heads）输出可能仍然较大，甚至干扰到新任务的分类。这被称为<strong>遗忘问题</strong>（catastrophic forgetting），即在训练新任务时，模型对旧任务的表现可能变得不稳定或不准确。</li>
+</ul>
+</li>
+<li><p><strong>模型更新前后（Before and After Model Update）</strong>：</p>
+<ul>
+<li>图中用蓝色虚线和实线来表示模型更新前后输出的变化。虚线表示新任务数据在旧任务分类头中的表现（应为零或接近零），而实线表示更新后的情况，模型对旧任务的表现变得不一致，这体现了<strong>连续学习中的互相干扰问题</strong>。</li>
+</ul>
+</li>
+</ol>
+<p>model dynamic expansion [Serra et al., 2018; Mallya and Lazebnik, 2018]</p>
+<p>- </p>
+<p>regularization constraints design [Aljundi et al., 2019]</p>
+<p>- </p>
+<p>本文贡献：a joint input and output coordination (JIOC) mechanism, which enables incremental learning models to simultaneously alleviate the class imbalance and reduce the interference between the predictions of old and new tasks.</p>
+<p>方法：different weights are adaptively assigned to different input data according to their gradients for the output scores during the training of the new task and updating of the old task models. Then the outputs of old task data on new classification heads are explicitly suppressed and knowledge distillation (KD) [Menon et al., 2021] is utilized for harmonization of the output scores based on the principle of human inductive memory [Williams, 1999; Redondo and Morris, 2011].</p>
+<ul>
+<li>不同类样本根据梯度甲醛，旧任务数据在新分类头上的输出背明确抑制，利用知识蒸馏(KD)协调输出梯度</li>
+</ul>
+<p>knowledge distillation (KD) [Menon et al., 2021] </p>
+<p>- </p>
+<p> the principle of human inductive memory [Williams, 1999; Redondo and Morris, 2011]</p>
+<p>- </p>
+<h2 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2.相关工作"></a>2.相关工作</h2><h3 id="2-1-增量学习"><a href="#2-1-增量学习" class="headerlink" title="2.1 增量学习"></a>2.1 增量学习</h3><p>定义为以下的模型：</p>
+<ol>
+<li>模型可以从新的任务数据中学到有用的知识</li>
+<li>旧的数据不需要访问或者只具有很少的访问权限</li>
+<li>对所学的知识有记忆能力</li>
+</ol>
+<p>-incremental learning [Mirza et al., 2022; Garg et al., 2022; Mallya et al., 2018],</p>
+<p>-class-incremental learning [Ahn et al., 2021; Rebuffi et al., 2017; Yan et al., 2021; Zhang et al., 2020; Liu et al., 2021]</p>
+<p>-small sample incremental learning [Tao et al., 2020; Cheraghian et al., 2021].</p>
+<p>class-incremental learning (CIL), and most of these works overcome catastrophic forgetting by using knowledge distillation (KD) together with a small amount of old task data accessed.</p>
+<p>-DMC [Zhang et al., 2020] utilizes separate models for the new and old classes and trains the two models by combining double distillation. </p>
+<p>-SPB [Liu et al., 2021] utilizes cosine classifier and reciprocal adaptive weights, and a new method of learning class-independent knowledge and multi-view knowledge is designed to balance the stability-plasticity dilemma of incremental learning</p>
+<ul>
+<li>没有解决任务内的类偏差和新旧任务的类偏差，这是本文的贡献：环节类不平衡并减少新旧任务预测之间的干扰</li>
+</ul>
+<h4 id="2-2-人类的归纳记忆"><a href="#2-2-人类的归纳记忆" class="headerlink" title="2.2 人类的归纳记忆"></a>2.2 人类的归纳记忆</h4><p>-Fisher et al. [Fisher and Sloutsky, 2005] demonstrated that category- and similarity-based induction should result in different memory traces and thus different memory accuracy. Hayes et al. [Hayes et al., 2013] examined the development of the relationship between inductive reasoning and visual recognition memory, and demonstrated it through two studies. Inspired by human inductive memory, Geng et al. [Geng et al., 2020] proposed a Dynamic Memory Induction Network (DMIN) to further address the small-sample challenge</p>
+<h2 id="3-方法"><a href="#3-方法" class="headerlink" title="3 方法"></a>3 方法</h2><h4 id="3-1-符号：CIL-class-Incremental-Learning"><a href="#3-1-符号：CIL-class-Incremental-Learning" class="headerlink" title="3.1 符号：CIL class Incremental Learning"></a>3.1 符号：CIL class Incremental Learning</h4><p>新任务数据的持续到来:$D&#x3D;{D^1,D^2,…,D^t,…,D^T}$</p>
+<p>第t个新任务($D^t$)中的数据为$D^t&#x3D;{(x^t_{i,j},y^t_{i,j})_{i&#x3D;1,2,…,m;j&#x3D;1,2,…,n_m}}$，其中m是类别数，$n_m$是第m个类别数内的样本数目，x是输出数据，y是对应的标签</p>
+<p>当学习到新任务的时候，我们假设有一少部分旧任务数据仍然储存，如:$D_{old}^t&#x3D;{(x^1_{i,j},y^1_{i,j}),…,(x^t_{i,j},y^t_{i,j})}$其中 $i&#x3D;1,2,..,m;j&#x3D;1,2,…,n_{old}\ll n$</p>
+<p>在CIL中，特征提取器$f(·)$(举例：ResNet [He et al., 2016]))和一个全连接层（FCL）带有一个softmax分类器会是如下形式：</p>
+<p>$X^{\tau}<em>{i,j}&#x3D;f(x^{\tau}</em>{i,j};\Theta)$</p>
+<p>$\hat{P}^{\tau}<em>{i,j}&#x3D;softmax(x^{\tau}</em>{i,j};W)$</p>
+<p>其中，$\tau&#x3D;{1,2,…,t}$是特征提取器的参数，W是分类器的参数，$hat{P}^{\tau}_{i,j}$是输出分数的向量</p>
+<p>当增量学习到第t个任务的时候，所有数据($D^t\cup D^t_{old}&#x3D;(x^{\tau}<em>{i,j},y^{\tau}</em>{i,j}) $)都用于训练</p>
+<p>并且经常采用交叉熵损失:</p>
+<p>$L_{ce,t}&#x3D;-\frac{1}{N_{old}+n_{new} }\sum_{i,j,j,\tau&#x3D;1}^ty^{\tau}<em>{i,j,k}log(\hat{p}^{\tau}</em>{i,j,k})$</p>
+<p>其中，$N_{old}$是旧任务存储下来的数据，$n_{new}$是新任务的所有样例,$\hat{p}^{\tau}_{i,j,k}$是第k个神经元的输出分数</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>markastrid
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/" title="Joint Input and Output Coordination for Class-Incremental Learning">http://example.com/2024/10/25/Joint Input and Output Coordination for Class-Incremental Learning/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BA%E6%96%87/" rel="tag"># 论文</a>
+              <a href="/tags/Incremental-Learning/" rel="tag"># Incremental Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/10/25/python/" rel="prev" title="python">
+      <i class="fa fa-chevron-left"></i> python
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">1.介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">2.相关工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%A2%9E%E9%87%8F%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 增量学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%BA%BA%E7%B1%BB%E7%9A%84%E5%BD%92%E7%BA%B3%E8%AE%B0%E5%BF%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.2 人类的归纳记忆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">3 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E7%AC%A6%E5%8F%B7%EF%BC%9ACIL-class-Incremental-Learning"><span class="nav-number">4.0.1.</span> <span class="nav-text">3.1 符号：CIL class Incremental Learning</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="markastrid"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">markastrid</p>
+  <div class="site-description" itemprop="description">to be continued</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        </style>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">markastrid</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+<div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    </div>
+<div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共21.9k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
