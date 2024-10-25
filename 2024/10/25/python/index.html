@@ -222,47 +222,32 @@
       
         <p>1.三种乘法的规则</p>
 <ul>
-<li><p>np.multiply()：数组和矩阵对应位置相乘，输出与相乘数组&#x2F;矩阵的大小一致</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A=np.arange(<span class="number">1</span>,<span class="number">5</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">B=np.arange(<span class="number">0</span>,<span class="number">4</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">C=np.multiply(A,B)</span><br><span class="line">A,B,C</span><br></pre></td></tr></table></figure></li>
+<li><p>np.multiply()：数组和矩阵对应位置相乘，输出与相乘数组/矩阵的大小一致</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A=np.arange(<span class="number">1</span>,<span class="number">5</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">B=np.arange(<span class="number">0</span>,<span class="number">4</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">C=np.multiply(A,B)</span><br><span class="line">A,B,C</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <img src="/2024/10/25/python/image-20241025122257951.png" class="" title="image-20241025122257951">
-
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D=np.multiply(np.matrix(A),np.matrix(B))</span><br><span class="line">D</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/25/python/image-20241025122644070.png" class="" title="image-20241025122644070">
-
-<p>​				对于两者格式不一致的情况:输出为逐行与后面的列相        乘，注意前者的宽度和后者的长度一致.</p>
+<p>​                对于两者格式不一致的情况:输出为逐行与后面的列相        乘，注意前者的宽度和后者的长度一致.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E=np.arange(<span class="number">0</span>,<span class="number">2</span>)</span><br><span class="line">F=np.multiply(np.matrix(A),np.matrix(E))</span><br><span class="line">A,E,F</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/25/python/image-20241025123310020.png" class="" title="image-20241025123310020">
-
 <ul>
 <li>np.dot():对于秩为1的数组，执行对应位置相乘，然后再相加；对于秩不为1的二维数组，执行矩阵乘法运算</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">D=np.arange(<span class="number">1</span>,<span class="number">5</span>)</span><br><span class="line">E=np.arange(<span class="number">0</span>,<span class="number">4</span>)</span><br><span class="line">F=np.dot(D,E)</span><br><span class="line">D,E,F</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/25/python/image-20241025124017382.png" class="" title="image-20241025124017382">
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A=np.arange(<span class="number">1</span>,<span class="number">5</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">B=np.arange(<span class="number">0</span>,<span class="number">4</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">C=np.dot(A,B)</span><br><span class="line">A,B,C</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/25/python/image-20241025123646528.png" class="" title="image-20241025123646528">
-
-<p>​				是矩阵就直接进行矩阵乘法：和正常矩阵的操作一样</p>
+<p>​                是矩阵就直接进行矩阵乘法：和正常矩阵的操作一样</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">D=np.arange(<span class="number">1</span>,<span class="number">5</span>)</span><br><span class="line">E=np.arange(<span class="number">0</span>,<span class="number">4</span>)</span><br><span class="line">F=np.dot(np.matrix(D).T,np.matrix(E))</span><br><span class="line">G=np.dot(np.matrix(D),np.matrix(E).T)</span><br><span class="line">D,E,F,G</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/25/python/image-20241025124345274.png" class="" title="image-20241025124345274">
-
 <ul>
 <li>*:对数组执行对应位置相乘;对矩阵执行矩阵乘法运算</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A=np.arange(<span class="number">1</span>,<span class="number">5</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">B=np.arange(<span class="number">0</span>,<span class="number">4</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">C=A*B</span><br><span class="line">A,B,C</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/25/python/image-20241025124810010.png" class="" title="image-20241025124810010">
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D=np.dot(np.matrix(A),np.matrix(B))</span><br><span class="line">D</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/25/python/image-20241025124917275.png" class="" title="image-20241025124917275">
     </div>
 
@@ -441,7 +426,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共21.9k字</span>
+    <span class="post-count">全站共21.6k字</span>
   </div>
 
         

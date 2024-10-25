@@ -224,50 +224,41 @@
       
         <h2 id="一-预先说明"><a href="#一-预先说明" class="headerlink" title="一.预先说明"></a>一.预先说明</h2><p>数据的规模不限，表示的形式为如下形式：</p>
 <img src="/2024/10/24/week2%E9%99%84%E5%8A%A0/image-20241024191237419-17297683593366.png" class="" title="image-20241024191237419">
-
 <p>每一行是一个数据，行数即为数据的数目，列数为数据的维度(<strong>最后一行为标记</strong>)</p>
 <p>目的是做回归直线来拟合数据的点，并最小化loss</p>
 <h2 id="二-代码实现"><a href="#二-代码实现" class="headerlink" title="二.代码实现"></a>二.代码实现</h2><p>由于原理在week1和2中已经有了详尽的说明，这里只给出代码实现的框架并且给出一定的解释。</p>
 <h4 id="2-1-数据的提取和预处理"><a href="#2-1-数据的提取和预处理" class="headerlink" title="2.1 数据的提取和预处理"></a>2.1 数据的提取和预处理</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
-
 <p>读取数据并进行预处理</p>
 <p>header不设置或者为None就是默认的0-1标签，设置为n把n+1行的数字当成标签(路径需要注意)</p>
 <p>data.head()可以默认展示前五行的数据</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data=pd.read_csv(<span class="string">&quot;data.txt&quot;</span>,header=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
-
 <p>可以画散点图观察数据的分布，但是仅限维度情况</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.plot(kind=<span class="string">&#x27;scatter&#x27;</span>, x=<span class="string">&#x27;one class&#x27;</span>, y=<span class="string">&#x27;the other class&#x27;</span>, figsize=(<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 <p>下面开始对数据进行处理</p>
 <p>*可能的操作：对变量进行归一化处理</p>
 <ul>
 <li><p>Min-Max标准化:将样本数据等比例缩放到一个特定的范围 [a,b] 之内,常用的缩放区间是 [0, 1]</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data=(data - <span class="built_in">min</span>(data)) / (<span class="built_in">max</span>(data) - <span class="built_in">min</span>(data))</span><br></pre></td></tr></table></figure>
-
 <p><strong>这种方法的实现细节还需要再考虑</strong></p>
 </li>
 <li><p>Z-score:这种方法的范围是整个实数集，将数据变换为均值为0，标准差为1的分布，但不是传统意义的归一化</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = (data-data.mean())/data.std()</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = (data-data.mean())/data.std()</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <p>首先要将标签和数据进行分离，这里假设X是训练数据，y是标签</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">column=data.shape[<span class="number">1</span>]<span class="comment">#数据第二维度数，即每条数据的列数目</span></span><br><span class="line">X=data.iloc[:,<span class="number">0</span>:column-<span class="number">1</span>]<span class="comment">#除了最后的所有列</span></span><br><span class="line">y=data.iloc[:,column-<span class="number">1</span>:column]</span><br></pre></td></tr></table></figure>
-
 <p>在0处添加全1列，名称为ones，理由后面会说</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X.insert(<span class="number">0</span>, <span class="string">&#x27;Ones&#x27;</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><em><em>注意这里的添加需要在X被转化成matrix之前，否则会出现：</em>‘matrix’ object has no attribute ‘insert’</em>**</li>
+<li><strong>注意这里的添加需要在X被转化成matrix之前，否则会出现：<em>‘matrix’ object has no attribute ‘insert’</em></strong></li>
 </ul>
 <p>其次注意这个数据的类型是dataFrame的，要先转化成np.matrix才方便进行处理（.values是取值，但是好像不加也可以获得相同的效果）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X=np.matrix(X.values)</span><br><span class="line">y=np.matrix(y.values)</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/24/week2%E9%99%84%E5%8A%A0/image-20241024201449882-17297720914427.png" class="" title="image-20241024201449882">
-
-<p>假设变量为$\vec{w}$，那么我们需要一个长度为data.shape[1]+1的向量$\vec{w}$作为未知量进行参数更新，其中$\vec{w}&#x3D;[b,w_1,w_2,…]$</p>
+<p>假设变量为$\vec{w}$，那么我们需要一个长度为data.shape[1]+1的向量$\vec{w}$作为未知量进行参数更新，其中$\vec{w}=[b,w_1,w_2,…]$</p>
 <p>这样做的好处是，我们只需要更新$w$即可，b会放在里面一起更新</p>
 <p>但是同时意味着，我们需要对X加上一层处理：在所有数据前加上统一的1（或者数据的最后或者任意的位置，只要保持一致即可，因为在线性函数中，常数项的位置是任意的）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w=np.matrix(np.array([<span class="number">0</span>]*X.shape[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>w直接设成初始值即可，注意这里因为是在添加全1列之后，因此只需要设置成X.shape[1]即X的特征数目即可</li>
 </ul>
@@ -281,34 +272,27 @@
 <p>损失函数计算：</p>
 <ul>
 <li>可能的损失函数种类：平方损失，Hinge损失，对数损失…</li>
-<li>这里选用平方:$\frac{1}{2m}\sum_{i&#x3D;1}^m(\hat{y}-y)^2$</li>
+<li>这里选用平方:$\frac{1}{2m}\sum_{i=1}^m(\hat{y}-y)^2$</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">X,y,w</span>):</span><br><span class="line">    predict_y=np.dot(X,w.T)</span><br><span class="line">    square=np.power(predict_y-y,<span class="number">2</span>)</span><br><span class="line">    m=X.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>(square)/(<span class="number">2</span>*m)</span><br></pre></td></tr></table></figure>
-
 <p>设置学习率和迭代次数，前者是步长后者是循环次数，复杂的时候还会对比损失函数的值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iters=<span class="number">1500</span></span><br><span class="line">alpha=<span class="number">0.01</span></span><br></pre></td></tr></table></figure>
-
 <p>先计算一下当前的损失</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span>(cost_function(X,y,w))</span><br></pre></td></tr></table></figure>
-
-<p>在前面的基础上进行梯度下降:$w_i:&#x3D;w_i-\alpha\frac{1}{m}\sum_{i&#x3D;1}^m(\hat{y}_i-y_i)x_i$</p>
+<p>在前面的基础上进行梯度下降:$w_i:=w_i-\alpha\frac{1}{m}\sum_{i=1}^m(\hat{y}_i-y_i)x_i$</p>
 <ul>
 <li>这里也体现了前面全1列的好处：1可以直接放进去更新而不影响整体</li>
 <li>这里选择的批量梯度下降，每次都把所有样本放进去下降</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">X,y,w,alpha,iters</span>):</span><br><span class="line">    <span class="comment">#temp矩阵用于存w的临时值，方便一起更新</span></span><br><span class="line">    <span class="comment">#temp=np.matrix(np.array([0]*X.shape[1]))</span></span><br><span class="line">    temp = np.matrix(np.zeros(w.shape))</span><br><span class="line">    <span class="comment">#记录损失曲线可以可视化损失函数,先建立一个全0数组</span></span><br><span class="line">    loss=np.zeros(iters)</span><br><span class="line">    i=<span class="number">0</span></span><br><span class="line">    parameter=w.shape[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">while</span> i&lt;iters:</span><br><span class="line">        error=np.dot(X,w.T)-y</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(parameter):</span><br><span class="line">            <span class="comment">#error和 X[:,j]即第j列逐元素相乘</span></span><br><span class="line">            descent=np.multiply(error,X[:,j])</span><br><span class="line">            <span class="comment">#用这个表示是因为temp为matrix类型</span></span><br><span class="line">        	temp[<span class="number">0</span>, j] = w[<span class="number">0</span>, j]-alpha/X.shape[<span class="number">0</span>]*np.<span class="built_in">sum</span>(descent)</span><br><span class="line">        w=temp</span><br><span class="line">        cost[i]=cost_function(X,y,w)</span><br><span class="line">        i+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <p>接下来就是进行测试</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">para,cost=gradientDescent(X,y,theta,alpha,iters)</span><br><span class="line"><span class="built_in">float</span>(cost_function(X, y, para))</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><strong>0.130686706060959</strong></li>
 </ul>
 <p>损失函数图</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">12</span>,<span class="number">8</span>))</span><br><span class="line">ax.plot(np.arange(iters), cost, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;Iterations&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">ax.set_title(<span class="string">&#x27;Error vs. Training Epoch&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 <img src="/2024/10/24/week2%E9%99%84%E5%8A%A0/image-20241024211748240-17297758692668.png" class="" title="image-20241024211748240">
-
 <p>至此完成一个模型的结构</p>
 <p>主要难点：理解和梯度下降</p>
 
@@ -491,7 +475,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共21.9k字</span>
+    <span class="post-count">全站共21.6k字</span>
   </div>
 
         

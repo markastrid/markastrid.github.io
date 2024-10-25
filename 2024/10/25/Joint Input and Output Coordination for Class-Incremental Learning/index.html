@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025143258263-17298379801951.png">
 <meta property="article:published_time" content="2024-10-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-25T07:33:18.429Z">
+<meta property="article:modified_time" content="2024-10-25T07:35:42.639Z">
 <meta property="article:author" content="markastrid">
 <meta property="article:tag" content="论文">
 <meta property="article:tag" content="Incremental Learning">
@@ -189,7 +189,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-10-25 00:00:00 / 修改时间：15:33:18" itemprop="dateCreated datePublished" datetime="2024-10-25T00:00:00+08:00">2024-10-25</time>
+              <time title="创建时间：2024-10-25 00:00:00 / 修改时间：15:35:42" itemprop="dateCreated datePublished" datetime="2024-10-25T00:00:00+08:00">2024-10-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -214,19 +214,12 @@
 
       
         <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>增量学习遇到的问题：</p>
-<ol>
-<li><p>adequately address the class bias problem</p>
-<p>类别不平衡</p>
-</li>
-<li><p>alleviate the mutual interference between new and old tasks</p>
-</li>
-</ol>
+<p>1) adequately address the class bias problem</p>
+<p>   类别不平衡</p>
+<p>2)  alleviate the mutual interference between new and old tasks</p>
 <p>   新旧任务之间的干扰</p>
-<ol start="3">
-<li><p>consider the problem of class bias within tasks.</p>
-<p>任务内的偏差</p>
-</li>
-</ol>
+<p>3) consider the problem of class bias within tasks.</p>
+<p>   任务内的偏差</p>
 <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>可能解决增量学习的方法：</p>
 <p>memory storage replay [Ahn et al., 2021; Li and Hoiem, 2017; Wu et al., 2019; Rebuffi et al., 2017; Yan et al., 2021]</p>
 <ul>
@@ -243,7 +236,6 @@
 </li>
 </ul>
 <img src="/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025143258263-17298379801951.png" class="" title="image-20241025143258263">
-
 <p>深度学习模型在面对<strong>类不平衡</strong>和<strong>互相干扰</strong>问题时的情况图中通过图像和文字说明了以下几个关键点：</p>
 <ol>
 <li><p><strong>类不平衡问题（Class Imbalance Issues）</strong>：</p>
@@ -265,18 +257,22 @@
 </li>
 </ol>
 <p>model dynamic expansion [Serra et al., 2018; Mallya and Lazebnik, 2018]</p>
-<p>- </p>
-<p>regularization constraints design [Aljundi et al., 2019]</p>
-<p>- </p>
+<ul>
+<li><p>regularization constraints design [Aljundi et al., 2019]</p>
+</li>
+<li></li>
+</ul>
 <p>本文贡献：a joint input and output coordination (JIOC) mechanism, which enables incremental learning models to simultaneously alleviate the class imbalance and reduce the interference between the predictions of old and new tasks.</p>
 <p>方法：different weights are adaptively assigned to different input data according to their gradients for the output scores during the training of the new task and updating of the old task models. Then the outputs of old task data on new classification heads are explicitly suppressed and knowledge distillation (KD) [Menon et al., 2021] is utilized for harmonization of the output scores based on the principle of human inductive memory [Williams, 1999; Redondo and Morris, 2011].</p>
 <ul>
 <li>不同类样本根据梯度甲醛，旧任务数据在新分类头上的输出背明确抑制，利用知识蒸馏(KD)协调输出梯度</li>
 </ul>
 <p>knowledge distillation (KD) [Menon et al., 2021] </p>
-<p>- </p>
-<p> the principle of human inductive memory [Williams, 1999; Redondo and Morris, 2011]</p>
-<p>- </p>
+<ul>
+<li><p>the principle of human inductive memory [Williams, 1999; Redondo and Morris, 2011]</p>
+</li>
+<li></li>
+</ul>
 <h2 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2.相关工作"></a>2.相关工作</h2><h3 id="2-1-增量学习"><a href="#2-1-增量学习" class="headerlink" title="2.1 增量学习"></a>2.1 增量学习</h3><p>定义为以下的模型：</p>
 <ol>
 <li>模型可以从新的任务数据中学到有用的知识</li>
@@ -293,16 +289,16 @@
 <li>没有解决任务内的类偏差和新旧任务的类偏差，这是本文的贡献：环节类不平衡并减少新旧任务预测之间的干扰</li>
 </ul>
 <h4 id="2-2-人类的归纳记忆"><a href="#2-2-人类的归纳记忆" class="headerlink" title="2.2 人类的归纳记忆"></a>2.2 人类的归纳记忆</h4><p>-Fisher et al. [Fisher and Sloutsky, 2005] demonstrated that category- and similarity-based induction should result in different memory traces and thus different memory accuracy. Hayes et al. [Hayes et al., 2013] examined the development of the relationship between inductive reasoning and visual recognition memory, and demonstrated it through two studies. Inspired by human inductive memory, Geng et al. [Geng et al., 2020] proposed a Dynamic Memory Induction Network (DMIN) to further address the small-sample challenge</p>
-<h2 id="3-方法"><a href="#3-方法" class="headerlink" title="3 方法"></a>3 方法</h2><h4 id="3-1-符号：CIL-class-Incremental-Learning"><a href="#3-1-符号：CIL-class-Incremental-Learning" class="headerlink" title="3.1 符号：CIL class Incremental Learning"></a>3.1 符号：CIL class Incremental Learning</h4><p>新任务数据的持续到来:$D&#x3D;{D^1,D^2,…,D^t,…,D^T}$</p>
-<p>第t个新任务($D^t$)中的数据为$D^t&#x3D;{(x^t_{i,j},y^t_{i,j})_{i&#x3D;1,2,…,m;j&#x3D;1,2,…,n_m}}$，其中m是类别数，$n_m$是第m个类别数内的样本数目，x是输出数据，y是对应的标签</p>
-<p>当学习到新任务的时候，我们假设有一少部分旧任务数据仍然储存，如:$D_{old}^t&#x3D;{(x^1_{i,j},y^1_{i,j}),…,(x^t_{i,j},y^t_{i,j})}$其中 $i&#x3D;1,2,..,m;j&#x3D;1,2,…,n_{old}\ll n$</p>
+<h2 id="3-方法"><a href="#3-方法" class="headerlink" title="3 方法"></a>3 方法</h2><h4 id="3-1-符号：CIL-class-Incremental-Learning"><a href="#3-1-符号：CIL-class-Incremental-Learning" class="headerlink" title="3.1 符号：CIL class Incremental Learning"></a>3.1 符号：CIL class Incremental Learning</h4><p>新任务数据的持续到来:$D=\{D^1,D^2,…,D^t,…,D^T\}$</p>
+<p>第t个新任务($D^t$)中的数据为$D^t=\{(x^t_{i,j},y^t_{i,j})_{i=1,2,…,m;j=1,2,…,n_m}\}$，其中m是类别数，$n_m$是第m个类别数内的样本数目，x是输出数据，y是对应的标签</p>
+<p>当学习到新任务的时候，我们假设有一少部分旧任务数据仍然储存，如:$D_{old}^t=\{(x^1_{i,j},y^1_{i,j}),…,(x^t_{i,j},y^t_{i,j})\}$其中 $i=1,2,..,m;j=1,2,…,n_{old}\ll n$</p>
 <p>在CIL中，特征提取器$f(·)$(举例：ResNet [He et al., 2016]))和一个全连接层（FCL）带有一个softmax分类器会是如下形式：</p>
-<p>$X^{\tau}<em>{i,j}&#x3D;f(x^{\tau}</em>{i,j};\Theta)$</p>
-<p>$\hat{P}^{\tau}<em>{i,j}&#x3D;softmax(x^{\tau}</em>{i,j};W)$</p>
-<p>其中，$\tau&#x3D;{1,2,…,t}$是特征提取器的参数，W是分类器的参数，$hat{P}^{\tau}_{i,j}$是输出分数的向量</p>
-<p>当增量学习到第t个任务的时候，所有数据($D^t\cup D^t_{old}&#x3D;(x^{\tau}<em>{i,j},y^{\tau}</em>{i,j}) $)都用于训练</p>
+<p>$X^{\tau}_{i,j}=f(x^{\tau}_{i,j};\Theta)$</p>
+<p>$\hat{P}^{\tau}_{i,j}=softmax(x^{\tau}_{i,j};W)$</p>
+<p>其中，$\tau=\{1,2,…,t\}$是特征提取器的参数，W是分类器的参数，$hat{P}^{\tau}_{i,j}$是输出分数的向量</p>
+<p>当增量学习到第t个任务的时候，所有数据($D^t\cup D^t_{old}=(x^{\tau}_{i,j},y^{\tau}_{i,j}) $)都用于训练</p>
 <p>并且经常采用交叉熵损失:</p>
-<p>$L_{ce,t}&#x3D;-\frac{1}{N_{old}+n_{new} }\sum_{i,j,j,\tau&#x3D;1}^ty^{\tau}<em>{i,j,k}log(\hat{p}^{\tau}</em>{i,j,k})$</p>
+<p>$L_{ce,t}=-\frac{1}{N_{old}+n_{new} }\sum_{i,j,j,\tau=1}^ty^{\tau}_{i,j,k}log(\hat{p}^{\tau}_{i,j,k})$</p>
 <p>其中，$N_{old}$是旧任务存储下来的数据，$n_{new}$是新任务的所有样例,$\hat{p}^{\tau}_{i,j,k}$是第k个神经元的输出分数</p>
 
     </div>
@@ -480,7 +476,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共21.9k字</span>
+    <span class="post-count">全站共21.6k字</span>
   </div>
 
         

@@ -218,19 +218,17 @@
       
         <p>[TOC]</p>
 <h3 id="一-引入：一个线性模型的例子"><a href="#一-引入：一个线性模型的例子" class="headerlink" title="一. 引入：一个线性模型的例子"></a>一. 引入：一个线性模型的例子</h3><ol>
-<li><p>假设我们首先得到了一个模型训练的结果:$f(x_1,x_2)&#x3D;3x_1+4x_2+2$，需要根据新样本$(2,2,12)$来更新模型</p>
+<li><p>假设我们首先得到了一个模型训练的结果:$f(x_1,x_2)=3x_1+4x_2+2$，需要根据新样本$(2,2,12)$来更新模型</p>
 </li>
 <li><p>采用增量学习的方式，即是在该模型参数上进行微调而不是重新开始训练</p>
 <ul>
-<li><p>即:$f(x_1,x_2)&#x3D;3\times 2+4\times 2+2&#x3D;16$，和真实值12差距为4</p>
-</li>
-<li><p>采用梯度下降进行更新:$\omega_i^{t+1}&#x3D;\omega_i^{t}-\eta \frac{\partial{L}}{\partial{\omega_i}}$</p>
-</li>
-<li><p>采用均方误差为损失函数:$L&#x3D;\frac{1}{2}(f(x_1,x_2)-y)^2$</p>
+<li>即:$f(x_1,x_2)=3\times 2+4\times 2+2=16$，和真实值12差距为4</li>
+<li>采用梯度下降进行更新:$\omega_i^{t+1}=\omega_i^{t}-\eta \frac{\partial{L}}{\partial{\omega_i}}$</li>
+<li><p>采用均方误差为损失函数:$L=\frac{1}{2}(f(x_1,x_2)-y)^2$</p>
 <ul>
 <li>其求导为:$(f(x_1,x_2)-y)\frac{\partial{f(2,2)}}{\partial{\omega_i}}$</li>
-<li>求偏导得到:$\frac{\partial{f(2,2)}}{\partial{\omega_1}}&#x3D;2$,$\frac{\partial{f(2,2)}}{\partial{\omega_2}}&#x3D;2$,$\frac{\partial{f(2,2)}}{\partial{\omega_3}}&#x3D;1$</li>
-<li>带入梯度下降公式得到$w_1&#x3D;3-\eta·4·2&#x3D;3-8\eta$，$w_2&#x3D;4-\eta·4·2&#x3D;4-8\eta$，$w_3&#x3D;2-\eta·4·1&#x3D;2-4\eta$</li>
+<li>求偏导得到:$\frac{\partial{f(2,2)}}{\partial{\omega_1}}=2$,$\frac{\partial{f(2,2)}}{\partial{\omega_2}}=2$,$\frac{\partial{f(2,2)}}{\partial{\omega_3}}=1$</li>
+<li>带入梯度下降公式得到$w_1=3-\eta·4·2=3-8\eta$，$w_2=4-\eta·4·2=4-8\eta$，$w_3=2-\eta·4·1=2-4\eta$</li>
 </ul>
 </li>
 <li><p>用这些结合超参数$\eta$更新公式即可</p>
@@ -246,7 +244,7 @@
 <h4 id="2-1-灾难性遗忘"><a href="#2-1-灾难性遗忘" class="headerlink" title="2.1 灾难性遗忘"></a>2.1 灾难性遗忘</h4><ul>
 <li>概念：一般的机器学习模型(尤其是基于反向传播的深度学习方法)在新任务上训练时，在旧任务上的表现通常会显著下降</li>
 <li>原因：<strong>传统模型假设数据分布是固定或平稳的，训练样本是独立同分布的</strong>，但是当新数据来的时候，训练数据的分布就是非平稳的，模型从非平稳的数据分布中持续不断地获取知识时，新知识会干扰旧知识，从而导致模型性能的快速下降，甚至完全覆盖或遗忘以前学习到的旧知识</li>
-<li>**稳定性-可塑性困境(stability-plasticity dilemma)**：希望模型一方面必须表现出从新数据中整合新知识和提炼已有知识的能力(可塑性)，另一方面又必须防止新输入对已有知识的显著干扰(稳定性)</li>
+<li><strong>稳定性-可塑性困境(stability-plasticity dilemma)</strong>：希望模型一方面必须表现出从新数据中整合新知识和提炼已有知识的能力(可塑性)，另一方面又必须防止新输入对已有知识的显著干扰(稳定性)</li>
 </ul>
 <h4 id="2-2-增量学习"><a href="#2-2-增量学习" class="headerlink" title="2.2 增量学习"></a>2.2 增量学习</h4><ul>
 <li><p>类似持续学习、终生学习</p>
@@ -256,6 +254,7 @@
 <li><p>辨析增量学习和在线学习：</p>
 <ul>
 <li><p>前者通常要求每个样本只能使用一次，且数据全都来自于同一个任务，而增量学习是多任务的，但它允许在进入下一个任务之前多次处理当前任务的数据</p>
+
 </li>
 </ul>
 </li>
@@ -266,12 +265,12 @@
 <li><p>计算能力与内存应该随着类别数的增加固定或者缓慢增长，最理想的情况是一旦完成某一任务的学习，该任务的观测样本便被全部丢弃</p>
 </li>
 <li><p>模型可以从新任务和新数据中持续学习新知识，当新任务在不同时间出现，它都是可训练的</p>
+
 </li>
 </ol>
 </li>
 </ul>
 <h3 id="三-实现"><a href="#三-实现" class="headerlink" title="三.实现"></a>三.实现</h3>
-
 <ul>
 <li>关于其他划分方式和不同类别的增量学习的优缺点对比可见：A Comprehensive Study of Class Incremental Learning Algorithms for Visual Tasks</li>
 </ul>
@@ -283,11 +282,10 @@
 </ul>
 <h4 id="3-2-基于回放的增量学习"><a href="#3-2-基于回放的增量学习" class="headerlink" title="3.2 基于回放的增量学习"></a>3.2 基于回放的增量学习</h4><h4 id="3-3-基于参数隔离的增量学习"><a href="#3-3-基于参数隔离的增量学习" class="headerlink" title="3.3 基于参数隔离的增量学习"></a>3.3 基于参数隔离的增量学习</h4><p>：模糊聚类</p>
 <ul>
-<li><p>模糊聚类：跟聚类相比使用模糊集合的概念，允许数据点属于多个聚类，并且可以量化这种隶属关系</p>
-</li>
+<li>模糊聚类：跟聚类相比使用模糊集合的概念，允许数据点属于多个聚类，并且可以量化这种隶属关系</li>
 <li><p>常见的增量模糊聚类算法：增量模糊C均值聚类（Incremental Fuzzy C-means Clustering Algorithm，IFCM）</p>
 <ul>
-<li>基本思路是：每次只考虑新增加的数据，将新增加的数据与现有的聚类中心进行比较，更新聚类中心和<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=224586528&content_type=Article&match_order=1&q=%E9%9A%B6%E5%B1%9E%E5%BA%A6%E7%9F%A9%E9%98%B5&zhida_source=entity">隶属度矩阵</a>。该算法通过增量更新聚类中心和隶属度矩阵来实现增量学习</li>
+<li>基本思路是：每次只考虑新增加的数据，将新增加的数据与现有的聚类中心进行比较，更新聚类中心和<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=224586528&amp;content_type=Article&amp;match_order=1&amp;q=隶属度矩阵&amp;zhida_source=entity">隶属度矩阵</a>。该算法通过增量更新聚类中心和隶属度矩阵来实现增量学习</li>
 </ul>
 </li>
 <li><p>一般步骤：</p>
@@ -468,7 +466,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共21.9k字</span>
+    <span class="post-count">全站共21.6k字</span>
   </div>
 
         
