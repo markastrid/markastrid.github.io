@@ -30,8 +30,11 @@
 <meta property="og:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025143258263-17298379801951.png">
 <meta property="og:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025185904962-17298539467131.png">
 <meta property="og:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025185929767-17298539709042.png">
-<meta property="article:published_time" content="2024-10-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-25T11:10:51.712Z">
+<meta property="og:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241030143100806-17302698690771.png">
+<meta property="og:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241030151337846-17302724193592.png">
+<meta property="og:image" content="http://example.com/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241030151358482-17302724394523.png">
+<meta property="article:published_time" content="2024-10-25T04:58:51.436Z">
+<meta property="article:modified_time" content="2024-10-30T07:21:31.136Z">
 <meta property="article:author" content="markastrid">
 <meta property="article:tag" content="论文">
 <meta property="article:tag" content="Incremental Learning">
@@ -189,10 +192,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-10-25 00:00:00 / 修改时间：19:10:51" itemprop="dateCreated datePublished" datetime="2024-10-25T00:00:00+08:00">2024-10-25</time>
+              <time title="创建时间：2024-10-25 12:58:51" itemprop="dateCreated datePublished" datetime="2024-10-25T12:58:51+08:00">2024-10-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-10-30 15:21:31" itemprop="dateModified" datetime="2024-10-30T15:21:31+08:00">2024-10-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -300,7 +309,7 @@
 <p>其中，$\tau=\{1,2,…,t\}$是特征提取器的参数，W是分类器的参数，$hat{P}^{\tau}_{i,j}$是输出分数的向量</p>
 <p>当增量学习到第t个任务的时候，所有数据($D^t\cup D^t_{old}=(x^{\tau}_{i,j},y^{\tau}_{i,j}) $)都用于训练</p>
 <p>并且经常采用交叉熵损失:</p>
-<p>$L_{ce,t}=-\frac{1}{N_{old}+n_{new} }\sum_{i,j,j,\tau=1}^ty^{\tau}_{i,j,k}log(\hat{p}^{\tau}_{i,j,k})$</p>
+<p>$L_{ce,t}=-\frac{1}{N_{old}+n_{new} }\sum_{i,j,k,\tau=1}^ty^{\tau}_{i,j,k}log(\hat{p}^{\tau}_{i,j,k})$</p>
 <p>其中，$N_{old}$是旧任务存储下来的数据，$n_{new}$是新任务的所有样例,$\hat{p}^{\tau}_{i,j,k}$是第k个神经元的输出分数</p>
 <h4 id="3-2-概述"><a href="#3-2-概述" class="headerlink" title="3.2 概述"></a>3.2 概述</h4><p>从上面可以知道，由于我们每次只能保存一小部分的旧任务的样本，而新样本的数目很大，因此在新旧任务之间会产生类别不平衡</p>
 <p>新任务本身内部也可能会产生类别不平衡，但是现有的方法忽略了这一点</p>
@@ -309,7 +318,33 @@
 <p>如图二所示，我们对不同的输入数据指派不同的权重，根据他们的输出分数的梯度；除此之外，我们拆分了softmax层inspired by the principle of human inductive memory.(类似SSIL [Ahn et al., 2021] approach，但是有几个显著的差异:1) for each of the old tasks, we utilize KD to maintain the output distribution of each task. To make the output scores of new task data on the classification heads of old tasks consistent, we also employ KD to enforce the outputs after updating the old task models agree with the scores before the update; 2) to suppress the outputs of old task data on the classification heads of new tasks, their ground-truth target values are directly set to be zero for training.)</p>
 <p>差异如图三所示：</p>
 <img src="/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241025185929767-17298539709042.png" class="" title="image-20241025185929767">
-<h4 id="3-3-输入协调"><a href="#3-3-输入协调" class="headerlink" title="3.3 输入协调"></a>3.3 输入协调</h4>
+<h4 id="3-3-输入协调"><a href="#3-3-输入协调" class="headerlink" title="3.3 输入协调"></a>3.3 输入协调</h4><p>由于类别不平衡问题可能导致全连接层的学习权重出现重大偏差，因此输出分数$\hat{P}^{\tau}_{i,j}$可能和真实值$P^{\tau}_{i,j}$相差甚远，因此需要平衡权重</p>
+<p>采用全连接层前一层的输出来调整权重：假设$\hat{q}^{\tau}_{i,j}$是输出分数前一层对应的向量，我们计算交叉熵$L_{ce,t}$对前一层向量的导数如下：（细节见目录）</p>
+<img src="/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241030143100806-17302698690771.png" class="" title="image-20241030143100806">
+<p>这里存在的问题是，当某个样本的数据量很大的时候，模型会偏向于该类别，因此上面的公式会在学习过程中变得很小，为了去解决这个问题，我们提出了绝对值视为对应输入样本的权重加入到loss中，因此较小的泉州霓虹将自适应的分配给拥有更多输入数据的类别的样本，因此模型将更多的关注样本较少的类别</p>
+<p>因此，我们利用绝对值$\delta_{i,j}^{\tau}$在训练期间为每个数据输入权重：</p>
+<ul>
+<li>首先，我们利用输入梯度的绝对值合并到传统的交叉熵损失中:</li>
+</ul>
+<p>$L_{IC,t}=-\frac{1}{N_{old}+n_{new} }\sum_{i,j,k=i,\tau=1}^ty^{\tau}_{i,j,k}\delta_{i,j,k}^{\tau}log(\hat{p}^{\tau}_{i,j,k})$ （7）</p>
+<ul>
+<li>之后使用这个式子去平衡每一类的los，这样就能根据每个输入梯度的绝对值$\delta$来平衡全连接层的类别权重</li>
+</ul>
+<p>它不仅缓解了增量学习中新旧任务之间的类别偏差，而且大大降低了任务内偏差</p>
+<img src="/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241030151337846-17302724193592.png" class="" title="image-20241030151337846">
+<img src="/2024/10/25/Joint%20Input%20and%20Output%20Coordination%20for%20Class-Incremental%20Learning/image-20241030151358482-17302724394523.png" class="" title="image-20241030151358482">
+<h4 id="3-4-输出协调"><a href="#3-4-输出协调" class="headerlink" title="3.4 输出协调"></a>3.4 输出协调</h4><p>更新旧任务模型之后，需要保持新任务数据$D^t$的输出分布一致；并且在新任务分类头上隐藏旧任务数据$D^t_{old}$。</p>
+<p>In Figure 1, this is to keep the blue solid line consistent with the dotted line, and make the green solid line approach to 0</p>
+<p>在训练第t个轮次的任务时，我们假设输出$D^t\cup D^t_{old}$的没有经过softmax层的分数由$\hat{z}^{\tau}_{i,j,k}$给出，并且在更新旧任务模型训练第k轮新任务时，输出的数据$D^t\cup D^t_{old}$分数是$\widetilde{z}^{\tau}_{i,j,k}$</p>
+<p>通过考虑the principle of human inductive memory，使用KD知识蒸馏在更新对应模型前后，强制新任务数据在每个旧任务的分类头上的输出一致性</p>
+<p>$L_{OC,1\rightarrow t-1}=\sum_{\tau=1}^{t-1}\left[\sum_{i,j,k}\rho_{KL}^{\epsilon}(\hat{z}^{\tau}_{i,j,k}-\widetilde{z}^{\tau}_{i,j,k})\right]$ （8）</p>
+<p>$\rho_{KL}^{\epsilon}(·)$是蒸馏损失，$\epsilon$是缩放函数</p>
+<p>旧任务数据在新类别头上的数据可以背调整，根据：</p>
+<p>$L_{OC,t}^{old}=\frac{1}{n_{new}}\sum_{i,j,k}(\hat{p}^t_{i,j,k}-0)$,$i\in \{1,2,…,m(t-1)\}$</p>
+<p> （8）的原理和SSIL相似，但是提出的输出协调机制和SSIL方法不同，结合一致损失$L_{IC,t}$（7），总体的输出损失为:</p>
+<p>$L_{JIOC,t}=L_{IC,t}+\gamma_1 L_{OC,1\rightarrow t-1}+\gamma_2 L_{OC,t}^{old}$</p>
+<p>其中$\gamma_1$和$\gamma_2$是两个权衡的超参数</p>
+
     </div>
 
     
@@ -410,7 +445,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">1.介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">2.相关工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%A2%9E%E9%87%8F%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 增量学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%BA%BA%E7%B1%BB%E7%9A%84%E5%BD%92%E7%BA%B3%E8%AE%B0%E5%BF%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.2 人类的归纳记忆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">3 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E7%AC%A6%E5%8F%B7%EF%BC%9ACIL-class-Incremental-Learning"><span class="nav-number">4.0.1.</span> <span class="nav-text">3.1 符号：CIL class Incremental Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E6%A6%82%E8%BF%B0"><span class="nav-number">4.0.2.</span> <span class="nav-text">3.2 概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E8%BE%93%E5%85%A5%E5%8D%8F%E8%B0%83"><span class="nav-number">4.0.3.</span> <span class="nav-text">3.3 输入协调</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">1.介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">2.相关工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%A2%9E%E9%87%8F%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 增量学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%BA%BA%E7%B1%BB%E7%9A%84%E5%BD%92%E7%BA%B3%E8%AE%B0%E5%BF%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.2 人类的归纳记忆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">3 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E7%AC%A6%E5%8F%B7%EF%BC%9ACIL-class-Incremental-Learning"><span class="nav-number">4.0.1.</span> <span class="nav-text">3.1 符号：CIL class Incremental Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E6%A6%82%E8%BF%B0"><span class="nav-number">4.0.2.</span> <span class="nav-text">3.2 概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E8%BE%93%E5%85%A5%E5%8D%8F%E8%B0%83"><span class="nav-number">4.0.3.</span> <span class="nav-text">3.3 输入协调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-%E8%BE%93%E5%87%BA%E5%8D%8F%E8%B0%83"><span class="nav-number">4.0.4.</span> <span class="nav-text">3.4 输出协调</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -488,7 +523,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共34.1k字</span>
+    <span class="post-count">全站共35.4k字</span>
   </div>
 
         
