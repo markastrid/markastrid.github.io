@@ -20,20 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="[TOC] 一 .概述1.1 定义是模型压缩的一种方法，不同于其中的剪枝和量化，其通过构建一个轻量级的小模型，使用一个性能较好的大模型（教师模型）来指导一个小模型（学生模型）的训练，以提高小模型的性能和精度 来自Teacher 模型输出的监督信息称之为 knowledge(知识)，而 student 学习迁移来自 teacher 的监督信息的过程称之为 Distillation(蒸馏) 最早由Hi">
+  <meta name="description" content="[TOC] 一 .概述1.1 定义模型压缩的一种方法，不同于其中的剪枝和量化，通过构建一个轻量级的小模型，使用一个性能较好的大模型（教师模型）来指导一个小模型（学生模型）的训练，以提高小模型的性能和精度  来自Teacher 模型输出的监督信息称之为 knowledge(知识)，而 student 学习迁移来自 teacher 的监督信息的过程称之为 Distillation(蒸馏)   最早由H">
 <meta property="og:type" content="article">
 <meta property="og:title" content="知识蒸馏">
 <meta property="og:url" content="http://example.com/2024/11/11/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/index.html">
 <meta property="og:site_name" content="Resume">
-<meta property="og:description" content="[TOC] 一 .概述1.1 定义是模型压缩的一种方法，不同于其中的剪枝和量化，其通过构建一个轻量级的小模型，使用一个性能较好的大模型（教师模型）来指导一个小模型（学生模型）的训练，以提高小模型的性能和精度 来自Teacher 模型输出的监督信息称之为 knowledge(知识)，而 student 学习迁移来自 teacher 的监督信息的过程称之为 Distillation(蒸馏) 最早由Hi">
+<meta property="og:description" content="[TOC] 一 .概述1.1 定义模型压缩的一种方法，不同于其中的剪枝和量化，通过构建一个轻量级的小模型，使用一个性能较好的大模型（教师模型）来指导一个小模型（学生模型）的训练，以提高小模型的性能和精度  来自Teacher 模型输出的监督信息称之为 knowledge(知识)，而 student 学习迁移来自 teacher 的监督信息的过程称之为 Distillation(蒸馏)   最早由H">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/11/11/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/v2-a2f935396ce7563ebd8d4b1ee89e99a7_1440w.jpg">
 <meta property="og:image" content="http://example.com/2024/11/11/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/v2-14b20b5373b45da27d822d22f6c04b7c_1440w.png">
 <meta property="article:published_time" content="2024-11-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-11T16:40:44.974Z">
+<meta property="article:modified_time" content="2024-12-12T09:47:58.638Z">
 <meta property="article:author" content="markastrid">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/11/11/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/v2-a2f935396ce7563ebd8d4b1ee89e99a7_1440w.jpg">
+<meta name="twitter:image" content="http://example.com/2024/11/11/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/v2-14b20b5373b45da27d822d22f6c04b7c_1440w.png">
 
 <link rel="canonical" href="http://example.com/2024/11/11/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/">
 
@@ -194,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-11-12 00:40:44" itemprop="dateModified" datetime="2024-11-12T00:40:44+08:00">2024-11-12</time>
+                <time title="修改时间：2024-12-12 17:47:58" itemprop="dateModified" datetime="2024-12-12T17:47:58+08:00">2024-12-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,69 +217,312 @@
 
       
         <p>[TOC]</p>
-<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一 .概述"></a>一 .概述</h2><h4 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h4><p><strong>是模型压缩的一种方法，不同于其中的剪枝和量化，其通过构建一个轻量级的小模型，使用一个性能较好的大模型（教师模型）来指导一个小模型（学生模型）的训练，以提高小模型的性能和精度</strong></p>
-<p>来自Teacher 模型输出的监督信息称之为 knowledge(知识)，而 student 学习迁移来自 teacher 的监督信息的过程称之为 Distillation(蒸馏)</p>
-<p>最早由Hinton等人在2015年提出，并应用于分类任务中</p>
-<p>知识蒸馏的核心思想是利用教师模型的输出信息（称为软目标soft-target）来训练学生模型，而不是传统的硬目标hard-target（如one-hot编码的标签）。软目标提供了更多的信息，包括类别之间的概率分布，从而使学生模型能够学习到更多的知识</p>
+<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一 .概述"></a>一 .概述</h2><h4 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h4><p><strong>模型压缩的一种方法，不同于其中的剪枝和量化，通过构建一个轻量级的小模型，使用一个性能较好的大模型（教师模型）来指导一个小模型（学生模型）的训练，以提高小模型的性能和精度</strong></p>
+<ul>
+<li>来自Teacher 模型输出的监督信息称之为 knowledge(知识)，而 student 学习迁移来自 teacher 的监督信息的过程称之为 Distillation(蒸馏)</li>
+</ul>
+<ul>
+<li>最早由Hinton等人在2015年提出，并应用于分类任务中： <em>Distilling the Knowledge in a Neural Network</em></li>
+</ul>
+<p>知识蒸馏的核心思想是利用教师模型的输出信息（软目标：soft-target，是一种概率分布，表示样本对所有类别的可能性）来训练学生模型，而不是传统的硬目标hard-target（如分类任务重即是one-hot编码标签）。软目标提供了更多的信息，包括类别之间的概率分布，从而使学生模型能够学习到更多的知识</p>
+<ul>
+<li><p>软目标说明：</p>
+<ul>
+<li><p><strong>定义</strong>: 软目标是由教师模型生成的概率分布，表示样本对所有类别的可能性。这种分布更平滑，包含类别之间的相似性信息。</p>
+</li>
+<li><p><strong>特点</strong>:</p>
+<ul>
+<li><p>概率分布由教师模型的 softmax 输出计算而来，并通过调整温度T来平滑分布：</p>
+<p>$q_i = \frac{\exp(z_i / T)}{\sum_j \exp(z_j / T)}$</p>
+<ul>
+<li><p>$z_i$ 是 logits:</p>
+<ul>
+<li><p><strong>什么是 logits</strong> : <strong>logits</strong> 指网络在最后一层输出的未归一化的分数（通常是全连接层的线性输出）。Logits 的主要特点是：</p>
+<ul>
+<li><strong>未归一化</strong>：它们可以是任意的实数，可能是正数、负数或零。</li>
+<li><strong>直接输出</strong>：Logits 是 softmax 激活函数的输入，softmax 将这些值转换为一个概率分布。</li>
+</ul>
+<p>Logits 是模型预测结果的基础，它们本身不代表概率，但通过 softmax 函数可以将 logits 转换为概率分布，用于分类决策。</p>
+</li>
+<li><p><strong>logits 的计算过程</strong></p>
+<ol>
+<li><p><strong>网络的最后一层输出 logits</strong></p>
+<p>在分类任务中，网络的最后一层通常是一个全连接层，输出的值就是 logits。<br>假设有一个神经网络用于对输入图像进行分类，类别为 A、B、C，最后一层的计算如下：$z = Wx + b$</p>
+<p>其中：z 是 logits；W 是权重矩阵；xx是上一层的输出；b 是偏置输出的 logits 是一个向量，例如：$z = [2.5, 0.3, -1.2]$</p>
+</li>
+<li><p>. <strong>通过 softmax 将 logits 转换为概率</strong></p>
+<p>Softmax：$p_i = \frac{\exp(z_i)}{\sum_{j} \exp(z_j)}$</p>
+<ul>
+<li><p>$z_i $是第 i类的 logits。</p>
+</li>
+<li><p>$p_i $是 logits 对应的概率。</p>
+</li>
+</ul>
+<p>对于 z=[2.5,0.3,−1.2]z = [2.5, 0.3, -1.2]，softmax 计算为：$\exp(z) = [\exp(2.5), \exp(0.3), \exp(-1.2)] = [12.182, 1.349, 0.301]$</p>
+<p>归一化后：$p = \frac{\exp(z)}{\sum_{j} \exp(z_j)} = \left[\frac{12.182}{13.832}, \frac{1.349}{13.832}, \frac{0.301}{13.832}\right] = [0.880, 0.098, 0.022]$</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>T 是温度参数:</p>
+<ul>
+<li><p>知识蒸馏中的一个重要调节因子，控制 softmax 输出概率分布的“平滑程度”。具体来说，T 改变了 logits 的归一化过程，从而影响类别之间的相对概率</p>
+</li>
+<li><p>$p_i = \frac{\exp(z_i / T)}{\sum_j \exp(z_j / T)}$</p>
+<ul>
+<li>$z_i$：第 ii 类的 logits（未归一化的分数）。</li>
+<li>温度T &gt; 0<ul>
+<li>T = 1：这是常规的 softmax。</li>
+<li>T &gt; 1：分布变得更平滑，类别之间的差异减小</li>
+<li>T &lt; 1：分布变得更尖锐，倾向于强化最大值类别</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>温度的影响：</p>
+<ol>
+<li><strong>低温 (T &lt; 1)</strong><ol>
+<li>更偏向于最大 logits 的类别，较小的 logits 对结果的影响被进一步减弱。</li>
+<li>强化模型对“最可能类别”的偏好</li>
+<li>适用于预测阶段（推理），因为我们希望选择最优解。</li>
+</ol>
+</li>
+<li><strong>高温 (T &gt; 1)</strong><ol>
+<li>平滑 logits 之间的差距，使得概率分布更加均匀。</li>
+<li>不同类别之间的相对关系（相似性）变得更明显。</li>
+<li>适用于知识蒸馏训练阶段，因为能为学生模型提供更多细粒度的信息。</li>
+</ol>
+</li>
+</ol>
+<hr>
+</li>
+<li><p><strong>例子：温度 T 对 softmax 的影响</strong></p>
+<p>假设 logits 为：z = [5.0, 2.0, 0.0]</p>
+<p><strong>当T = 1：常规 softmax</strong></p>
+<p>$p = \frac{\exp(z_i)}{\sum \exp(z_i)} = \text{softmax}([5.0, 2.0, 0.0]) = [0.91, 0.08, 0.01]$</p>
+<ul>
+<li>概率分布非常偏向5.0 的类别。</li>
+</ul>
+<p><strong>当T = 2：高温平滑</strong></p>
+<p>$p = \frac{\exp(z_i / 2)}{\sum \exp(z_i / 2)} = \text{softmax}([2.5, 1.0, 0.0]) = [0.66, 0.24, 0.10]$</p>
+<ul>
+<li>概率分布变得更平滑，类别之间的相对关系更清晰。</li>
+</ul>
+<p><strong>当 T = 0.5：低温尖锐</strong></p>
+<p>$p = \frac{\exp(z_i / 0.5)}{\sum \exp(z_i / 0.5)} = \text{softmax}([10.0, 4.0, 0.0]) = [0.99, 0.01, 0.00]$</p>
+<ul>
+<li>概率几乎完全集中在最大值类别，其他类别的权重被忽略。</li>
+</ul>
+</li>
+<li><p><strong>知识蒸馏中的温度 T</strong></p>
+<ul>
+<li>高温T &gt; 1 是核心，因为它通过平滑输出概率分布<strong>揭示了类别之间的相对关系</strong></li>
+<li>学生模型不仅学习正确答案（通过硬目标），还从教师模型的软目标中获得额外信息，比如“哪些类别相似”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>当T &gt; 1 时，概率分布变得更加平滑：例如，对于一张“猫”的图片，软目标可能是： ${\text{soft}} = [0.6, 0.3, 0.1] $表示 60% 的概率是猫，30% 是狗，10% 是兔子,提供类别之间的关系信息：“猫”和“狗”的类别概率更接近，而“猫”和“汽车”的类别概率相差很大。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>损失函数</strong>: 软目标用于计算软目标交叉熵损失：</p>
+<p>$L_{\text{soft}} = -\sum_i q_i^{\text{teacher}} \log(p_i^{\text{student}})$</p>
+<p>其中 $q_i^{\text{teacher}}$ 是教师模型的软目标概率分布，$p_i^{\text{student}}$ 是学生模型的预测概率分布</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>硬目标 (Hard Targets)</strong></th>
+<th><strong>软目标 (Soft Targets)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>来源</strong></td>
+<td>数据的真实标签（one-hot 编码）</td>
+<td>教师模型的输出概率分布</td>
+</tr>
+<tr>
+<td><strong>信息丰富性</strong></td>
+<td>只有目标类别的监督信息</td>
+<td>包含所有类别的概率分布，提供类别之间的相似性信息</td>
+</tr>
+<tr>
+<td><strong>监督信号</strong></td>
+<td>强制模型匹配真实标签</td>
+<td>引导模型学习教师模型的行为</td>
+</tr>
+<tr>
+<td><strong>概率分布</strong></td>
+<td>离散（如 [0, 1, 0, 0]）</td>
+<td>连续（如 [0.6, 0.3, 0.1]）</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>传统监督学习</td>
+<td>知识蒸馏或迁移学习</td>
+</tr>
+<tr>
+<td><strong>温度调节</strong></td>
+<td>不适用</td>
+<td>需要温度 T &gt; 1 来平滑分布</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h4 id="1-2-过程"><a href="#1-2-过程" class="headerlink" title="1.2 过程"></a>1.2 过程</h4><ol>
-<li><strong>训练教师模型</strong>：开发一个高精度、结构复杂的大型模型，作为性能基准。</li>
-<li><strong>训练学生模型</strong>：使用教师模型的输出作为训练目标，提高正确类别的概率以及其他类别的概率信息，让学生模型学习到全面的概率分布，增强上下文理解。</li>
-<li><strong>计算损失函数</strong>：结合教师和学生模型的输出，，通常会结合教师模型和学生模型的损失函数，通过梯度下降优化学生模型，使其性能接近教师模型，即输出与教师模型京可能接近</li>
+<li><p><strong>训练教师模型</strong>：开发一个高精度、结构复杂的大型模型，作为性能基准。</p>
+</li>
+<li><p><strong>训练学生模型</strong>：使用教师模型的输出作为训练目标，提高正确类别的概率以及其他类别的概率信息，让学生模型学习到全面的概率分布，增强上下文理解。</p>
+</li>
+<li><p><strong>计算损失函数</strong>：结合教师和学生模型的输出，，通常会结合教师模型和学生模型的损失函数，通过梯度下降优化学生模型，使其性能接近教师模型，即输出与教师模型京可能接近</p>
+<ul>
+<li><p>训练学生模型时，使用的损失函数是硬目标和软目标的结合：<script type="math/tex">L = (1-\alpha) L_{\text{hard}} + \alpha T^2 L_{\text{soft}}</script></p>
+<ul>
+<li><p>$L_{\text{hard}}$：硬目标的交叉熵损失，指导学生模型学习正确的标签。</p>
+</li>
+<li><p>$L_{\text{soft}}$：软目标的交叉熵损失，指导学生模型模仿教师模型的行为。</p>
+</li>
+<li><p>$\alpha$：调节硬目标和软目标的权重。</p>
+</li>
+<li><p>T：温度参数，调节软目标的平滑程度（通常 T &gt; 1）</p>
+</li>
+</ul>
+</li>
+<li><p>硬目标损失 $L_{\text{hard}}$:$L_{\text{hard}} = -\sum_i y_i^{\text{true}} \log(p_i^{\text{student}})$：</p>
+<ul>
+<li><p>$y_i^{\text{true}}$：真实标签的独热编码。例如，如果类别是“猫”，那么 $y^{\text{true}} = [1, 0, 0]$</p>
+</li>
+<li><p>$p_i^{\text{student}}$：学生模型对第 i 类的预测概率，通过 softmax 计算： $p_i^{\text{student}} = \frac{\exp(z_i)}{\sum_j \exp(z_j)} $</p>
+<ul>
+<li>z_i 是学生模型的 logits。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>假设类别为 [猫、狗、兔子]，真实标签是“猫” ($y^{\text{true}} = [1, 0, 0]$)。</p>
+<ul>
+<li>学生模型的预测概率为$p^{\text{student}} = [0.8, 0.15, 0.05]$，则硬目标损失：<script type="math/tex">L_{\text{hard}} = -\left(1 \cdot \log(0.8) + 0 \cdot \log(0.15) + 0 \cdot \log(0.05)\right) = -\log(0.8)</script></li>
+</ul>
+</li>
+<li><p>$L_{\text{soft}}$ :<script type="math/tex">L_{\text{soft}} = -\sum_i q_i^{\text{teacher}} \log(p_i^{\text{student}})</script></p>
+<ul>
+<li><p>$q_i^{\text{teacher}}$：教师模型对第 i 类的软目标概率，通过温度参数 T &gt; 1 调整 softmax 计算：<script type="math/tex">q_i^{\text{teacher}} = \frac{\exp(z_i^{\text{teacher}} / T)}{\sum_j \exp(z_j^{\text{teacher}} / T)}</script></p>
+<ul>
+<li>$z_i^{\text{teacher}} 是教师模型的 logits$</li>
+</ul>
+</li>
+<li><p>$p_i^{\text{student}}$：学生模型对第 i 类的预测概率，也基于同样的温度 T:$p_i^{\text{student}} = \frac{\exp(z_i^{\text{student}} / T)}{\sum_j \exp(z_j^{\text{student}} / T)}$</p>
+</li>
+<li><p>温度 T：提高T &gt; 1 时，softmax 输出的分布更加平滑</p>
+</li>
+</ul>
+</li>
+<li><p>假设:</p>
+<ul>
+<li>教师模型的 logits：<script type="math/tex">z^{\text{teacher}} = [6.0, 2.0, -1.0]</script>，温度 T = 2,那么$q^{\text{teacher}} = \text{softmax}([3.0, 1.0, -0.5]) = [0.71, 0.22, 0.07]$</li>
+<li>学生模型的 logits：<script type="math/tex">z^{\text{student}} = [5.0, 1.0, 0.0]</script>T = 2，那么<script type="math/tex">p^{\text{student}} = \text{softmax}([2.5, 0.5, 0.0]) = [0.66, 0.27, 0.07]</script></li>
+<li>则软目标损失：<script type="math/tex">L_{\text{soft}} = -(0.71 \cdot \log(0.66) + 0.22 \cdot \log(0.27) + 0.07 \cdot \log(0.07))</script></li>
+</ul>
+</li>
+<li><p>总损失：<script type="math/tex">L = (1 - \alpha) L_{\text{hard}} + \alpha T^2 L_{\text{soft}}</script></p>
+<ul>
+<li><p>$\alpha$：控制硬目标和软目标的权重比例</p>
+<ul>
+<li>一般在0.1-0.9，默认是0.5</li>
+<li>较小就依赖硬目标，较大就重视软目标</li>
+</ul>
+</li>
+<li><p>乘以 $T^2$ 是为了补偿高温度下 softmax 导致的梯度缩放效应，更有效地补偿高温度下梯度变小的效应</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
-<h4 id="1-3-分类"><a href="#1-3-分类" class="headerlink" title="1.3 分类"></a>1.3 分类</h4><p><strong>1、 离线蒸馏</strong></p>
+<h4 id="1-3-分类"><a href="#1-3-分类" class="headerlink" title="1.3 分类"></a>1.3 分类</h4><ul>
+<li><p><strong>标准知识蒸馏</strong></p>
 <ul>
-<li><p>传统的知识蒸馏</p>
+<li>通过教师模型生成的软目标（即概率分布），来指导学生模型的训练，即上面所说的蒸馏方式</li>
+<li><strong>过程</strong>：学生模型不仅学习真实标签（硬目标），还通过教师模型生成的软标签（软目标）进行训练。软标签是通过教师模型对输入数据的预测概率分布得到的，温度 T 被用来调节软标签的平滑程度。</li>
+</ul>
 </li>
-<li><p>已知数据集上面提前训练好一个 teacher 模型，然后在对 student 模型进行训练的时候，利用所获取的 teacher 模型进行监督训练来达到蒸馏的目的</p>
+<li><p><strong>特征级蒸馏（Feature-based Distillation）</strong></p>
+<ul>
+<li>目标是让学生模型模仿教师模型在 <strong>中间层</strong> 或 <strong>隐藏层</strong> 上的特征表示：通常，学生模型会尽量去匹配教师模型在相同输入下的中间表示（例如，隐藏层的激活或特征图）</li>
+<li><strong>过程</strong>：通过最小化学生模型和教师模型在某些层次上的特征差异来进行训练。</li>
+<li><strong>损失函数</strong>：除了硬目标损失和软目标损失外，通常还会有一个额外的损失项，表示学生和教师模型在中间层输出的差异：<script type="math/tex">L_{\text{total}} = L_{\text{hard}} + \alpha L_{\text{soft}} + \beta L_{\text{feature}}</script><ul>
+<li>其中，$L_{\text{feature}} $是中间层特征差异的损失，通常是基于欧几里得距离或KL散度。</li>
+</ul>
 </li>
-<li><p>teacher 的模型参数在蒸馏训练的过程中保持不变，蒸馏的损失函数 distillation loss 计算 teacher 和 student 之前输出预测值的差别，和 student 的 loss 加在一起作为整个训练 loss，来进行梯度更新，最终得到一个更高性能和精度的 student 模型</p>
+<li>在 <strong>深度神经网络</strong> 中尤其有效，能够帮助学生模型学习到教师模型在中间层的高级特征表示。</li>
+</ul>
+</li>
+<li><p><strong>关系蒸馏（Relation-based Distillation）</strong></p>
+<ul>
+<li><p>通过学习教师模型和学生模型之间的 <strong>关系</strong> 来进行训练，而不是单纯地匹配特征或输出概率。具体来说，关系蒸馏旨在捕捉类别之间的 <strong>相对关系</strong>，例如，通过学习教师模型中的 <strong>类别间的相似性</strong> 或 <strong>类别对之间的相对排序</strong>。</p>
+</li>
+<li><p><strong>过程</strong>：学生模型不仅学习教师模型的软标签，还学习教师模型输出之间的相对关系。</p>
+</li>
+<li><p><strong>损失函数</strong>：关系蒸馏的损失函数通常包括教师和学生之间的 <strong>相对关系损失</strong>，即让学生模型学习教师模型在不同类别之间的相似性。</p>
+</li>
+<li><p><strong>应用</strong>：这种方法适用于学生模型在学习过程中需要理解 <strong>类与类之间的相似性</strong> 和 <strong>层次关系</strong> 的场景。</p>
 </li>
 </ul>
-<p><strong>2、 半监督蒸馏</strong></p>
-<ul>
-<li><p>半监督方式的蒸馏利用了 teacher 模型的预测信息作为标签，来对 student 网络进行监督学习</p>
 </li>
-<li><p>教师模型的输出作为标签，辅助学生模型学习，提高模型精度</p>
+<li><p><strong>自蒸馏（Self-distillation）</strong></p>
+<ul>
+<li>自蒸馏是一种 <strong>无教师模型</strong> 的蒸馏方法，不依赖外部教师模型，通过训练同一模型的不同版本或在不同时间点的模型来进行知识传递。</li>
+<li>通常，通过 <strong>同一模型的不同阶段</strong> 来生成软标签进行蒸馏。</li>
+<li><strong>过程</strong>：通过 <strong>同一模型的早期阶段和后期阶段</strong> 进行蒸馏，后期模型作为教师，早期模型作为学生。</li>
+<li><strong>应用</strong>：自蒸馏常用于 <strong>自监督学习</strong> 或 <strong>增强学习</strong> 的场景，尤其是当没有外部教师模型时。</li>
+</ul>
+</li>
+<li><p><strong>任务特定蒸馏（Task-specific Distillation）</strong></p>
+<ul>
+<li><p>在某些任务中，蒸馏的目标不仅是让学生模型学习分类任务的软标签，还要处理特定任务的其他信息。例如，在 <strong>目标检测</strong>、<strong>语义分割</strong> 或 <strong>生成模型</strong> 等任务中，除了分类信息，学生模型还需要学习到其他任务相关的特征。</p>
+</li>
+<li><p><strong>过程</strong>：蒸馏过程中不仅传递类别信息，还包括任务相关的其他信息，比如 <strong>边界框</strong>、<strong>语义信息</strong> 或 <strong>生成的细节</strong>。</p>
+</li>
+<li><p><strong>应用</strong>：适用于 <strong>计算机视觉</strong> 或 <strong>自然语言处理</strong> 等任务，其中模型的输出包含多个信息维度</p>
 </li>
 </ul>
-<p><strong>3、 自监督蒸馏</strong></p>
-<ul>
-<li><p>不需要提前训练一个 teacher 网络模型，而是 student 网络本身的训练完成一个蒸馏过程</p>
 </li>
-<li><p>具体实现方式 有多种，例如先开始训练 student 模型，在整个训练过程的最后几个 epoch 的时候，利用前面训练的 student 作为监督模型，在剩下的 epoch 中，对模型进行蒸馏</p>
+<li><p><strong>多教师蒸馏（Multi-teacher Distillation）</strong></p>
+<ul>
+<li><p>多教师蒸馏（或多模型蒸馏）是将多个教师模型的知识传递给学生模型的技术。通过结合多个教师模型的输出，可以让学生模型从更多元的教师知识中受益，通常是通过加权平均教师模型的软标签。</p>
+</li>
+<li><p><strong>过程</strong>：使用多个教师模型的输出概率进行蒸馏，可能是多个不同架构的模型，也可以是同一模型的不同版本。</p>
+</li>
+<li><p><strong>应用</strong>：这种方法适用于通过集成多个不同模型的知识来提升学生模型的表现，常见于 <strong>模型集成</strong> 的场景。</p>
 </li>
 </ul>
-<p><strong>4、在线蒸馏</strong>：</p>
+</li>
+<li><p><strong>标签平滑蒸馏（Label Smoothing Distillation）</strong></p>
 <ul>
-<li>在线蒸馏是一种端到端的训练方案，允许教师和学生模型同时训练和更新。</li>
-<li>教师模型不仅在训练开始时提供知识，而且在训练的整个过程中持续地与学生模型互动，提供实时的反馈和指导</li>
+<li><p>结合了标签平滑（Label Smoothing）和知识蒸馏的技术标签平滑是一种常见的正则化方法，它通过在真实标签中引入一些 <strong>噪声</strong> 来避免模型对训练数据的过度拟合。</p>
+</li>
+<li><p><strong>过程</strong>：通过标签平滑方法修改硬标签，并结合软标签进行蒸馏。</p>
+</li>
+<li><p><strong>应用</strong>：适用于解决 <strong>过拟合</strong> 问题，尤其是在数据量不足或者噪声较大的情况下</p>
+</li>
 </ul>
-<p><strong>5、对抗蒸馏</strong>：</p>
-<ul>
-<li>通过引入对抗性训练的元素来提高模型的鲁棒性和性能</li>
-<li>通常会有一个鉴别器网络，它的任务是区分由教师模型和学生模型生成的输出。这种对抗性的训练过程迫使学生模型不仅要模仿教师模型的输出，还要在对抗性环境中保持输出的质量和真实性</li>
+</li>
+<li><p>……</p>
+</li>
 </ul>
-<p><strong>6、多教师蒸馏</strong>：</p>
-<ul>
-<li>允许学生模型从多个教师模型那里学习，每个教师模型可能擅长不同的任务或拥有不同的知识。这种方法的核心在于集成多个教师模型的知识和专长，以提供给学生模型一个更全面、更丰富的知识体系</li>
-</ul>
-<h4 id="1-5-一些核心概念"><a href="#1-5-一些核心概念" class="headerlink" title="1.5 一些核心概念"></a>1.5 一些核心概念</h4><ol>
-<li><strong>模型压缩</strong>：知识蒸馏最初被提出是为了解决大型模型在部署时的资源消耗问题，目的是将大型、复杂的神经网络模型（教师模型）中的知识转移到一个更小、更轻量化的模型（学生模型）中，以减少计算成本和内存占用，同时保持较高的性能和准确率</li>
-<li><strong>软标签与硬标签</strong>：在传统的监督学习中，模型通常使用硬标签（即类别的确定标签）进行训练。而知识蒸馏使用教师模型的<strong>软标签（即产生的输出概率分布）</strong>来训练学生模型，这些软标签包含了教师模型对输入样本属于各个类别的概率估计，从而帮助学生模型学习到更丰富的信息</li>
-<li><strong>模仿学习</strong>：知识蒸馏的核心思想是让学生模型模仿教师模型的行为。学生模型不仅仅学习如何预测正确的类别，还<strong>学习教师模型对于不同类别的置信度</strong>，从而可以捕捉到教师模型的深层特征和决策逻辑。</li>
-<li><strong>损失函数</strong>：在训练过程中，通常会结合教师模型和学生模型的损失函数。学生模型的损失不仅包括对真实标签的损失，还包括与教师模型输出之间的差异，通常使用<strong>KL散度损失</strong>来衡量这种差异。通过这种方式，学生模型被引导去逼近教师模型的输出分布。</li>
-<li><strong>温度参数</strong>：知识蒸馏中一个重要的参数是<strong>温度（T）</strong>，它用于调整教师模型输出的概率分布的平滑度。通过提高温度，可以使教师模型的输出更加平滑，有助于学生模型学习到更泛化的特征表示</li>
-<li><strong>中间层特征对齐</strong>：除了输出层的软标签，还可以通过对齐教师模型和学生模型的中间层特征来进行知识蒸馏，这样可以进一步提升学生模型的表示能力</li>
-<li><strong>多任务和多模型蒸馏</strong>：在更高级的知识蒸馏技术中，学生模型可以从多个任务或多个教师模型中学习，进一步提升其泛化能力和性能</li>
-<li><strong>…</strong></li>
-</ol>
 <h2 id="二-知识蒸馏相关论文"><a href="#二-知识蒸馏相关论文" class="headerlink" title="二.知识蒸馏相关论文"></a>二.知识蒸馏相关论文</h2><ol>
 <li><strong>“Distilling the Knowledge in a Neural Network”</strong> - Hinton et al., NIPS 2014<ul>
-<li>这知识蒸馏领域的开创性工作，首次提出了从大型神经网络（教师模型）向小型神经网络（学生模型）转移知识的概念。</li>
-</ul>
-</li>
-<li><strong>“Fitnets: Hints for thin deep nets”</strong> - ICLR 2015<ul>
-<li>提出了一种特征蒸馏方法，通过匹配教师和学生模型的中间层特征来提高学生模型的性能。</li>
+<li>这知识蒸馏领域的开创性工作，首次提出了从大型神经网络（教师模型）向小型神经网络（学生模型）转移知识的概念</li>
 </ul>
 </li>
 <li><strong>“A gift from knowledge distillation: Fast optimization, network minimization and transfer learning”</strong> - CVPR 2017<ul>
@@ -304,21 +546,85 @@
 </ul>
 </li>
 </ol>
-<h4 id="2-1-解读：-Distilling-the-Knowledge-in-a-Neural-Network"><a href="#2-1-解读：-Distilling-the-Knowledge-in-a-Neural-Network" class="headerlink" title="2.1 解读： Distilling the Knowledge in a Neural Network"></a>2.1 解读： Distilling the Knowledge in a Neural Network</h4><p>这篇是提出知识蒸馏的论文</p>
-<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a><strong>1.简介</strong></h2><p>在大规模的的机器学习任务中，我们经常需要使用集成学习来训练一些相似的模型，而这会消耗大量的计算资源。并且在部署为实际应用时，也会由于模型/网络<strong>过于复杂</strong>而难以部署。针对此问题，Hinton提出了一种压缩网络的有效方法——<strong>知识蒸馏(Knowledge Distillation)</strong>[1]。并且讨论了知识蒸馏的其他优势。</p>
-<h2 id="2-蒸馏方法"><a href="#2-蒸馏方法" class="headerlink" title="2.蒸馏方法"></a><strong>2.蒸馏方法</strong></h2><p>当我们已经有一个训练好的，较为笨重的模型(<strong>cumbersome model</strong>，通常也称为<strong>教师模型</strong>)时，我们可以采用一种新的训练方式——<strong>蒸馏</strong>，来将原模型中已经学习到的知识转移到新的，轻量级的模型（通常也称为<strong>学生模型</strong>）中。对于分类任务而言，模型本质上是在将一个输入的矩阵映射为一个输出矩阵，输出矩阵中的最大值对应的就是最终预测的分类。<strong>除了最大值给我们传递的预测信息之外，模型对于其他类的预测值同样也包含了很关键的信息。</strong>例如，当输入为一辆汽车的图片时，卡车类在预测结果中的值将会远大于萝卜类的预测值。利用好这一点，我们就可以实现知识的转移，即将笨重模型中包含的知识转移到轻量级的模型中。</p>
-<p>我们将除目标类外，别的类的预测值成为soft targets（当教师模型为一个集成模型时，soft targets可以取为多个模型的算数平均，或几何平均值）。由于soft targets中包含了大量的信息，所以在训练学生模型时，<strong>使用少量的数据就可以完成训练</strong>。</p>
-<p>在学生模型的训练中，一个寻常的想法是最小化学生模型的预测logits与教师模型的logits间的均方误差。对此，文章中引入了<strong>温度</strong>的概念。</p>
-<img src="/2024/11/11/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/v2-a2f935396ce7563ebd8d4b1ee89e99a7_1440w.jpg" class="" title="img">
-<p>在常用的softmax函数中，我们没有使用到这个温度T(换言之，T=1)。这里引入的广义的softmax函数，能够生成与原先不同的输出值。容易看出，当T值很高时，预测值的分布将更加靠近，因此也包含了更多的信息。</p>
-<p>也就是说，我们先将T升高来得到一个更”软”的分布(softer probability distribution)，但是在预测阶段，重新将温度值调低来获取模型中的知识，这也是称这个方法为蒸馏的原因。</p>
-<p>注意到我们改变温度值时，实质上改变了数据的分布，因此我们最后还需要乘上 𝑇2 。</p>
-<h2 id="3-实验验证"><a href="#3-实验验证" class="headerlink" title="3.实验验证"></a><strong>3.实验验证</strong></h2><p>在MNIST数据集上使用蒸馏方法时，测试错误从146个降低到了74个(温度值为20)。这说明soft targets确实传递了更多的信息。</p>
+<h3 id="2-1-解读：-Distilling-the-Knowledge-in-a-Neural-Network"><a href="#2-1-解读：-Distilling-the-Knowledge-in-a-Neural-Network" class="headerlink" title="2.1 解读： Distilling the Knowledge in a Neural Network"></a>2.1 解读： Distilling the Knowledge in a Neural Network</h3><p>这篇是提出知识蒸馏的论文</p>
+<h4 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h4><p>transfer set：用于小模型训练的数据，也是<strong>获得teacher模型soft target输出的输入数据集</strong></p>
+<p>hard target： 样本原始标签</p>
+<p>soft target：teacher模型输出的预测结果</p>
+<p>temperature: softmax函数中的超参数</p>
+<p>knowledge：输入向量到输出向量学习到的映射</p>
+
+<ul>
+<li>交叉熵损失函数:$ L(y, \hat{y}) = -∑(ylog( \hat{y}) + (1-y)log(1- \hat{y}))$ 其中,y是实际标签的概率分布,ŷ是模型的预测概率分布<ul>
+<li>多分类交叉熵损失：每个分类的真实分布和log下的预测概率分布的积</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-蒸馏（Distillation）"><a href="#2-蒸馏（Distillation）" class="headerlink" title="2.蒸馏（Distillation）"></a>2.蒸馏（Distillation）</h4><p>我们将除目标类外，别的类的预测值成为soft targets（当教师模型为一个集成模型时，soft targets可以取为多个模型的算数平均或几何平均值）</p>
+
+<p>由于soft targets中包含了大量的信息，所以在训练学生模型时，<strong>使用少量的数据就可以完成训练</strong>。</p>
+<p>在学生模型的训练中，一个寻常的想法是最小化学生模型的预测logits与教师模型的logits间的均方误差，因此引出了温度的概念</p>
+<p>我们先将T升高来得到一个更”软”的分布(softer probability distribution)，但是在预测阶段，重新将温度值调低来获取模型中的知识，这也是称这个方法为蒸馏的原因。</p>
+<p>注意到我们改变温度值时，实质上改变了数据的分布，因此我们最后还需要乘上 $T^2$ </p>
+<ul>
+<li>整个过程如下：</li>
+</ul>
+
+<h5 id="2-1-匹配logits是蒸馏的特殊形态"><a href="#2-1-匹配logits是蒸馏的特殊形态" class="headerlink" title="2.1 匹配logits是蒸馏的特殊形态"></a>2.1 匹配logits是蒸馏的特殊形态</h5><p>首先我们推导一下公式(2)的由来</p>
+<ul>
+<li><p>含义：</p>
+<ul>
+<li><p>C：交叉熵</p>
+</li>
+<li><p>$q_i$是软间隔输出$z_i$的带温度的softmax，其中$z_i$即计算得到的logits层</p>
+</li>
+<li><p>$v_i$是软间隔$p_i$得到的带温度的softmax，其中$p_i$即计算得到的logits层</p>
+</li>
+<li><p>二者的区别是前者是蒸馏出来的模型，后者是直接得到的教师模型的结果</p>
+<ul>
+<li>所以交叉熵后者为truth</li>
+</ul>
+</li>
+<li><p>这里我们通过数学公式推导得到公式(2)：</p>
+</li>
+<li><p>首先对于交叉熵公式我们有：$C=-\sum_{i=1}^n p_i\log q_i$</p>
+<ul>
+<li>前者一般是one-hot编码，这里是对于教师模型输出的软标签编码</li>
+<li>后者是某个样本输出logits经过了softmax的结果</li>
+</ul>
+</li>
+<li><p>我们需要得到的结果是$\frac{\partial C}{\partial z_i}$，因为$z_i$是我们需要矫正的第i个输出logits</p>
+<ul>
+<li>且我们有:$q_i=\frac{e^{z_i/T}}{\sum_je^{z_j/T}}$；$p_i=\frac{e^{v_i/T}}{\sum_je^{v_j/T}}$</li>
+<li>这里的$v_i$和$q_i$都是一个一维向量而不是数字，其长度为类的数量，CE是求和得到的结果，在计算完之后（如果需要计算）是一堆数字</li>
+<li>$z_i$就是全连接层输出logits的第i个，也是一维向量</li>
+</ul>
+</li>
+<li><p>要求出$\frac{\partial C}{\partial z_k}$，即求对某一个$z_k$的导数，需要先求导softmax：</p>
+<ul>
+<li>$q_i$对$z_k$求导：</li>
+<li>$i=k$时： $\frac{\partial q_i}{\partial z_k}=\frac{\frac{1}{T}e^{z_i/T}\sum_j e^{z_j/T}-e^{z_i/T}\frac{1}{T}e^{z_j/T}}{(\sum_j e^{z_j/T})^2}=\frac{1}{T}\frac{e^{z_i/T}}{\sum_j e^{z_j/T}}(1-\frac{e^{z_j/T}}{\sum_j e^{z_j/T}})=\frac{1}{T}q_i(1-q_k)$</li>
+<li>$i!=k$时：$\frac{\partial q_i}{\partial z_k}=\frac{\frac{1}{T}0\sum_j e^{z_j/T}-e^{z_i/T}\frac{1}{T}e^{z_k/T}}{(\sum_j e^{z_j/T})^2}=-\frac{1}{T}\frac{e^{z_i/T}}{\sum_j e^{z_i/T}}\frac{e^{z_k/T}}{\sum_j e^{z_j/T}}=-\frac{1}{T}q_iq_k$</li>
+</ul>
+</li>
+<li><p>接下来对交叉熵损失函数求导:</p>
+<p>$\frac{\partial C}{\partial z_k}=-\sum_{i=1}^n\frac{\partial C}{\partial q_i}\frac{q_i}{\partial z_k}=-(\frac{p_k}{q_k}<em>\frac{\partial q_k}{\partial z_k}+\sum_{i!=k}^n\frac{p_i}{q_i}</em>\frac{\partial q_i}{\partial z_k})=-\frac{1}{T}\frac{p_k}{q_k}q_k(1-q_k)-\frac{1}{T}\sum_{i!=k}^n\frac{p_i}{q_i}(-q_iq_k)=-\frac{1}{T}p_k+\frac{1}{T}\sum_{i=1}^np_iq_k=\frac{1}{T}(q_k-p_k)$</p>
+<ul>
+<li>这里的求导是对每个量都做分别求导得到的结果</li>
+<li>k替换乘i即是下面的式子</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h4 id="3-实验验证"><a href="#3-实验验证" class="headerlink" title="3.实验验证"></a>3.实验验证</h4><p>在MNIST数据集上使用蒸馏方法时，测试错误从146个降低到了74个(温度值为20)。这说明soft targets确实传递了更多的信息。</p>
 <p>当训练学生模型时，如果除去训练集中所有的’3’，模型总共的预测错误是206，其中133个是数字3，而数字3的总数为1010，<strong>这表明我们用一个有缺失类的训练集，也能很好的学到别的类的信息</strong>。这一点也在训练集中只包含8和9的实验中得到了很好的证明。</p>
 <p>为了证明是否能使用更少的训练集来取得相近的预测效果，文中采用了3%的数据来进行对比：</p>
 <img src="/2024/11/11/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/v2-14b20b5373b45da27d822d22f6c04b7c_1440w.png" class="" title="img">
 <p>可以看到，使用soft targets训练得到的学生模型表现远好于baseline的训练效果，其效果仅比使用大量数据进行训练、使用early stopping的baseline差了1.9%。<strong>值得一提的是，使用soft targets进行训练，最终的模型是近乎收敛到最优值而不需要采用early stopping。</strong></p>
-<h2 id="4-讨论"><a href="#4-讨论" class="headerlink" title="4.讨论"></a><strong>4.讨论</strong></h2><p>对于大型神经网络，完整的进行训练也是不可行的，但是已经证明可以使用多个专家模型进行加速。每个专家网都能够区分一部分高度混淆的的类。但目前还不明确如何将专家模型的知识全部转移到单个的大模型中。</p>
+<h4 id="4-讨论"><a href="#4-讨论" class="headerlink" title="4.讨论"></a>4.讨论</h4><p>对于大型神经网络，完整的进行训练也是不可行的，但是已经证明可以使用多个专家模型进行加速。每个专家网都能够区分一部分高度混淆的的类。但目前还不明确如何将专家模型的知识全部转移到单个的大模型</p>
+
+
 
     </div>
 
@@ -416,7 +722,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">一 .概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E5%AE%9A%E4%B9%89"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E8%BF%87%E7%A8%8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E5%88%86%E7%B1%BB"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3 分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-%E4%B8%80%E4%BA%9B%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.5 一些核心概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87"><span class="nav-number">2.</span> <span class="nav-text">二.知识蒸馏相关论文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E8%A7%A3%E8%AF%BB%EF%BC%9A-Distilling-the-Knowledge-in-a-Neural-Network"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1 解读： Distilling the Knowledge in a Neural Network</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-number">3.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%92%B8%E9%A6%8F%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">2.蒸馏方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%9E%E9%AA%8C%E9%AA%8C%E8%AF%81"><span class="nav-number">5.</span> <span class="nav-text">3.实验验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%AE%A8%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">4.讨论</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">一 .概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E5%AE%9A%E4%B9%89"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E8%BF%87%E7%A8%8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E5%88%86%E7%B1%BB"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3 分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87"><span class="nav-number">2.</span> <span class="nav-text">二.知识蒸馏相关论文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%A7%A3%E8%AF%BB%EF%BC%9A-Distilling-the-Knowledge-in-a-Neural-Network"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 解读： Distilling the Knowledge in a Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%BC%95%E8%A8%80"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%92%B8%E9%A6%8F%EF%BC%88Distillation%EF%BC%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.蒸馏（Distillation）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-%E5%8C%B9%E9%85%8Dlogits%E6%98%AF%E8%92%B8%E9%A6%8F%E7%9A%84%E7%89%B9%E6%AE%8A%E5%BD%A2%E6%80%81"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">2.1 匹配logits是蒸馏的特殊形态</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%9E%E9%AA%8C%E9%AA%8C%E8%AF%81"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.实验验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%AE%A8%E8%AE%BA"><span class="nav-number">2.1.4.</span> <span class="nav-text">4.讨论</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -431,20 +737,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -478,7 +784,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -494,7 +800,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共43.7k字</span>
+    <span class="post-count">全站共46.9k字</span>
   </div>
 
         
