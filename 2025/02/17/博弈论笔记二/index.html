@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="记录博弈论的学习整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一章 策略式博弈和纳什均衡">
+<meta property="og:url" content="http://example.com/2025/02/17/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Resume">
+<meta property="og:description" content="记录博弈论的学习整理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-25T11:19:43.593Z">
+<meta property="article:author" content="markastrid">
+<meta property="article:tag" content="博弈论第一章">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/02/17/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第一章 策略式博弈和纳什均衡 | Resume</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Resume</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Show yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/17/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第一章 策略式博弈和纳什均衡
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-02-17 00:00:00" itemprop="dateCreated datePublished" datetime="2025-02-17T00:00:00+08:00">2025-02-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-02-25 19:19:43" itemprop="dateModified" datetime="2025-02-25T19:19:43+08:00">2025-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">记录博弈论的学习整理</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-1-策略式博弈"><a href="#1-1-策略式博弈" class="headerlink" title="1.1 策略式博弈"></a>1.1 策略式博弈</h2><ul>
+<li><p>Strategy game = normal form game</p>
+</li>
+<li><p>full information（完全信息）+ non-cooperate（非合作）+ simultaneously（同时）</p>
+</li>
+<li><p>定义:</p>
+<ul>
+<li>N players</li>
+<li>每个players $i\in [1,N]$ , $A_i$</li>
+<li>$u_i, A_1\times A_2 \times A_3\times …\times A_n\rightarrow R,i\in N$ or a preference relation $\succeq_i $ over A for $i \in N$（推广策略式博弈到偏好）</li>
+</ul>
+</li>
+<li><p>outcome:$a=(a_1,a_2,a_3,…,a_2)$</p>
+</li>
+<li><p>收益函数 $u_i$ 可以被偏好关系替代:$≳$</p>
+<ul>
+<li><p>A perference（偏好关系）$≳$ over a set A satisfies:</p>
+<ul>
+<li><p>完备性 complete</p>
+<p>$a\succeq b$ or $b\succ a$ for every $a\in A,b \in A$</p>
+</li>
+<li><p>反身性 reflexive</p>
+<p>$a ≳ a$ for every a$\in $A </p>
+</li>
+<li><p>传递性 transitive</p>
+<p>if $a≳b$ , $b≳c$,than $a≳c$ for every a , b , c $\in$A</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>举例:囚徒困境</p>
+<ul>
+<li>N={1,2}</li>
+<li>$A_1=A_2=\{Confess,Don’t Confess\}=\{C,D\}$</li>
+<li>$(C,C)_1$=-6 ; $(C,C)_2=-6$ ; $(C,D)_1=-1$ ; $(C,D)_2$=-12 ; …</li>
+</ul>
+</li>
+<li><p>A Game : $G=\{N,\{A_i\}_{i=1}^N,\{u_i\}_{i=1}^N\}$   $G=\{N,\{A_i\}_{i=1}^N,\{\succeq\}_{i=1}^N\}$</p>
+</li>
+<li><p>$A_{-i}$：除了Player i之外的所有人的 outcome/action : $A_{-i}=A_1\times A_2\times …\times A_{i-1}\times A_{i+1}\times …A_n$</p>
+</li>
+</ul>
+<h2 id="1-2-纳什均衡-Nash-Equilibrium-NE"><a href="#1-2-纳什均衡-Nash-Equilibrium-NE" class="headerlink" title="1.2 纳什均衡 Nash Equilibrium (NE)"></a>1.2 纳什均衡 Nash Equilibrium (NE)</h2><ul>
+<li>$a^<em>=(a_1^</em>,a_2^<em>,…,a_n^</em>)$ is a NE if  for $\forall $ Player i $u_i^<em>(a_i^</em>,a_{-i}^<em>)\geq u_i(a_i,a_{-i}^</em>)$ for all $a_i \in A_i$</li>
+<li>对任何人调整策略收益都不会增加</li>
+<li>self-enforcing : no player has an encentive to alter his strategy intentively</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>player(横2纵1)                                            C</th>
+<th><strong>D</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Confesss</strong>                                                           -6     -6</td>
+<td>0    -12</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Don’t Confess</strong>                                                 -12     0</td>
+<td>-1      -1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>NE:(C,C)</li>
+</ul>
+<h3 id="1-4-1-Best-Response-Correspondence"><a href="#1-4-1-Best-Response-Correspondence" class="headerlink" title="1.4.1 Best Response Correspondence"></a>1.4.1 Best Response Correspondence</h3><ul>
+<li>$B_i(A_{-i})=\{a_i \in A_i,u_i(a_i,a_{-i})\succeq u_i(b_i,a_{-i})，\forall b_i \in A_i\}$</li>
+<li>$B_1(C)=C$ : 第一个人的在其他人行动条为confess时的最优回应</li>
+<li>类似的：$B_1(D)=C$ ；$B_2(C)=C$；$B_2(D)=C$</li>
+</ul>
+<h3 id="1-4-2"><a href="#1-4-2" class="headerlink" title="1.4.2"></a>1.4.2</h3><ul>
+<li><p>假设$(q_1^*,q_2^8)$ 是一个纳什均衡策略</p>
+</li>
+<li><p>player i makes the best strategies $q_i^<em>$ with respect to $q^</em>_{-i}$</p>
+
+</li>
+</ul>
+<h3 id="1-4-3-one-way-of-finding-Nash-eqilibria-for-payoff-matrix"><a href="#1-4-3-one-way-of-finding-Nash-eqilibria-for-payoff-matrix" class="headerlink" title="1.4.3 one way of finding Nash eqilibria for payoff matrix"></a>1.4.3 one way of finding Nash eqilibria for payoff matrix</h3><ol>
+<li><p>Find the best response correspondence for each player</p>
+<p>best response correspondence gives the set of payoff maximizing strategies for each strategy profile of the other players</p>
+</li>
+<li><p>Find where they intersect</p>
+<p>Find all outcomes $(a_1^<em>,a_2^</em>,…,a^<em>_N)$ such that $a_i^</em>\in B_i(a^*_{-i})$</p>
+</li>
+</ol>
+<h3 id="1-4-4-Primitive-hunting"><a href="#1-4-4-Primitive-hunting" class="headerlink" title="1.4.4 Primitive hunting"></a>1.4.4 Primitive hunting</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>player(横2纵1)                                         r</th>
+<th><strong>B</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rabbit(r)                                                           3 3</td>
+<td>3 0</td>
+<td></td>
+</tr>
+<tr>
+<td>Bear(b)                                                              0 3</td>
+<td>9 9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>$B_1(r)=\{r\}$ ; $B_1(b)=\{b\}$ ; $B_2(r)=r$ ; $B_2(b)=\{b\}$</li>
+<li>考虑$(a_1^<em>,a_2^</em>$) 满足 $a_1^<em> \in B_1(a_2^</em>) $ and $a_2^<em> \in B_2 (a_1^</em>)$ 这时候构成纳什均衡</li>
+<li>纳什均衡点:$(r,r)$,$(b,b)$</li>
+</ul>
+<h3 id="1-4-5-Rock-Paper-Scissors-石头剪刀布"><a href="#1-4-5-Rock-Paper-Scissors-石头剪刀布" class="headerlink" title="1.4.5 Rock-Paper-Scissors 石头剪刀布"></a>1.4.5 Rock-Paper-Scissors 石头剪刀布</h3><p>纯策略博弈可能没有纳什均衡点，但是概率性的混合事件有纳什均衡，因此还是一定存在纳什均衡</p>
+
+<h3 id="1-4-6-例2"><a href="#1-4-6-例2" class="headerlink" title="1.4.6 例2"></a>1.4.6 例2</h3>
+<p>$a_2^<em>=d$ 的时候，$a_1^</em>=a$，此时不满足</p>
+<p>$a_2^<em>=e$的时候，$a_1^</em>=c$，此时不满足</p>
+<p>…</p>
+<ul>
+<li>(c,f) 为唯一纳什均衡点</li>
+</ul>
+<h3 id="1-4-7-例3"><a href="#1-4-7-例3" class="headerlink" title="1.4.7 例3"></a>1.4.7 例3</h3>
+<ul>
+<li>考虑：(a,x,L)=(8,7,4)：不是</li>
+<li>考虑：(a,y,R)=(6,5,4): 是<ul>
+<li>$a\in B_1(y,R)$</li>
+<li>$y\in B_2(a,R)$</li>
+<li>$R\in B_3(a,y)$</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5-如何寻找连续策略的纳什均衡"><a href="#1-5-如何寻找连续策略的纳什均衡" class="headerlink" title="1.5 如何寻找连续策略的纳什均衡"></a>1.5 如何寻找连续策略的纳什均衡</h2><p>One way of finding Nash equilibrium for continuous strategies $A_i$</p>
+<ol>
+<li><p>Find the best response correspondence for each player</p>
+<p>Best response correspondence:</p>
+<p>​    $B_i(a_{-i})=\{a_i argmax_{a_i\in A_i}u_i(a_i,a_{-i}) \}$</p>
+</li>
+<li><p>Find all Nash Equilibria ($a_1^<em>,a_2^</em>,…,a_N^<em>$) such that $a_i^</em> B_i(a_{-i}^*)$ for each player</p>
+</li>
+</ol>
+<h3 id="1-5-1-古诺竞争"><a href="#1-5-1-古诺竞争" class="headerlink" title="1.5.1 古诺竞争"></a>1.5.1 古诺竞争</h3><ul>
+<li>$q_2\geq \frac{a-c}{b}$ , $B_1(q_2)=0$</li>
+<li>$q_2$</li>
+</ul>
+<h3 id="1-5-2-伯特兰德模型-Bertrand-Model"><a href="#1-5-2-伯特兰德模型-Bertrand-Model" class="headerlink" title="1.5.2 伯特兰德模型 Bertrand Model"></a>1.5.2 伯特兰德模型 Bertrand Model</h3><ul>
+<li>两个公司公开招标报价:<ul>
+<li>市场交易价格是最低的</li>
+<li>但是</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>markastrid
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2025/02/17/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="第一章 策略式博弈和纳什均衡">http://example.com/2025/02/17/博弈论笔记二/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E4%B8%80%E7%AB%A0/" rel="tag"># 博弈论第一章</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/11/18/week4/" rel="prev" title="第四周">
+      <i class="fa fa-chevron-left"></i> 第四周
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/02/17/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%80/" rel="next" title="博弈论笔记一">
+      博弈论笔记一 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%AD%96%E7%95%A5%E5%BC%8F%E5%8D%9A%E5%BC%88"><span class="nav-number">1.</span> <span class="nav-text">1.1 策略式博弈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1-Nash-Equilibrium-NE"><span class="nav-number">2.</span> <span class="nav-text">1.2 纳什均衡 Nash Equilibrium (NE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-Best-Response-Correspondence"><span class="nav-number">2.1.</span> <span class="nav-text">1.4.1 Best Response Correspondence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2"><span class="nav-number">2.2.</span> <span class="nav-text">1.4.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-one-way-of-finding-Nash-eqilibria-for-payoff-matrix"><span class="nav-number">2.3.</span> <span class="nav-text">1.4.3 one way of finding Nash eqilibria for payoff matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4-Primitive-hunting"><span class="nav-number">2.4.</span> <span class="nav-text">1.4.4 Primitive hunting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-5-Rock-Paper-Scissors-%E7%9F%B3%E5%A4%B4%E5%89%AA%E5%88%80%E5%B8%83"><span class="nav-number">2.5.</span> <span class="nav-text">1.4.5 Rock-Paper-Scissors 石头剪刀布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-6-%E4%BE%8B2"><span class="nav-number">2.6.</span> <span class="nav-text">1.4.6 例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-7-%E4%BE%8B3"><span class="nav-number">2.7.</span> <span class="nav-text">1.4.7 例3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE%E8%BF%9E%E7%BB%AD%E7%AD%96%E7%95%A5%E7%9A%84%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">3.</span> <span class="nav-text">1.5 如何寻找连续策略的纳什均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E5%8F%A4%E8%AF%BA%E7%AB%9E%E4%BA%89"><span class="nav-number">3.1.</span> <span class="nav-text">1.5.1 古诺竞争</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E4%BC%AF%E7%89%B9%E5%85%B0%E5%BE%B7%E6%A8%A1%E5%9E%8B-Bertrand-Model"><span class="nav-number">3.2.</span> <span class="nav-text">1.5.2 伯特兰德模型 Bertrand Model</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="markastrid"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">markastrid</p>
+  <div class="site-description" itemprop="description">to be continued</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        </style>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">markastrid</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+<div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    </div>
+<div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共47.8k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
