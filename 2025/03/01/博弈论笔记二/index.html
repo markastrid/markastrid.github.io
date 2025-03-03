@@ -28,7 +28,7 @@
 <meta property="og:description" content="记录博弈论的学习整理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-01T08:41:31.679Z">
+<meta property="article:modified_time" content="2025-03-03T06:30:27.316Z">
 <meta property="article:author" content="markastrid">
 <meta property="article:tag" content="博弈论第一章">
 <meta name="twitter:card" content="summary">
@@ -184,10 +184,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-03-01 00:00:00 / 修改时间：16:41:31" itemprop="dateCreated datePublished" datetime="2025-03-01T00:00:00+08:00">2025-03-01</time>
+              <time title="创建时间：2025-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2025-03-01T00:00:00+08:00">2025-03-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-03-03 14:30:27" itemprop="dateModified" datetime="2025-03-03T14:30:27+08:00">2025-03-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -217,9 +223,14 @@
 </li>
 <li><p>定义:</p>
 <ul>
-<li>N players</li>
-<li>For each players $i\in [1,N]$ , $A_i$ (一个动作集)</li>
-<li>$u_i, A_1\times A_2 \times A_3\times …\times A_n\rightarrow R,i\in N$ <strong>or</strong> a preference relation $\succeq_i $ over A for $i \in N$（推广策略式博弈到：偏好）</li>
+<li><p>N players</p>
+</li>
+<li><p>For each players $i\in [1,N]$ , $A_i$ (一个动作集)</p>
+</li>
+<li><p>$u_i, A_1\times A_2 \times A_3\times …\times A_n\rightarrow R,i\in N$</p>
+<p> <strong>or</strong> a preference relation $\succeq_i $ over A for $i \in N$</p>
+<p>（推广策略式博弈到：偏好）</p>
+</li>
 </ul>
 </li>
 <li><p>outcome:$a=(a_1,a_2,a_3,…,a_2)$</p>
@@ -248,18 +259,20 @@
 <li>$(C,C)_1$=-6 ; $(C,C)_2=-6$ ; $(C,D)_1=-1$ ; $(C,D)_2$=-12 ; …</li>
 </ul>
 </li>
-<li><p>A Game : $G=\{N,\{A_i\}_{i=1}^N,\{u_i\}_{i=1}^N\}$   $G=\{N,\{A_i\}_{i=1}^N,\{\succeq\}_{i=1}^N\}$</p>
+<li><p>A Game : </p>
+<p>$G=\{N,\{A_i\}_{i=1}^N,\{u_i\}_{i=1}^N\}$  </p>
+<p>$G=\{N,\{A_i\}_{i=1}^N,\{\succeq\}_{i=1}^N\}$</p>
 </li>
-<li><p>$A_{-i}$：除了Player i之外的所有人的 outcome/action : $A_{-i}=A_1\times A_2\times …\times A_{i-1}\times A_{i+1}\times …A_n$</p>
+<li><p>$A_{-i}$：</p>
+<p>除了Player i之外的所有人的 outcome/action : </p>
+<p>$A_{-i}=A_1\times A_2\times …\times A_{i-1}\times A_{i+1}\times …A_n$</p>
 </li>
 </ul>
-<h2 id="1-2-纳什均衡-Nash-Equilibrium-NE"><a href="#1-2-纳什均衡-Nash-Equilibrium-NE" class="headerlink" title="1.2 纳什均衡 Nash Equilibrium (NE)"></a>1.2 纳什均衡 Nash Equilibrium (NE)</h2><ul>
-<li>$a^<em>=(a_1^</em>,a_2^<em>,…,a_n^</em>)$ is a NE if  for $\forall $ Player i $u_i^<em>(a_i^</em>,a_{-i}^<em>)\geq u_i(a_i,a_{-i}^</em>)$ for all $a_i \in A_i$</li>
-<li>即对任何人来说，在其他人的选择条件不变时，当前选择最佳<ul>
+<h2 id="1-2-纳什均衡-Nash-Equilibrium-NE"><a href="#1-2-纳什均衡-Nash-Equilibrium-NE" class="headerlink" title="1.2 纳什均衡 Nash Equilibrium (NE)"></a>1.2 纳什均衡 Nash Equilibrium (NE)</h2><p>$a^<em>=(a_1^</em>,a_2^<em>,…,a_n^</em>)$ is a NE if  for $\forall$ Player i $u_i^<em>(a_i^</em>,a_{-i}^<em>)\geq u_i(a_i,a_{-i}^</em>)$ for all $a_i \in A_i$</p>
+<p>即对任何人来说，在其他人的选择条件不变时，当前选择最佳</p>
+<ul>
 <li>对任何人调整策略收益都不会增加</li>
 <li>self-enforcing : no player has an encentive to alter his strategy intentively</li>
-</ul>
-</li>
 </ul>
 <div class="table-container">
 <table>
@@ -281,28 +294,18 @@
 <td>-12 0</td>
 <td>-1 -1</td>
 </tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
 </div>
 <ul>
 <li>NE:(C,C)</li>
 </ul>
-<h3 id="1-4-1-Best-Response-Correspondence"><a href="#1-4-1-Best-Response-Correspondence" class="headerlink" title="1.4.1 Best Response Correspondence"></a>1.4.1 Best Response Correspondence</h3><ul>
-<li>$B_i(A_{-i})=\{a_i \in A_i,u_i(a_i,a_{-i})\succeq u_i(b_i,a_{-i})，\forall b_i \in A_i\}$</li>
-<li>$B_1(C)=C$ : 第一个人的在其他人行动条为confess时的最大利益回应</li>
-<li>类似的：$B_1(D)=C$ ；$B_2(C)=C$；$B_2(D)=C$</li>
-</ul>
-<h3 id="1-4-2"><a href="#1-4-2" class="headerlink" title="1.4.2"></a>1.4.2</h3><ul>
-<li><p>假设$(q_1^*,q_2^8)$ 是一个纳什均衡策略</p>
-</li>
-<li><p>player i makes the best strategies $q_i^<em>$ with respect to $q^</em>_{-i}$</p>
+<h3 id="1-4-1-Best-Response-Correspondence"><a href="#1-4-1-Best-Response-Correspondence" class="headerlink" title="1.4.1 Best Response Correspondence"></a>1.4.1 Best Response Correspondence</h3><p>$B_i(A_{-i})=\{a_i \in A_i,u_i(a_i,a_{-i})\succeq u_i(b_i,a_{-i})，\forall b_i \in A_i\}$</p>
+<p>$B_1(C)=C$ : 第一个人的在其他人行动条为confess时的最大利益回应</p>
+<p>类似的：$B_1(D)=C$ ；$B_2(C)=C$；$B_2(D)=C$</p>
+<h3 id="1-4-2"><a href="#1-4-2" class="headerlink" title="1.4.2"></a>1.4.2</h3><p>假设$(q_1^<em>,q_2^</em>)$ 是一个纳什均衡策略</p>
+<p>player i makes the best strategies $q_i^<em> $ with respect to $ q^</em>_{-i} $</p>
 
-</li>
-</ul>
 <h3 id="1-4-3-one-way-of-finding-Nash-eqilibria-for-payoff-matrix"><a href="#1-4-3-one-way-of-finding-Nash-eqilibria-for-payoff-matrix" class="headerlink" title="1.4.3 one way of finding Nash eqilibria for payoff matrix"></a>1.4.3 one way of finding Nash eqilibria for payoff matrix</h3><ol>
 <li><p><strong>Find the best response correspondence for each player</strong></p>
 <p>best response correspondence gives the set of payoff maximizing strategies for each strategy profile of the other players</p>
@@ -317,14 +320,12 @@
 <tr>
 <th>player(横2纵1)                                         r</th>
 <th><strong>B</strong></th>
-<th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Rabbit(r)                                                           3 3</td>
 <td>3 0</td>
-<td></td>
 </tr>
 <tr>
 <td>Bear(b)                                                              0 3</td>
@@ -333,29 +334,30 @@
 </tbody>
 </table>
 </div>
-<ul>
-<li>$B_1(r)=\{r\}$ ; $B_1(b)=\{b\}$ ; $B_2(r)=\{r\}$ ; $B_2(b)=\{b\}$</li>
-<li>考虑$(a_1^<em>,a_2^</em>$) 满足 $a_1^<em> \in B_1(a_2^</em>) $ and $a_2^<em> \in B_2 (a_1^</em>)$ 这时候构成纳什均衡</li>
-<li>纳什均衡点:$(r,r)$,$(b,b)$</li>
-</ul>
+<p>$B_1(r)=\{r\}$ ; $B_1(b)=\{b\}$ ; $B_2(r)=\{r\}$ ; $B_2(b)=\{b\}$</p>
+<p>考虑$(a_1^<em>,a_2^</em>$) 满足 $a_1^<em> \in B_1(a_2^</em>) $ and $a_2^<em> \in B_2 (a_1^</em>)$ 这时候构成纳什均衡</p>
+<p>纳什均衡点:$(r,r)$,$(b,b)$</p>
 <h3 id="1-4-5-Rock-Paper-Scissors-石头剪刀布"><a href="#1-4-5-Rock-Paper-Scissors-石头剪刀布" class="headerlink" title="1.4.5 Rock-Paper-Scissors 石头剪刀布"></a>1.4.5 Rock-Paper-Scissors 石头剪刀布</h3><p>纯策略博弈可能没有纳什均衡点，但是概率性的混合事件有纳什均衡，因此还是一定存在纳什均衡</p>
 
-<h3 id="1-4-6-例2"><a href="#1-4-6-例2" class="headerlink" title="1.4.6 例2"></a>1.4.6 例2</h3>
+<ul>
+<li>exercise:</li>
+</ul>
+
+<h3 id="1-4-6-例"><a href="#1-4-6-例" class="headerlink" title="1.4.6 例"></a>1.4.6 例</h3>
 <p>$a_2^<em>=d$ 的时候，$a_1^</em>=a$，此时不满足</p>
 <p>$a_2^<em>=e$的时候，$a_1^</em>=c$，此时不满足</p>
 <p>…</p>
 <ul>
 <li>(c,f) 为唯一纳什均衡点</li>
 </ul>
-<h3 id="1-4-7-例3"><a href="#1-4-7-例3" class="headerlink" title="1.4.7 例3"></a>1.4.7 例3</h3>
+<h3 id="1-4-7-例3"><a href="#1-4-7-例3" class="headerlink" title="1.4.7 例3"></a>1.4.7 例3</h3><p>$G=\{\{1,2,3\},\{\{a,b,c\},\{x,y,z\},\{L,R\}\},\{u_i\}_{i=1}^3\}$</p>
+
+<p>考虑：(a,x,L)=(8,7,4)：不是</p>
+<p>考虑：(a,y,R)=(6,5,4): 是</p>
 <ul>
-<li>考虑：(a,x,L)=(8,7,4)：不是</li>
-<li>考虑：(a,y,R)=(6,5,4): 是<ul>
 <li>$a\in B_1(y,R)$</li>
 <li>$y\in B_2(a,R)$</li>
 <li>$R\in B_3(a,y)$</li>
-</ul>
-</li>
 </ul>
 <h2 id="1-5-如何寻找连续策略的纳什均衡"><a href="#1-5-如何寻找连续策略的纳什均衡" class="headerlink" title="1.5 如何寻找连续策略的纳什均衡"></a>1.5 如何寻找连续策略的纳什均衡</h2><p>One way of finding Nash equilibrium for continuous strategies $A_i$</p>
 <ol>
@@ -368,7 +370,7 @@
 </ol>
 <h3 id="1-5-1-古诺竞争"><a href="#1-5-1-古诺竞争" class="headerlink" title="1.5.1 古诺竞争"></a>1.5.1 古诺竞争</h3><p>说明：两家公司竞争要选择生产多少产品</p>
 <ul>
-<li><p>$G=\{\{1,2\},\{q_1,q_2\},\{\mu_1,\mu_2\}\}$</p>
+<li><p>$G=\{ \{1,2\},\{q_1,q_2\},\{\mu_1,\mu_2\} \}$</p>
 </li>
 <li><p>Price:$p(q_1+q_2)=max(0,a-b(q_1+q_2))$</p>
 </li>
@@ -419,6 +421,60 @@
 </ul>
 </li>
 </ul>
+<p>那么$B_1$的最佳回复$B_1(q_2)$为:</p>
+
+
+<p>纳什均衡策略$(q_1^<em>,q_2^</em>)$需要满足$q^<em>_1\in B_1(q_2^</em>)$，$q^<em>_2\in B_2(q_1^</em>)$</p>
+<p>Intersection of the graphs of the best response function</p>
+
+<ul>
+<li>NE:(c,c)</li>
+</ul>
+<h2 id="1-6-选择-Election"><a href="#1-6-选择-Election" class="headerlink" title="1.6 选择 Election"></a>1.6 选择 Election</h2><ul>
+<li>Several candidates vote for political office</li>
+<li>Each candidate chooses a policy position</li>
+<li>Each citizen, who has preferences over policy positions, votes for one of the candidates</li>
+<li>Candidate who obtains the most votes wins</li>
+</ul>
+<p>Strategic game:</p>
+<ol>
+<li>Players: candidates</li>
+<li>Set of actions of each candidate: set of possible positions</li>
+<li>Payoff is 1 for winner; is 0.5 for ties; and is 0 for loser</li>
+</ol>
+<ul>
+<li>Note: Citizens are not players in this game</li>
+</ul>
+<h3 id="1-6-1-Example-1"><a href="#1-6-1-Example-1" class="headerlink" title="1.6.1 Example 1"></a>1.6.1 Example 1</h3><ul>
+<li><p>Two candidates $N=\{1,2\}$</p>
+</li>
+<li><p>Set of possible position: $b_1,b_2 \in [0,1]$</p>
+</li>
+<li><p>•Citizens are continuous, and are distributed uniformly on [0,1], and vote for the candidate with closet position</p>
+</li>
+<li><p>Payoff: </p>
+<script type="math/tex; mode=display">
+\mu_i(q_1,q_2) = 
+\begin{cases} 
+1& \text{if i wins} \\
+0.5 &  \text{if i ties}\\
+0 & \text{if i loses} 
+\end{cases}</script></li>
+<li><p>$B_i(b_j)$:</p>
+<ol>
+<li>$b_j&lt;\frac{1}{2}$:$B_i(b_j)=\{b_i:b_j&lt;b_i&lt;1-b_j\}$</li>
+<li>$b_j=\frac{1}{2}$:$B_i(b_j)=\{b_i:b_i=\frac{1}{2}\}$</li>
+<li>$b_j&gt;\frac{1}{2}$:$B_i(b_j)=\{b_i:1-b_j&lt;b_i&lt;b_j\}$</li>
+</ol>
+</li>
+</ul>
+
+<ul>
+<li>NE:$(\frac{1}{2},\frac{1}{2})$</li>
+</ul>
+<h3 id="1-7-1-Example-2"><a href="#1-7-1-Example-2" class="headerlink" title="1.7.1 Example 2"></a>1.7.1 Example 2</h3><ul>
+<li>$G=\{\{1,2\},\{\{U,L\},\{L,R\}\},\{u_1,u_2\}\}$</li>
+</ul>
 
     </div>
 
@@ -454,8 +510,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/02/17/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%80/" rel="prev" title="博弈论笔记一">
-      <i class="fa fa-chevron-left"></i> 博弈论笔记一
+    <a href="/2025/03/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%89/" rel="prev" title="第二章 混合式博弈和纳什策略">
+      <i class="fa fa-chevron-left"></i> 第二章 混合式博弈和纳什策略
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -516,7 +572,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%AD%96%E7%95%A5%E5%BC%8F%E5%8D%9A%E5%BC%88"><span class="nav-number">1.</span> <span class="nav-text">1.1 策略式博弈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1-Nash-Equilibrium-NE"><span class="nav-number">2.</span> <span class="nav-text">1.2 纳什均衡 Nash Equilibrium (NE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-Best-Response-Correspondence"><span class="nav-number">2.1.</span> <span class="nav-text">1.4.1 Best Response Correspondence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2"><span class="nav-number">2.2.</span> <span class="nav-text">1.4.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-one-way-of-finding-Nash-eqilibria-for-payoff-matrix"><span class="nav-number">2.3.</span> <span class="nav-text">1.4.3 one way of finding Nash eqilibria for payoff matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4-Primitive-hunting"><span class="nav-number">2.4.</span> <span class="nav-text">1.4.4 Primitive hunting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-5-Rock-Paper-Scissors-%E7%9F%B3%E5%A4%B4%E5%89%AA%E5%88%80%E5%B8%83"><span class="nav-number">2.5.</span> <span class="nav-text">1.4.5 Rock-Paper-Scissors 石头剪刀布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-6-%E4%BE%8B2"><span class="nav-number">2.6.</span> <span class="nav-text">1.4.6 例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-7-%E4%BE%8B3"><span class="nav-number">2.7.</span> <span class="nav-text">1.4.7 例3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE%E8%BF%9E%E7%BB%AD%E7%AD%96%E7%95%A5%E7%9A%84%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">3.</span> <span class="nav-text">1.5 如何寻找连续策略的纳什均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E5%8F%A4%E8%AF%BA%E7%AB%9E%E4%BA%89"><span class="nav-number">3.1.</span> <span class="nav-text">1.5.1 古诺竞争</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E4%BC%AF%E7%89%B9%E5%85%B0%E5%BE%B7%E6%A8%A1%E5%9E%8B-Bertrand-Model"><span class="nav-number">3.2.</span> <span class="nav-text">1.5.2 伯特兰德模型 Bertrand Model</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%AD%96%E7%95%A5%E5%BC%8F%E5%8D%9A%E5%BC%88"><span class="nav-number">1.</span> <span class="nav-text">1.1 策略式博弈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1-Nash-Equilibrium-NE"><span class="nav-number">2.</span> <span class="nav-text">1.2 纳什均衡 Nash Equilibrium (NE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-Best-Response-Correspondence"><span class="nav-number">2.1.</span> <span class="nav-text">1.4.1 Best Response Correspondence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2"><span class="nav-number">2.2.</span> <span class="nav-text">1.4.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-one-way-of-finding-Nash-eqilibria-for-payoff-matrix"><span class="nav-number">2.3.</span> <span class="nav-text">1.4.3 one way of finding Nash eqilibria for payoff matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4-Primitive-hunting"><span class="nav-number">2.4.</span> <span class="nav-text">1.4.4 Primitive hunting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-5-Rock-Paper-Scissors-%E7%9F%B3%E5%A4%B4%E5%89%AA%E5%88%80%E5%B8%83"><span class="nav-number">2.5.</span> <span class="nav-text">1.4.5 Rock-Paper-Scissors 石头剪刀布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-6-%E4%BE%8B"><span class="nav-number">2.6.</span> <span class="nav-text">1.4.6 例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-7-%E4%BE%8B3"><span class="nav-number">2.7.</span> <span class="nav-text">1.4.7 例3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE%E8%BF%9E%E7%BB%AD%E7%AD%96%E7%95%A5%E7%9A%84%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">3.</span> <span class="nav-text">1.5 如何寻找连续策略的纳什均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E5%8F%A4%E8%AF%BA%E7%AB%9E%E4%BA%89"><span class="nav-number">3.1.</span> <span class="nav-text">1.5.1 古诺竞争</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E4%BC%AF%E7%89%B9%E5%85%B0%E5%BE%B7%E6%A8%A1%E5%9E%8B-Bertrand-Model"><span class="nav-number">3.2.</span> <span class="nav-text">1.5.2 伯特兰德模型 Bertrand Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E9%80%89%E6%8B%A9-Election"><span class="nav-number">4.</span> <span class="nav-text">1.6 选择 Election</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-Example-1"><span class="nav-number">4.1.</span> <span class="nav-text">1.6.1 Example 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-1-Example-2"><span class="nav-number">4.2.</span> <span class="nav-text">1.7.1 Example 2</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -531,7 +587,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -544,7 +600,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -594,7 +650,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共48.1k字</span>
+    <span class="post-count">全站共48.3k字</span>
   </div>
 
         
