@@ -43,6 +43,7 @@
 <meta property="og:image" content="http://example.com/2024/10/28/week3/image-20241028143749327.png">
 <meta property="og:image" content="http://example.com/2024/10/28/week3/image-20241028144325236.png">
 <meta property="og:image" content="http://example.com/2024/10/28/week3/image-20241028144455076.png">
+<meta property="og:image" content="http://example.com/2024/10/28/week3/image-20241028144533470.png">
 <meta property="og:image" content="http://example.com/2024/10/28/week3/image-20241028144608205.png">
 <meta property="og:image" content="http://example.com/2024/10/28/week3/image-20241028144643521.png">
 <meta property="og:image" content="http://example.com/2024/10/28/week3/image-20241028144716796.png">
@@ -382,7 +383,7 @@
 <p>$\theta_j := \theta_j - \alpha \frac{\partial}{\partial\theta_j} J(\theta)$</p>
 <p>${\theta_j}:={\theta_j}-\alpha \frac{1}{m}\sum\limits_{i=1}^{m}{({h_\theta}({ {x}^{(i)} })-{ {y}^{(i)} }){x_{j} } ^{(i)} }$</p>
 <p>将后面这个式子，在 $i=1$  到 $m$ 上求和，其实就是预测误差乘以$x_j^{(i)}$ ，导数项$\frac{\partial }{\partial {\theta_j} }J\left( \theta  \right)$即其中的更新项</p>
-<p>所以，如果你有 $n$ 个特征，也就是说：} }$来同时更新所有$\theta $的值。</p>
+<p>所以，如果你有 $n$ 个特征，也就是说：<img src="/2024/10/28/week3/image-20241028144533470.png" class="" title="image-20241028144533470">那么需要用这个式子：${\theta_j}:={\theta_j}-\alpha \frac{1}{m}\sum\limits_{i=1}^{m} {({h_\theta}({ {x}^{(i)} })-{ {y}^{(i)} }){ {x}_{j} }^{(i)} }$来同时更新所有$\theta $的值。</p>
 <p>把这个更新规则和我们之前用在线性回归上的进行比较会发现，这个式子正是我们用来做线性回归梯度下降的。</p>
 <p>那么，线性回归和逻辑回归是同一个算法吗？实际上，假设的定义发生了变化。</p>
 <p>对于线性回归假设函数：</p>
