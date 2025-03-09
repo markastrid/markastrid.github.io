@@ -28,7 +28,7 @@
 <meta property="og:description" content="记录博弈论的学习整理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-08T17:25:56.151Z">
+<meta property="article:modified_time" content="2025-03-09T10:57:52.843Z">
 <meta property="article:author" content="markastrid">
 <meta property="article:tag" content="博弈论第二章">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-09 01:25:56" itemprop="dateModified" datetime="2025-03-09T01:25:56+08:00">2025-03-09</time>
+                <time title="修改时间：2025-03-09 18:57:52" itemprop="dateModified" datetime="2025-03-09T18:57:52+08:00">2025-03-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -216,58 +216,173 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="2-1-Mixed-Strategy"><a href="#2-1-Mixed-Strategy" class="headerlink" title="2.1 Mixed Strategy"></a>2.1 Mixed Strategy</h2><h3 id="2-1-1-引入：选举-Election-Hotelling-Downs-模型"><a href="#2-1-1-引入：选举-Election-Hotelling-Downs-模型" class="headerlink" title="2.1.1 引入：选举 Election-Hotelling-Downs 模型"></a>2.1.1 引入：选举 Election-Hotelling-Downs 模型</h3><ul>
-<li>每个候选人将从一组可选的政策立场中选择一个概率分布。</li>
-<li>候选人会选择一个策略，使得在考虑到其他候选人选择的政策时，每个候选人的预期支付最大化。</li>
-<li>混合策略实际上会导致候选人在某种程度上模糊化他们的政策立场，以便最大化他们吸引中间选民的机会，同时确保不被其他候选人超越。</li>
-</ul>
-<h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><ul>
-<li><strong>平局</strong>：如果有多个候选人被选民同等偏好，平局的处理可以基于随机因素或者某种偏好顺序来决定。</li>
-<li><strong>均衡</strong>：混合策略均衡通常涉及候选人选择政策立场，使得没有任何候选人能够通过单方面改变策略来提高自己的获胜几率。在一个简单的情况下，这通常会导致候选人趋向于选择政策谱系的中间位置，因为这样做能够最大化吸引中间选民的机会。</li>
-</ul>
-<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><p>假设有两个候选人（A和B），政策空间是连续的（比如从0到1），在混合策略纳什均衡下，两个候选人可能会随机选择一个策略，这样他们可以根据选民的投票行为来最大化自己的获胜概率。选民会选择与他们自己的理想政策最接近的候选人投票。</p>
-<p>混合策略可能是一个<strong>概率分布</strong>，表示每个候选人按照这个分布选择一个政策位置。如果两个候选人选择政策的概率是相等的，他们的预期支付也会相等，且没有任何候选人能够通过改变自己的策略来提高获胜概率。</p>
-<p>在实际应用中，混合策略可能会导致候选人围绕一个焦点政策点（例如政策谱系的中心）进行“随机化”，或者根据候选人的数量和他们的策略分布来进行调整。</p>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>在这种博弈中，混合策略是一种候选人随机化选择政策立场的方式，通过这种方式，候选人的选择变得不可预测，但他们依然能够最大化吸引选民，特别是那些中间选民，从而提高他们的获胜概率。</p>
-<p>这个问题描述的是一个经典的<strong>Hotelling-Downs模型</strong>，其中有两个候选人，选民的分布是均匀的，且投票给最接近自己偏好的候选人。我们需要找出这个博弈的<strong>纳什均衡</strong>。</p>
-<h3 id="给定的条件："><a href="#给定的条件：" class="headerlink" title="给定的条件："></a>给定的条件：</h3><ul>
-<li><p><strong>玩家</strong>：有两个候选人 N={1,2}N = \{1, 2\}，他们的策略是选择一个在区间 [0,1][0, 1] 上的政策位置，即 b1b_1 和 b2b_2 分别是候选人1和候选人2选择的位置。</p>
-</li>
-<li><p><strong>选民分布</strong>：选民的分布是均匀的，且位于区间 [0,1][0, 1] 上。</p>
-</li>
-<li><p><strong>投票规则</strong>：选民会投票给与自己位置最接近的候选人。如果一个选民距离两个候选人同样远，他会投票给平局的候选人。</p>
-</li>
-<li><p>支付函数</p>
-<p>：</p>
+        <h2 id="2-1-Mixed-Strategy"><a href="#2-1-Mixed-Strategy" class="headerlink" title="2.1 Mixed Strategy"></a>2.1 Mixed Strategy</h2><h3 id="2-1-1-引入：选举-Election（Hotelling-Downs-模型）"><a href="#2-1-1-引入：选举-Election（Hotelling-Downs-模型）" class="headerlink" title="2.1.1 引入：选举 Election（Hotelling-Downs 模型）"></a>2.1.1 引入：选举 Election（Hotelling-Downs 模型）</h3><p>Several candidates vote for political office</p>
+<p>Each candidate chooses a policy position</p>
+<p>Each citizen, who has preferences over policy positions, votes for one of the candidates</p>
+<p>Candidate who obtains the most votes wins</p>
+<p>Strategic game:</p>
 <ul>
-<li>如果候选人 ii 获胜，支付为1。</li>
-<li>如果候选人 ii 与对方平局，支付为0.5。</li>
-<li>如果候选人 ii 输掉选举，支付为0。</li>
-</ul>
+<li><p>Players: candidates</p>
+</li>
+<li><p>Set of actions of each candidate: set of possible positions</p>
+</li>
+<li><p>Payoff is 1 for winner; is 0.5 for ties; and is 0 for loser</p>
 </li>
 </ul>
-<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><p>我们需要找到一个<strong>纳什均衡</strong>，即每个候选人的策略选择在给定对方策略时，不会单方面改变自己的策略来获得更好的结果。</p>
-<h4 id="1-候选人的选择"><a href="#1-候选人的选择" class="headerlink" title="1. 候选人的选择"></a>1. <strong>候选人的选择</strong></h4><p>候选人1和候选人2的目标是最大化自己获得的选票。每个选民会选择距离自己最近的候选人投票。如果两个候选人选择的位置不同，那么选民会选择距离自己最近的一个候选人。</p>
-<h4 id="2-假设候选人选择的政策位置为-b1b-1-和-b2b-2："><a href="#2-假设候选人选择的政策位置为-b1b-1-和-b2b-2：" class="headerlink" title="2. 假设候选人选择的政策位置为 b1b_1 和 b2b_2："></a>2. <strong>假设候选人选择的政策位置为 b1b_1 和 b2b_2</strong>：</h4><ul>
-<li>如果候选人1选择 b1b_1，候选人2选择 b2b_2，则选民根据他们的位置来选择投票对象。</li>
-<li>假设选民位于某个位置 x∈[0,1]x \in [0, 1]，如果 x<b1+b22x < \frac{b_1 + b_2}{2}，则选民会选择候选人1；如果 x>b1+b22x &gt; \frac{b_1 + b_2}{2}，则选民会选择候选人2。这个临界点是 x=b1+b22x = \frac{b_1 + b_2}{2}，表示两个候选人选民投票的“分界线”。</li>
-</ul>
-<h4 id="3-投票和支付"><a href="#3-投票和支付" class="headerlink" title="3. 投票和支付"></a>3. <strong>投票和支付</strong></h4><ul>
-<li>如果候选人1选择 b1=0b_1 = 0 和候选人2选择 b2=1b_2 = 1，选民在 [0,0.5][0, 0.5] 区间内投票给候选人1，在 [0.5,1][0.5, 1] 区间内投票给候选人2。因此，候选人1和候选人2各获得一半选民的选票，即他们平局，支付为0.5。</li>
-</ul>
-<h4 id="4-纳什均衡"><a href="#4-纳什均衡" class="headerlink" title="4. 纳什均衡"></a>4. <strong>纳什均衡</strong></h4><p>在这个模型中，<strong>纳什均衡</strong>的一个关键特性是：候选人趋向于选择<strong>中间位置</strong>，即 b1b_1 和 b2b_2 会收敛到相同的位置，即 <strong>b1=b2=0.5b_1 = b_2 = 0.5</strong>。这种行为可以解释为候选人会试图吸引中间选民，因此趋向于选择政策谱系的中点。</p>
+<p>Note: Citizens are not players in this game</p>
+<p>Two candidates N={1,2} </p>
+<p>Set of <strong>possible position</strong>: $b_1, b_2∈[0,1]$</p>
+<p>Citizens are continuous, and are distributed uniformly on [0,1], and vote for the candidate with closet position. </p>
+<p>Payoff：<script type="math/tex">u_i(b_1, b_2) =
+\begin{cases}
+1 & \text{if } i \text{ wins} \\
+0.5 & \text{if } i \text{ ties} \\
+0 & \text{if } i \text{ loses}
+\end{cases}</script></p>
+<p>每个候选人将从一组可选的政策立场中选择一个概率分布。</p>
 <ul>
+<li>候选人会选择一个策略，使得在考虑到其他候选人选择的政策时，自己的预期支付最大化。</li>
+<li>混合策略可能是一个<strong>概率分布</strong>，表示每个候选人按照这个分布选择一个政策位置</li>
+<li>混合策略实际上会导致候选人在某种程度上模糊化他们的政策立场，以便最大化他们吸引中间选民的机会，同时确保不被其他候选人超越</li>
+</ul>
+<p>对$B_i(b_j)$：</p>
+<script type="math/tex; mode=display">
+&\text{If } b_j < \frac{1}{2}, \quad B_i(b_j) = \{ b_i : b_j < b_i < 1 - b_j \}\\
+
+&\text{If } b_j = \frac{1}{2}, \quad B_i(b_j) = \{ b_i : b_i = \frac{1}{2} \}\\
+
+&\text{If } b_j > \frac{1}{2}, \quad B_i(b_j) = \{ b_i : 1 - b_j < b_i < b_j \}\\</script><ol>
+<li>候选人1和候选人2的目标是最大化自己获得的选票。每个选民会选择距离自己最近的候选人投票。如果两个候选人选择的位置不同，那么选民会选择距离自己最近的一个候选人。</li>
+<li>假设选民位于某个位置 $x \in [0, 1]$，如果 $x &lt; \frac{b_1 + b_2}{2}$，则选民会选择候选人1；如果 $x &gt; \frac{b_1 + b_2}{2}$，则选民会选择候选人2。这个临界点是 $x = \frac{b_1 + b_2}{2}$，表示两个候选人选民投票的“分界线”</li>
+<li>候选人趋向于选择<strong>中间位置</strong>，即 $b_1$ 和 $b_2 $会收敛到相同的位置，即 <strong>$b_1 = b_2 = 0.5$</strong>。这种行为可以解释为候选人会试图吸引中间选民，因此趋向于选择政策谱系的中点。</li>
 <li>当两个候选人选择相同的位置时，他们会吸引同样的选民，因此会形成平局，每个候选人获得0.5的支付。</li>
-<li>如果一个候选人偏离中点，那么他将失去一部分选民，最终可能导致选举失败。所以每个候选人选择中间位置是一个<strong>稳定的策略</strong>。</li>
+<li>如果其中一个候选人偏离了中点，另一个候选人将会吸引更多选民，最终导致偏离中点的候选人失去选举。因此，选择中间位置是双方的最优策略，这就是这次博弈中的纳什均衡</li>
+</ol>
+
+<h3 id="2-1-2-defination"><a href="#2-1-2-defination" class="headerlink" title="2.1.2 defination"></a>2.1.2 defination</h3>
+<p>Mixed strategy keeps the guess of player’s strategies, keep unpredictable on pure strategies</p>
+<p>Pure strategy can be viewed as a special mixed strategy：$G = \{ N, \{ A_1, A_2, \dots, A_N \}, \{ u_1, u_2, \dots, u_N \} \}$</p>
+<p>Pure strategy: strategies set of player $i$$：A_i = \{ a_{i1}, a_{i2}, \dots, a_{i n_i} \}$</p>
+<p>Mixed strategy: a probability over the set $A_i$ of strategies<br>$A_i = \{ a_{i1}, a_{i2}, \dots, a_{i n_i} \}$<br>$p_i = (p_{i1}, p_{i2}, \dots, p_{i n_i})$</p>
+<ul>
+<li>即有$p_{ij}$的性选择$a_{ij}$</li>
 </ul>
-<h4 id="5-结论："><a href="#5-结论：" class="headerlink" title="5. 结论："></a>5. <strong>结论：</strong></h4><ul>
-<li><strong>纳什均衡</strong>是两个候选人都选择 b1=b2=0.5b_1 = b_2 = 0.5，即他们都选择政策谱系的中点。</li>
-<li>在这个均衡下，两个候选人会吸引到相同数量的选民，因此会平局，每个候选人获得0.5的支付。</li>
+<p>Denote by $\Delta(A_i)$ the set of all probability distributions over $A_i$<br>$\Delta(A_i) = \{ p_i = (p_{i1}, p_{i2}, \dots, p_{i n_i}) : p_{ij} \geq 0, \sum_j p_{ij} = 1 \}$</p>
+<h3 id="2-1-3-混合策略例子"><a href="#2-1-3-混合策略例子" class="headerlink" title="2.1.3 混合策略例子"></a>2.1.3 混合策略例子</h3>
+<p>$p = (p_1, p_2) = \left( (0.4, 0.6), (0.5, 0.5) \right)$</p>
+<p>$U_1(p) = p_1(U) p_2(L) u_1(U, L) + p_1(U) p_2(R) u_1(U, R) \+ p_1(D) p_2(L) u_1(D, L) + p_1(D) p_2(D) u_1(D, R) = 1.1$</p>
+<p>$U_2(p) = \dots = 3.3$</p>
+<p>Given $G = \{ N, \{ A_i \}, \{ u_i \} \}$ and mixed $p = (p_1, p_2, \dots, p_N)$, the expected payoff of player $i$ is given by</p>
+<p>$U_i(p) = \sum_{a \in A} p(a) u_i(a) \\= \sum_{a = (a_1, \dots, a_N) \in A} p_1(a_1) \times \dots \times p_N(a_N) u_i(a)$</p>
+<p>Pure strategy game:$G = \{ N, \{ A_1, A_2, \dots, A_N \}, \{ u_1, u_2, \dots, u_N \} \}$</p>
+<p>Mixed strategy game:$G = \{ N, \{ \Delta(A_1), \Delta(A_2), \dots, \Delta(A_N) \}, \{ U_1, U_2, \dots, U_N \} \}$$$</p>
+<p>$\Delta(A_i)$表示了第$i$个玩家可选的概率操作$(p_1,p_2,…)$</p>
+<h2 id="2-2-Lemma"><a href="#2-2-Lemma" class="headerlink" title="2.2 Lemma"></a>2.2 Lemma</h2><h3 id="2-2-1-Lemma1"><a href="#2-2-1-Lemma1" class="headerlink" title="2.2.1 Lemma1"></a>2.2.1 Lemma1</h3><p> $U_i(p)$ is a <strong>continuous function</strong> for each variable.(如果玩家 iii 的混合策略 p中的某个概率发生轻微变化（即某个策略的选择概率发生变化），那么玩家 i 的期望效用 $U_i(p)$ 也会发生连续变化，不会出现突变或不连续的情况。)</p>
+<p><strong>Proof:</strong></p>
+<p>$U_i(p) = \sum_{a = (a_1, \dots, a_N) \in A} p_1(a_1) \times \dots \times p_N(a_N) u_i(a)$</p>
+<p>这里，$U_i(p)$ 是玩家 i的期望效用。公式的意思是，对于每种可能的策略组合 $a = (a_1, a_2, \dots, a_N)$，其概率为 $p_1(a_1) \times p_2(a_2) \times \dots \times p_N(a_N)$，而 $u_i(a)$ 是给定策略组合 a 时玩家 i 的效用（在效用矩阵中获得）。通过对所有可能的策略组合加权平均，我们就得到了玩家 i的期望效用 $U_i(p)$</p>
+<p>Given $p = (p_1, p_2, \dots, p_N)$, we write</p>
+<p>$U_i(a_j, p_{-j}) = \sum_{a_{-j} \in A_{-j}} p_{-j}(a_{-j}) u_i(a_j, a_{-j})$</p>
+<p>这个式子表示，对于某个action $a_j$玩家 i的期望效用$U_i(a_j, p_{-j}) $是所有其他玩家 j 的策略 $a_{-j} $和其他玩家的策略 $ u_i(a_j, a_{-j})$ 下的加权效用,$a_{-j} \in A_{-j}$可能有很多种概率的组合形式</p>
+<p>Then $U_i(p) = \sum_{a_j \in A_j} p_j(a_j) U_i(p_{-j}, a_j)$</p>
+<p>玩家 i 的总期望效用是通过玩家 j 的策略 $a_j $来加权每个条件期望效用$U_i(p_{-j}, a_j)$ 得到的。</p>
+<h3 id="2-2-2-Lemma2"><a href="#2-2-2-Lemma2" class="headerlink" title="2.2.2 Lemma2"></a>2.2.2 Lemma2</h3><p>The expected payoff function $U_i$ is multi-linear.</p>
+<p>For mixed outcomes $p = (p_1, p_2, \dots, p_N)$ and $p_j’$, we have:</p>
+<script type="math/tex; mode=display">U_i(\lambda p_j + (1 - \lambda) p_j', p_{(-j)}) = \lambda U_i(p_j, p_{(-j)}) + (1 - \lambda) U_i(p_j', p_{(-j)}), \\ \lambda \in [0,1]</script><p>See board from the definition.<br>$U_i(p) = \sum_{a_j \in A_j} p_j(a_j) U_i(p_{(-j)}, a_j).$</p>
+<p>证明过程如下：</p>
+<p>我们首先回顾期望效用函数的定义，它是每个可能策略组合的概率和效用的加权平均：</p>
+<p>$U_i(p) = \sum_{a_j \in A_j} p_j(a_j) U_i(p_{(-j)}, a_j)$</p>
+<p>其中 $p_j(a_j) $是玩家 j 选择策略$a_j$ 的概率，而$U_i(p_{(-j)}, a_j)$ 是当玩家 j 选择策略 $a_j$ 时，其他玩家的策略为$p_{(-j)}$ 时玩家 i 的期望效用。</p>
+<p>现在，我们考虑两种混合策略 $p_j $和$p_j’$，新的混合策略是由这两种策略的线性组合构成：</p>
+<p>$\tilde{p_j} = \lambda p_j + (1 - \lambda) p_j’.$</p>
+<p>玩家 i 在这种新的混合策略下的期望效用可以写作：</p>
+<p>$U_i(\tilde{p_j}, p_{(-j)}) = U_i(\lambda p_j + (1 - \lambda) p_j’, p_{(-j)})$</p>
+<p>我们根据期望效用函数的定义，可以将其展开：</p>
+<p>$U_i(\lambda p_j + (1 - \lambda) p_j’, p_{(-j)}) = \sum_{a_j \in A_j} \tilde{p_j}(a_j) U_i(p_{(-j)}, a_j)$</p>
+<p>由于$\tilde{p_j}(a_j) = \lambda p_j(a_j) + (1 - \lambda) p_j’(a_j)$，我们将其代入：</p>
+<p>$U_i(\lambda p_j + (1 - \lambda) p_j’, p_{(-j)}) \\= \sum_{a_j \in A_j} \left( \lambda p_j(a_j) + (1 - \lambda) p_j’(a_j) \right) U_i(p_{(-j)}, a_j)$</p>
+<p>据加法的线性性质，展开后我们得到：</p>
+<script type="math/tex; mode=display">U_i(\lambda p_j + (1 - \lambda) p_j', p_{(-j)}) \\= \lambda \sum_{a_j \in A_j} p_j(a_j) U_i(p_{(-j)}, a_j) + (1 - \lambda) \sum_{a_j \in A_j} p_j'(a_j) U_i(p_{(-j)}, a_j).</script><p>这正是：</p>
+<p>$\lambda U_i(p_j, p_{(-j)}) + (1 - \lambda) U_i(p_j’, p_{(-j)})$</p>
+<p>因此，我们证明了期望效用函数 $U_i $的线性性质，即它是多线性的（multi-linear）。</p>
+<h2 id="2-3-Mixed-Strategy-Nash-Equilibrium"><a href="#2-3-Mixed-Strategy-Nash-Equilibrium" class="headerlink" title="2.3 Mixed Strategy Nash Equilibrium"></a>2.3 Mixed Strategy Nash Equilibrium</h2><p>An mixed strategy outcome $p = (p_1, p_2, \dots, p_N)$ is a <strong>Nash equilibrium (NE)</strong> if for each $i$, we have</p>
+<script type="math/tex; mode=display">U_i(p_i, p_{(-i)}) \geq U_i(p_i', p_{(-i)}), \quad \text{for } p_i' \in \Delta(A_i)</script><p>Given $G = \{N, \{\Delta(A_i)\}, \{U_i\}\}$ and $p = (p_1, \dots, p_N)$, the best response correspondence of player $i$ is given by</p>
+<script type="math/tex; mode=display">B_i(p_{(-i)}) = \{ p_i : U(p_i, p_{(-i)}) \geq U(p_i', p_{(-i)}) \text{ for all } p_i' \in \Delta(A_i) \}</script><p><strong>Theorem:</strong> A mixed outcome $p = (p_1, \dots, p_N)$ is a NE if and only if $p_i \in B_i(p_{(-i)})$.</p>
+<p><strong>Theorem:</strong> Every finite strategic game has a mixed strategy Nash equilibrium</p>
+<ul>
+<li><strong>finite players</strong></li>
+<li>each player has <strong>finite pure strategies</strong></li>
+<li>Why is this important <ul>
+<li>Difficult to understand properties (NE) without existence</li>
+<li>Find the NE if we know the existence of NE</li>
 </ul>
-<h3 id="进一步解释："><a href="#进一步解释：" class="headerlink" title="进一步解释："></a>进一步解释：</h3><ul>
-<li>如果其中一个候选人偏离了中点，另一个候选人将会吸引更多选民，最终导致偏离中点的候选人失去选举。因此，选择中间位置是双方的最优策略。</li>
+</li>
 </ul>
-<p>这就是该博弈中的纳什均衡。</p>
+<h2 id="2-3-1-An-Property-of-MNE"><a href="#2-3-1-An-Property-of-MNE" class="headerlink" title="2.3.1 An Property of MNE"></a>2.3.1 An Property of MNE</h2><p><strong>Theorem</strong> If a mixed strategy is a best response, then each of the pure strategies (positive prob.) involved in the mixed strategy must be a best response. Particularly, each must yield the same expected payoff.(如果一个混合策略是一个最优反应（best response），那么在该混合策略中出现的每一个纯策略（即具有正概率的策略）必须也是最优反应，并且它们的期望效用必须相同)</p>
+<p>If a mixed strategy $p_i$ is a best response to the strategies of the others $p_{-i}$, then each pure strategy $a_j s.t. p_i (a_j) &gt; 0 $is itself a best response to $p_(-i)$.</p>
+<p>Particularly, all $U_i (a_j,p_(-i))$ must be equal</p>
+<ul>
+<li><strong>前半部分</strong>：假设玩家选择一个混合策略，并且这个混合策略是最优反应。那么，混合策略中每个正概率的纯策略（被玩家实际选择的策略）也必须是最优反应。这意味着，如果混合策略中有某个纯策略，且它有正的概率被选择，那么在该纯策略下，该玩家的期望效用应该是最大化的。</li>
+<li><strong>后半部分</strong>：这些正概率的纯策略必须使玩家的期望效用相同。换句话说，如果玩家在混合策略中选择多个纯策略，那么这些策略的期望效用必须是一样的，因为混合策略的期望效用是基于这些纯策略的加权平均值。如果一个策略的期望效用比其他策略高，玩家会倾向于选择这个策略，而不可能同时使用其他纯策略。</li>
+</ul>
+
+<p><strong>Theorem</strong> $G={N, {A_i }, {u_i}}, p=(p_1,p_2,…, p_N)$ is a mixed Nash equilibrium if and only if every pure strategy of player i with positive probability is a best response to $p_{-i}$</p>
+<p>如果在博弈 $G = {N, {A_i}, {u_i}}$ 中，混合策略 $p = (p_1, p_2, \dots, p_N)$ 是一个纳什均衡（Nash Equilibrium），那么对于每个玩家 $i$，所有在混合策略中具有正概率的纯策略都是对其他玩家策略 $p_{-i}$ 的最佳反应（best response）；反之，如果每个在混合策略中具有正概率的纯策略都是最佳反应，那么该混合策略是纳什均衡。</p>
+<h4 id="充分性证明："><a href="#充分性证明：" class="headerlink" title="充分性证明："></a>充分性证明：</h4><p>假设在混合策略 $p = (p_1, p_2, \dots, p_N)$ 下，对于每个玩家 $i$，所有在混合策略中具有正概率的纯策略 $a_j$ 都是对 $p_{-i}$ 的最佳反应。即对于玩家 $i$ 的所有正概率纯策略 $a_j$，都有：</p>
+<script type="math/tex; mode=display">U_i(a_j, p_{-i}) \geq U_i(a_j', p_{-i}) \quad \forall a_j' \in A_i</script><p>我们需要证明 $p$ 是一个混合纳什均衡。</p>
+<ol>
+<li><p>对于玩家 $i$ 来说，混合策略 $p_i$ 是给定其他玩家策略 $p_{-i}$ 时能够最大化其期望效用的策略。如果每个正概率的纯策略 $a_j$ 对 $p_{-i}$ 都是最佳反应，那么它们的期望效用相同，因此玩家 $i$ 不会倾向于通过单独改变策略来获得更好的效用。</p>
+</li>
+<li><p>玩家 $i$ 的期望效用是：</p>
+<p>$U_i(p) = \sum_{a_j \in A_i} p_i(a_j) U_i(a_j, p_{-i})$</p>
+</li>
+<li><p>由于每个正概率的纯策略 $a_j$ 都是最佳反应，所以对于所有选择的纯策略 $a_j$，它们的效用 $U_i(a_j, p_{-i})$ 是相同的。因此，混合策略 $p_i$ 在所有正概率的纯策略上提供相同的效用，因此没有玩家能够通过单独改变策略来提高期望效用，从而 $p$ 是纳什均衡。</p>
+</li>
+</ol>
+<h4 id="必要性证明："><a href="#必要性证明：" class="headerlink" title="必要性证明："></a>必要性证明：</h4><p>假设 $p = (p_1, p_2, \dots, p_N)$ 是一个混合纳什均衡，我们需要证明对于每个玩家 $i$，在混合策略中具有正概率的纯策略都是对 $p_{-i}$ 的最佳反应。</p>
+<ol>
+<li><p>由于 $p$ 是纳什均衡，意味着对于任意玩家 $i$ 和其混合策略 $p_i$，给定其他玩家的策略 $p_{-i}$，玩家 $i$ 的期望效用已经最大化。</p>
+</li>
+<li><p>如果玩家 $i$ 在混合策略 $p_i$ 中选择纯策略 $a_j$，且 $p_i(a_j) &gt; 0$，那么玩家 $i$ 在选择该策略时，其期望效用为：</p>
+<script type="math/tex; mode=display">U_i(a_j, p_{-i}) \geq U_i(a_j', p_{-i}) \quad \forall a_j' \in A_i</script></li>
+<li><p>因此，玩家 $i$ 选择纯策略 $a_j$ 时的期望效用 $U_i(a_j, p_{-i})$ 必须不小于选择任何其他纯策略 $a_j’$ 的期望效用。这说明，在混合策略中具有正概率的纯策略 $a_j$ 都是最佳反应。</p>
+</li>
+</ol>
+<h2 id="2-3-2-例子1"><a href="#2-3-2-例子1" class="headerlink" title="2.3.2 例子1"></a>2.3.2 例子1</h2>
+<p>Fixed Player 1, the expectation payoff of Player 2 on L:$2\pi_1+5(1-\pi_1)$</p>
+<p>the expectation payoff of Player 2 on R:$4\pi_1+2(1-\pi_1)$</p>
+<p>Nash Equilibrium implies :$2\pi_1+5(1-\pi_1)=4\pi_1+2(1-\pi_1)→π_1=3/5$(否则就会偏向于其中一个选择LorR，不会是混合式的)</p>
+<p>Fixed Player 2, the expectation payoff of Player 1 on U：$\pi_2$</p>
+<p>the expectation payoff of Player 1 on D:$3(1-π_2)$</p>
+<p>Nash Equilibrium implies $π_2=3(1-π_2 )→π_2=3/4$</p>
+<p>Nash Equilibrium:<br> Player 1 selects the mixed strategy $p_1 = \left( \frac{3}{5}, \frac{2}{5} \right)$ over ${U, D}$.<br> Player 2 selects the mixed strategy $p_2 = \left( \frac{3}{4}, \frac{1}{4} \right)$ over ${L, R}$.</p>
+<p>The expected payoff of Player 1 on mixed strategy $p = (p_1, p_2)$:</p>
+<script type="math/tex; mode=display">\frac{3}{5} \times \frac{3}{4} \times 1 + \frac{2}{5} \times \frac{1}{4} \times 3 = \frac{3}{4}.</script><p>The expected payoff of Player 2 on mixed strategy $p = (p_1, p_2)$:</p>
+<script type="math/tex; mode=display">\frac{3}{5} \times \frac{3}{4} \times 2 + \frac{3}{5} \times \frac{1}{4} \times 4 + \frac{2}{5} \times \frac{3}{4} \times 5 + \frac{2}{5} \times \frac{1}{4} \times 2 = \frac{16}{5}.</script><h2 id="2-3-2-例子2-D"><a href="#2-3-2-例子2-D" class="headerlink" title="2.3.2 例子2:D"></a>2.3.2 例子2:D</h2>
+<p>PNE:(C,C)</p>
+<p>Mixed Nash Equilibrium:</p>
+<ul>
+<li>Player 1 selects the mixed strategy $p_1 = \left( \frac{1}{5}, \frac{4}{5} \right)$</li>
+<li>Player 2 selects the mixed strategy $p_2 = \left( \frac{1}{5}, \frac{4}{5} \right)$ </li>
+</ul>
+<h2 id="2-3-2-例子3-Primitive-Hunting"><a href="#2-3-2-例子3-Primitive-Hunting" class="headerlink" title="2.3.2 例子3:Primitive Hunting"></a>2.3.2 例子3:Primitive Hunting</h2>
+<p>PNE:(3,3);(9,9)</p>
+<p>Mixed Nash Equilibrium: NO</p>
+<h3 id="2-3-2-例子4-Rock-Paper-Scissors"><a href="#2-3-2-例子4-Rock-Paper-Scissors" class="headerlink" title="2.3.2 例子4:Rock-Paper-Scissors"></a>2.3.2 例子4:<strong>Rock-Paper-Scissors</strong></h3>
+<h3 id="第一步：猜测某些行和列（正概率）"><a href="#第一步：猜测某些行和列（正概率）" class="headerlink" title="第一步：猜测某些行和列（正概率）"></a>第一步：猜测某些行和列（正概率）</h3><ul>
+<li>在这个步骤中，你需要猜测一些可能的策略（即猜测某些行和列将具有正的概率）。例如，你可以从猜测博弈矩阵中的某些行或列在混合策略中的概率为正开始。</li>
+<li>这些猜测基于一个假设：玩家会随机选择他们的纯策略，目的是选择你认为可能在均衡中具有非零概率的几种策略（行或列）。</li>
+</ul>
+<h3 id="第二步：计算混合策略"><a href="#第二步：计算混合策略" class="headerlink" title="第二步：计算混合策略"></a>第二步：计算混合策略</h3><ul>
+<li>在这个步骤中，你需要计算每个玩家的混合策略。混合策略是一个玩家可用纯策略的概率分布。</li>
+<li>例如，如果玩家1有两个策略$U$和$D$，他们的混合策略可能是$p_1 = (p, 1-p)$，其中$p$是选择$U$的概率，而$(1-p)$是选择$D$的概率。你需要通过计算得出这些概率，使得两个玩家的策略都最优。</li>
+</ul>
+<h3 id="第三步：检查纳什均衡"><a href="#第三步：检查纳什均衡" class="headerlink" title="第三步：检查纳什均衡"></a>第三步：检查纳什均衡</h3><ul>
+<li>一旦你计算出了混合策略，就需要检查这些策略是否形成了纳什均衡。这意味着你需要验证在其他玩家的策略保持不变的情况下，任何玩家都无法通过改变自己的策略来提高自己的收益。换句话说，你需要确保每个玩家的策略都是对方策略的最优回应。</li>
+</ul>
+<h3 id="运行时间随着策略数量指数增长"><a href="#运行时间随着策略数量指数增长" class="headerlink" title="运行时间随着策略数量指数增长"></a>运行时间随着策略数量指数增长</h3><ul>
+<li>这个方法之所以可能需要指数级的时间，是因为你需要检查大量可能的策略组合。如果每个玩家有$n$种纯策略，那么混合策略的可能组合数量随着$n$的增大而指数增长。因此，你可能需要评估大量的策略组合来找到纳什均衡，计算量随着策略数量的增加而变得非常大。</li>
+</ul>
 
     </div>
 
@@ -365,7 +480,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Mixed-Strategy"><span class="nav-number">1.</span> <span class="nav-text">2.1 Mixed Strategy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E5%BC%95%E5%85%A5%EF%BC%9A%E9%80%89%E4%B8%BE-Election-Hotelling-Downs-%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">2.1.1 引入：选举 Election-Hotelling-Downs 模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">分析：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E5%AE%9A%E7%9A%84%E6%9D%A1%E4%BB%B6%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">给定的条件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%80%99%E9%80%89%E4%BA%BA%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 候选人的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%81%87%E8%AE%BE%E5%80%99%E9%80%89%E4%BA%BA%E9%80%89%E6%8B%A9%E7%9A%84%E6%94%BF%E7%AD%96%E4%BD%8D%E7%BD%AE%E4%B8%BA-b1b-1-%E5%92%8C-b2b-2%EF%BC%9A"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 假设候选人选择的政策位置为 b1b_1 和 b2b_2：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%8A%95%E7%A5%A8%E5%92%8C%E6%94%AF%E4%BB%98"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 投票和支付</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">1.4.4.</span> <span class="nav-text">4. 纳什均衡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E7%BB%93%E8%AE%BA%EF%BC%9A"><span class="nav-number">1.4.5.</span> <span class="nav-text">5. 结论：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%A7%A3%E9%87%8A%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">进一步解释：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Mixed-Strategy"><span class="nav-number">1.</span> <span class="nav-text">2.1 Mixed Strategy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E5%BC%95%E5%85%A5%EF%BC%9A%E9%80%89%E4%B8%BE-Election%EF%BC%88Hotelling-Downs-%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">2.1.1 引入：选举 Election（Hotelling-Downs 模型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-defination"><span class="nav-number">1.2.</span> <span class="nav-text">2.1.2 defination</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-%E6%B7%B7%E5%90%88%E7%AD%96%E7%95%A5%E4%BE%8B%E5%AD%90"><span class="nav-number">1.3.</span> <span class="nav-text">2.1.3 混合策略例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Lemma"><span class="nav-number">2.</span> <span class="nav-text">2.2 Lemma</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Lemma1"><span class="nav-number">2.1.</span> <span class="nav-text">2.2.1 Lemma1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Lemma2"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.2 Lemma2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Mixed-Strategy-Nash-Equilibrium"><span class="nav-number">3.</span> <span class="nav-text">2.3 Mixed Strategy Nash Equilibrium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-1-An-Property-of-MNE"><span class="nav-number">4.</span> <span class="nav-text">2.3.1 An Property of MNE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%85%E5%88%86%E6%80%A7%E8%AF%81%E6%98%8E%EF%BC%9A"><span class="nav-number">4.0.1.</span> <span class="nav-text">充分性证明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%85%E8%A6%81%E6%80%A7%E8%AF%81%E6%98%8E%EF%BC%9A"><span class="nav-number">4.0.2.</span> <span class="nav-text">必要性证明：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-2-%E4%BE%8B%E5%AD%901"><span class="nav-number">5.</span> <span class="nav-text">2.3.2 例子1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-2-%E4%BE%8B%E5%AD%902-D"><span class="nav-number">6.</span> <span class="nav-text">2.3.2 例子2:D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-2-%E4%BE%8B%E5%AD%903-Primitive-Hunting"><span class="nav-number">7.</span> <span class="nav-text">2.3.2 例子3:Primitive Hunting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-%E4%BE%8B%E5%AD%904-Rock-Paper-Scissors"><span class="nav-number">7.1.</span> <span class="nav-text">2.3.2 例子4:Rock-Paper-Scissors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E7%8C%9C%E6%B5%8B%E6%9F%90%E4%BA%9B%E8%A1%8C%E5%92%8C%E5%88%97%EF%BC%88%E6%AD%A3%E6%A6%82%E7%8E%87%EF%BC%89"><span class="nav-number">7.2.</span> <span class="nav-text">第一步：猜测某些行和列（正概率）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%B7%B7%E5%90%88%E7%AD%96%E7%95%A5"><span class="nav-number">7.3.</span> <span class="nav-text">第二步：计算混合策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E6%A3%80%E6%9F%A5%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">7.4.</span> <span class="nav-text">第三步：检查纳什均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E9%9A%8F%E7%9D%80%E7%AD%96%E7%95%A5%E6%95%B0%E9%87%8F%E6%8C%87%E6%95%B0%E5%A2%9E%E9%95%BF"><span class="nav-number">7.5.</span> <span class="nav-text">运行时间随着策略数量指数增长</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -443,7 +558,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共49.4k字</span>
+    <span class="post-count">全站共52.1k字</span>
   </div>
 
         
