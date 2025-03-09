@@ -254,7 +254,7 @@
 </li>
 </ul>
 <p>向量化快速的原因：并行化</p>
-<p><style>.iwvhmcftjgkj{zoom:33%;}</style><img src="/2024/10/23/week2/DEF2BD76410D660642568370D5F367F1-172966793691916.png" class="iwvhmcftjgkj"></p>
+<p><style>.sluvkpgnnrbo{zoom:33%;}</style><img src="/2024/10/23/week2/DEF2BD76410D660642568370D5F367F1-172966793691916.png" class="sluvkpgnnrbo"></p>
 <h2 id="五、多变量线性回归-Linear-Regression-with-Multiple-Variables"><a href="#五、多变量线性回归-Linear-Regression-with-Multiple-Variables" class="headerlink" title="五、多变量线性回归(Linear Regression with Multiple Variables)"></a>五、多变量线性回归(Linear Regression with Multiple Variables)</h2><h3 id="5-1-多维特征"><a href="#5-1-多维特征" class="headerlink" title="5.1 多维特征"></a>5.1 多维特征</h3><p>现在我们对房价模型增加更多的特征，例如房间数楼层等，构成一个含有多个变量的模型，模型中的特征为$\left( {x_{1}},{x_{2}},…,{x_{n}} \right)$。</p>
 <img src="/2024/10/23/week2/591785837c95bca369021efa14a8bb1c-172966793691918.png" class="">
 <p>增添更多特征后，我们引入一系列新的注释：</p>
@@ -283,7 +283,7 @@
 <p><strong>Python</strong> 代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">computeCost</span>(<span class="params">X, y, theta</span>):</span><br><span class="line">    inner = np.power(((X * theta.T) - y), <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>(inner) / (<span class="number">2</span> * <span class="built_in">len</span>(X))</span><br></pre></td></tr></table></figure>
 <p>多变量与单变量的对比：</p>
-<p><style>.fmvexmqyhetv{zoom:33%;}</style><img src="/2024/10/23/week2/02EE7400476D13115C4416D2D510D111-172966793692022.png" class="fmvexmqyhetv"></p>
+<p><style>.sjiyoftkoxtw{zoom:33%;}</style><img src="/2024/10/23/week2/02EE7400476D13115C4416D2D510D111-172966793692022.png" class="sjiyoftkoxtw"></p>
 <h3 id="5-3-梯度下降法实践1-特征缩放"><a href="#5-3-梯度下降法实践1-特征缩放" class="headerlink" title="5.3 梯度下降法实践1-特征缩放"></a>5.3 梯度下降法实践1-特征缩放</h3><p>面对多维特征问题的时候，要保证这些特征都具有相近的尺度，这将帮助梯度下降算法更快地收敛。</p>
 <p>以房价问题为例，假设我们使用两个特征，房屋的尺寸和房间的数量，尺寸的值为 0-2000平方英尺，而房间数量的值则是0-5，以两个参数分别为横纵坐标，绘制代价函数的等高线图能，看出图像会显得很扁，梯度下降算法需要非常多次的迭代才能收敛。</p>
 <img src="/2024/10/23/week2/966e5a9b00687678374b8221fdd33475-172966793692021.jpg" class="">
