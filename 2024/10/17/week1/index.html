@@ -5,56 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/markastrid/markastrid.github.io/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/markastrid/markastrid.github.io/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/markastrid/markastrid.github.io/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/markastrid/markastrid.github.io/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/markastrid/markastrid.github.io/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/markastrid/markastrid.github.io/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/markastrid/markastrid.github.io/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="这是学习机器学习的第一周课程笔记，记录在此">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一周">
-<meta property="og:url" content="https://github.com/markastrid/markastrid.github.io/2024/10/17/week1/index.html">
+<meta property="og:url" content="https://example.com/2024/10/17/week1/index.html">
 <meta property="og:site_name" content="Resume">
 <meta property="og:description" content="这是学习机器学习的第一周课程笔记，记录在此">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/4f80108ebbb6707d39b7a6da4d2a7a4e.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/c34fa10153f223aa955d6717663a9f91.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/0c93b5efd5fd5601ed475d2c8a0e6dcd.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/94f0b1d26de3923fc4ae934ec05c66ab.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/903868fb76c706f1e2f96d8e26e0074e.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/8e76e65ca7098b74a2e9bc8e9577adfc.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/44c68412e65e62686a96ad16f278571f.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/ad0718d6e5218be6e6fce9dc775a38e6.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/d385f8a293b254454746adee51a027d4.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/6168b654649a0537c67df6f2454dc9ba.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/10ba90df2ada721cf1850ab668204dc9.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/2c9fe871ca411ba557e65ac15d55745d.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/86c827fe0978ebdd608505cd45feb774.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/db48c81304317847870d486ba5bb2015.jpg">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/ef4227864e3cabb9a3938386f857e938.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/ee916631a9f386e43ef47efafeb65b0f.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/D425FEF834EF2DDE9869077E87B91B3B.jpg">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/4668349e04cf0c4489865e133d112e98.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/5eb364cc5732428c695e2aa90138b01b.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/image-20241018173640667.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/ffddfddfdfd.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/fdddddd.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/437ae2333f00286141abe181a1b7c44a.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/b2069e4b3e12618f5405500d058118d7.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/1a9f98df1560724713f6580de27a0bde.jpg">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/5ec35206e8ae22668d4b4a3c3ea7b292.jpg">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/4f80108ebbb6707d39b7a6da4d2a7a4e.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/c34fa10153f223aa955d6717663a9f91.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/0c93b5efd5fd5601ed475d2c8a0e6dcd.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/94f0b1d26de3923fc4ae934ec05c66ab.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/903868fb76c706f1e2f96d8e26e0074e.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/8e76e65ca7098b74a2e9bc8e9577adfc.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/44c68412e65e62686a96ad16f278571f.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/ad0718d6e5218be6e6fce9dc775a38e6.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/d385f8a293b254454746adee51a027d4.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/6168b654649a0537c67df6f2454dc9ba.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/10ba90df2ada721cf1850ab668204dc9.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/2c9fe871ca411ba557e65ac15d55745d.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/86c827fe0978ebdd608505cd45feb774.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/db48c81304317847870d486ba5bb2015.jpg">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/ef4227864e3cabb9a3938386f857e938.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/ee916631a9f386e43ef47efafeb65b0f.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/D425FEF834EF2DDE9869077E87B91B3B.jpg">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/4668349e04cf0c4489865e133d112e98.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/5eb364cc5732428c695e2aa90138b01b.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/image-20241018173640667.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/ffddfddfdfd.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/fdddddd.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/437ae2333f00286141abe181a1b7c44a.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/b2069e4b3e12618f5405500d058118d7.png">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/1a9f98df1560724713f6580de27a0bde.jpg">
+<meta property="og:image" content="https://example.com/2024/10/17/week1/5ec35206e8ae22668d4b4a3c3ea7b292.jpg">
 <meta property="article:published_time" content="2024-10-17T07:12:45.000Z">
 <meta property="article:modified_time" content="2025-03-08T16:51:23.614Z">
 <meta property="article:author" content="markastrid">
@@ -66,9 +66,9 @@
 <meta property="article:tag" content="线性代数回顾">
 <meta property="article:tag" content="矩阵乘法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/4f80108ebbb6707d39b7a6da4d2a7a4e.png">
+<meta name="twitter:image" content="https://example.com/2024/10/17/week1/4f80108ebbb6707d39b7a6da4d2a7a4e.png">
 
-<link rel="canonical" href="https://github.com/markastrid/markastrid.github.io/2024/10/17/week1/">
+<link rel="canonical" href="https://example.com/2024/10/17/week1/">
 
 
 <script id="page-configurations">
@@ -130,7 +130,7 @@
 
   <div class="site-meta">
 
-    <a href="/markastrid/markastrid.github.io/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">Resume</h1>
       <span class="logo-line-after"><i></i></span>
@@ -151,22 +151,22 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/markastrid/markastrid.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/markastrid/markastrid.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/markastrid/markastrid.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/markastrid/markastrid.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
   </ul>
@@ -197,10 +197,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://github.com/markastrid/markastrid.github.io/2024/10/17/week1/">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2024/10/17/week1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/markastrid/markastrid.github.io/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="markastrid">
       <meta itemprop="description" content="to be continued">
     </span>
@@ -235,7 +235,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/markastrid/markastrid.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
                 </span>
             </span>
 
@@ -324,7 +324,7 @@
 </ul>
 </li>
 </ul>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/4f80108ebbb6707d39b7a6da4d2a7a4e.png" class="">
+<img src="/2024/10/17/week1/4f80108ebbb6707d39b7a6da4d2a7a4e.png" class="">
 <ul>
 <li>让我们来看一组数据：横轴表示肿瘤的大小，纵轴上，1和0表示是或者不是恶性肿瘤。我们之前见过的肿瘤，如果是恶性则记为1，不是恶性，或者说良性记为0。</li>
 </ul>
@@ -341,7 +341,7 @@
 <li><p>在其它一些机器学习问题中，可能会遇到不止一种特征。举个例子，我们不仅知道肿瘤的尺寸，还知道对应患者的年龄。在其他机器学习问题中，我们通常有更多的特征，比如肿块密度，肿瘤细胞尺寸的一致性和形状的一致性等等</p>
 </li>
 </ul>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/c34fa10153f223aa955d6717663a9f91.png" class="">
+<img src="/2024/10/17/week1/c34fa10153f223aa955d6717663a9f91.png" class="">
 <ul>
 <li>上图中列举了总共5种不同的特征，坐标轴上的两种和右边的3种<ul>
 <li>做分类即是找到一条分界线去很好的区分这两类，比如说在肿瘤上就是诊断这种情况是否肿瘤是良性，这里用到了两个特征</li>
@@ -367,8 +367,8 @@
 </ul>
 </li>
 </ol>
-<h3 id="1-4-无监督学习"><a href="#1-4-无监督学习" class="headerlink" title="1.4 无监督学习"></a>1.4 无监督学习</h3><img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/0c93b5efd5fd5601ed475d2c8a0e6dcd.png" class="">
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/94f0b1d26de3923fc4ae934ec05c66ab.png" class="">
+<h3 id="1-4-无监督学习"><a href="#1-4-无监督学习" class="headerlink" title="1.4 无监督学习"></a>1.4 无监督学习</h3><img src="/2024/10/17/week1/0c93b5efd5fd5601ed475d2c8a0e6dcd.png" class="">
+<img src="/2024/10/17/week1/94f0b1d26de3923fc4ae934ec05c66ab.png" class="">
 <p>在上一节的肿瘤例子中，对于监督学习里的每条数据，我们已经清楚地知道，训练集对应的正确答案，是良性或恶性了。</p>
 <p>在无监督学习中，我们已知的数据没有任何的标签。所以我们已知数据集，却不知如何处理，也未告知每个数据点是什么。我们的工作是找到其中的一些结构和模式</p>
 <p>针对数据集，无监督学习能判断出数据有两个不同的聚集簇：这是一个，那是另一个，二者不同，这叫做聚类算法。</p>
@@ -376,7 +376,7 @@
 <li>聚类应用例子：Google news（news.google.com），谷歌新闻每天都在收集非常多的网络新闻内容，再将这些新闻分组，组成有关联的新闻。所以谷歌新闻做的就是搜索非常多的新闻事件，自动地把它们聚类到一起。这些新闻事件全是同一主题的，所以显示到一起。</li>
 </ul>
 <p>事实证明，聚类算法和无监督学习算法同样还用在很多其它的问题上。</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/903868fb76c706f1e2f96d8e26e0074e.png" class="">
+<img src="/2024/10/17/week1/903868fb76c706f1e2f96d8e26e0074e.png" class="">
 <ul>
 <li>基因学的理解应用：一个<strong>DNA</strong>微观数据的例子（上图）。<ul>
 <li>基本思想是输入一组不同个体，对其中的每个个体，你要分析出它们是否有一个特定的基因。技术上，你要分析多少特定基因已经表达；所以这些颜色，红，绿，灰等等颜色，这些颜色展示了相应的程度的活性，即不同的个体是否有着一个特定的基因以及基因的表现程度；你能做的就是运行一个聚类算法，把个体聚类到不同的类或不同类型的组（人）……</li>
@@ -398,11 +398,11 @@
 <li>Linear Regression with One Variable</li>
 </ul>
 <h3 id="2-1-模型表示"><a href="#2-1-模型表示" class="headerlink" title="2.1 模型表示"></a>2.1 模型表示</h3><p>通过一个例子来开始：预测住房价格的，我们要使用一个数据集，数据集包含俄勒冈州波特兰市的住房价格。在这里，我要根据不同房屋尺寸所售出的价格，画出我的数据集。比方说，如果你朋友的房子是1250平方尺大小，你要告诉他们这房子能卖多少钱。那么，你可以做的一件事就是构建一个模型，也许是条直线，从这个数据模型上来看，也许你可以告诉你的朋友，他能以大约220000(美元)左右的价格卖掉这个房子。</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/8e76e65ca7098b74a2e9bc8e9577adfc.png" class="">
+<img src="/2024/10/17/week1/8e76e65ca7098b74a2e9bc8e9577adfc.png" class="">
 <p>它被称作监督学习是因为对于每个数据来说，我们给出了“正确的答案”，即告诉我们：根据我们的数据来说，房子实际的价格是多少，而且，更具体来说，这是一个回归问题。回归一词指的是，我们根据之前的数据预测出一个准确的输出值，对于这个例子就是价格，同时，还有另一种最常见的监督学习方式，叫做分类问题，当我们想要预测离散的输出值，例如，我们正在寻找癌症肿瘤，并想要确定肿瘤是良性的还是恶性的，这就是0/1离散输出的问题。更进一步来说，在监督学习中我们有一个数据集，这个数据集被称训练集。</p>
 <p><strong>用小写的$m$来表示训练样本的数目。</strong></p>
 <p>以之前的房屋交易问题为例，假使我们回归问题的训练集（<strong>Training Set</strong>）如下表所示：</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/44c68412e65e62686a96ad16f278571f.png" class="">
+<img src="/2024/10/17/week1/44c68412e65e62686a96ad16f278571f.png" class="">
 <p>描述这个回归问题的标记如下：</p>
 <ul>
 <li>$m$代表训练集中实例的数量</li>
@@ -422,7 +422,7 @@
 <ul>
 <li><strong>$h$代表学习算法的解决方案或函数也称为假设（hypothesis）</strong></li>
 </ul>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/ad0718d6e5218be6e6fce9dc775a38e6.png" class="">
+<img src="/2024/10/17/week1/ad0718d6e5218be6e6fce9dc775a38e6.png" class="">
 <ul>
 <li>图示是一个监督学习算法的工作方式</li>
 <li>输出的Estimated price $\hat{y}$ 即是预测值</li>
@@ -432,23 +432,23 @@
 <ul>
 <li>一种可能的表达方式：$h_\theta \left( x \right)=\theta_{0} + \theta_{1}x$，因为只含有一个特征/输入变量，因此这样的问题叫作单变量线性回归问题。</li>
 </ul>
-<h3 id="2-2-代价函数（cost-function）"><a href="#2-2-代价函数（cost-function）" class="headerlink" title="2.2 代价函数（cost function）"></a>2.2 代价函数（cost function）</h3><img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/d385f8a293b254454746adee51a027d4.png" class="">
+<h3 id="2-2-代价函数（cost-function）"><a href="#2-2-代价函数（cost-function）" class="headerlink" title="2.2 代价函数（cost function）"></a>2.2 代价函数（cost function）</h3><img src="/2024/10/17/week1/d385f8a293b254454746adee51a027d4.png" class="">
 <p>在线性回归中我们有一个像这样的训练集，$m$代表了训练样本的数量，比如 $m = 47$。</p>
 <p>我们的假设函数，也就是用来进行预测的函数，是这样的线性函数形式：$h_\theta \left( x \right)=\theta_{0}+\theta_{1}x$ or $f_{w,b}(x)=wx+b$。</p>
 <p>接下来我们会引入一些术语我们现在要做的便是为我们的模型选择合适的<strong>参数</strong>（<strong>parameters</strong>）$w$ 和 $b$，在房价问题这个例子中便是直线的斜率和在$y$ 轴上的截距。</p>
 <p>我们选择的参数决定了我们得到的直线相对于我们的训练集的准确程度，模型所预测的值与训练集中实际值之间的差距（下图中蓝线所指）就是<strong>建模误差</strong>（<strong>modeling error</strong>）。</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/6168b654649a0537c67df6f2454dc9ba.png" class="">
+<img src="/2024/10/17/week1/6168b654649a0537c67df6f2454dc9ba.png" class="">
 <p>我们的目标便是选择出可以使得建模误差的平方和能够最小的模型参数。</p>
 <p>这里的代价函数:$\sum_{i=1}^m(\hat{y}^{(i)}-y^{(i)})^2$,进一步除以二除以m</p>
 <p>即使得代价函数 $J \left( w, b \right) = \frac{1}{2m}\sum\limits_{i=1}^m \left( f_{w,b}(x^{(i)})-y^{(i)} \right)^{2}$最小。</p>
 <p>我们绘制一个等高线图，三个坐标分别为$w$和$b$ 和$J(w, b)$：</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png" class="">
+<img src="/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png" class="">
 <p>则可以看出在三维空间中存在一个使得$J(w, b)$最小的点。</p>
 <p>代价函数也被称作平方误差函数，有时也被称为平方误差代价函数。我们之所以要求出误差的平方和，是因为误差平方代价函数，对于大多数问题，特别是回归问题，都是一个合理的选择。还有其他的代价函数也能很好地发挥作用，但是<strong>平方误差代价函数可能是解决回归问题最常用的手段</strong>。</p>
 <p>后续课程中会谈论其他的代价函数，但我们刚刚讲的选择对于大多数线性回归问题非常合理。</p>
 <p>在接下来的几个视频里，我们要更进一步解释代价函数J的工作原理，并尝试更直观地解释它在计算什么，以及我们使用它的目的。</p>
 <h3 id="2-3-代价函数的直观理解I"><a href="#2-3-代价函数的直观理解I" class="headerlink" title="2.3 代价函数的直观理解I"></a>2.3 代价函数的直观理解I</h3><p>在上一个视频中，我们给了代价函数一个数学上的定义。在这个视频里，让我们通过一些例子来获取一些直观的感受，看看代价函数到底是在干什么。</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/10ba90df2ada721cf1850ab668204dc9.png" class="">
+<img src="/2024/10/17/week1/10ba90df2ada721cf1850ab668204dc9.png" class="">
 <ul>
 <li><p>Hypothesis即是model</p>
 </li>
@@ -471,20 +471,20 @@
 </ul>
 </li>
 </ul>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/2c9fe871ca411ba557e65ac15d55745d.png" class="">
+<img src="/2024/10/17/week1/2c9fe871ca411ba557e65ac15d55745d.png" class="">
 <ul>
 <li>参数w的每个值(点)对应左边图上不同的直线去拟合x的情况</li>
 </ul>
-<h3 id="2-4-代价函数的直观理解II"><a href="#2-4-代价函数的直观理解II" class="headerlink" title="2.4 代价函数的直观理解II"></a>2.4 代价函数的直观理解II</h3><img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png" class="">
+<h3 id="2-4-代价函数的直观理解II"><a href="#2-4-代价函数的直观理解II" class="headerlink" title="2.4 代价函数的直观理解II"></a>2.4 代价函数的直观理解II</h3><img src="/2024/10/17/week1/27ee0db04705fb20fab4574bb03064ab.png" class="">
 <p>可视化图：可以看出在三维空间中存在一个使得$J(\theta_{0}, \theta_{1})$最小的点。</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/86c827fe0978ebdd608505cd45feb774.png" class="">
+<img src="/2024/10/17/week1/86c827fe0978ebdd608505cd45feb774.png" class="">
 <p>目标函数和损失函数的等高线图：从左图的损失即是对右图不同等高线的一一对应</p>
 <p>需要的是一种有效的算法能够自动地找出这些使代价函数$J$取最小值的参数$\theta_{0}$和$\theta_{1}$。</p>
 <p>会遇到更复杂、更高维度、更多参数的情况，很难画出图，因此更无法将其可视化。</p>
 <p>因此真正需要的是编写程序来找出这些最小化代价函数的$\theta_{0}$和$\theta_{1}$的值，下一节将介绍一种算法，能够自动地找出能使代价函数$J$最小化的参数$\theta_{0}$和$\theta_{1}$的值。</p>
 <h3 id="2-5-梯度下降"><a href="#2-5-梯度下降" class="headerlink" title="2.5 梯度下降"></a>2.5 梯度下降</h3><p>梯度下降是一个用来求函数最小值的算法，我们将用其求出代价函数$J(\theta_{0}, \theta_{1})$ 的最小值。</p>
 <p>梯度下降背后的思想：开始时我们随机选择一个参数的组合$\left( {\theta_{0}},{\theta_{1}},……,{\theta_{n}} \right)$，计算代价函数，然后我们寻找下一个能让代价函数值下降最多的参数组合。我们持续这么做直到找到一个局部最小值（<strong>local minimum</strong>），因为我们并没有尝试完所有的参数组合，所以不能确定我们得到的局部最小值是否便是全局最小值（<strong>global minimum</strong>），选择不同的初始参数组合，可能会找到不同的局部最小值。</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/db48c81304317847870d486ba5bb2015.jpg" class="">
+<img src="/2024/10/17/week1/db48c81304317847870d486ba5bb2015.jpg" class="">
 <ul>
 <li>可视化：想象一下你正站立在山的这一点上，站立在你想象的公园这座红色山上，在梯度下降算法中，我们要做的就是旋转360度，看看我们的周围，并问自己要在某个方向上，用小碎步尽快下山。这些小碎步需要朝什么方向？如果我们站在山坡上的这一点，你看一下周围，你会发现最佳的下山方向，你再看看周围，然后再一次想想，我应该从什么方向迈着小碎步下山？然后你按照自己的判断又迈出一步，重复上面的步骤，从这个新的点，你环顾四周，并决定从什么方向将会最快下山，然后又迈进了一小步，并依此类推，直到你接近局部最低点的位置。</li>
 </ul>
@@ -495,7 +495,7 @@
 <ul>
 <li>$a$是学习率（<strong>learning rate</strong>），决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都<strong>同时让所有的参数减去学习速率乘以代价函数的导数</strong>。</li>
 </ul>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/ef4227864e3cabb9a3938386f857e938.png" class="">
+<img src="/2024/10/17/week1/ef4227864e3cabb9a3938386f857e938.png" class="">
 <p>在梯度下降算法中，还有一个更微妙的问题:</p>
 <ul>
 <li>梯度下降中，我们要更新${\theta_{0}}$和${\theta_{1}}$ ，当 $j=0$ 和$j=1$时，会产生更新，所以你将更新$J\left( {\theta_{0}} \right)$和$J\left( {\theta_{1}} \right)$。</li>
@@ -528,11 +528,11 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 <ul>
 <li>描述：对$\theta $赋值，使得$J\left( \theta  \right)$按梯度下降最快方向进行，一直迭代下去，最终得到局部最小值。其中$a$是学习率（<strong>learning rate</strong>），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大。</li>
 </ul>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/ee916631a9f386e43ef47efafeb65b0f.png" class="">
+<img src="/2024/10/17/week1/ee916631a9f386e43ef47efafeb65b0f.png" class="">
 <p>对于这个问题，求导的可以说是取这个红点的切线，刚好与函数相切于这一点，让我们看看这条红色直线的斜率，其正好是这个三角形的高度除以这个水平长度，其是正的也就是说它有正导数，因此得到的新${\theta_{1}}$更新后等于${\theta_{1}}$减去一个正数乘以$a$。</p>
 <p>这就是梯度下降法的更新规则：${\theta_{j}}:={\theta_{j}}-\alpha \frac{\partial }{\partial {\theta_{j}}}J\left( \theta  \right)$</p>
 <p>关于学习率：如果$a$太小或$a$太大的出现什么情况：</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/D425FEF834EF2DDE9869077E87B91B3B.jpg" class="">
+<img src="/2024/10/17/week1/D425FEF834EF2DDE9869077E87B91B3B.jpg" class="">
 <ul>
 <li>如果$a$太小了，即我的学习速率太小，这样就需要很多步才能到达最低点，所以如果$a$太小的话，可能会很慢，因为它会一点点挪动，它会需要很多步才能到达全局最低点。</li>
 </ul>
@@ -548,7 +548,7 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 <li>如果到最大值也可能会这样？不过只要初始不在不可能到极大值点</li>
 </ul>
 <p>一个例子，这是代价函数$J\left( \theta  \right)$：</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/4668349e04cf0c4489865e133d112e98.png" class="">
+<img src="/2024/10/17/week1/4668349e04cf0c4489865e133d112e98.png" class="">
 <ul>
 <li>我想找到它的最小值，首先初始化我的梯度下降算法：<ul>
 <li>粉红色的点初始化，如果我更新一步梯度下降，也许它会带我到这个点，因为这个点的导数是相当陡的。</li>
@@ -561,7 +561,7 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 </ul>
 <p>回顾：在梯度下降法中，当我们接近局部最低点时，梯度下降法会自动采取更小的幅度，这是因为当我们接近局部最低点时，导数值会自动变得越来越小，所以梯度下降将自动采取较小的幅度，这就是梯度下降的做法。所以实际上没有必要再另外减小$a$。</p>
 <h3 id="2-7-梯度下降的线性回归"><a href="#2-7-梯度下降的线性回归" class="headerlink" title="2.7 梯度下降的线性回归"></a>2.7 梯度下降的线性回归</h3><p>梯度下降算法和线性回归算法如图：</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/5eb364cc5732428c695e2aa90138b01b.png" class="">
+<img src="/2024/10/17/week1/5eb364cc5732428c695e2aa90138b01b.png" class="">
 <p>对之前的线性回归问题运用梯度下降法，关键在于求出代价函数的导数，即：</p>
 <script type="math/tex; mode=display">
 \frac{\partial} {\partial{ {\theta} _ {j} } }J({ {\theta} _ {0 } } , { {\theta}_{1} })= \frac {\partial} {\partial{ {\theta} _ {j} } }\frac {1} {2m} { {\sum\limits_ {i=1} ^ {m} {\left( { {h} _ {\theta} }( { {x}^{ (i) } } )-{ {y } ^ { (i) } }\right) } }^{2} }</script><p>$j=0$  时：$\frac{\partial }{\partial { {\theta }_{0} } }J( { {\theta }_{0} },{ {\theta }_{1} })=\frac{1}{m}{ {\sum\limits_{i=1}^{m}{\left( { {h}_{\theta } }({ {x}^{(i)} })-{ {y}^{(i)} } \right)} } }$</p>
@@ -572,7 +572,7 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 <p>​                ${\theta_{1}}:={\theta_{1}}-\alpha\frac{1}{m}\sum\limits_{i=1}^{m}{\left( \left({ {h}_{\theta } }({ {x}^{(i)} })-{ {y}^{(i)} } \right)\cdot { {x}^{(i)} } \right)}$</p>
 <p>​               <strong>}</strong></p>
 <p>图示如下：</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/image-20241018173640667.png" class="">
+<img src="/2024/10/17/week1/image-20241018173640667.png" class="">
 <ul>
 <li>在逐渐更新的过程中（从蓝色逐渐到最后的黄色），直线在梯度下降的更新过程中变得越来越拟合数据的趋势。</li>
 </ul>
@@ -591,19 +591,19 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 <p>如右为1索引向量和0索引向量，一般我们用1索引向量。$y=\left[ \begin{matrix}   { {y}_{1} }  \\   { {y}_{2} }  \\   { {y}_{3} }  \\   { {y}_{4} }  \\\end{matrix} \right]$，$y=\left[ \begin{matrix}   { {y}_{0} }  \\   { {y}_{1} }  \\   { {y}_{2} }  \\   { {y}_{3} }  \\\end{matrix} \right]$</p>
 <h3 id="3-2-加法和标量乘法"><a href="#3-2-加法和标量乘法" class="headerlink" title="3.2 加法和标量乘法"></a>3.2 加法和标量乘法</h3><p>矩阵的加法：行列数相等的可以加。</p>
 <p>例：</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/ffddfddfdfd.png" class="">
+<img src="/2024/10/17/week1/ffddfddfdfd.png" class="">
 <p>矩阵的乘法：每个元素都要乘</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/fdddddd.png" class="">
+<img src="/2024/10/17/week1/fdddddd.png" class="">
 <p>组合算法也类似。</p>
 <h3 id="3-3-矩阵向量乘法"><a href="#3-3-矩阵向量乘法" class="headerlink" title="3.3 矩阵向量乘法"></a>3.3 矩阵向量乘法</h3><p>矩阵和向量的乘法如图：$m×n$的矩阵乘以$n×1$的向量，得到的是$m×1$的向量</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/437ae2333f00286141abe181a1b7c44a.png" class="">
+<img src="/2024/10/17/week1/437ae2333f00286141abe181a1b7c44a.png" class="">
 <p>算法举例：</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/b2069e4b3e12618f5405500d058118d7.png" class="">
+<img src="/2024/10/17/week1/b2069e4b3e12618f5405500d058118d7.png" class="">
 <h3 id="3-4-矩阵乘法"><a href="#3-4-矩阵乘法" class="headerlink" title="3.4 矩阵乘法"></a>3.4 矩阵乘法</h3><p>矩阵乘法：</p>
 <p>$m×n$矩阵乘以$n×o$矩阵，变成$m×o$矩阵。</p>
 <p>如果这样说不好理解的话就举一个例子来说明一下，比如说现在有两个矩阵$A$和$B$，那么它们的乘积就可以表示为图中所示的形式。</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/1a9f98df1560724713f6580de27a0bde.jpg" class="">
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/week1/5ec35206e8ae22668d4b4a3c3ea7b292.jpg" class="">
+<img src="/2024/10/17/week1/1a9f98df1560724713f6580de27a0bde.jpg" class="">
+<img src="/2024/10/17/week1/5ec35206e8ae22668d4b4a3c3ea7b292.jpg" class="">
 <h3 id="3-5-矩阵乘法的性质"><a href="#3-5-矩阵乘法的性质" class="headerlink" title="3.5 矩阵乘法的性质"></a>3.5 矩阵乘法的性质</h3><p>矩阵乘法的性质：</p>
 <p>矩阵的乘法不满足交换律：$A×B≠B×A$</p>
 <p>矩阵的乘法满足结合律。即：$A×(B×C)=(A×B)×C$</p>
@@ -636,7 +636,7 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://github.com/markastrid/markastrid.github.io/2024/10/17/week1/" title="第一周">https://github.com/markastrid/markastrid.github.io/2024/10/17/week1/</a>
+    <a href="https://example.com/2024/10/17/week1/" title="第一周">https://example.com/2024/10/17/week1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -647,13 +647,13 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/markastrid/markastrid.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5/" rel="tag"># 机器学习概念</a>
-              <a href="/markastrid/markastrid.github.io/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"># 监督学习</a>
-              <a href="/markastrid/markastrid.github.io/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"># 无监督学习</a>
-              <a href="/markastrid/markastrid.github.io/tags/%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag"># 单变量线性回归</a>
-              <a href="/markastrid/markastrid.github.io/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/" rel="tag"># 梯度下降</a>
-              <a href="/markastrid/markastrid.github.io/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9B%9E%E9%A1%BE/" rel="tag"># 线性代数回顾</a>
-              <a href="/markastrid/markastrid.github.io/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" rel="tag"># 矩阵乘法</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5/" rel="tag"># 机器学习概念</a>
+              <a href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"># 监督学习</a>
+              <a href="/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"># 无监督学习</a>
+              <a href="/tags/%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag"># 单变量线性回归</a>
+              <a href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/" rel="tag"># 梯度下降</a>
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9B%9E%E9%A1%BE/" rel="tag"># 线性代数回顾</a>
+              <a href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/" rel="tag"># 矩阵乘法</a>
           </div>
 
         
@@ -663,7 +663,7 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
     <div class="post-nav">
       <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/markastrid/markastrid.github.io/2024/10/17/hello/" rel="next" title="hello, my blog">
+    <a href="/2024/10/17/hello/" rel="next" title="hello, my blog">
       hello, my blog <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -731,26 +731,26 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="markastrid"
-      src="/markastrid/markastrid.github.io/images/avatar.jpg">
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">markastrid</p>
   <div class="site-description" itemprop="description">to be continued</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/markastrid/markastrid.github.io/archives">
+          <a href="/archives">
           <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/markastrid/markastrid.github.io/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/markastrid/markastrid.github.io/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
@@ -759,7 +759,7 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
 
@@ -773,7 +773,7 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 
 
       </div>
-        <a href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
         </style>
     </main>
 
@@ -821,19 +821,19 @@ temp1:=\theta_1-\alpha\frac{\partial}{\partial \theta_1}J(\theta_0,\theta_1)\\\
 <script type="text/javascript" src="/js/love.js"></script>
 
   
-  <script src="/markastrid/markastrid.github.io/lib/anime.min.js"></script>
-  <script src="/markastrid/markastrid.github.io/lib/velocity/velocity.min.js"></script>
-  <script src="/markastrid/markastrid.github.io/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/markastrid/markastrid.github.io/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/markastrid/markastrid.github.io/js/motion.js"></script>
-
-
-<script src="/markastrid/markastrid.github.io/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/markastrid/markastrid.github.io/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 

@@ -5,41 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/markastrid/markastrid.github.io/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/markastrid/markastrid.github.io/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/markastrid/markastrid.github.io/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/markastrid/markastrid.github.io/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/markastrid/markastrid.github.io/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/markastrid/markastrid.github.io/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/markastrid/markastrid.github.io/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="笔者从学习机器学习到后续对PCA都是一知半解，其中的理论公式推导等部分让人头大，孱弱的数学基础也让人难以招架PCA的各种知识点，因此在这次重新学习PCA过程中将自己的学习过程做一个梳理，也算是对整体结构进行一个重新说明和把握，希望在掌握PCA的同时也能对大家有所帮助。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PCA降维">
-<meta property="og:url" content="https://github.com/markastrid/markastrid.github.io/2024/10/17/PCA/index.html">
+<meta property="og:url" content="https://example.com/2024/10/17/PCA/index.html">
 <meta property="og:site_name" content="Resume">
 <meta property="og:description" content="笔者从学习机器学习到后续对PCA都是一知半解，其中的理论公式推导等部分让人头大，孱弱的数学基础也让人难以招架PCA的各种知识点，因此在这次重新学习PCA过程中将自己的学习过程做一个梳理，也算是对整体结构进行一个重新说明和把握，希望在掌握PCA的同时也能对大家有所帮助。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-14-59-46.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-16-13-31.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-16-14-13.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-16-17-06.png">
-<meta property="og:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-29-13-14-58.png">
+<meta property="og:image" content="https://example.com/2024/10/17/PCA/2024-03-22-14-59-46.png">
+<meta property="og:image" content="https://example.com/2024/10/17/PCA/2024-03-22-16-13-31.png">
+<meta property="og:image" content="https://example.com/2024/10/17/PCA/2024-03-22-16-14-13.png">
+<meta property="og:image" content="https://example.com/2024/10/17/PCA/2024-03-22-16-17-06.png">
+<meta property="og:image" content="https://example.com/2024/10/17/PCA/2024-03-29-13-14-58.png">
 <meta property="article:published_time" content="2024-10-17T07:12:45.000Z">
 <meta property="article:modified_time" content="2024-10-25T05:08:36.011Z">
 <meta property="article:author" content="markastrid">
 <meta property="article:tag" content="PCA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-14-59-46.png">
+<meta name="twitter:image" content="https://example.com/2024/10/17/PCA/2024-03-22-14-59-46.png">
 
-<link rel="canonical" href="https://github.com/markastrid/markastrid.github.io/2024/10/17/PCA/">
+<link rel="canonical" href="https://example.com/2024/10/17/PCA/">
 
 
 <script id="page-configurations">
@@ -101,7 +101,7 @@
 
   <div class="site-meta">
 
-    <a href="/markastrid/markastrid.github.io/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">Resume</h1>
       <span class="logo-line-after"><i></i></span>
@@ -122,22 +122,22 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/markastrid/markastrid.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/markastrid/markastrid.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/markastrid/markastrid.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/markastrid/markastrid.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
   </ul>
@@ -168,10 +168,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://github.com/markastrid/markastrid.github.io/2024/10/17/PCA/">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2024/10/17/PCA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/markastrid/markastrid.github.io/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="markastrid">
       <meta itemprop="description" content="to be continued">
     </span>
@@ -206,7 +206,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/markastrid/markastrid.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
                 </span>
             </span>
 
@@ -225,7 +225,7 @@
         <p>[TOC]</p>
 <h2 id="1-起因"><a href="#1-起因" class="headerlink" title="1.起因"></a>1.起因</h2><p>PCA，又叫Principal Component Analysis，即主成分分析，为什么要这么说呢，他实际上是通过降维的方法，保留数据的主要成分，同时又降低了储存和计算的困难</p>
 <p>为什么可以通过这种降维的方法达到目的？因为现实生活中我们遇到的很多数据，虽然具有很高的维度，但是他们往往维度不是相互独立的，也就是说，我们只需要用其中的一些维度就能把其他维度很好的表示出来，如:</p>
-<img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-14-59-46.png" class="">
+<img src="/2024/10/17/PCA/2024-03-22-14-59-46.png" class="">
 <p><strong>1.1(a)</strong> 的坐标轴中的数据点上可以直观的看出x和y是有着线性关系的，而 <strong>(b)</strong> 部分很难直接观察出两者的关系，这种情况降维就不可用(也许该数据在更高维度上是可分或者有着其他关系，这需要用到核函数进行维度扩展)</p>
 <p>那么PCA如何对类似(a)的情况(乃至更多维度向下)进行降维呢？<br>PCA只考虑线性关系进行降维，这种线性降维的问题也被看做如何找到线性约束或者发现$R^D$的低维子空间的过程</p>
 <h2 id="2-线性降维的实现-基变换"><a href="#2-线性降维的实现-基变换" class="headerlink" title="2.线性降维的实现:基变换"></a>2.线性降维的实现:基变换</h2><p>现在考虑这样的一个简单等式:</p>
@@ -262,7 +262,7 @@ P_Ra_1 & ... & P_Ra_M
 <script type="math/tex; mode=display">
 x_{best}=argmin_{x} \frac{1}{N}\sum_{i=1}^N||x_i-x^*||^2=J(x^*)</script><p>根据$||x_i-x^<em>||^2=(x_i-x^</em>)^T(x_i-x^<em>)$<br>,以及$\frac{\partial x^Tx}{\partial x}=2x$<br>对所给求导得到$\frac{J(x^</em>)}{x^<em>}=\frac{2}{N}\sum_{i=1}^N(x^</em>-x_i)$<br>得到最佳的$x^<em>=\frac{1}{N}\sum_{i=1}^Nx_i=\overline{x}$，<br>即降维到零维表示的最佳向量为$x^</em>=\overline{x}$:<strong>x的均值</strong></p>
 <h3 id="3-2-降维到一维子空间-推广就是超平面"><a href="#3-2-降维到一维子空间-推广就是超平面" class="headerlink" title="3.2 降维到一维子空间(推广就是超平面)"></a>3.2 降维到一维子空间(推广就是超平面)</h3><p>一维子空间是一条直线，因此形式化的，我们可以知道即是将一些高维的样本点投射到一条直线上，直觉的，我们有如下目标:<br><strong>1.样本点投射到直线上的距离尽可能短<br>2.样本点在直线上之间的距离尽可能长</strong></p>
-<h4 id="3-2-1-样本中心化-减去均值"><a href="#3-2-1-样本中心化-减去均值" class="headerlink" title="3.2.1 样本中心化:减去均值"></a>3.2.1 样本中心化:减去均值</h4><p>中心化的作用如下:对于线性降维$y=a^Tx+b$，由于有b的存在，假如我们没有中心化，我们所需要降维的结果为:<br><img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-16-13-31.png" class=""><br>但是由于我们降维过程中是没有b的，最后形成的线性变换会是如下结果:<br><img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-16-14-13.png" class=""><br>显然不是我们需要的结果，因此去中心化的目的:<strong>消除数据的平移影响</strong>，如本图，在去中心化之后会得到大致如下的降维结果:<br><img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-22-16-17-06.png" class=""><br>显然这是我们需要的</p>
+<h4 id="3-2-1-样本中心化-减去均值"><a href="#3-2-1-样本中心化-减去均值" class="headerlink" title="3.2.1 样本中心化:减去均值"></a>3.2.1 样本中心化:减去均值</h4><p>中心化的作用如下:对于线性降维$y=a^Tx+b$，由于有b的存在，假如我们没有中心化，我们所需要降维的结果为:<br><img src="/2024/10/17/PCA/2024-03-22-16-13-31.png" class=""><br>但是由于我们降维过程中是没有b的，最后形成的线性变换会是如下结果:<br><img src="/2024/10/17/PCA/2024-03-22-16-14-13.png" class=""><br>显然不是我们需要的结果，因此去中心化的目的:<strong>消除数据的平移影响</strong>，如本图，在去中心化之后会得到大致如下的降维结果:<br><img src="/2024/10/17/PCA/2024-03-22-16-17-06.png" class=""><br>显然这是我们需要的</p>
 <h4 id="3-2-2-降维过程-1"><a href="#3-2-2-降维过程-1" class="headerlink" title="3.2.2 降维过程-1"></a>3.2.2 降维过程-1</h4><p>对于上面我们讲的两个目标，从两个目标出发有两个异曲同工的想法，这里先说比较容易理解的第二个:<strong>要让样本点在这个直线上的投影点之间的距离尽可能长</strong>，自然的想到了让降维之后的样本点方差足够的大<br>对于每一个$x_i$，在去中心化之后线性降维的结果为$\omega^T(x_i-\overline{x})$(<strong>中心化之后均值为0</strong>)，这也就是我在2.1部分所说的基变换:矩阵变换<br>因此，我们自然的想要最大化:$\frac{1}{N}\sum_{i=1}^N||\omega^T(x_i-\overline{x})||^2$,形式化有如下表达:</p>
 <script type="math/tex; mode=display">
 argmax_{\omega} \quad J_1(\omega)=\frac{1}{N}\sum_{i=1}^N||\omega^T(x_i-\overline{x})||^2\\
@@ -277,7 +277,7 @@ $$\omega^T\omega=1</script><p>从</p>
   &Cov(x)=\frac{1}{N}\sum_{i=1}^N(x_i-\overline{x})^2\\
   &a Cov(x)a^T=a·E[(x_i-\overline{x})(x_i-\overline{x})^T]·a^T\\
   &=E[a(x_i-\overline{x})(a(x_i-\overline{x}))^T]=E[(a(x_i-\overline{x}))^2]\geq 0
-\end{align*}</script><h4 id="3-2-3-降维过程-2"><a href="#3-2-3-降维过程-2" class="headerlink" title="3.2.3 降维过程-2"></a>3.2.3 降维过程-2</h4><p>这里我们最小化投影点到原来样本点之间的距离来进行问题求解，最后可以得到这种方法和3.2.2的结果是相同的<br>这里的思想其实类似于零维的时候，假设我们降维前的结果为$x_i$，对于投影，实际上降维后的向量为$a\omega_1+x_0$，其中$\omega$是方向，$a$是长度标量，如下面所示<br><img src="/markastrid/markastrid.github.io/markastrid/2024/10/17/PCA/2024-03-29-13-14-58.png" class=""></p>
+\end{align*}</script><h4 id="3-2-3-降维过程-2"><a href="#3-2-3-降维过程-2" class="headerlink" title="3.2.3 降维过程-2"></a>3.2.3 降维过程-2</h4><p>这里我们最小化投影点到原来样本点之间的距离来进行问题求解，最后可以得到这种方法和3.2.2的结果是相同的<br>这里的思想其实类似于零维的时候，假设我们降维前的结果为$x_i$，对于投影，实际上降维后的向量为$a\omega_1+x_0$，其中$\omega$是方向，$a$是长度标量，如下面所示<br><img src="/2024/10/17/PCA/2024-03-29-13-14-58.png" class=""></p>
 <h5 id="投影说明"><a href="#投影说明" class="headerlink" title="-投影说明-"></a>-投影说明-</h5><p>由于数学知识我们知道,一个向量$y$向另一个方向的向量$x$上的投影结果为$\frac{y^Tx}{||x||^2}x$，在本题中即是$\omega_1^T(x-\overline{x})\omega_1$(其中$\omega_1^T\omega_1=1$，前面的内积是标量做转置不影响结果)<br>即：$x\approx \overline{x}+(\omega_1^T(x-\overline{x}))\omega_1$,其中$y_i=\omega_1^T(x-\overline{x}),b=\overline{x}$<br>回到上面的结果，我们需要最小化投影前后样本点之间的距离,即:</p>
 <script type="math/tex; mode=display">
 \begin{align*}
@@ -311,7 +311,7 @@ $$\omega^T\omega=1</script><p>从</p>
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://github.com/markastrid/markastrid.github.io/2024/10/17/PCA/" title="PCA降维">https://github.com/markastrid/markastrid.github.io/2024/10/17/PCA/</a>
+    <a href="https://example.com/2024/10/17/PCA/" title="PCA降维">https://example.com/2024/10/17/PCA/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -322,7 +322,7 @@ $$\omega^T\omega=1</script><p>从</p>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/markastrid/markastrid.github.io/tags/PCA/" rel="tag"># PCA</a>
+              <a href="/tags/PCA/" rel="tag"># PCA</a>
           </div>
 
         
@@ -331,11 +331,11 @@ $$\omega^T\omega=1</script><p>从</p>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/markastrid/markastrid.github.io/2024/10/17/hello/" rel="prev" title="hello, my blog">
+    <a href="/2024/10/17/hello/" rel="prev" title="hello, my blog">
       <i class="fa fa-chevron-left"></i> hello, my blog
     </a></div>
       <div class="post-nav-item">
-    <a href="/markastrid/markastrid.github.io/2024/10/22/%E5%A2%9E%E9%87%8F%E5%AD%A6%E4%B9%A0/" rel="next" title="Incremental Learning">
+    <a href="/2024/10/22/%E5%A2%9E%E9%87%8F%E5%AD%A6%E4%B9%A0/" rel="next" title="Incremental Learning">
       Incremental Learning <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -403,26 +403,26 @@ $$\omega^T\omega=1</script><p>从</p>
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="markastrid"
-      src="/markastrid/markastrid.github.io/images/avatar.jpg">
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">markastrid</p>
   <div class="site-description" itemprop="description">to be continued</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/markastrid/markastrid.github.io/archives">
+          <a href="/archives">
           <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/markastrid/markastrid.github.io/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/markastrid/markastrid.github.io/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
@@ -431,7 +431,7 @@ $$\omega^T\omega=1</script><p>从</p>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
 
@@ -445,7 +445,7 @@ $$\omega^T\omega=1</script><p>从</p>
 
 
       </div>
-        <a href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
         </style>
     </main>
 
@@ -493,19 +493,19 @@ $$\omega^T\omega=1</script><p>从</p>
 <script type="text/javascript" src="/js/love.js"></script>
 
   
-  <script src="/markastrid/markastrid.github.io/lib/anime.min.js"></script>
-  <script src="/markastrid/markastrid.github.io/lib/velocity/velocity.min.js"></script>
-  <script src="/markastrid/markastrid.github.io/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/markastrid/markastrid.github.io/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/markastrid/markastrid.github.io/js/motion.js"></script>
-
-
-<script src="/markastrid/markastrid.github.io/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/markastrid/markastrid.github.io/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
