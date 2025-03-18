@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="博弈论第四章 关于两人情景下的零和博弈问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章 Two-Player Zero-Sum Game">
+<meta property="og:url" content="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/index.html">
+<meta property="og:site_name" content="Resume">
+<meta property="og:description" content="博弈论第四章 关于两人情景下的零和博弈问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318145516792.png">
+<meta property="og:image" content="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318145620525.png">
+<meta property="og:image" content="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318163443405.png">
+<meta property="og:image" content="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318163738118.png">
+<meta property="og:image" content="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318175606722.png">
+<meta property="og:image" content="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318180444461.png">
+<meta property="article:published_time" content="2025-03-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-18T10:25:51.737Z">
+<meta property="article:author" content="markastrid">
+<meta property="article:tag" content="博弈论第四章">
+<meta property="article:tag" content="零和博弈">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318145516792.png">
+
+<link rel="canonical" href="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第四章 Two-Player Zero-Sum Game | Resume</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Resume</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Show yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第四章 Two-Player Zero-Sum Game
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-18 00:00:00 / 修改时间：18:25:51" itemprop="dateCreated datePublished" datetime="2025-03-18T00:00:00+08:00">2025-03-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">博弈论第四章 关于两人情景下的零和博弈问题</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<h2 id="4-1-定义"><a href="#4-1-定义" class="headerlink" title="4.1 定义"></a>4.1 定义</h2><p>A two-player zero-sum game is a strategy game $ G = \{ \{ 1, 2 \}, \{ A_1, A_2 \}, \{ u_1, u_2 \} \} $ such that</p>
+<script type="math/tex; mode=display">u_1(a_1, a_2) + u_2(a_1, a_2) = 0 \quad \text{for } a_1 \in A_1 \text{ and } a_2 \in A_2.</script><p><strong>One player wins while the other losses</strong></p>
+<h3 id="4-1-1-举例"><a href="#4-1-1-举例" class="headerlink" title="4.1.1 举例"></a>4.1.1 举例</h3><img src="/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318145516792.png" class="" title="image-20250318145516792">
+<ul>
+<li>对于两人的零和博弈，约定考虑第一个人的收益矩阵，缩略图如下</li>
+</ul>
+<img src="/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318145620525.png" class="" title="image-20250318145620525">
+<ul>
+<li>$ u(a_1, a_2)$即为第一个人的收益矩阵</li>
+</ul>
+<h2 id="4-1-2-Maxmin-最大化最小原则例子"><a href="#4-1-2-Maxmin-最大化最小原则例子" class="headerlink" title="4.1.2 Maxmin (最大化最小原则例子)"></a>4.1.2 Maxmin (最大化最小原则例子)</h2><p><strong>Player 1 method</strong>: $\max_{a_1 \in A_1} \min_{a_2 \in A_2} \, u(a_1, a_2)$</p>
+<p><strong>Player 1 selects M</strong>: $ M \in \arg\max_{a_1 \in A_1} \min_{a_2 \in A_2} u(a_1, a_2) $</p>
+<ul>
+<li>$a_1=U$ ，$a_2$会最小化收益，因此收益1</li>
+<li>$a_1=M$ ，$a_2$会最小化收益，因此选择2</li>
+<li>$a_1=D$ ，$a_2$会最小化收益，因此选择0</li>
+</ul>
+<p>最大化选择，因此选择M</p>
+<p><strong>Player 2 method</strong>: $ \max_{a_2 \in A_2} \min_{a_1 \in A_1} \, u_2(a_1, a_2)$</p>
+<p><strong>Player 2 selects M</strong></p>
+<ul>
+<li>在这个情况下，Player 2的收益矩阵相当于Player 1的收益矩阵全部取负值</li>
+<li>$a_2=L$ ，$a_1$会最小化收益，因此收益-7</li>
+<li>$a_2=M$ ，$a_1$会最小化收益，因此选择-2</li>
+<li>$a_2=R$ ，$a_1$会最小化收益，因此选择-8</li>
+</ul>
+<p>最大化选择，因此选择M</p>
+<h2 id="4-2-Minmax-最小化最大原则"><a href="#4-2-Minmax-最小化最大原则" class="headerlink" title="4.2 Minmax (最小化最大原则)"></a>4.2 Minmax (最小化最大原则)</h2><p>Player 2 method: $ \max_{a_2 \in A_2} \min_{a_1 \in A_1} u_2(a_1, a_2) $</p>
+<p>From $ u_2(a_1, a_2) = -u(a_1, a_2) $, we have</p>
+<p>$ \max_{a_2 \in A_2} \min_{a_1 \in A_1} u_2(a_1, a_2) = \max_{a_2 \in A_2} \min_{a_1 \in A_1} (-u(a_1, a_2)) $</p>
+<p>By $ \max(-f(x)) = -\min(f(x)) $, we get</p>
+<p>$ \max_{a_2 \in A_2} \min_{a_1 \in A_1} u_2(a_1, a_2) = -\min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2) $</p>
+<p>Player 2 method: $ \arg\min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2) $</p>
+<h3 id="4-2-1-例1"><a href="#4-2-1-例1" class="headerlink" title="4.2.1 例1"></a>4.2.1 例1</h3><p>还是上文的例子：<strong>Player 2 method</strong>: $ \min_{a_2 \in A_2} \max_{a_1 \in A_1} \, u_2(a_1, a_2)$</p>
+<img src="/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318163443405.png" class="" title="image-20250318163443405">
+<ul>
+<li>$a_2=L$ ，$a_1$会最大化收益，因此收益7</li>
+<li>$a_2=M$ ，$a_1$会最大化收益，因此选择2</li>
+<li>$a_2=R$ ，$a_1$会最大化收益，因此选择8</li>
+</ul>
+<p>最小化选择，因此仍旧选择M</p>
+<p>在这里我们发现两个player的选择：</p>
+<p>$ \min_{a_2 \in A_2} \max_{a_1 \in A_1} \, u_2(a_1, a_2)$=$\max_{a_1 \in A_1} \min_{a_2 \in A_2} \, u(a_1, a_2)$</p>
+<h3 id="4-2-2-例2"><a href="#4-2-2-例2" class="headerlink" title="4.2.2 例2"></a>4.2.2 例2</h3><img src="/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318163738118.png" class="" title="image-20250318163738118">
+<p>$ \min_{a_2 \in A_2} \max_{a_1 \in A_1} \, u_2(a_1, a_2)$&gt;$\max_{a_1 \in A_1} \min_{a_2 \in A_2} \, u(a_1, a_2)$</p>
+<ul>
+<li>Player 1:3</li>
+<li>Player 2:4</li>
+</ul>
+<h3 id="4-2-3-MinMax-≥-MaxMin"><a href="#4-2-3-MinMax-≥-MaxMin" class="headerlink" title="4.2.3 MinMax ≥ MaxMin"></a>4.2.3 MinMax ≥ MaxMin</h3><p><strong>Lemma</strong>: For a two-player zero-sum finite game $ G $, we have</p>
+<script type="math/tex; mode=display">\min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2) \geq \max_{a_1 \in A_1} \min_{a_2 \in A_2} u(a_1, a_2)</script><p><strong>Proof</strong>: For any function $ F(x, y) $, we have</p>
+<script type="math/tex; mode=display">F(x, y) \geq \min_y F(x, y) \quad \text{for any } y</script><script type="math/tex; mode=display">\max_x F(x, y) \geq \max_x \min_y F(x, y) \quad \text{for any } x</script><script type="math/tex; mode=display">\min_y \max_x F(x, y) \geq \max_x \min_y F(x, y)</script><ul>
+<li>实际上对于任何一个问题都有minmax$\geq$maxmin</li>
+</ul>
+<h2 id="4-3-Two-Players-Zero-Sum-Nash-Equilibrium"><a href="#4-3-Two-Players-Zero-Sum-Nash-Equilibrium" class="headerlink" title="4.3 Two-Players Zero-Sum Nash Equilibrium"></a>4.3 Two-Players Zero-Sum Nash Equilibrium</h2><p><strong>Theorem</strong>: For a two-player zero-sum finite game $ G = \{ \{1, 2\}, \{A_1, A_2\}, u \} $, let player 1 select</p>
+<script type="math/tex; mode=display">a_1^* \in \arg\max_{a_1 \in A_1} \min_{a_2 \in A_2} u(a_1, a_2),</script><p>and let player 2 select</p>
+<script type="math/tex; mode=display">a_2^* \in \arg\min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2).</script><p>The strategy outcome $(a_1^<em>, a_2^</em>)$ is a Nash Equilibrium if and only if</p>
+<script type="math/tex; mode=display">\max_{a_1 \in A_1} \min_{a_2 \in A_2} u(a_1, a_2) = \min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2).</script><h3 id="4-3-1-Proof"><a href="#4-3-1-Proof" class="headerlink" title="4.3.1 Proof"></a>4.3.1 Proof</h3><h4 id="Necessity"><a href="#Necessity" class="headerlink" title="Necessity:"></a><strong>Necessity:</strong></h4><p><strong>要证明：</strong></p>
+<p>If $(a_1^<em>, a_2^</em>)$ is a NE, then </p>
+<script type="math/tex; mode=display">u_1(a_1^*, a_2^*) \geq u_1(a_1, a_2^*) \text{ for all } a_1 \in A_1,</script><script type="math/tex; mode=display">u_2(a_1^*, a_2^*) \geq u_2(a_1^*, a_2) \text{ for all } a_2 \in A_2.</script><p>By using $u_1(\cdot, \cdot) = u(\cdot, \cdot)$ and $u_2(\cdot, \cdot) = -u(\cdot, \cdot)$, we have</p>
+<script type="math/tex; mode=display">(a_1^*, a_2^*) \text{ is a NE} \iff u(a_1, a_2^*) \leq u(a_1^*, a_2^*) \leq u(a_1^*, a_2)</script><script type="math/tex; mode=display">\iff u(a_1, a_2^*) \leq u(a_1^*, a_2).</script><p>If $(a_1^<em>, a_2^</em>)$ is a NE, then we have</p>
+<script type="math/tex; mode=display">u(a_1, a_2^*) \leq u(a_1^*, a_2) \rightarrow \max_{a_1} u(a_1, a_2^*) \leq \min_{a_2} u(a_1^*, a_2),</script><script type="math/tex; mode=display">a_2^* \in \arg \min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2), \quad a_1^* \in \arg \max_{a_1 \in A_1} \min_{a_2 \in A_2} u(a_1, a_2).</script><p>Therefore,<script type="math/tex">\min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2) \leq \max_{a_1 \in A_1} \min_{a_2 \in A_2} u(a_1, a_2).</script> </p>
+<p>结合<script type="math/tex">\min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2) \geq \max_{a_1 \in A_1} \min_{a_2 \in A_2} u(a_1, a_2)</script></p>
+<p>即可得到相等结果</p>
+<h4 id="Sufficiency"><a href="#Sufficiency" class="headerlink" title="Sufficiency:"></a><strong>Sufficiency</strong>:</h4><p><strong>要证明：</strong></p>
+<p>If $ \min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2) = \max_{a_1 \in A_1} \min_{a_2 \in A_2} u(a_1, a_2), $=<br>then =$ u(a_1, a_2^<em>) \leq u(a_1^</em>, a_2). $</p>
+<p>We have</p>
+<script type="math/tex; mode=display">u(a_1, a_2^*) \leq \max_{a_1} u(a_1, a_2^*) = \min_{a_2 \in A_2} \max_{a_1 \in A_1} u(a_1, a_2),</script><p>and </p>
+<script type="math/tex; mode=display">u(a_1^*, a_2) \geq \min_{a_2} u(a_1^*, a_2) = \max_{a_1} \min_{a_2} u(a_1, a_2).</script><p>Thus , $ u(a_1, a_2^<em>) \leq u(a_1^</em>, a_2)$, $(a_1^<em>, a_2^</em>)$ is a NE</p>
+<h3 id="4-3-2-Find-Nash-Equilibrium"><a href="#4-3-2-Find-Nash-Equilibrium" class="headerlink" title="4.3.2 Find Nash Equilibrium"></a>4.3.2 Find Nash Equilibrium</h3><p><style>.ofqxpxjvmakf{zoom:100%;}</style><img src="/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318175606722.png" class="ofqxpxjvmakf" alt="image-20250318175606722"></p>
+<h2 id="4-4-Mixed-strategy"><a href="#4-4-Mixed-strategy" class="headerlink" title="4.4 Mixed strategy"></a>4.4 Mixed strategy</h2><p><strong>Strategic game</strong><br> $N = \{1, 2\}$<br> $A_1 = {a_1, a_2, \dots, a_m}$,  $A_2 = {b_1, b_2, \dots, b_n}$<br> $u_1 (a_i, b_j) = u(a_i, b_j) = u_{ij}$, $M = (u_{ij})_{m \times n}$</p>
+<p><strong>Mixed strategy</strong><br> $p = (p_1, p_2, \dots, p_m) \in \Delta_1$ is a mixed strategy over $A_1$<br> $q = (q_1, q_2, \dots, q_n) \in \Delta_2$ is a mixed strategy over $A_2$</p>
+<p>The expected payoff for player 1 on mixed outcome $(p, q)$<br> $U(p, q) = \sum_{i, j} p_i q_j u(a_i, b_j) = \sum_{i, j} p_i q_j u_{ij} = p M q^{\top}$</p>
+<p><strong>Player 1’s methods:</strong><br> $\max_{p \in \Delta_1} \min_{q \in \Delta_2} U_1(p, q) = \max_{p \in \Delta_1} \min_{q \in \Delta_2} p M q^{\top}$</p>
+<p><strong>Player 2’s methods:</strong><br> $\max_{q \in \Delta_2} \min_{p \in \Delta_1} U_2(p, q) = \min_{q \in \Delta_2} \max_{p \in \Delta_1} p M q^{\top}$</p>
+<p><strong>Lemma</strong><br> We have  $\max_{p \in \Delta_1} \min_{q \in \Delta_2} U(p, q) \leq \min_{q \in \Delta_2} \max_{p \in \Delta_1} U(p, q)$</p>
+<h3 id="4-4-1-混合策略零和博弈的纳什均衡"><a href="#4-4-1-混合策略零和博弈的纳什均衡" class="headerlink" title="4.4.1 混合策略零和博弈的纳什均衡"></a>4.4.1 混合策略零和博弈的纳什均衡</h3><p>Here is the theorem and proof with the <code>$</code> symbols added for proper formatting in LaTeX:</p>
+<p><strong>Theorem:</strong><br> For a two-player zero-sum finite game $G = \{ \{1, 2\}, \{A_1, A_2\}, u \}$, let player 1 select</p>
+<script type="math/tex; mode=display">p^* \in \arg \max_{p \in \Delta_1} \min_{q \in \Delta_2} U(p, q),</script><p>and let player 2 select</p>
+<script type="math/tex; mode=display">q^* \in \arg \min_{q \in \Delta_2} \max_{p \in \Delta_1} U(p, q).</script><p>The mixed strategy outcome $(p^<em>, q^</em>)$ is a Mixed Strategy Nash Equilibrium (MNE) if and only if</p>
+<p>$\max_{p \in \Delta_1} \min_{q \in \Delta_2} U(p, q) = \min_{q \in \Delta_2} \max_{p \in \Delta_1} U(p, q).$</p>
+<h4 id="Proof"><a href="#Proof" class="headerlink" title="Proof"></a>Proof</h4><ol>
+<li><p><strong>Maximization by Player 1:</strong> Player 1 seeks to maximize their minimum payoff by choosing a mixed strategy $p \in \Delta_1$. This means player 1 will select $p^* \in \arg \max_{p \in \Delta_1} \min_{q \in \Delta_2} p M q^\top$.</p>
+<p>The objective is:</p>
+<p>$\max_{p \in \Delta_1} \min_{q \in \Delta_2} p M q^\top.$</p>
+<p>This represents the maximum of the minimum payoff player 1 can secure, considering that player 2 is choosing their strategy qq to minimize player 1’s payoff.</p>
+</li>
+<li><p><strong>Minimization by Player 2:</strong> Similarly, player 2 aims to minimize their maximum loss, selecting $q^* \in \arg \min_{q \in \Delta_2} \max_{p \in \Delta_1} p M q^\top$.</p>
+<p>The objective is:</p>
+<p>$\min_{q \in \Delta_2} \max_{p \in \Delta_1} p M q^\top$.</p>
+<p>This represents the minimum of the maximum payoff player 2 has to endure, considering that player 1 is choosing their strategy pp to maximize their payoff.</p>
+</li>
+<li><p><strong>The Minimax Theorem:</strong> By the minimax theorem for zero-sum games, we know that the optimal strategies $p^<em> $and $q^</em>$ for players 1 and 2, respectively, will lead to the following equality:</p>
+<p>$\max_{p \in \Delta_1} \min_{q \in \Delta_2} p M q^\top = \min_{q \in \Delta_2} \max_{p \in \Delta_1} p M q^\top$.</p>
+<p>This is the core of the minimax theorem, which ensures that the game has an equilibrium point in mixed strategies where both players are choosing their strategies optimally.</p>
+</li>
+<li><p><strong>Conclusion:</strong> Since $p^<em>$ and $q^</em>$ satisfy the conditions of the minimax theorem, we conclude that the outcome of the game (given by $p^<em>, q^</em>$) will be a Mixed Strategy Nash Equilibrium (MNE). The equality</p>
+<p>$\max_{p \in \Delta_1} \min_{q \in \Delta_2} p M q^\top = \min_{q \in \Delta_2} \max_{p \in \Delta_1} p M q^\top$</p>
+<p>holds true, confirming that the mixed strategy outcome $(p^<em>, q^</em>)$ is indeed a Nash equilibrium.</p>
+</li>
+</ol>
+<h3 id="4-4-2-General-John-von-Neumann’s-minimax-theorem"><a href="#4-4-2-General-John-von-Neumann’s-minimax-theorem" class="headerlink" title="4.4.2 General John von Neumann’s minimax theorem"></a>4.4.2 General John von Neumann’s minimax theorem</h3><p><strong>The Minimax Theorem</strong>: </p>
+<p>Let $X \subset \mathbb{R}^n$ and $Y \subset \mathbb{R}^m$ be compact convex sets. </p>
+<p>If $f: X \times Y \to \mathbb{R}$ is a continuous function such that:</p>
+<ul>
+<li>$f(\cdot, y): X \to \mathbb{R}$ is concave for fixed $y$;</li>
+<li>$f(x, \cdot): Y \to \mathbb{R}$ is convex for fixed $x$,</li>
+</ul>
+<p>then we have:</p>
+<script type="math/tex; mode=display">
+\max_{x \in X} \min_{y \in Y} f(x, y) = \min_{y \in Y} \max_{x \in X} f(x, y).</script><h3 id="4-4-3-John-von-Neumann’s-Minimax-Theorem-1928"><a href="#4-4-3-John-von-Neumann’s-Minimax-Theorem-1928" class="headerlink" title="4.4.3 John von Neumann’s Minimax Theorem (1928)"></a>4.4.3 John von Neumann’s Minimax Theorem (1928)</h3><p><strong>The Minimax Theorem</strong>: For a two-player zero-sum finite game $G = \{ \{1, 2\}, \{A_1, A_2\}, u \}$, we have:</p>
+<script type="math/tex; mode=display">
+\max_{p \in \Delta_1} \min_{q \in \Delta_2} p M q^{\top} = \min_{q \in \Delta_2} \max_{p \in \Delta_1} p M q^{\top}.</script><p><strong>Corollary</strong>: Two-person finite zero-sum games have at least one mixed-strategy Nash equilibrium: any pair of optimal strategies is a Nash equilibrium.</p>
+<h3 id="4-4-4-Example"><a href="#4-4-4-Example" class="headerlink" title="4.4.4 Example"></a>4.4.4 Example</h3><img src="/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/image-20250318180444461.png" class="" title="image-20250318180444461">
+<p>Player 1’s mixed strategy: $(x_1, x_2)$<br>$U_2 (L) = -3x_1 + 2x_2, \quad U_2 (R) = x_1 - x_2$</p>
+<p>The optimal solution for Player 2 is:<br>$\max(-3x_1 + 2x_2, x_1 - x_2)$</p>
+<p>The payoffs for Player 1 is:<br>$-\max(-3x_1 + 2x_2, x_1 - x_2) = \min(3x_1 - 2x_2, -x_1 + x_2)$</p>
+<p>The solution for Player 1 is:<br>$(x_1, x_2) \in \arg\max_{(x_1, x_2)} \min(3x_1 - 2x_2, -x_1 + x_2)$</p>
+<p>This is equivalent to:(<strong>Linear programming</strong>)</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\max \quad&v \\ \text{s.t.}\quad &3x_1 - 2x_2 \geq v, \\ &-x_1 + x_2 \geq v, \\ &x_1 + x_2 = 1, x_1 > 0,  x_2 > 0
+\end{align}</script><h3 id="4-4-5-Theorem"><a href="#4-4-5-Theorem" class="headerlink" title="4.4.5 Theorem"></a>4.4.5 <strong>Theorem</strong></h3><p>The optimization problem of </p>
+<p>$\max_{p \in \Delta_1} \min_{q \in \Delta_2} p M q^{\top}$</p>
+<p>is equivalent to:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\max \quad&v  \\\text{s.t.} \quad& p M \geq v \mathbf{1}, \\& p = (p_1, \dots, p_m) \in \Delta_1, \quad \\&\mathbf{1} = (1, \dots, 1)^{\top}
+\end{align}</script><p><strong>Linear programming:Can be solved in polynomial time.</strong></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>markastrid
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/" title="第四章 Two-Player Zero-Sum Game">https://example.com/2025/03/18/博弈论笔记五/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E5%9B%9B%E7%AB%A0/" rel="tag"># 博弈论第四章</a>
+              <a href="/tags/%E9%9B%B6%E5%92%8C%E5%8D%9A%E5%BC%88/" rel="tag"># 零和博弈</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/17/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%9B%9B/" rel="prev" title="第三章 支配策略和理性">
+      <i class="fa fa-chevron-left"></i> 第三章 支配策略和理性
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">4.1 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-%E4%B8%BE%E4%BE%8B"><span class="nav-number">1.1.</span> <span class="nav-text">4.1.1 举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-2-Maxmin-%E6%9C%80%E5%A4%A7%E5%8C%96%E6%9C%80%E5%B0%8F%E5%8E%9F%E5%88%99%E4%BE%8B%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">4.1.2 Maxmin (最大化最小原则例子)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Minmax-%E6%9C%80%E5%B0%8F%E5%8C%96%E6%9C%80%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="nav-number">3.</span> <span class="nav-text">4.2 Minmax (最小化最大原则)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E4%BE%8B1"><span class="nav-number">3.1.</span> <span class="nav-text">4.2.1 例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E4%BE%8B2"><span class="nav-number">3.2.</span> <span class="nav-text">4.2.2 例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-MinMax-%E2%89%A5-MaxMin"><span class="nav-number">3.3.</span> <span class="nav-text">4.2.3 MinMax ≥ MaxMin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Two-Players-Zero-Sum-Nash-Equilibrium"><span class="nav-number">4.</span> <span class="nav-text">4.3 Two-Players Zero-Sum Nash Equilibrium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-Proof"><span class="nav-number">4.1.</span> <span class="nav-text">4.3.1 Proof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Necessity"><span class="nav-number">4.1.1.</span> <span class="nav-text">Necessity:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sufficiency"><span class="nav-number">4.1.2.</span> <span class="nav-text">Sufficiency:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-Find-Nash-Equilibrium"><span class="nav-number">4.2.</span> <span class="nav-text">4.3.2 Find Nash Equilibrium</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-Mixed-strategy"><span class="nav-number">5.</span> <span class="nav-text">4.4 Mixed strategy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-1-%E6%B7%B7%E5%90%88%E7%AD%96%E7%95%A5%E9%9B%B6%E5%92%8C%E5%8D%9A%E5%BC%88%E7%9A%84%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">5.1.</span> <span class="nav-text">4.4.1 混合策略零和博弈的纳什均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Proof"><span class="nav-number">5.1.1.</span> <span class="nav-text">Proof</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-2-General-John-von-Neumann%E2%80%99s-minimax-theorem"><span class="nav-number">5.2.</span> <span class="nav-text">4.4.2 General John von Neumann’s minimax theorem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-3-John-von-Neumann%E2%80%99s-Minimax-Theorem-1928"><span class="nav-number">5.3.</span> <span class="nav-text">4.4.3 John von Neumann’s Minimax Theorem (1928)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-4-Example"><span class="nav-number">5.4.</span> <span class="nav-text">4.4.4 Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-5-Theorem"><span class="nav-number">5.5.</span> <span class="nav-text">4.4.5 Theorem</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="markastrid"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">markastrid</p>
+  <div class="site-description" itemprop="description">to be continued</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        </style>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">markastrid</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+<div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    </div>
+<div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共59.3k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
