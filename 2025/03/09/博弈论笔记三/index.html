@@ -36,9 +36,11 @@
 <meta property="og:image" content="https://example.com/2025/03/09/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%89/image-20250309183911954.png">
 <meta property="og:image" content="https://example.com/2025/03/09/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%89/image-20250309183926719.png">
 <meta property="article:published_time" content="2025-03-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-18T08:20:02.797Z">
+<meta property="article:modified_time" content="2025-03-21T19:29:35.525Z">
 <meta property="article:author" content="markastrid">
 <meta property="article:tag" content="博弈论第二章">
+<meta property="article:tag" content="混合式博弈">
+<meta property="article:tag" content="纳什均衡">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://example.com/2025/03/09/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%89/image-20250309171417293-17415116581841.png">
 
@@ -201,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-18 16:20:02" itemprop="dateModified" datetime="2025-03-18T16:20:02+08:00">2025-03-18</time>
+                <time title="修改时间：2025-03-22 03:29:35" itemprop="dateModified" datetime="2025-03-22T03:29:35+08:00">2025-03-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -395,7 +397,7 @@
 </li>
 </ul>
 <h2 id="2-3-1-An-Property-of-MNE"><a href="#2-3-1-An-Property-of-MNE" class="headerlink" title="2.3.1 An Property of MNE"></a>2.3.1 An Property of MNE</h2><p><strong>Theorem</strong> If a mixed strategy is a best response, then each of the pure strategies (positive prob.) involved in the mixed strategy must be a best response. Particularly, each must yield the same expected payoff.(如果一个混合策略是一个最优反应（best response），那么在该混合策略中出现的每一个纯策略（即具有正概率的策略）必须也是最优反应，并且它们的期望效用必须相同)</p>
-<p>If a mixed strategy $p_i$ is a best response to the strategies of the others $p_{-i}$, then each pure strategy $a_j s.t. p_i (a_j) &gt; 0 $is itself a best response to $p_(-i)$.</p>
+<p>If a mixed strategy $p_i$ is a best response to the strategies of the others $p_{-i}$, then each pure strategy $a_j s.t. p_i (a_j) &gt; 0 $ is itself a best response to $p_{-i}$.</p>
 <p>Particularly, all $U_i (a_j,p_(-i))$ must be equal</p>
 <ul>
 <li><strong>前半部分</strong>：假设玩家选择一个混合策略，并且这个混合策略是最优反应。那么，混合策略中每个正概率的纯策略（被玩家实际选择的策略）也必须是最优反应。这意味着，如果混合策略中有某个纯策略，且它有正的概率被选择，那么在该纯策略下，该玩家的期望效用应该是最大化的。</li>
@@ -403,7 +405,7 @@
 </ul>
 <img src="/2025/03/09/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%89/image-20250309182633299.png" class="" title="image-20250309182633299">
 <p><strong>Theorem</strong> $G={N, {A_i }, {u_i}}, p=(p_1,p_2,…, p_N)$ is a mixed Nash equilibrium if and only if every pure strategy of player i with positive probability is a best response to $p_{-i}$</p>
-<p>如果在博弈 $G = {N, {A_i}, {u_i}}$ 中，混合策略 $p = (p_1, p_2, \dots, p_N)$ 是一个纳什均衡（Nash Equilibrium），那么对于每个玩家 $i$，所有在混合策略中具有正概率的纯策略都是对其他玩家策略 $p_{-i}$ 的最佳反应（best response）；反之，如果每个在混合策略中具有正概率的纯策略都是最佳反应，那么该混合策略是纳什均衡。</p>
+<p>如果在博弈 $G = \{N, {A_i}, {u_i}\}$ 中，混合策略 $p = (p_1, p_2, \dots, p_N)$ 是一个纳什均衡（Nash Equilibrium），那么对于每个玩家 $i$，所有在混合策略中具有正概率的纯策略都是对其他玩家策略 $p_{-i}$ 的最佳反应（best response）；反之，如果每个在混合策略中具有正概率的纯策略都是最佳反应，那么该混合策略是纳什均衡。</p>
 <h4 id="充分性证明："><a href="#充分性证明：" class="headerlink" title="充分性证明："></a>充分性证明：</h4><p>假设在混合策略 $p = (p_1, p_2, \dots, p_N)$ 下，对于每个玩家 $i$，所有在混合策略中具有正概率的纯策略 $a_j$ 都是对 $p_{-i}$ 的最佳反应。即对于玩家 $i$ 的所有正概率纯策略 $a_j$，都有：</p>
 <script type="math/tex; mode=display">U_i(a_j, p_{-i}) \geq U_i(a_j', p_{-i}) \quad \forall a_j' \in A_i</script><p>我们需要证明 $p$ 是一个混合纳什均衡。</p>
 <ol>
@@ -483,6 +485,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E4%BA%8C%E7%AB%A0/" rel="tag"># 博弈论第二章</a>
+              <a href="/tags/%E6%B7%B7%E5%90%88%E5%BC%8F%E5%8D%9A%E5%BC%88/" rel="tag"># 混合式博弈</a>
+              <a href="/tags/%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1/" rel="tag"># 纳什均衡</a>
           </div>
 
         
@@ -571,7 +575,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -584,7 +588,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -634,7 +638,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共59.3k字</span>
+    <span class="post-count">全站共61.1k字</span>
   </div>
 
         

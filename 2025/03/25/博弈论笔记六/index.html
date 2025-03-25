@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="[TOC] 5.1 引入：Battle of Sexes with Incomplete Information  完全信息的情况下，我们知道：both boy and girl like to meet  There are 2 pure strategy NE and 1 mixed strategy NE  IF:  The boy is not sure if the girl wishe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第五章 Games with Incomplete Information">
+<meta property="og:url" content="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/index.html">
+<meta property="og:site_name" content="Resume">
+<meta property="og:description" content="[TOC] 5.1 引入：Battle of Sexes with Incomplete Information  完全信息的情况下，我们知道：both boy and girl like to meet  There are 2 pure strategy NE and 1 mixed strategy NE  IF:  The boy is not sure if the girl wishe">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325174522251.png">
+<meta property="og:image" content="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325174913857.png">
+<meta property="og:image" content="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325182106067.png">
+<meta property="og:image" content="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325183738323.png">
+<meta property="article:published_time" content="2025-03-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-25T11:08:09.560Z">
+<meta property="article:author" content="markastrid">
+<meta property="article:tag" content="博弈论第五章">
+<meta property="article:tag" content="非完全信息博弈">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325174522251.png">
+
+<link rel="canonical" href="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第五章 Games with Incomplete Information | Resume</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Resume</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Show yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第五章 Games with Incomplete Information
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-25 00:00:00 / 修改时间：19:08:09" itemprop="dateCreated datePublished" datetime="2025-03-25T00:00:00+08:00">2025-03-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<h2 id="5-1-引入：Battle-of-Sexes-with-Incomplete-Information"><a href="#5-1-引入：Battle-of-Sexes-with-Incomplete-Information" class="headerlink" title="5.1 引入：Battle of Sexes with Incomplete Information"></a>5.1 引入：Battle of Sexes with Incomplete Information</h2><img src="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325174522251.png" class="" title="image-20250325174522251">
+<ul>
+<li><p>完全信息的情况下，我们知道：both boy and girl like to meet</p>
+</li>
+<li><p>There are 2 pure strategy NE and 1 mixed strategy NE</p>
+</li>
+<li><p><strong>IF</strong>:</p>
+</li>
+<li><p>The boy is not sure if the girl wishes to meet or not</p>
+<p><strong>Incomplete information</strong></p>
+</li>
+</ul>
+<h3 id="5-1-1-detail"><a href="#5-1-1-detail" class="headerlink" title="5.1.1 detail"></a>5.1.1 detail</h3><img src="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325174913857.png" class="" title="image-20250325174913857">
+<p>The girl has two types: like or dislike</p>
+<p>The boy assumes that girl like with probability p</p>
+<p>The girl knows the complete information</p>
+<p>The boy does not know </p>
+<h3 id="5-1-2-NE"><a href="#5-1-2-NE" class="headerlink" title="5.1.2 NE"></a>5.1.2 NE</h3><p>If the boy selects $B$, then the best response of the girl is $(B,F)$. Thus, the strategy pair is: $\{B, (B,F)\}$</p>
+<p>$U_1 (B,(B,F)) = p + (1 - p) \cdot 0 = p$</p>
+<p>$U_1 (F,(B,F)) = 0 + (1 - p) \cdot 2 = 2(1 - p)$</p>
+<p>If $p \geq \frac{2}{3}$, then $\{B, (B,F)\}$ is a Nash Equilibrium (NE).</p>
+<p>If $p &lt; \frac{2}{3}$, then $\{B, (B,F)\}$ is not a NE.</p>
+<p>If the boy selects $F$, then the best response of the girl is $(F,B)$. Thus, the strategy pair is: $\{F, (F,B)\}$</p>
+<p>$U_1 (F,(F,B)) = 2p + (1 - p) \cdot 0 = 2p$</p>
+<p>$U_1 (B,(F,B)) = 0 + (1 - p) = 1 - p$</p>
+<p>If $p \geq \frac{1}{3}$, then $\{F, (F,B)\}$ is a Nash Equilibrium (NE).</p>
+<p>If $p &lt; \frac{1}{3}$, then $\{F, (F,B)\}$ is not a NE.</p>
+<p>If $p \geq \frac{1}{3}$ then$ \{F, (F,B)\} $ is a Nash Equilibrium $NE$.</p>
+<p>If  $p \geq \frac{2}{3} $, then both  $\{F, (F,B)\}$ and $\{B, (B,F)\}$ are Nash Equilibriums (NEs).</p>
+<h2 id="5-2-Bayesian-Games"><a href="#5-2-Bayesian-Games" class="headerlink" title="5.2 Bayesian Games"></a>5.2 Bayesian Games</h2><p>A Bayesian game consists of:</p>
+<ul>
+<li>A set of players N</li>
+<li>A set of strategies $A_i$ for each player i</li>
+<li>A set of types $\Theta_i$ for each player i<ul>
+<li>The type set $\Theta_i$ includes all private information for player i</li>
+<li>The types on payoff are adequate (Payoff types)</li>
+</ul>
+</li>
+<li>A probability distribution $p = p(\theta_1, \dots, \theta_N)$ on $i\prod_{i=1}^{n} \Theta_i$</li>
+</ul>
+<p>For player $i$, a pure strategy is a map $a_i : \Theta_i \to A_i$, which prescribes a strategy for each type:</p>
+<script type="math/tex; mode=display">
+a_i = \left( a_i(\theta_i^1), a_i(\theta_i^2), \dots, a_i(\theta_i^{n_i}) \right)</script><p>A payoff function $u_i : \prod_{i=1}^{N} A_i \times \prod_{i=1}^{n} \Theta_i \to \mathbb{R}$ is defined as:</p>
+<script type="math/tex; mode=display">
+u_i(a_1, \dots, a_N, \theta_1, \dots, \theta_N) \quad \text{for } a_i \in A_i \text{ and } \theta_i \in \Theta_i</script><p>The game $G$ is defined as:</p>
+<script type="math/tex; mode=display">
+G = \left\{ N, \{ A_i \}, \{ \Theta_i \}, \{ u_i \}, p \right\}</script><h3 id="5-2-1-Battle-of-Sexes-with-Incomplete-Information"><a href="#5-2-1-Battle-of-Sexes-with-Incomplete-Information" class="headerlink" title="5.2.1 Battle of Sexes with Incomplete Information"></a>5.2.1 Battle of Sexes with Incomplete Information</h3><img src="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325182106067.png" class="" title="image-20250325182106067">
+<h3 id="5-2-2-Such-game-is-called-Bayes-Game"><a href="#5-2-2-Such-game-is-called-Bayes-Game" class="headerlink" title="5.2.2 Such game is called Bayes Game"></a>5.2.2 <strong>Such game is called Bayes Game</strong></h3><p>The set of types $ \Theta_i $ for each player $ i $.</p>
+<ul>
+<li>Player $ i $ does not know the selection of $ \Theta_j $.</li>
+</ul>
+<ul>
+<li>All types are drawn from the prior distribution $ p(\theta_1, \dots, \theta_N) $:</li>
+<li>$p(\theta_1, \dots, \theta_N) = p(\theta_1) p(\theta_2) \dots p(\theta_N) $ independent types</li>
+</ul>
+<p>Given $ p(\theta_1, \dots, \theta_N) $, we have, by Bayes’ rule:</p>
+<script type="math/tex; mode=display">
+p(\theta_{(-i)} | \theta_i) = \frac{p(\theta_i, \theta_{(-i)})}{p(\theta_i)}</script><p>where $ \theta_{(-i)} = (\theta_1, \dots, \theta_{i-1}, \theta_{i+1}, \dots, \theta_N) $.</p>
+<p><strong>Such a game is called a Bayes Game.</strong></p>
+<h3 id="5-2-3-Outcome-and-Payoff-Functions"><a href="#5-2-3-Outcome-and-Payoff-Functions" class="headerlink" title="5.2.3 Outcome and Payoff Functions"></a>5.2.3 Outcome and Payoff Functions</h3><p>A pure strategy for player $i$ is:</p>
+<script type="math/tex; mode=display">
+(a_i (\theta_i^1), a_i (\theta_i^2), \dots, a_i (\theta_i^{n_i}))</script><p>An outcome of the Bayes game is given by:</p>
+<script type="math/tex; mode=display">
+((a_1 (\theta_1^1), \dots, a_1 (\theta_1^{n_1})), \dots, (a_N (\theta_N^1), \dots, a_N (\theta_N^{n_N})))</script><p>Given $a_{-i}$, the expected payoff of player $i$ and type $\theta_i$ is:</p>
+<script type="math/tex; mode=display">
+U_i (a_i (\theta_i), a_{(-i)}) = \sum_{\theta_{(-i)}} p(\theta_{(-i)} | \theta_i) u_i (a_{(-i)} (\theta_{(-i)}), a_i, \theta_{(-i)}, \theta_i)</script><h2 id="5-3-Bayesian-Nash-Equilibrium"><a href="#5-3-Bayesian-Nash-Equilibrium" class="headerlink" title="5.3 Bayesian Nash Equilibrium"></a>5.3 Bayesian Nash Equilibrium</h2><p><strong>Definition</strong>: The outcome $(a_1, a_2, \dots, a_N)$ is a Bayesian Nash Equilibrium if for each $i$ and type $\theta_i$, we have:</p>
+<script type="math/tex; mode=display">
+U_i (a_i (\theta_i), a_{(-i)}) \geq U_i (a_i' (\theta_i), a_{(-i)}) \quad \text{for all } a_i' (\theta_i) \in A_i</script><p>Given $a_{(-i)}$ and type $\theta_i$, the best response for player $i$ is:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+B_i (a_{(-i)}, \theta_i)& = \{ a_i (\theta_i) : U_i (a_i (\theta_i), a_{(-i)})\\& \geq U_i (a_i' (\theta_i), a_{(-i)}) \quad \text{for all } a_i' (\theta_i) \in A_i \}
+\end{align*}</script><p><strong>Theorem</strong>: The outcome $(a_1, a_2, \dots, a_N)$ is a Bayesian NE if and only if for every player $i$ and each type $\theta_i$, we have:</p>
+<script type="math/tex; mode=display">
+a_i (\theta_i) \in B_i (a_{(-i)}, \theta_i)</script><h3 id="5-3-1-How-to-find-Bayesian-Nash-Equilibrium"><a href="#5-3-1-How-to-find-Bayesian-Nash-Equilibrium" class="headerlink" title="5.3.1 How to find Bayesian Nash Equilibrium"></a>5.3.1 How to find Bayesian Nash Equilibrium</h3><p>Find the best response function for each player and type.</p>
+<p>Find the Bayesian Nash Equilibrium by $a_i(\theta_i \in B_i(a_{(-i)}, \theta_i) $.</p>
+<h2 id="5-4-例1-Bank-Runs-银行挤脱"><a href="#5-4-例1-Bank-Runs-银行挤脱" class="headerlink" title="5.4 例1:Bank Runs (银行挤脱)"></a>5.4 例1:Bank Runs (银行挤脱)</h2><p>Both players 1 and 2 have a deposit of $100 in the bank.</p>
+<p>If the bank manager is good, each player gets $150; if the manager is bad, then they lose all their money.</p>
+<p>Players can withdraw money, but the bank has only $100.</p>
+<ul>
+<li>If only one player withdraws, he gets $100 and the other gets 0.</li>
+<li>If two players both withdraw, each gets $50.</li>
+</ul>
+<p>Player 1 believes the manager is good with probability  p .</p>
+<p>Player 2 knows whether the manager is good or bad.</p>
+<p>Both players simultaneously make a strategy: <strong>withdraw or not</strong>.</p>
+<img src="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325183738323.png" class="" title="image-20250325183738323">
+<ul>
+<li>Two players</li>
+</ul>
+<ul>
+<li>Strategies ( A_1 = A_2 = \{ W, N \} )</li>
+</ul>
+<ul>
+<li>Types $ \Theta_1 = \{ 1 \} ); ( \Theta_2 = \{ G, B \} $</li>
+</ul>
+<p>A probability distribution $p_1(\theta_2 = G) = p $$</p>
+<p>Payoffs:</p>
+<ul>
+<li>Player 1:  W  or  N </li>
+<li>Player 2:  W(G), N(G), W(B), N(B) </li>
+</ul>
+<h3 id="5-4-1-Bayesian-Nash-Equilibrium-of-Bank-Runs"><a href="#5-4-1-Bayesian-Nash-Equilibrium-of-Bank-Runs" class="headerlink" title="5.4.1 Bayesian Nash Equilibrium of Bank Runs"></a>5.4.1 Bayesian Nash Equilibrium of Bank Runs</h3><h4 id="case-1"><a href="#case-1" class="headerlink" title="case 1"></a>case 1</h4><p>If Player 1 selects $ W $, then</p>
+<script type="math/tex; mode=display">
+B_2(W, G) = \{W\}, \quad B_2(W, B) = \{W\}</script><p>Outcome $ (W, (W(G), W(B))) $: best strategy for Player 2.</p>
+<p>Is $ W $ a best response to $ W(G), W(B) $?</p>
+<script type="math/tex; mode=display">
+U_1(W, (W(G), W(B))) = 50p + 50(1 - p) = 50</script><script type="math/tex; mode=display">
+U_1(N, (W(G), W(B))) = 0p + 0(1 - p) = 0</script><p><strong>$ (W, (W(G), W(B))) $ is a Bayesian NE.</strong></p>
+<h4 id="case-2"><a href="#case-2" class="headerlink" title="case 2"></a>case 2</h4><p>If Player 1 selects $ N $, then</p>
+<script type="math/tex; mode=display">
+B_2(N, G) = \{N\}, \quad B_2(N, B) = \{W\}</script><p>Outcome $ (N, (N(G), W(B))) $: Player 2 makes best strategy.</p>
+<p>Is $ N $ a best response to $ (N(G), W(B)) $?</p>
+<script type="math/tex; mode=display">
+U_1(N, (N(G), W(B))) = 150p + 0(1 - p) = 150p</script><script type="math/tex; mode=display">
+U_1(W, (N(G), W(B))) = 100p + 50(1 - p) = 50(1 + p)</script><p><strong>If $ 150p &gt; 50 + 50p $, then $ (N, (N(G), W(B))) $ is a Bayesian Nash Equilibrium (BNE).</strong></p>
+<h2 id="5-5-例2-Cournot-Duopoly-with-Incomplete-Information"><a href="#5-5-例2-Cournot-Duopoly-with-Incomplete-Information" class="headerlink" title="5.5 例2:Cournot Duopoly with Incomplete Information"></a>5.5 例2:Cournot Duopoly with Incomplete Information</h2><h3 id="5-5-1-base-situation"><a href="#5-5-1-base-situation" class="headerlink" title="5.5.1 base situation"></a>5.5.1 base situation</h3><p>Two firms $ N = \{ 1, 2 \} $</p>
+<p>Firm 1 has a cost $ c_H $; </p>
+<p>Firm 2 has two costs $ c_L $ and $ c_H $</p>
+<p>Firm 1 believes that Firm 2 selects $ c_H $ with probability $ p $</p>
+<p>Firm 1’s strategy: $ \{ q_1 : q_1 \geq 0 \} $</p>
+<p>Firm 2’s strategy: $ \{ q_{2,L}, q_{2,H} : q_{2,L} \geq 0 \text{ and } q_{2,H} \geq 0 \} $</p>
+<p>Price: $ a - q_1 - q_{2,L} $ or $ a - q_1 - q_{2,H} $</p>
+<h3 id="5-5-2-payoff-function"><a href="#5-5-2-payoff-function" class="headerlink" title="5.5.2 payoff function"></a>5.5.2 payoff function</h3><p>For player 1, the expected payoff function is </p>
+<script type="math/tex; mode=display">
+U_1 (q_1, q_{2,L}, q_{2,H}, c_L, c_H) = p q_1 (a - q_1 - q_{2,H}) + (1 - p) q_1 (a - q_1 - q_{2,L}) - c_H q_1</script><p>For player 2, the expected payoff function of type $ c_H $ is </p>
+<script type="math/tex; mode=display">
+U_2 (q_1, q_{2,H}, c_H) = (a - q_1 - q_{2,H}) q_{2,H} - c_H q_{2,H}</script><p>For player 2, the expected payoff function of type $ c_L $ is </p>
+<script type="math/tex; mode=display">
+U_2 (q_1, q_{2,L}, c_L) = (a - q_1 - q_{2,L}) q_{2,L} - c_L q_{2,L}</script><h3 id="5-5-3-Best-Response-for-Player-1"><a href="#5-5-3-Best-Response-for-Player-1" class="headerlink" title="5.5.3 Best Response for Player 1"></a>5.5.3 Best Response for Player 1</h3><p>For player 1, the expected payoff function is </p>
+<script type="math/tex; mode=display">
+U_1 (q_1, q_{2,L}, q_{2,H}, c_L, c_H) = p q_1 (a - q_1 - q_{2,H}) + (1 - p) q_1 (a - q_1 - q_{2,L}) - c_H q_1</script><p>Maximizing $U_1 (q_1, q_{2,L}, q_{2,H}, c_L, c_H)$ gives </p>
+<script type="math/tex; mode=display">
+B_1 (q_{2,L}, q_{2,H}) = \left\{ \frac{a - p q_{2,H} - (1 - p) q_{2,L} - c_H}{2} \right\}</script><h3 id="5-5-4-Best-Response-for-Player-2"><a href="#5-5-4-Best-Response-for-Player-2" class="headerlink" title="5.5.4 Best Response for Player 2"></a>5.5.4 Best Response for Player 2</h3><p>For player 2, the expected payoff function of type $c_H$ is </p>
+<script type="math/tex; mode=display">
+U_2 (q_1, q_{2,H}, c_H) = (a - q_1 - q_{2,H}) q_{2,H} - c_H q_{2,H}</script><p>Maximizing $U_2 (q_1, q_{2,H}, c_H)$ gives </p>
+<script type="math/tex; mode=display">
+B_2 (q_1, c_H) = \left\{ \frac{a - q_1 - c_H}{2} \right\}</script><p>Similarly, we have</p>
+<script type="math/tex; mode=display">
+B_2 (q_1, c_L) = \left\{ \frac{a - q_1 - c_L}{2} \right\}</script><h3 id="5-5-5-Bayesian-Nash-Equilibrium"><a href="#5-5-5-Bayesian-Nash-Equilibrium" class="headerlink" title="5.5.5 Bayesian Nash Equilibrium"></a>5.5.5 Bayesian Nash Equilibrium</h3><script type="math/tex; mode=display">
+B_1 (q_{2,L}, q_{2,H}) = \left\{ \frac{a - p q_{2,H} - (1 - p) q_{2,L} - c_H}{2} \right\}</script><script type="math/tex; mode=display">
+B_2 (q_1, c_H) = \left\{ \frac{a - q_1 - c_H}{2} \right\}</script><script type="math/tex; mode=display">
+B_2 (q_1, c_L) = \left\{ \frac{a - q_1 - c_L}{2} \right\}</script><p>We solve the Bayesian Nash Equilibrium by </p>
+<script type="math/tex; mode=display">
+q_1 \in B_1 (q_{2,L}, q_{2,H})</script><script type="math/tex; mode=display">
+q_{2,H} \in B_2 (q_1, c_H)</script><script type="math/tex; mode=display">
+q_{2,L} \in B_2 (q_1, c_L)</script><p>The Bayesian Nash Equilibrium is $(q_1, (q_{2,L}, q_{2,H}))$</p>
+<script type="math/tex; mode=display">
+q_1 = \frac{a - c_H - (1 - p)(c_H - c_L)}{3}</script><script type="math/tex; mode=display">
+q_{2,H} = \frac{a}{3} - \frac{c_H + c_L}{6} - p \cdot \frac{c_H - c_L}{6}</script><script type="math/tex; mode=display">
+q_{2,L} = \frac{a}{3} - \frac{c_L}{3} - p \cdot \frac{c_H - c_L}{6}</script><p><strong>Discussions:</strong></p>
+<ul>
+<li>Incomplete information affects the outputs of players.</li>
+<li>$q_{2,L} &gt; q_{2,H}$ implies player 2 produces more for the lower price.</li>
+</ul>
+<h3 id="5-5-6-other-discussions"><a href="#5-5-6-other-discussions" class="headerlink" title="5.5.6 other discussions"></a>5.5.6 other discussions</h3><p>If player 1 knows that player 2 selects $c_H$ ($p=1$) then </p>
+<script type="math/tex; mode=display">
+q_1 = q_{2,H} = \frac{a - c_H}{3}</script><p>If player 1 does not know the choices of player 2, </p>
+<script type="math/tex; mode=display">
+q_1 = \frac{a - c_H - (1 - p)(c_H - c_L)}{3}</script><p>If player 1 knows that player 2 selects $c_L$ ($p=0$) then </p>
+<script type="math/tex; mode=display">
+q_1 = q_{2,L} = \frac{a - c_L + c_H - c_L}{3}</script><p>If player 1 does not know the choices of player 2, </p>
+<script type="math/tex; mode=display">
+q_1 = \frac{a - c_L + c_H - c_L - (3 - p)(c_H - c_L)}{3}</script><p><strong>Player 1 produces less with incomplete information.</strong></p>
+<p>If player 1 knows that player 2 selects $c_H$ ($p=1$) then </p>
+<script type="math/tex; mode=display">
+q_{2,H} = \frac{a - c_H}{3}</script><p>otherwise,</p>
+<script type="math/tex; mode=display">
+q_{2,H} = \frac{a - c_H}{3} + (1 - p) \frac{(c_H - c_L)}{6}</script><p><strong>Player 2 benefits from the incomplete information.</strong></p>
+<p><strong>The firm will benefit by keeping cost secrets.</strong></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>markastrid
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/" title="第五章 Games with Incomplete Information">https://example.com/2025/03/25/博弈论笔记六/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E4%BA%94%E7%AB%A0/" rel="tag"># 博弈论第五章</a>
+              <a href="/tags/%E9%9D%9E%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8D%9A%E5%BC%88/" rel="tag"># 非完全信息博弈</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/" rel="prev" title="第四章 Two-Player Zero-Sum Game">
+      <i class="fa fa-chevron-left"></i> 第四章 Two-Player Zero-Sum Game
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E5%BC%95%E5%85%A5%EF%BC%9ABattle-of-Sexes-with-Incomplete-Information"><span class="nav-number">1.</span> <span class="nav-text">5.1 引入：Battle of Sexes with Incomplete Information</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-detail"><span class="nav-number">1.1.</span> <span class="nav-text">5.1.1 detail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-NE"><span class="nav-number">1.2.</span> <span class="nav-text">5.1.2 NE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-Bayesian-Games"><span class="nav-number">2.</span> <span class="nav-text">5.2 Bayesian Games</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1-Battle-of-Sexes-with-Incomplete-Information"><span class="nav-number">2.1.</span> <span class="nav-text">5.2.1 Battle of Sexes with Incomplete Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-2-Such-game-is-called-Bayes-Game"><span class="nav-number">2.2.</span> <span class="nav-text">5.2.2 Such game is called Bayes Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-3-Outcome-and-Payoff-Functions"><span class="nav-number">2.3.</span> <span class="nav-text">5.2.3 Outcome and Payoff Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-Bayesian-Nash-Equilibrium"><span class="nav-number">3.</span> <span class="nav-text">5.3 Bayesian Nash Equilibrium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-How-to-find-Bayesian-Nash-Equilibrium"><span class="nav-number">3.1.</span> <span class="nav-text">5.3.1 How to find Bayesian Nash Equilibrium</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E4%BE%8B1-Bank-Runs-%E9%93%B6%E8%A1%8C%E6%8C%A4%E8%84%B1"><span class="nav-number">4.</span> <span class="nav-text">5.4 例1:Bank Runs (银行挤脱)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-1-Bayesian-Nash-Equilibrium-of-Bank-Runs"><span class="nav-number">4.1.</span> <span class="nav-text">5.4.1 Bayesian Nash Equilibrium of Bank Runs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#case-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">case 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#case-2"><span class="nav-number">4.1.2.</span> <span class="nav-text">case 2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-%E4%BE%8B2-Cournot-Duopoly-with-Incomplete-Information"><span class="nav-number">5.</span> <span class="nav-text">5.5 例2:Cournot Duopoly with Incomplete Information</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-1-base-situation"><span class="nav-number">5.1.</span> <span class="nav-text">5.5.1 base situation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-2-payoff-function"><span class="nav-number">5.2.</span> <span class="nav-text">5.5.2 payoff function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-3-Best-Response-for-Player-1"><span class="nav-number">5.3.</span> <span class="nav-text">5.5.3 Best Response for Player 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-4-Best-Response-for-Player-2"><span class="nav-number">5.4.</span> <span class="nav-text">5.5.4 Best Response for Player 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-5-Bayesian-Nash-Equilibrium"><span class="nav-number">5.5.</span> <span class="nav-text">5.5.5 Bayesian Nash Equilibrium</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-6-other-discussions"><span class="nav-number">5.6.</span> <span class="nav-text">5.5.6 other discussions</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="markastrid"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">markastrid</p>
+  <div class="site-description" itemprop="description">to be continued</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        </style>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">markastrid</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+<div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    </div>
+<div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共61.1k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

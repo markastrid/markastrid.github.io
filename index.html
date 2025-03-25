@@ -158,6 +158,243 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/" class="post-title-link" itemprop="url">第五章 Games with Incomplete Information</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-25 00:00:00 / 修改时间：19:08:09" itemprop="dateCreated datePublished" datetime="2025-03-25T00:00:00+08:00">2025-03-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p>
+<h2 id="5-1-引入：Battle-of-Sexes-with-Incomplete-Information"><a href="#5-1-引入：Battle-of-Sexes-with-Incomplete-Information" class="headerlink" title="5.1 引入：Battle of Sexes with Incomplete Information"></a>5.1 引入：Battle of Sexes with Incomplete Information</h2><img src="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325174522251.png" class="" title="image-20250325174522251">
+<ul>
+<li><p>完全信息的情况下，我们知道：both boy and girl like to meet</p>
+</li>
+<li><p>There are 2 pure strategy NE and 1 mixed strategy NE</p>
+</li>
+<li><p><strong>IF</strong>:</p>
+</li>
+<li><p>The boy is not sure if the girl wishes to meet or not</p>
+<p><strong>Incomplete information</strong></p>
+</li>
+</ul>
+<h3 id="5-1-1-detail"><a href="#5-1-1-detail" class="headerlink" title="5.1.1 detail"></a>5.1.1 detail</h3><img src="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325174913857.png" class="" title="image-20250325174913857">
+<p>The girl has two types: like or dislike</p>
+<p>The boy assumes that girl like with probability p</p>
+<p>The girl knows the complete information</p>
+<p>The boy does not know </p>
+<h3 id="5-1-2-NE"><a href="#5-1-2-NE" class="headerlink" title="5.1.2 NE"></a>5.1.2 NE</h3><p>If the boy selects $B$, then the best response of the girl is $(B,F)$. Thus, the strategy pair is: $\{B, (B,F)\}$</p>
+<p>$U_1 (B,(B,F)) = p + (1 - p) \cdot 0 = p$</p>
+<p>$U_1 (F,(B,F)) = 0 + (1 - p) \cdot 2 = 2(1 - p)$</p>
+<p>If $p \geq \frac{2}{3}$, then $\{B, (B,F)\}$ is a Nash Equilibrium (NE).</p>
+<p>If $p &lt; \frac{2}{3}$, then $\{B, (B,F)\}$ is not a NE.</p>
+<p>If the boy selects $F$, then the best response of the girl is $(F,B)$. Thus, the strategy pair is: $\{F, (F,B)\}$</p>
+<p>$U_1 (F,(F,B)) = 2p + (1 - p) \cdot 0 = 2p$</p>
+<p>$U_1 (B,(F,B)) = 0 + (1 - p) = 1 - p$</p>
+<p>If $p \geq \frac{1}{3}$, then $\{F, (F,B)\}$ is a Nash Equilibrium (NE).</p>
+<p>If $p &lt; \frac{1}{3}$, then $\{F, (F,B)\}$ is not a NE.</p>
+<p>If $p \geq \frac{1}{3}$ then$ \{F, (F,B)\} $ is a Nash Equilibrium $NE$.</p>
+<p>If  $p \geq \frac{2}{3} $, then both  $\{F, (F,B)\}$ and $\{B, (B,F)\}$ are Nash Equilibriums (NEs).</p>
+<h2 id="5-2-Bayesian-Games"><a href="#5-2-Bayesian-Games" class="headerlink" title="5.2 Bayesian Games"></a>5.2 Bayesian Games</h2><p>A Bayesian game consists of:</p>
+<ul>
+<li>A set of players N</li>
+<li>A set of strategies $A_i$ for each player i</li>
+<li>A set of types $\Theta_i$ for each player i<ul>
+<li>The type set $\Theta_i$ includes all private information for player i</li>
+<li>The types on payoff are adequate (Payoff types)</li>
+</ul>
+</li>
+<li>A probability distribution $p = p(\theta_1, \dots, \theta_N)$ on $i\prod_{i=1}^{n} \Theta_i$</li>
+</ul>
+<p>For player $i$, a pure strategy is a map $a_i : \Theta_i \to A_i$, which prescribes a strategy for each type:</p>
+<script type="math/tex; mode=display">
+a_i = \left( a_i(\theta_i^1), a_i(\theta_i^2), \dots, a_i(\theta_i^{n_i}) \right)</script><p>A payoff function $u_i : \prod_{i=1}^{N} A_i \times \prod_{i=1}^{n} \Theta_i \to \mathbb{R}$ is defined as:</p>
+<script type="math/tex; mode=display">
+u_i(a_1, \dots, a_N, \theta_1, \dots, \theta_N) \quad \text{for } a_i \in A_i \text{ and } \theta_i \in \Theta_i</script><p>The game $G$ is defined as:</p>
+<script type="math/tex; mode=display">
+G = \left\{ N, \{ A_i \}, \{ \Theta_i \}, \{ u_i \}, p \right\}</script><h3 id="5-2-1-Battle-of-Sexes-with-Incomplete-Information"><a href="#5-2-1-Battle-of-Sexes-with-Incomplete-Information" class="headerlink" title="5.2.1 Battle of Sexes with Incomplete Information"></a>5.2.1 Battle of Sexes with Incomplete Information</h3><img src="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325182106067.png" class="" title="image-20250325182106067">
+<h3 id="5-2-2-Such-game-is-called-Bayes-Game"><a href="#5-2-2-Such-game-is-called-Bayes-Game" class="headerlink" title="5.2.2 Such game is called Bayes Game"></a>5.2.2 <strong>Such game is called Bayes Game</strong></h3><p>The set of types $ \Theta_i $ for each player $ i $.</p>
+<ul>
+<li>Player $ i $ does not know the selection of $ \Theta_j $.</li>
+</ul>
+<ul>
+<li>All types are drawn from the prior distribution $ p(\theta_1, \dots, \theta_N) $:</li>
+<li>$p(\theta_1, \dots, \theta_N) = p(\theta_1) p(\theta_2) \dots p(\theta_N) $ independent types</li>
+</ul>
+<p>Given $ p(\theta_1, \dots, \theta_N) $, we have, by Bayes’ rule:</p>
+<script type="math/tex; mode=display">
+p(\theta_{(-i)} | \theta_i) = \frac{p(\theta_i, \theta_{(-i)})}{p(\theta_i)}</script><p>where $ \theta_{(-i)} = (\theta_1, \dots, \theta_{i-1}, \theta_{i+1}, \dots, \theta_N) $.</p>
+<p><strong>Such a game is called a Bayes Game.</strong></p>
+<h3 id="5-2-3-Outcome-and-Payoff-Functions"><a href="#5-2-3-Outcome-and-Payoff-Functions" class="headerlink" title="5.2.3 Outcome and Payoff Functions"></a>5.2.3 Outcome and Payoff Functions</h3><p>A pure strategy for player $i$ is:</p>
+<script type="math/tex; mode=display">
+(a_i (\theta_i^1), a_i (\theta_i^2), \dots, a_i (\theta_i^{n_i}))</script><p>An outcome of the Bayes game is given by:</p>
+<script type="math/tex; mode=display">
+((a_1 (\theta_1^1), \dots, a_1 (\theta_1^{n_1})), \dots, (a_N (\theta_N^1), \dots, a_N (\theta_N^{n_N})))</script><p>Given $a_{-i}$, the expected payoff of player $i$ and type $\theta_i$ is:</p>
+<script type="math/tex; mode=display">
+U_i (a_i (\theta_i), a_{(-i)}) = \sum_{\theta_{(-i)}} p(\theta_{(-i)} | \theta_i) u_i (a_{(-i)} (\theta_{(-i)}), a_i, \theta_{(-i)}, \theta_i)</script><h2 id="5-3-Bayesian-Nash-Equilibrium"><a href="#5-3-Bayesian-Nash-Equilibrium" class="headerlink" title="5.3 Bayesian Nash Equilibrium"></a>5.3 Bayesian Nash Equilibrium</h2><p><strong>Definition</strong>: The outcome $(a_1, a_2, \dots, a_N)$ is a Bayesian Nash Equilibrium if for each $i$ and type $\theta_i$, we have:</p>
+<script type="math/tex; mode=display">
+U_i (a_i (\theta_i), a_{(-i)}) \geq U_i (a_i' (\theta_i), a_{(-i)}) \quad \text{for all } a_i' (\theta_i) \in A_i</script><p>Given $a_{(-i)}$ and type $\theta_i$, the best response for player $i$ is:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+B_i (a_{(-i)}, \theta_i)& = \{ a_i (\theta_i) : U_i (a_i (\theta_i), a_{(-i)})\\& \geq U_i (a_i' (\theta_i), a_{(-i)}) \quad \text{for all } a_i' (\theta_i) \in A_i \}
+\end{align*}</script><p><strong>Theorem</strong>: The outcome $(a_1, a_2, \dots, a_N)$ is a Bayesian NE if and only if for every player $i$ and each type $\theta_i$, we have:</p>
+<script type="math/tex; mode=display">
+a_i (\theta_i) \in B_i (a_{(-i)}, \theta_i)</script><h3 id="5-3-1-How-to-find-Bayesian-Nash-Equilibrium"><a href="#5-3-1-How-to-find-Bayesian-Nash-Equilibrium" class="headerlink" title="5.3.1 How to find Bayesian Nash Equilibrium"></a>5.3.1 How to find Bayesian Nash Equilibrium</h3><p>Find the best response function for each player and type.</p>
+<p>Find the Bayesian Nash Equilibrium by $a_i(\theta_i \in B_i(a_{(-i)}, \theta_i) $.</p>
+<h2 id="5-4-例1-Bank-Runs-银行挤脱"><a href="#5-4-例1-Bank-Runs-银行挤脱" class="headerlink" title="5.4 例1:Bank Runs (银行挤脱)"></a>5.4 例1:Bank Runs (银行挤脱)</h2><p>Both players 1 and 2 have a deposit of $100 in the bank.</p>
+<p>If the bank manager is good, each player gets $150; if the manager is bad, then they lose all their money.</p>
+<p>Players can withdraw money, but the bank has only $100.</p>
+<ul>
+<li>If only one player withdraws, he gets $100 and the other gets 0.</li>
+<li>If two players both withdraw, each gets $50.</li>
+</ul>
+<p>Player 1 believes the manager is good with probability  p .</p>
+<p>Player 2 knows whether the manager is good or bad.</p>
+<p>Both players simultaneously make a strategy: <strong>withdraw or not</strong>.</p>
+<img src="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/image-20250325183738323.png" class="" title="image-20250325183738323">
+<ul>
+<li>Two players</li>
+</ul>
+<ul>
+<li>Strategies ( A_1 = A_2 = \{ W, N \} )</li>
+</ul>
+<ul>
+<li>Types $ \Theta_1 = \{ 1 \} ); ( \Theta_2 = \{ G, B \} $</li>
+</ul>
+<p>A probability distribution $p_1(\theta_2 = G) = p $$</p>
+<p>Payoffs:</p>
+<ul>
+<li>Player 1:  W  or  N </li>
+<li>Player 2:  W(G), N(G), W(B), N(B) </li>
+</ul>
+<h3 id="5-4-1-Bayesian-Nash-Equilibrium-of-Bank-Runs"><a href="#5-4-1-Bayesian-Nash-Equilibrium-of-Bank-Runs" class="headerlink" title="5.4.1 Bayesian Nash Equilibrium of Bank Runs"></a>5.4.1 Bayesian Nash Equilibrium of Bank Runs</h3><h4 id="case-1"><a href="#case-1" class="headerlink" title="case 1"></a>case 1</h4><p>If Player 1 selects $ W $, then</p>
+<script type="math/tex; mode=display">
+B_2(W, G) = \{W\}, \quad B_2(W, B) = \{W\}</script><p>Outcome $ (W, (W(G), W(B))) $: best strategy for Player 2.</p>
+<p>Is $ W $ a best response to $ W(G), W(B) $?</p>
+<script type="math/tex; mode=display">
+U_1(W, (W(G), W(B))) = 50p + 50(1 - p) = 50</script><script type="math/tex; mode=display">
+U_1(N, (W(G), W(B))) = 0p + 0(1 - p) = 0</script><p><strong>$ (W, (W(G), W(B))) $ is a Bayesian NE.</strong></p>
+<h4 id="case-2"><a href="#case-2" class="headerlink" title="case 2"></a>case 2</h4><p>If Player 1 selects $ N $, then</p>
+<script type="math/tex; mode=display">
+B_2(N, G) = \{N\}, \quad B_2(N, B) = \{W\}</script><p>Outcome $ (N, (N(G), W(B))) $: Player 2 makes best strategy.</p>
+<p>Is $ N $ a best response to $ (N(G), W(B)) $?</p>
+<script type="math/tex; mode=display">
+U_1(N, (N(G), W(B))) = 150p + 0(1 - p) = 150p</script><script type="math/tex; mode=display">
+U_1(W, (N(G), W(B))) = 100p + 50(1 - p) = 50(1 + p)</script><p><strong>If $ 150p &gt; 50 + 50p $, then $ (N, (N(G), W(B))) $ is a Bayesian Nash Equilibrium (BNE).</strong></p>
+<h2 id="5-5-例2-Cournot-Duopoly-with-Incomplete-Information"><a href="#5-5-例2-Cournot-Duopoly-with-Incomplete-Information" class="headerlink" title="5.5 例2:Cournot Duopoly with Incomplete Information"></a>5.5 例2:Cournot Duopoly with Incomplete Information</h2><h3 id="5-5-1-base-situation"><a href="#5-5-1-base-situation" class="headerlink" title="5.5.1 base situation"></a>5.5.1 base situation</h3><p>Two firms $ N = \{ 1, 2 \} $</p>
+<p>Firm 1 has a cost $ c_H $; </p>
+<p>Firm 2 has two costs $ c_L $ and $ c_H $</p>
+<p>Firm 1 believes that Firm 2 selects $ c_H $ with probability $ p $</p>
+<p>Firm 1’s strategy: $ \{ q_1 : q_1 \geq 0 \} $</p>
+<p>Firm 2’s strategy: $ \{ q_{2,L}, q_{2,H} : q_{2,L} \geq 0 \text{ and } q_{2,H} \geq 0 \} $</p>
+<p>Price: $ a - q_1 - q_{2,L} $ or $ a - q_1 - q_{2,H} $</p>
+<h3 id="5-5-2-payoff-function"><a href="#5-5-2-payoff-function" class="headerlink" title="5.5.2 payoff function"></a>5.5.2 payoff function</h3><p>For player 1, the expected payoff function is </p>
+<script type="math/tex; mode=display">
+U_1 (q_1, q_{2,L}, q_{2,H}, c_L, c_H) = p q_1 (a - q_1 - q_{2,H}) + (1 - p) q_1 (a - q_1 - q_{2,L}) - c_H q_1</script><p>For player 2, the expected payoff function of type $ c_H $ is </p>
+<script type="math/tex; mode=display">
+U_2 (q_1, q_{2,H}, c_H) = (a - q_1 - q_{2,H}) q_{2,H} - c_H q_{2,H}</script><p>For player 2, the expected payoff function of type $ c_L $ is </p>
+<script type="math/tex; mode=display">
+U_2 (q_1, q_{2,L}, c_L) = (a - q_1 - q_{2,L}) q_{2,L} - c_L q_{2,L}</script><h3 id="5-5-3-Best-Response-for-Player-1"><a href="#5-5-3-Best-Response-for-Player-1" class="headerlink" title="5.5.3 Best Response for Player 1"></a>5.5.3 Best Response for Player 1</h3><p>For player 1, the expected payoff function is </p>
+<script type="math/tex; mode=display">
+U_1 (q_1, q_{2,L}, q_{2,H}, c_L, c_H) = p q_1 (a - q_1 - q_{2,H}) + (1 - p) q_1 (a - q_1 - q_{2,L}) - c_H q_1</script><p>Maximizing $U_1 (q_1, q_{2,L}, q_{2,H}, c_L, c_H)$ gives </p>
+<script type="math/tex; mode=display">
+B_1 (q_{2,L}, q_{2,H}) = \left\{ \frac{a - p q_{2,H} - (1 - p) q_{2,L} - c_H}{2} \right\}</script><h3 id="5-5-4-Best-Response-for-Player-2"><a href="#5-5-4-Best-Response-for-Player-2" class="headerlink" title="5.5.4 Best Response for Player 2"></a>5.5.4 Best Response for Player 2</h3><p>For player 2, the expected payoff function of type $c_H$ is </p>
+<script type="math/tex; mode=display">
+U_2 (q_1, q_{2,H}, c_H) = (a - q_1 - q_{2,H}) q_{2,H} - c_H q_{2,H}</script><p>Maximizing $U_2 (q_1, q_{2,H}, c_H)$ gives </p>
+<script type="math/tex; mode=display">
+B_2 (q_1, c_H) = \left\{ \frac{a - q_1 - c_H}{2} \right\}</script><p>Similarly, we have</p>
+<script type="math/tex; mode=display">
+B_2 (q_1, c_L) = \left\{ \frac{a - q_1 - c_L}{2} \right\}</script><h3 id="5-5-5-Bayesian-Nash-Equilibrium"><a href="#5-5-5-Bayesian-Nash-Equilibrium" class="headerlink" title="5.5.5 Bayesian Nash Equilibrium"></a>5.5.5 Bayesian Nash Equilibrium</h3><script type="math/tex; mode=display">
+B_1 (q_{2,L}, q_{2,H}) = \left\{ \frac{a - p q_{2,H} - (1 - p) q_{2,L} - c_H}{2} \right\}</script><script type="math/tex; mode=display">
+B_2 (q_1, c_H) = \left\{ \frac{a - q_1 - c_H}{2} \right\}</script><script type="math/tex; mode=display">
+B_2 (q_1, c_L) = \left\{ \frac{a - q_1 - c_L}{2} \right\}</script><p>We solve the Bayesian Nash Equilibrium by </p>
+<script type="math/tex; mode=display">
+q_1 \in B_1 (q_{2,L}, q_{2,H})</script><script type="math/tex; mode=display">
+q_{2,H} \in B_2 (q_1, c_H)</script><script type="math/tex; mode=display">
+q_{2,L} \in B_2 (q_1, c_L)</script><p>The Bayesian Nash Equilibrium is $(q_1, (q_{2,L}, q_{2,H}))$</p>
+<script type="math/tex; mode=display">
+q_1 = \frac{a - c_H - (1 - p)(c_H - c_L)}{3}</script><script type="math/tex; mode=display">
+q_{2,H} = \frac{a}{3} - \frac{c_H + c_L}{6} - p \cdot \frac{c_H - c_L}{6}</script><script type="math/tex; mode=display">
+q_{2,L} = \frac{a}{3} - \frac{c_L}{3} - p \cdot \frac{c_H - c_L}{6}</script><p><strong>Discussions:</strong></p>
+<ul>
+<li>Incomplete information affects the outputs of players.</li>
+<li>$q_{2,L} &gt; q_{2,H}$ implies player 2 produces more for the lower price.</li>
+</ul>
+<h3 id="5-5-6-other-discussions"><a href="#5-5-6-other-discussions" class="headerlink" title="5.5.6 other discussions"></a>5.5.6 other discussions</h3><p>If player 1 knows that player 2 selects $c_H$ ($p=1$) then </p>
+<script type="math/tex; mode=display">
+q_1 = q_{2,H} = \frac{a - c_H}{3}</script><p>If player 1 does not know the choices of player 2, </p>
+<script type="math/tex; mode=display">
+q_1 = \frac{a - c_H - (1 - p)(c_H - c_L)}{3}</script><p>If player 1 knows that player 2 selects $c_L$ ($p=0$) then </p>
+<script type="math/tex; mode=display">
+q_1 = q_{2,L} = \frac{a - c_L + c_H - c_L}{3}</script><p>If player 1 does not know the choices of player 2, </p>
+<script type="math/tex; mode=display">
+q_1 = \frac{a - c_L + c_H - c_L - (3 - p)(c_H - c_L)}{3}</script><p><strong>Player 1 produces less with incomplete information.</strong></p>
+<p>If player 1 knows that player 2 selects $c_H$ ($p=1$) then </p>
+<script type="math/tex; mode=display">
+q_{2,H} = \frac{a - c_H}{3}</script><p>otherwise,</p>
+<script type="math/tex; mode=display">
+q_{2,H} = \frac{a - c_H}{3} + (1 - p) \frac{(c_H - c_L)}{6}</script><p><strong>Player 2 benefits from the incomplete information.</strong></p>
+<p><strong>The firm will benefit by keeping cost secrets.</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://example.com/2025/03/18/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%BA%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -181,10 +418,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-03-18 00:00:00 / 修改时间：18:25:51" itemprop="dateCreated datePublished" datetime="2025-03-18T00:00:00+08:00">2025-03-18</time>
+              <time title="创建时间：2025-03-18 00:00:00" itemprop="dateCreated datePublished" datetime="2025-03-18T00:00:00+08:00">2025-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-03-25 17:43:50" itemprop="dateModified" datetime="2025-03-25T17:43:50+08:00">2025-03-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -264,7 +507,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-18 16:20:00" itemprop="dateModified" datetime="2025-03-18T16:20:00+08:00">2025-03-18</time>
+                <time title="修改时间：2025-03-21 18:26:32" itemprop="dateModified" datetime="2025-03-21T18:26:32+08:00">2025-03-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -345,7 +588,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-18 16:20:02" itemprop="dateModified" datetime="2025-03-18T16:20:02+08:00">2025-03-18</time>
+                <time title="修改时间：2025-03-22 03:29:35" itemprop="dateModified" datetime="2025-03-22T03:29:35+08:00">2025-03-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -426,7 +669,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-18 16:19:28" itemprop="dateModified" datetime="2025-03-18T16:19:28+08:00">2025-03-18</time>
+                <time title="修改时间：2025-03-21 18:16:32" itemprop="dateModified" datetime="2025-03-21T18:16:32+08:00">2025-03-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -871,87 +1114,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://example.com/2024/10/28/week3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="markastrid">
-      <meta itemprop="description" content="to be continued">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Resume">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/10/28/week3/" class="post-title-link" itemprop="url">第三周</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-10-28 13:27:07" itemprop="dateCreated datePublished" datetime="2024-10-28T13:27:07+08:00">2024-10-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-11-11 14:18:32" itemprop="dateModified" datetime="2024-11-11T14:18:32+08:00">2024-11-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这是学习机器学习的第三周课程笔记，记录在此</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/10/28/week3/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1022,7 +1184,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1035,7 +1197,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1085,7 +1247,7 @@
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共59.3k字</span>
+    <span class="post-count">全站共61.1k字</span>
   </div>
 
         
