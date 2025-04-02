@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="博弈论第六章的相关内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第六章 Extensive Game">
+<meta property="og:url" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/index.html">
+<meta property="og:site_name" content="Resume">
+<meta property="og:description" content="博弈论第六章的相关内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165526209.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170331444.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170951696.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402171613097.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172023268.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172907857.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173636357.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173639654.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173718308.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402174147272.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175731287.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175905062.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175920602.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175936878.png">
+<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402180055590.png">
+<meta property="article:published_time" content="2025-03-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-02T10:20:53.252Z">
+<meta property="article:author" content="markastrid">
+<meta property="article:tag" content="博弈论第六章">
+<meta property="article:tag" content="广义博弈">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png">
+
+<link rel="canonical" href="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第六章 Extensive Game | Resume</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Resume</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Show yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第六章 Extensive Game
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-01 00:00:00" itemprop="dateCreated datePublished" datetime="2025-04-01T00:00:00+08:00">2025-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-02 18:20:53" itemprop="dateModified" datetime="2025-04-02T18:20:53+08:00">2025-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">博弈论第六章的相关内容</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<h2 id="6-1-引入"><a href="#6-1-引入" class="headerlink" title="6.1 引入"></a>6.1 引入</h2><p>In some situation, players can observe others’ strategy before they make decision</p>
+<ul>
+<li>Simple Nim game<ul>
+<li>There are n coins </li>
+<li>Two players select 1 or 2 or 3 coins in turn</li>
+<li>The winner is the one taking the last coin. </li>
+</ul>
+</li>
+</ul>
+<h3 id="6-1-1比较"><a href="#6-1-1比较" class="headerlink" title="6.1.1比较"></a>6.1.1比较</h3><h4 id="Strategy-Game"><a href="#Strategy-Game" class="headerlink" title="Strategy Game"></a>Strategy Game</h4><ul>
+<li><p>Set of players</p>
+</li>
+<li><p>Set of strategies </p>
+</li>
+<li><p>Payoff functions</p>
+</li>
+</ul>
+<h4 id="Extensive-game-provides-more-information"><a href="#Extensive-game-provides-more-information" class="headerlink" title="Extensive game provides more information"></a>Extensive game provides more information</h4><ul>
+<li><p>Sequences of players </p>
+</li>
+<li><p>Strategies available at different points in the game</p>
+</li>
+</ul>
+<h4 id="Two-variants"><a href="#Two-variants" class="headerlink" title="Two variants"></a>Two variants</h4><ul>
+<li><p>perfect information extensive-form games</p>
+</li>
+<li><p>imperfect-information extensive-form games</p>
+</li>
+</ul>
+<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png" class="" title="image-20250402165509681">
+<h3 id="6-1-2-Entry-Game"><a href="#6-1-2-Entry-Game" class="headerlink" title="6.1.2 Entry Game"></a>6.1.2 Entry Game</h3><p>A company <strong>G</strong> is trying to enter a new market</p>
+<p>Another company <strong>B</strong> can either fight the entry or cooperate</p>
+<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165526209.png" class="" title="image-20250402165526209">
+<h4 id="Game-Tree"><a href="#Game-Tree" class="headerlink" title="Game Tree"></a>Game Tree</h4><ul>
+<li><p>node</p>
+<ul>
+<li>non-terminal node</li>
+<li>terminal node</li>
+</ul>
+</li>
+<li><p>branches</p>
+</li>
+<li><p>players</p>
+</li>
+<li><p>strategy</p>
+</li>
+<li><p>payoff</p>
+</li>
+</ul>
+<h2 id="6-2-Formal-Definition-of-Extensive-Game"><a href="#6-2-Formal-Definition-of-Extensive-Game" class="headerlink" title="6.2  Formal Definition of Extensive Game"></a>6.2  Formal Definition of Extensive Game</h2><p>An extensive game with perfect information includes:</p>
+<ul>
+<li><strong>Players</strong>: $N$ is the set of $N$ players</li>
+<li><strong>Strategies</strong>: $A$ is a set of all strategies</li>
+<li><strong>Histories</strong>: $H$ is a set of strategy sequences (finite or infinite) such that:<ul>
+<li>The empty sequence $\emptyset \in H$</li>
+<li>If $a^1 a^2 \dots a^k \in H$, then $a^1 a^2 \dots a^s \in H$ when $s \leq k$</li>
+<li>If an infinite sequence $(a^k)_{k=1}^{\infty}$ satisfies $a^1 a^2 \dots a^k \in H$ for each positive $k$, then $(a^k)_{k=1}^{\infty} \in H$</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2-1-example"><a href="#6-2-1-example" class="headerlink" title="6.2.1 example"></a>6.2.1 example</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170331444.png" class="" title="image-20250402170331444">
+<p>$H=\{\empty,A,B,AL,AR\}$</p>
+<h3 id="6-2-2-extensive-game-with-perfect-information"><a href="#6-2-2-extensive-game-with-perfect-information" class="headerlink" title="6.2.2  extensive game with perfect information"></a>6.2.2  extensive game with <strong>perfect information</strong></h3><ul>
+<li><strong>Players</strong>: $N$ is the set of $N$ players</li>
+<li><strong>Strategies</strong>: $A$ is a set of all strategies</li>
+<li><p><strong>Histories</strong>: $H$ is a set of sequences (finite or infinite)</p>
+<ul>
+<li>Each sequence in $H$ is called a history; each component $a^i \in A$ is a strategy</li>
+<li><strong>Terminal history</strong>: $a^1 \dots a^k \in H$ if $k = +\infty$ or $a^1 \dots a^{k+1} \notin H$ for any $a^{k+1} \in A$</li>
+<li><strong>Terminal history set</strong>: $Z = \{\text{all terminal histories } a^1 \dots a^k \in H\}$</li>
+</ul>
+</li>
+<li><p><strong>Player function</strong>: $P: H \setminus Z \to N$ assigns to each non-terminal history a player from $N$</p>
+<ul>
+<li>$P(h)$ denotes the player who takes action after the history $h$</li>
+</ul>
+</li>
+<li><strong>Payoff function</strong>: $u_i: Z \to \mathbb{R}$</li>
+<li><strong>Game </strong>: $G = \{ N, H, P, \{ u_i \} \}$</li>
+</ul>
+<h3 id="6-2-3-Ultimatum-Game"><a href="#6-2-3-Ultimatum-Game" class="headerlink" title="6.2.3 Ultimatum Game"></a>6.2.3 Ultimatum Game</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170951696.png" class="" title="image-20250402170951696">
+<p><strong>Game structure</strong>:<br>$G = \{ N, H, P, \{ u_i \} \}$</p>
+<p><strong>Players</strong>:<br>$N = \{ A, B \}$</p>
+<p><strong>Histories</strong>:<br>$H = \{ \emptyset, (2,0), (1,1), (0,2), ((2,0), y) \}<br>\cup \{ ((2,0), n), ((1,1), y), ((1,1), n) \}<br>\cup \{ ((0,2), y), ((0,2), n) \}$</p>
+<p><strong>Player function</strong>:<br>$P: P(\emptyset) = A; P((2,0)) = B; P((1,1)) = B; P((0,2)) = B$</p>
+<p><strong>Payoff functions</strong>:<br>$u_1((2,0), y) = 2, \quad u_1((2,0), n) = 0, \quad u_1((1,1), y) = 1, \quad u_1((1,1), n) = 0$</p>
+<p>$u_2((2,0), y) = 0, \quad u_2((2,0), n) = 0, \quad u_2((1,1), y) = 1, \quad u_2((1,1), n) = 0$</p>
+<h3 id="6-2-4-another-example"><a href="#6-2-4-another-example" class="headerlink" title="6.2.4 another example"></a>6.2.4 another example</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402171613097.png" class="" title="image-20250402171613097">
+<p><strong>Game structure</strong>:<br>$G = \{ N, H, P, \{ u_i \} \}$</p>
+<p><strong>Players</strong>:<br>$N = \{ 1, 2 \}$</p>
+<p><strong>Histories</strong>:<br>$H = \{ \emptyset, A, B, AL, AR \}$</p>
+<p><strong>Player function</strong>:<br>$P: P(\emptyset) = 1; P(A) = 2$</p>
+<p><strong>Payoff functions</strong>:<br>$u_1(B) = 1, \quad u_1(AL) = 0, \quad u_1(AR) = 2$</p>
+<p>$u_2(B) = 2, \quad u_2(AL) = 0, \quad u_2(AR) = 1$</p>
+<h2 id="6-3-Pure-strategies-注意是叉乘"><a href="#6-3-Pure-strategies-注意是叉乘" class="headerlink" title="6.3  Pure strategies (注意是叉乘)"></a>6.3  Pure strategies (注意是叉乘)</h2><p><strong>Definition</strong>: Given a game $G = \{ N, H, P, \{ u_i \} \}$, the pure strategy for player $i$ is given by the cross product</p>
+<script type="math/tex; mode=display">
+\times_{h \in H} \{ a^s : (h, a^s) \in H, P(h) = i \}.</script><p>A pure strategy for a player is a complete specification of which deterministic action to take at <strong>every node</strong> belonging to that player.</p>
+<h3 id="6-3-1-例1"><a href="#6-3-1-例1" class="headerlink" title="6.3.1 例1"></a>6.3.1 例1</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172023268.png" class="" title="image-20250402172023268">
+<p>How many pure strategies for each player?</p>
+<p>Player A: $(2,0), (1,1), (0,2)$</p>
+<p>Player B: $\{yyy, yyn, yna, ynn, nyy, nyn, nny, nnn\}$</p>
+<h3 id="6-3-2-例2"><a href="#6-3-2-例2" class="headerlink" title="6.3.2 例2"></a>6.3.2 例2</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172907857.png" class="" title="image-20250402172907857">
+<p>What are the pure strategies for players 1 and 2?</p>
+<p>What are payoffs of each outcome for players 1 and 2?</p>
+<h2 id="6-4-NE"><a href="#6-4-NE" class="headerlink" title="6.4 NE"></a>6.4 NE</h2><p>Based on the definition of pure strategy, we can define </p>
+<ul>
+<li><p>Mixed strategies</p>
+</li>
+<li><p>Best response</p>
+</li>
+<li><p>Nash equilibrium</p>
+</li>
+</ul>
+<p>Given an extensive game $G = \{ N, H, P, \{ u_i \} \}$, a strategy outcome $a^<em> = (a_1^</em>, a_2^<em>, \dots, a_N^</em>)$ is a <strong>Nash equilibrium</strong> if and only if:</p>
+<script type="math/tex; mode=display">
+u_i(a_i^*, a_{-i}^*) \geq u_i(a_i, a_{-i}^*) \quad \text{for every} \ a_i \ \text{of player} \ i</script><p>How to find Nash Equilibrium: Induced strategy game</p>
+<h3 id="6-4-1-a-strategy-game"><a href="#6-4-1-a-strategy-game" class="headerlink" title="6.4.1  a strategy game"></a>6.4.1  a strategy game</h3><p>Every extensive game can be converted to a strategy game</p>
+<p><strong>Remark:</strong> This conversion is not reverse</p>
+<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173636357.png" class="" title="image-20250402173636357">
+<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173639654.png" class="" title="image-20250402173639654">
+<h3 id="6-4-2-Kuhn-Theorem-1953"><a href="#6-4-2-Kuhn-Theorem-1953" class="headerlink" title="6.4.2 Kuhn Theorem (1953)"></a>6.4.2 Kuhn Theorem (1953)</h3><p><strong>Theorem</strong> Every <strong>finite</strong> extensive game with perfect information has at least one Pure Strategy Nash Equilibrium (PSNE).</p>
+<p><em>Proof</em> Constructive proof will be introduced later.</p>
+<h3 id="6-4-3-Example"><a href="#6-4-3-Example" class="headerlink" title="6.4.3 Example"></a>6.4.3 Example</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173718308.png" class="" title="image-20250402173718308">
+<p>Nash Equilibria are $(B, L)$ and $(A, R)$.</p>
+<ul>
+<li>$(B, L)$ is a Nash equilibrium: if player 2 selects $L$, then player 1 selects $B$, and vice versa.</li>
+</ul>
+<ul>
+<li><p>Is $(B, L)$ reasonable?</p>
+<ul>
+<li><strong>$(B, L)$ is a non-credible threat.</strong></li>
+</ul>
+</li>
+</ul>
+<p>指的是$(B, L)$这个$NE$的出现根本不可能，不合情理</p>
+<h3 id="6-4-4-Subgame-子博弈"><a href="#6-4-4-Subgame-子博弈" class="headerlink" title="6.4.4 Subgame (子博弈)"></a>6.4.4 Subgame (子博弈)</h3><p><strong>Definition</strong> A subgame is a set of nodes, strategies and payoffs, following from a single node to the end of game.</p>
+<p>A subgame is a part of the game tree such that </p>
+<ul>
+<li><p>It starts at a single strategy node</p>
+</li>
+<li><p>It contains every successor to this node</p>
+</li>
+<li><p>It contains all information in every successor</p>
+</li>
+</ul>
+<h4 id="an-emample-of-Subgame"><a href="#an-emample-of-Subgame" class="headerlink" title="an emample of Subgame"></a>an emample of Subgame</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402174147272.png" class="" title="image-20250402174147272">
+<h3 id="6-4-5-Subgame-Perfect-Equilibrium"><a href="#6-4-5-Subgame-Perfect-Equilibrium" class="headerlink" title="6.4.5 Subgame Perfect Equilibrium"></a>6.4.5 Subgame Perfect Equilibrium</h3><p><strong>Definition</strong>：An outcome is $a = (a_1^<em>, a_2^</em>, \dots, a_N^*)$ is a subgame perfect (子博弈完美) if it is a Nash Equilibrium in every subgame.</p>
+<ul>
+<li>Subgame perfect is a Nash Equilibrium.</li>
+</ul>
+<ul>
+<li>This definition rules out “non-credible threat”.</li>
+</ul>
+<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175731287.png" class="" title="image-20250402175731287">
+<p>How to find Nash Equilibrium</p>
+<p>How to find the subgame perfect?</p>
+<h3 id="6-4-6-Motivation"><a href="#6-4-6-Motivation" class="headerlink" title="6.4.6  Motivation"></a>6.4.6  Motivation</h3><p><strong>Theorem</strong> Every extensive game with perfect information has a subgame perfect.</p>
+<h3 id="6-4-7-Back-Induction-后向归纳"><a href="#6-4-7-Back-Induction-后向归纳" class="headerlink" title="6.4.7  Back Induction (后向归纳)"></a>6.4.7  Back Induction (后向归纳)</h3><p><strong>Theorem</strong> The set of strategy game constructed by backwards induction is equivalent to the set of SPE</p>
+<p>How to find subgame perfect Equilibria (SPE)?</p>
+<p><strong>Back induction</strong> is the process of “pruning the game tree” described as follows:</p>
+<ul>
+<li><p>Step 1: start at each of the final subgame in the game, and solve for the player’s equilibrium. Remove that subgame and replace it with payoff of the player’s choice</p>
+</li>
+<li><p>Step 2: Repeat step 1 until we arrive at the first node in the extensive game</p>
+</li>
+</ul>
+<h4 id="example-1"><a href="#example-1" class="headerlink" title="example"></a>example</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175905062.png" class="" title="image-20250402175905062">
+<p>Find a Sub-game perfect Equilibrium</p>
+<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175920602.png" class="" title="image-20250402175920602">
+<p>What happens for multiple optimal strategies? </p>
+<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175936878.png" class="" title="image-20250402175936878">
+<p>Centipede Game（蜈蚣游戏）:What happens for centipede game?</p>
+<h2 id="6-5-Example"><a href="#6-5-Example" class="headerlink" title="6.5 Example"></a>6.5 Example</h2><h3 id="6-5-1"><a href="#6-5-1" class="headerlink" title="6.5.1"></a>6.5.1</h3><p>开发商A在开发的价值8万元的楼盘时缺少3万元资金，银行B有3万元资金可以投资。 A说服B将这3万元借给自己开金矿，承诺开采到金子后与B对半分成，B是否应该将钱借给A呢？</p>
+<p>B的忧虑： A后期是否会履行诺言？不履行承诺则需要打官司</p>
+<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402180055590.png" class="" title="image-20250402180055590">
+<h3 id="6-5-2-Multiple-Persons-Game-Pirate-Game"><a href="#6-5-2-Multiple-Persons-Game-Pirate-Game" class="headerlink" title="6.5.2  Multiple-Persons Game: Pirate Game"></a>6.5.2  Multiple-Persons Game: Pirate Game</h3><p>Five Pirates A &gt; B &gt; C &gt; D &gt; E have 1000 gold coins, and decide how to distribute them</p>
+<p><strong>Pirate Rules:</strong></p>
+<ul>
+<li><p>The most senior pirate first proposes a plan of distribution. All pirates vote on whether to accept this distribution</p>
+</li>
+<li><p>If the majority (including tie vote) accepts the plan, the coins are dispersed and the game ends</p>
+</li>
+<li><p>If the majority rejects the plan, the proposer is thrown overboard from the pirate ship and dies, and the next most senior pirate makes a new proposal to begin the system again</p>
+</li>
+<li><p>The process repeats until a plan is accepted or if one pirate lefts</p>
+</li>
+</ul>
+<p><strong>Three decision factors</strong></p>
+<ul>
+<li><p>Each pirate wants to survive</p>
+</li>
+<li><p>Each pirate tries to maximize the number of gold coins if survival</p>
+</li>
+<li><p>The pirates do not trust each other, no cooperation</p>
+</li>
+</ul>
+<p><strong>For D and E</strong>     decisions: D:1000  E:0</p>
+<p><strong>For C, D and E</strong>    decisions: C: 999  D:0  E:1</p>
+<p><strong>For B, C, D and E</strong>     decisions: B:999  C:0  D:1  E:0</p>
+<p><strong>For A, B, C, D and E</strong>    decisions: A:998  B:0  C:1  D:0  E:1</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>markastrid
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/" title="第六章 Extensive Game">https://example.com/2025/04/01/博弈论笔记七/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E5%85%AD%E7%AB%A0/" rel="tag"># 博弈论第六章</a>
+              <a href="/tags/%E5%B9%BF%E4%B9%89%E5%8D%9A%E5%BC%88/" rel="tag"># 广义博弈</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/" rel="prev" title="第五章 Games with Incomplete Information">
+      <i class="fa fa-chevron-left"></i> 第五章 Games with Incomplete Information
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%BC%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">6.1 引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1%E6%AF%94%E8%BE%83"><span class="nav-number">1.1.</span> <span class="nav-text">6.1.1比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Strategy-Game"><span class="nav-number">1.1.1.</span> <span class="nav-text">Strategy Game</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extensive-game-provides-more-information"><span class="nav-number">1.1.2.</span> <span class="nav-text">Extensive game provides more information</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Two-variants"><span class="nav-number">1.1.3.</span> <span class="nav-text">Two variants</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-Entry-Game"><span class="nav-number">1.2.</span> <span class="nav-text">6.1.2 Entry Game</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Game-Tree"><span class="nav-number">1.2.1.</span> <span class="nav-text">Game Tree</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-Formal-Definition-of-Extensive-Game"><span class="nav-number">2.</span> <span class="nav-text">6.2  Formal Definition of Extensive Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-example"><span class="nav-number">2.1.</span> <span class="nav-text">6.2.1 example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2-extensive-game-with-perfect-information"><span class="nav-number">2.2.</span> <span class="nav-text">6.2.2  extensive game with perfect information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-3-Ultimatum-Game"><span class="nav-number">2.3.</span> <span class="nav-text">6.2.3 Ultimatum Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-4-another-example"><span class="nav-number">2.4.</span> <span class="nav-text">6.2.4 another example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-Pure-strategies-%E6%B3%A8%E6%84%8F%E6%98%AF%E5%8F%89%E4%B9%98"><span class="nav-number">3.</span> <span class="nav-text">6.3  Pure strategies (注意是叉乘)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-%E4%BE%8B1"><span class="nav-number">3.1.</span> <span class="nav-text">6.3.1 例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-%E4%BE%8B2"><span class="nav-number">3.2.</span> <span class="nav-text">6.3.2 例2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-NE"><span class="nav-number">4.</span> <span class="nav-text">6.4 NE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-1-a-strategy-game"><span class="nav-number">4.1.</span> <span class="nav-text">6.4.1  a strategy game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-2-Kuhn-Theorem-1953"><span class="nav-number">4.2.</span> <span class="nav-text">6.4.2 Kuhn Theorem (1953)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-3-Example"><span class="nav-number">4.3.</span> <span class="nav-text">6.4.3 Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-4-Subgame-%E5%AD%90%E5%8D%9A%E5%BC%88"><span class="nav-number">4.4.</span> <span class="nav-text">6.4.4 Subgame (子博弈)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#an-emample-of-Subgame"><span class="nav-number">4.4.1.</span> <span class="nav-text">an emample of Subgame</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-5-Subgame-Perfect-Equilibrium"><span class="nav-number">4.5.</span> <span class="nav-text">6.4.5 Subgame Perfect Equilibrium</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example"><span class="nav-number">4.5.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-6-Motivation"><span class="nav-number">4.6.</span> <span class="nav-text">6.4.6  Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-7-Back-Induction-%E5%90%8E%E5%90%91%E5%BD%92%E7%BA%B3"><span class="nav-number">4.7.</span> <span class="nav-text">6.4.7  Back Induction (后向归纳)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-1"><span class="nav-number">4.7.1.</span> <span class="nav-text">example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-Example"><span class="nav-number">5.</span> <span class="nav-text">6.5 Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-1"><span class="nav-number">5.1.</span> <span class="nav-text">6.5.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-2-Multiple-Persons-Game-Pirate-Game"><span class="nav-number">5.2.</span> <span class="nav-text">6.5.2  Multiple-Persons Game: Pirate Game</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="markastrid"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">markastrid</p>
+  <div class="site-description" itemprop="description">to be continued</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        </style>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">markastrid</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+<div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    </div>
+<div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共62.5k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
