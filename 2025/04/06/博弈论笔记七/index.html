@@ -20,48 +20,48 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="博弈论第六章的相关内容，完全博弈">
+  <meta name="description" content="博弈论第六、七章的相关内容，完全博弈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第六章 Extensive Game">
-<meta property="og:url" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/index.html">
+<meta property="og:title" content="第六、七章 Extensive Game">
+<meta property="og:url" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/index.html">
 <meta property="og:site_name" content="Resume">
-<meta property="og:description" content="博弈论第六章的相关内容，完全博弈">
+<meta property="og:description" content="博弈论第六、七章的相关内容，完全博弈">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165526209.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170331444.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170951696.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402171613097.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172023268.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172907857.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173636357.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173639654.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173718308.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402174147272.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175731287.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175905062.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175920602.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175936878.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402180055590.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409135926695.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409140823089.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409142101747.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409142910491.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409143844324.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144000338.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144119638.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144253824.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409145415374.png">
-<meta property="og:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409145648712.png">
-<meta property="article:published_time" content="2025-03-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-09T07:02:14.776Z">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165526209.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170331444.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170951696.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402171613097.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172023268.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172907857.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173636357.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173639654.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173718308.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402174147272.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175731287.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175905062.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175920602.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175936878.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402180055590.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409135926695.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409140823089.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409142101747.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409142910491.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409143844324.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144000338.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144119638.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144253824.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409145415374.png">
+<meta property="og:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409145648712.png">
+<meta property="article:published_time" content="2025-04-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-14T02:11:57.037Z">
 <meta property="article:author" content="markastrid">
-<meta property="article:tag" content="博弈论第六章">
+<meta property="article:tag" content="博弈论第六、七章">
 <meta property="article:tag" content="广义博弈">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png">
+<meta name="twitter:image" content="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png">
 
-<link rel="canonical" href="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/">
+<link rel="canonical" href="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/">
 
 
 <script id="page-configurations">
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title>第六章 Extensive Game | Resume</title>
+  <title>第六、七章 Extensive Game | Resume</title>
   
 
 
@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          第六章 Extensive Game
+          第六、七章 Extensive Game
         </h1>
 
         <div class="post-meta">
@@ -213,14 +213,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-04-01 00:00:00" itemprop="dateCreated datePublished" datetime="2025-04-01T00:00:00+08:00">2025-04-01</time>
+              <time title="创建时间：2025-04-06 00:00:00" itemprop="dateCreated datePublished" datetime="2025-04-06T00:00:00+08:00">2025-04-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-09 15:02:14" itemprop="dateModified" datetime="2025-04-09T15:02:14+08:00">2025-04-09</time>
+                <time title="修改时间：2025-04-14 10:11:57" itemprop="dateModified" datetime="2025-04-14T10:11:57+08:00">2025-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +233,7 @@
             </span>
 
           
-            <div class="post-description">博弈论第六章的相关内容，完全博弈</div>
+            <div class="post-description">博弈论第六、七章的相关内容，完全博弈</div>
 
         </div>
       </header>
@@ -250,7 +250,7 @@
 <li>Simple Nim game<ul>
 <li>There are n coins </li>
 <li>Two players select 1 or 2 or 3 coins in turn</li>
-<li>The winner is the one taking the last coin. </li>
+<li>The winner is the one taking the last coin</li>
 </ul>
 </li>
 </ul>
@@ -269,15 +269,17 @@
 </li>
 </ul>
 <h4 id="Two-variants"><a href="#Two-variants" class="headerlink" title="Two variants"></a>Two variants</h4><ul>
-<li><p>perfect information extensive-form games 国际象棋：知道对方所有可能的步骤</p>
+<li><p>perfect information extensive-form games </p>
+<p>国际象棋：知道对方所有可能的步骤</p>
 </li>
-<li><p>imperfect-information extensive-form games 扑克牌：不知道对方剩余的手牌和要出的牌的组合方式</p>
+<li><p>imperfect-information extensive-form games </p>
+<p>扑克牌：不知道对方剩余的手牌和要出的牌的组合方式</p>
 </li>
 </ul>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png" class="" title="image-20250402165509681">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165509681.png" class="" title="image-20250402165509681">
 <h3 id="6-1-2-Entry-Game"><a href="#6-1-2-Entry-Game" class="headerlink" title="6.1.2 Entry Game"></a>6.1.2 Entry Game</h3><p>A company <strong>G</strong> is trying to enter a new market</p>
 <p>Another company <strong>B</strong> can either fight the entry or cooperate</p>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165526209.png" class="" title="image-20250402165526209">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402165526209.png" class="" title="image-20250402165526209">
 <h4 id="Game-Tree"><a href="#Game-Tree" class="headerlink" title="Game Tree"></a>Game Tree</h4><ul>
 <li><p><strong>node</strong></p>
 <ul>
@@ -305,7 +307,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="6-2-1-example"><a href="#6-2-1-example" class="headerlink" title="6.2.1 example"></a>6.2.1 example</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170331444.png" class="" title="image-20250402170331444">
+<h3 id="6-2-1-example"><a href="#6-2-1-example" class="headerlink" title="6.2.1 example"></a>6.2.1 example</h3><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170331444.png" class="" title="image-20250402170331444">
 <p>$H=\{\emptyset,A,B,AL,AR\}$</p>
 <h3 id="6-2-2-extensive-game-with-perfect-information"><a href="#6-2-2-extensive-game-with-perfect-information" class="headerlink" title="6.2.2  extensive game with perfect information"></a>6.2.2  extensive game with <strong>perfect information</strong></h3><ul>
 <li><strong>Players</strong>: $N$ is the set of $N$ players</li>
@@ -325,14 +327,14 @@
 <li><strong>Payoff function</strong>: $u_i: Z \to \mathbb{R}$</li>
 <li><strong>Game </strong>: $G = \{ N, H, P, \{ u_i \} \}$</li>
 </ul>
-<h3 id="6-2-3-Ultimatum-Game"><a href="#6-2-3-Ultimatum-Game" class="headerlink" title="6.2.3 Ultimatum Game"></a>6.2.3 Ultimatum Game</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170951696.png" class="" title="image-20250402170951696">
+<h3 id="6-2-3-Ultimatum-Game"><a href="#6-2-3-Ultimatum-Game" class="headerlink" title="6.2.3 Ultimatum Game"></a>6.2.3 Ultimatum Game</h3><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402170951696.png" class="" title="image-20250402170951696">
 <p><strong>Game structure</strong>:<br>$G = \{ N, H, P, \{ u_i \} \}$</p>
 <p><strong>Players</strong>:<br>$N = \{ A, B \}$</p>
 <p><strong>Histories</strong>:<br>$H = \{ \emptyset, (2,0), (1,1), (0,2), ((2,0), y) \}<br>\cup \{ ((2,0), n), ((1,1), y), ((1,1), n) \}<br>\cup \{ ((0,2), y), ((0,2), n) \}$</p>
 <p><strong>Player function</strong>:<br>$P: P(\emptyset) = A; P((2,0)) = B; P((1,1)) = B; P((0,2)) = B$</p>
 <p><strong>Payoff functions</strong>:<br>$u_1((2,0), y) = 2, \quad u_1((2,0), n) = 0, \quad u_1((1,1), y) = 1, \quad u_1((1,1), n) = 0$</p>
 <p>$u_2((2,0), y) = 0, \quad u_2((2,0), n) = 0, \quad u_2((1,1), y) = 1, \quad u_2((1,1), n) = 0$</p>
-<h3 id="6-2-4-another-example"><a href="#6-2-4-another-example" class="headerlink" title="6.2.4 another example"></a>6.2.4 another example</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402171613097.png" class="" title="image-20250402171613097">
+<h3 id="6-2-4-another-example"><a href="#6-2-4-another-example" class="headerlink" title="6.2.4 another example"></a>6.2.4 another example</h3><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402171613097.png" class="" title="image-20250402171613097">
 <p><strong>Game structure</strong>:<br>$G = \{ N, H, P, \{ u_i \} \}$</p>
 <p><strong>Players</strong>:<br>$N = \{ 1, 2 \}$</p>
 <p><strong>Histories</strong>:<br>$H = \{ \emptyset, A, B, AL, AR \}$</p>
@@ -342,11 +344,11 @@
 <h2 id="6-3-Pure-strategies-注意是叉乘"><a href="#6-3-Pure-strategies-注意是叉乘" class="headerlink" title="6.3  Pure strategies (注意是叉乘)"></a>6.3  Pure strategies (注意是叉乘)</h2><p><strong>Definition</strong>: Given a game $G = \{ N, H, P, \{ u_i \} \}$, the pure strategy for player $i$ is given by the cross product</p>
 <script type="math/tex; mode=display">
 \times_{h \in H} \{ a^s : (h, a^s) \in H, P(h) = i \}.</script><p>A pure strategy for a player is a complete specification of which deterministic action to take at <strong>every node</strong> belonging to that player.</p>
-<h3 id="6-3-1-例1"><a href="#6-3-1-例1" class="headerlink" title="6.3.1 例1"></a>6.3.1 例1</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172023268.png" class="" title="image-20250402172023268">
+<h3 id="6-3-1-例1"><a href="#6-3-1-例1" class="headerlink" title="6.3.1 例1"></a>6.3.1 例1</h3><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172023268.png" class="" title="image-20250402172023268">
 <p>How many pure strategies for each player?</p>
 <p>Player A: $(2,0), (1,1), (0,2)$</p>
-<p>Player B: $\{yyy, yyn, yna, ynn, nyy, nyn, nny, nnn\}$</p>
-<h3 id="6-3-2-例2"><a href="#6-3-2-例2" class="headerlink" title="6.3.2 例2"></a>6.3.2 例2</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172907857.png" class="" title="image-20250402172907857">
+<p>Player B: $\{yyy, yyn, yny, ynn, nyy, nyn, nny, nnn\}$</p>
+<h3 id="6-3-2-例2"><a href="#6-3-2-例2" class="headerlink" title="6.3.2 例2"></a>6.3.2 例2</h3><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402172907857.png" class="" title="image-20250402172907857">
 <p>What are the pure strategies for players 1 and 2?</p>
 <ul>
 <li>Player 1: $\{AG,AH,BG,BH\}$</li>
@@ -355,7 +357,7 @@
 <p>What are payoffs of each outcome for players 1 and 2?</p>
 <ul>
 <li><p>$u_1(AG,CE) = 1$</p>
-<p>(其实就是AC所在的这个决定，这是一个序列化的决定结果，如果1选择AG，那么另一边选择CE最终的收益，虽然GE是跑不到的，但是会做这样的一个理论上的选择)</p>
+<p>(其实就是AC所在的这个决定，这是一个序列化的结果:如果1选择AG，那么另一边选择CE最终的收益，虽然GE是跑不到的，但是会做这样的一个理论上的选择)</p>
 </li>
 </ul>
 <h2 id="6-4-NE-纳什均衡"><a href="#6-4-NE-纳什均衡" class="headerlink" title="6.4 NE 纳什均衡"></a>6.4 NE 纳什均衡</h2><p>Based on the definition of pure strategy, we can define </p>
@@ -371,12 +373,11 @@
 <script type="math/tex; mode=display">
 u_i(a_i^*, a_{-i}^*) \geq u_i(a_i, a_{-i}^*) \quad \text{for every} \ a_i \ \text{of player} \ i</script><p>How to find Nash Equilibrium: <strong>Induced strategy game</strong> </p>
 <h3 id="6-4-1-a-strategy-game"><a href="#6-4-1-a-strategy-game" class="headerlink" title="6.4.1  a strategy game"></a>6.4.1  a strategy game</h3><p>Every extensive game can be converted to a strategy game</p>
-<p><strong>Remark:</strong> This conversion is not reverse 反过来是不能转化的：收益矩阵不能转化为扩展式博弈\动态博弈</p>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173636357.png" class="" title="image-20250402173636357">
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173639654.png" class="" title="image-20250402173639654">
+<p><strong>Remark:</strong> This conversion is not reverse 反过来是不能转化的：收益矩阵不能转化为动态博弈</p>
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173636357.png" class="" title="image-20250402173636357">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173639654.png" class="" title="image-20250402173639654">
 <h3 id="6-4-2-Kuhn-Theorem-1953"><a href="#6-4-2-Kuhn-Theorem-1953" class="headerlink" title="6.4.2 Kuhn Theorem (1953)"></a>6.4.2 Kuhn Theorem (1953)</h3><p><strong>Theorem</strong> Every <strong>finite</strong> extensive game with perfect information has at least one Pure Strategy Nash Equilibrium (PSNE).</p>
-<p><em>Proof</em> :Constructive proof will be introduced later.</p>
-<h3 id="6-4-3-Example"><a href="#6-4-3-Example" class="headerlink" title="6.4.3 Example"></a>6.4.3 Example</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173718308.png" class="" title="image-20250402173718308">
+<h3 id="6-4-3-Example"><a href="#6-4-3-Example" class="headerlink" title="6.4.3 Example"></a>6.4.3 Example</h3><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402173718308.png" class="" title="image-20250402173718308">
 <p>Nash Equilibria are $(B, L)$ and $(A, R)$.</p>
 <ul>
 <li>$(B, L)$ is a Nash equilibrium: if player 2 selects $L$, then player 1 selects $B$, and vice versa.</li>
@@ -388,8 +389,7 @@ u_i(a_i^*, a_{-i}^*) \geq u_i(a_i, a_{-i}^*) \quad \text{for every} \ a_i \ \tex
 </ul>
 </li>
 </ul>
-<p>指的是$(B, L)$这个$NE$的出现根本不可能:如果1选择B, 2根本不可能选择到L, 不合情理也不够理性</p>
-<p>非理性威胁现实中不会出现，用处不大</p>
+<p>指的是$(B, L)$这个$NE$的出现根本不可能:1选择B、2选择L这个出现不合情理也不够理性，非理性威胁现实中不会出现，用处不大。</p>
 <h3 id="6-4-4-Subgame-子博弈"><a href="#6-4-4-Subgame-子博弈" class="headerlink" title="6.4.4 Subgame (子博弈)"></a>6.4.4 Subgame (子博弈)</h3><p><strong>Definition</strong> A subgame is a set of nodes, strategies and payoffs, following from a single node to the end of game.</p>
 <p>A subgame is a part of the game tree such that </p>
 <ul>
@@ -400,15 +400,15 @@ u_i(a_i^*, a_{-i}^*) \geq u_i(a_i, a_{-i}^*) \quad \text{for every} \ a_i \ \tex
 <li><p>It contains all information in every successor</p>
 </li>
 </ul>
-<h4 id="an-emample-of-Subgame"><a href="#an-emample-of-Subgame" class="headerlink" title="an emample of Subgame"></a>an emample of Subgame</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402174147272.png" class="" title="image-20250402174147272">
-<h3 id="6-4-5-Subgame-Perfect-Equilibrium"><a href="#6-4-5-Subgame-Perfect-Equilibrium" class="headerlink" title="6.4.5 Subgame Perfect Equilibrium"></a>6.4.5 Subgame Perfect Equilibrium</h3><p><strong>Definition</strong>: An outcome is $a = (a_1^{<em>}, a_2^{</em>}, \dots, a_N^{*})$ is a subgame perfect (子博弈完美) if it is a Nash Equilibrium in every subgame.</p>
+<h4 id="an-emample-of-Subgame"><a href="#an-emample-of-Subgame" class="headerlink" title="an emample of Subgame"></a>an emample of Subgame</h4><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402174147272.png" class="" title="image-20250402174147272">
+<h3 id="6-4-5-Subgame-Perfect-Equilibrium"><a href="#6-4-5-Subgame-Perfect-Equilibrium" class="headerlink" title="6.4.5 Subgame Perfect Equilibrium"></a>6.4.5 Subgame Perfect Equilibrium</h3><p><strong>Definition</strong>: An outcome is $a = (a_1^<em>, a_2^</em>, \dots, a_N^*)$ is a subgame perfect (子博弈完美) if it is a Nash Equilibrium in every subgame.</p>
 <ul>
 <li>Subgame perfect is a Nash Equilibrium.</li>
 </ul>
 <ul>
 <li>This definition rules out “non-credible threat”.</li>
 </ul>
-<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175731287.png" class="" title="image-20250402175731287">
+<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175731287.png" class="" title="image-20250402175731287">
 <p>How to find Nash Equilibrium?</p>
 <p>How to find the subgame perfect?</p>
 <h3 id="6-4-6-Motivation"><a href="#6-4-6-Motivation" class="headerlink" title="6.4.6  Motivation"></a>6.4.6  Motivation</h3><p><strong>Theorem</strong> Every extensive game with perfect information has a subgame perfect.</p>
@@ -421,16 +421,16 @@ u_i(a_i^*, a_{-i}^*) \geq u_i(a_i, a_{-i}^*) \quad \text{for every} \ a_i \ \tex
 <li><p><strong>Step 2</strong>: Repeat step 1 until we arrive at the first node in the extensive game</p>
 </li>
 </ul>
-<h4 id="example-1"><a href="#example-1" class="headerlink" title="example"></a>example</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175905062.png" class="" title="image-20250402175905062">
+<h4 id="example-1"><a href="#example-1" class="headerlink" title="example"></a>example</h4><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175905062.png" class="" title="image-20250402175905062">
 <p>Find a Sub-game perfect Equilibrium</p>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175920602.png" class="" title="image-20250402175920602">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175920602.png" class="" title="image-20250402175920602">
 <p>What happens for multiple optimal strategies? </p>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175936878.png" class="" title="image-20250402175936878">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402175936878.png" class="" title="image-20250402175936878">
 <p>Centipede Game（蜈蚣游戏）:What happens for centipede game?</p>
 <p>最后一个节点1做选择，肯定选(5,3)，2最多拿到3；倒数第二个2做选择，肯定会选择(2,4)，1只能拿到2；倒数第三个1做选择，肯定会选(3,1)，2只能拿到1；倒数第四个2做选择，肯定选择(0,2)，1只能拿到0；第一个1肯定直接选择D(1,0)</p>
-<h2 id="6-5-Example"><a href="#6-5-Example" class="headerlink" title="6.5 Example"></a>6.5 Example</h2><h3 id="6-5-1"><a href="#6-5-1" class="headerlink" title="6.5.1"></a>6.5.1</h3><p>开发商A在开发的价值8万元的楼盘时缺少3万元资金，银行B有3万元资金可以投资。 A说服B将这3万元借给自己开金矿，承诺开采到金子后与B对半分成，B是否应该将钱借给A呢？</p>
+<h2 id="6-5-Example"><a href="#6-5-Example" class="headerlink" title="6.5 Example"></a>6.5 Example</h2><h3 id="6-5-1-楼盘开发"><a href="#6-5-1-楼盘开发" class="headerlink" title="6.5.1 楼盘开发"></a>6.5.1 楼盘开发</h3><p>开发商A在开发的价值8万元的楼盘时缺少3万元资金，银行B有3万元资金可以投资。 A说服B将这3万元借给自己开金矿，承诺开采到金子后与B对半分成，B是否应该将钱借给A呢？</p>
 <p>B的忧虑： A后期是否会履行诺言？不履行承诺则需要打官司</p>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402180055590.png" class="" title="image-20250402180055590">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250402180055590.png" class="" title="image-20250402180055590">
 <p>从下往上逐步分析，找到(4,4)是一个理性的结果</p>
 <h3 id="6-5-2-Multiple-Persons-Game-Pirate-Game"><a href="#6-5-2-Multiple-Persons-Game-Pirate-Game" class="headerlink" title="6.5.2  Multiple-Persons Game: Pirate Game"></a>6.5.2  Multiple-Persons Game: Pirate Game</h3><p>Five Pirates A &gt; B &gt; C &gt; D &gt; E have 1000 gold coins, and decide how to distribute them</p>
 <p><strong>Pirate Rules:</strong></p>
@@ -466,7 +466,7 @@ u_i(a_i^*, a_{-i}^*) \geq u_i(a_i, a_{-i}^*) \quad \text{for every} \ a_i \ \tex
 </li>
 </ul>
 <p>Given a pure strategy $s_i$ and a history $h$ such that $P(h) = i$, the strategy $s_i(h) = a$ is such that $a \in A(h)$ and $a \in s_i$.</p>
-<h4 id="example-2"><a href="#example-2" class="headerlink" title="example"></a>example</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409135926695.png" class="" title="image-20250409135926695">
+<h4 id="example-2"><a href="#example-2" class="headerlink" title="example"></a>example</h4><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409135926695.png" class="" title="image-20250409135926695">
 <p>$\ell(G)=3$</p>
 <p>$A(BF)=\{G,H\}$</p>
 <p>$A(A)=\{C,D\}$</p>
@@ -483,7 +483,7 @@ G(h) = \{ N, H|_h, P|_h, \{ u_i |_h \} \}</script><ul>
 <li>$s_i |_h$ is the strategy that $s_i$ induces in the subgame $G(h)$. </li>
 <li>$s_i |_h(h’) = s_i(h, h’)$ for every $h’ \in H|_h$.</li>
 </ul>
-<h4 id="example-3"><a href="#example-3" class="headerlink" title="example"></a>example</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409140823089.png" class="" title="image-20250409140823089">
+<h4 id="example-3"><a href="#example-3" class="headerlink" title="example"></a>example</h4><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409140823089.png" class="" title="image-20250409140823089">
 <p>$G(B)=\{N,H|_B,P|_B,\{u_i |_B \}\}$</p>
 <ul>
 <li>$N={1,2}$</li>
@@ -507,7 +507,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 </li>
 </ul>
 <p><strong>One Deviation</strong></p>
-<h4 id="Example-One-Deviation-Principle"><a href="#Example-One-Deviation-Principle" class="headerlink" title="Example: One Deviation Principle"></a>Example: One Deviation Principle</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409142101747.png" class="" title="image-20250409142101747">
+<h4 id="Example-One-Deviation-Principle"><a href="#Example-One-Deviation-Principle" class="headerlink" title="Example: One Deviation Principle"></a>Example: One Deviation Principle</h4><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409142101747.png" class="" title="image-20250409142101747">
 <p>每次只偏离一步即可</p>
 <p>Check whether (AHI,CE) is an SPE, it suffices to check</p>
 <div class="table-container">
@@ -532,7 +532,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 </div>
 <p>BHI in G, and it is not necessary to check BGK, AHK, BHK…</p>
 <p>每次只需要更改一步即可，如：AHI去验证BHI；AHI去验证AGI;AHI去验证AHK；CE去验证DE；CE去验证CF</p>
-<h3 id="6-7-1-Infinite-Games-for-One-Deviation-Property"><a href="#6-7-1-Infinite-Games-for-One-Deviation-Property" class="headerlink" title="6.7.1 Infinite Games for One Deviation Property"></a>6.7.1 Infinite Games for One Deviation Property</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409142910491.png" class="" title="image-20250409142910491">
+<h3 id="6-7-1-Infinite-Games-for-One-Deviation-Property"><a href="#6-7-1-Infinite-Games-for-One-Deviation-Property" class="headerlink" title="6.7.1 Infinite Games for One Deviation Property"></a>6.7.1 Infinite Games for One Deviation Property</h3><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409142910491.png" class="" title="image-20250409142910491">
 <p><strong>One deviation does</strong> <strong>NOT</strong> <strong>hold for</strong> <strong>infinite-length game</strong></p>
 <p>Strategy DDD… satisfies one-stage deviation property；AAA…is an SPE</p>
 <h2 id="6-8-Kuhn’s-Theorem"><a href="#6-8-Kuhn’s-Theorem" class="headerlink" title="6.8 Kuhn’s Theorem"></a>6.8 Kuhn’s Theorem</h2><p><strong>Theorem</strong> Every <strong>finite</strong> extensive game with perfect information has a subgame perfect equilibrium. </p>
@@ -563,7 +563,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 <p>We complete the proof by setting $h^* = \emptyset$.</p>
 <h3 id="6-8-2-Infinite-games"><a href="#6-8-2-Infinite-games" class="headerlink" title="6.8.2 Infinite games"></a>6.8.2 Infinite games</h3><p><strong>Kuhn’s theorem does not</strong> <strong>holds</strong> <strong>for infinite-length games</strong></p>
 <p>Counter example (for one player)</p>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409143844324.png" class="" title="image-20250409143844324">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409143844324.png" class="" title="image-20250409143844324">
 <p>$u_1 (AAA…)=0 $</p>
 <p>$u_1 (DDD…)=1 $</p>
 <p>$u_1 (AAA…D…)=n+1 no SPE$</p>
@@ -571,7 +571,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 <p>•妹妹的提议，姐姐同意就按照妹妹的提议分割，若拒绝则遗产因通膨或官司等原因为零；</p>
 <p>•假设利益相同时，两人均会接受。</p>
 <p>问题：两姐妹如何分割遗产？</p>
-<h4 id="analysis"><a href="#analysis" class="headerlink" title="analysis"></a>analysis</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144000338.png" class="" title="image-20250409144000338">
+<h4 id="analysis"><a href="#analysis" class="headerlink" title="analysis"></a>analysis</h4><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144000338.png" class="" title="image-20250409144000338">
 <p>后向规划：</p>
 <p>第二个决策阶段，姐姐接受的条件：y≥0，此时财产已缩水一半，妹妹可获得的最多比例是1/2；</p>
 <p>第一个决策阶段，妹妹接受的最低比例：1-x ≥ 1/2，姐姐可得到的最高比例是1/2；</p>
@@ -588,7 +588,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 <li><p>Question: What is an SPE for this game?</p>
 </li>
 </ul>
-<h4 id="analysis-1"><a href="#analysis-1" class="headerlink" title="analysis"></a>analysis</h4><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144119638.png" class="" title="image-20250409144119638">
+<h4 id="analysis-1"><a href="#analysis-1" class="headerlink" title="analysis"></a>analysis</h4><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144119638.png" class="" title="image-20250409144119638">
 <p>Back induction to find the SPE</p>
 <ul>
 <li><p>Player 1’s optimal strategy</p>
@@ -604,7 +604,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 </li>
 </ul>
 <p><strong>Unique SPE (1,Y)</strong></p>
-<h3 id="6-9-3-Two-Period-Bargaining-Game-Ultimatum-Game"><a href="#6-9-3-Two-Period-Bargaining-Game-Ultimatum-Game" class="headerlink" title="6.9.3 Two-Period Bargaining Game (Ultimatum Game)"></a>6.9.3 Two-Period Bargaining Game (Ultimatum Game)</h3><img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144253824.png" class="" title="image-20250409144253824">
+<h3 id="6-9-3-Two-Period-Bargaining-Game-Ultimatum-Game"><a href="#6-9-3-Two-Period-Bargaining-Game-Ultimatum-Game" class="headerlink" title="6.9.3 Two-Period Bargaining Game (Ultimatum Game)"></a>6.9.3 Two-Period Bargaining Game (Ultimatum Game)</h3><img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409144253824.png" class="" title="image-20250409144253824">
 <ul>
 <li><p>Player 1 offers player 2 some amount 1-x</p>
 </li>
@@ -632,7 +632,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 <p>–From today perspective, 1￥ tomorrow is worth δ&lt;1</p>
 </li>
 </ul>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409145415374.png" class="" title="image-20250409145415374">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409145415374.png" class="" title="image-20250409145415374">
 <p>Backward induction:</p>
 <ul>
 <li>The unique SPE in the second period (0,δ)</li>
@@ -672,7 +672,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 <p>Discounting factor: </p>
 <p>−the value of a pie in round three is discounted by $δ$</p>
 <p>−the value of a pie in round three is discounted by $δ^2$</p>
-<img src="/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409145648712.png" class="" title="image-20250409145648712">
+<img src="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/image-20250409145648712.png" class="" title="image-20250409145648712">
 <ul>
 <li><p>In the third round</p>
 <p>–Unique SPE $(δ^2,Y)$</p>
@@ -775,7 +775,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://example.com/2025/04/01/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/" title="第六章 Extensive Game">https://example.com/2025/04/01/博弈论笔记七/</a>
+    <a href="https://example.com/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/" title="第六、七章 Extensive Game">https://example.com/2025/04/06/博弈论笔记七/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -786,7 +786,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E5%85%AD%E7%AB%A0/" rel="tag"># 博弈论第六章</a>
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E5%85%AD%E3%80%81%E4%B8%83%E7%AB%A0/" rel="tag"># 博弈论第六、七章</a>
               <a href="/tags/%E5%B9%BF%E4%B9%89%E5%8D%9A%E5%BC%88/" rel="tag"># 广义博弈</a>
           </div>
 
@@ -799,7 +799,10 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
     <a href="/2025/03/25/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AD/" rel="prev" title="第五章 Games with Incomplete Information">
       <i class="fa fa-chevron-left"></i> 第五章 Games with Incomplete Information
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/" rel="next" title="第八章 Stackelberg Game - Applications to Seccurity">
+      第八章 Stackelberg Game - Applications to Seccurity <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -858,7 +861,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%BC%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">6.1 引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-%E6%AF%94%E8%BE%83"><span class="nav-number">1.1.</span> <span class="nav-text">6.1.1 比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Strategy-Game"><span class="nav-number">1.1.1.</span> <span class="nav-text">Strategy Game</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extensive-game-provides-more-information"><span class="nav-number">1.1.2.</span> <span class="nav-text">Extensive game provides more information</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Two-variants"><span class="nav-number">1.1.3.</span> <span class="nav-text">Two variants</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-Entry-Game"><span class="nav-number">1.2.</span> <span class="nav-text">6.1.2 Entry Game</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Game-Tree"><span class="nav-number">1.2.1.</span> <span class="nav-text">Game Tree</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-Formal-Definition-of-Extensive-Game"><span class="nav-number">2.</span> <span class="nav-text">6.2  Formal Definition of Extensive Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-example"><span class="nav-number">2.1.</span> <span class="nav-text">6.2.1 example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2-extensive-game-with-perfect-information"><span class="nav-number">2.2.</span> <span class="nav-text">6.2.2  extensive game with perfect information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-3-Ultimatum-Game"><span class="nav-number">2.3.</span> <span class="nav-text">6.2.3 Ultimatum Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-4-another-example"><span class="nav-number">2.4.</span> <span class="nav-text">6.2.4 another example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-Pure-strategies-%E6%B3%A8%E6%84%8F%E6%98%AF%E5%8F%89%E4%B9%98"><span class="nav-number">3.</span> <span class="nav-text">6.3  Pure strategies (注意是叉乘)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-%E4%BE%8B1"><span class="nav-number">3.1.</span> <span class="nav-text">6.3.1 例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-%E4%BE%8B2"><span class="nav-number">3.2.</span> <span class="nav-text">6.3.2 例2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-NE-%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">4.</span> <span class="nav-text">6.4 NE 纳什均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-1-a-strategy-game"><span class="nav-number">4.1.</span> <span class="nav-text">6.4.1  a strategy game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-2-Kuhn-Theorem-1953"><span class="nav-number">4.2.</span> <span class="nav-text">6.4.2 Kuhn Theorem (1953)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-3-Example"><span class="nav-number">4.3.</span> <span class="nav-text">6.4.3 Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-4-Subgame-%E5%AD%90%E5%8D%9A%E5%BC%88"><span class="nav-number">4.4.</span> <span class="nav-text">6.4.4 Subgame (子博弈)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#an-emample-of-Subgame"><span class="nav-number">4.4.1.</span> <span class="nav-text">an emample of Subgame</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-5-Subgame-Perfect-Equilibrium"><span class="nav-number">4.5.</span> <span class="nav-text">6.4.5 Subgame Perfect Equilibrium</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example"><span class="nav-number">4.5.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-6-Motivation"><span class="nav-number">4.6.</span> <span class="nav-text">6.4.6  Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-7-Back-Induction-%E5%90%8E%E5%90%91%E5%BD%92%E7%BA%B3"><span class="nav-number">4.7.</span> <span class="nav-text">6.4.7  Back Induction (后向归纳)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-1"><span class="nav-number">4.7.1.</span> <span class="nav-text">example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-Example"><span class="nav-number">5.</span> <span class="nav-text">6.5 Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-1"><span class="nav-number">5.1.</span> <span class="nav-text">6.5.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-2-Multiple-Persons-Game-Pirate-Game"><span class="nav-number">5.2.</span> <span class="nav-text">6.5.2  Multiple-Persons Game: Pirate Game</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-Formal-Definition-of-Subgame"><span class="nav-number">6.</span> <span class="nav-text">6.6 Formal Definition of Subgame</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-1-Notations"><span class="nav-number">6.1.</span> <span class="nav-text">6.6.1 Notations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-2"><span class="nav-number">6.1.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-2-Formal-Definition"><span class="nav-number">6.2.</span> <span class="nav-text">6.6.2 Formal Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-3"><span class="nav-number">6.2.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-3-Subgame-Perfect-Equilibrium"><span class="nav-number">6.3.</span> <span class="nav-text">6.6.3 Subgame Perfect Equilibrium</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-7-One-Deviation-Principle-%E5%8D%95%E6%AD%A5%E5%81%8F%E7%A6%BB%E5%8E%9F%E5%88%99"><span class="nav-number">7.</span> <span class="nav-text">6.7 One Deviation Principle (单步偏离原则)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Example-One-Deviation-Principle"><span class="nav-number">7.0.1.</span> <span class="nav-text">Example: One Deviation Principle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-1-Infinite-Games-for-One-Deviation-Property"><span class="nav-number">7.1.</span> <span class="nav-text">6.7.1 Infinite Games for One Deviation Property</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-8-Kuhn%E2%80%99s-Theorem"><span class="nav-number">8.</span> <span class="nav-text">6.8 Kuhn’s Theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8-1-Proof"><span class="nav-number">8.1.</span> <span class="nav-text">6.8.1 Proof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8-2-Infinite-games"><span class="nav-number">8.2.</span> <span class="nav-text">6.8.2 Infinite games</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-9-Example"><span class="nav-number">9.</span> <span class="nav-text">6.9 Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-1-%E9%81%97%E4%BA%A7%E5%88%86%E5%89%B2%E9%97%AE%E9%A2%98"><span class="nav-number">9.1.</span> <span class="nav-text">6.9.1 遗产分割问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#analysis"><span class="nav-number">9.1.1.</span> <span class="nav-text">analysis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-2-Ultimatum-Game-%E6%9C%80%E5%90%8E%E9%80%9A%E7%89%92%E5%8D%9A%E5%BC%88"><span class="nav-number">9.2.</span> <span class="nav-text">6.9.2 Ultimatum Game (最后通牒博弈)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#analysis-1"><span class="nav-number">9.2.1.</span> <span class="nav-text">analysis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-3-Two-Period-Bargaining-Game-Ultimatum-Game"><span class="nav-number">9.3.</span> <span class="nav-text">6.9.3 Two-Period Bargaining Game (Ultimatum Game)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Discount-Factor"><span class="nav-number">9.3.1.</span> <span class="nav-text">Discount Factor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-4-Three-Period-Bargaining-Game"><span class="nav-number">9.4.</span> <span class="nav-text">6.9.4 Three-Period Bargaining Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-5-Result-for-Four-Period-Bargaining-Game"><span class="nav-number">9.5.</span> <span class="nav-text">6.9.5 Result for Four-Period Bargaining Game</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Large-Number-of-Period-Bargaining-Game"><span class="nav-number">9.5.1.</span> <span class="nav-text">Large Number of Period Bargaining Game</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%BC%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">6.1 引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-%E6%AF%94%E8%BE%83"><span class="nav-number">1.1.</span> <span class="nav-text">6.1.1 比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Strategy-Game"><span class="nav-number">1.1.1.</span> <span class="nav-text">Strategy Game</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extensive-game-provides-more-information"><span class="nav-number">1.1.2.</span> <span class="nav-text">Extensive game provides more information</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Two-variants"><span class="nav-number">1.1.3.</span> <span class="nav-text">Two variants</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-Entry-Game"><span class="nav-number">1.2.</span> <span class="nav-text">6.1.2 Entry Game</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Game-Tree"><span class="nav-number">1.2.1.</span> <span class="nav-text">Game Tree</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-Formal-Definition-of-Extensive-Game"><span class="nav-number">2.</span> <span class="nav-text">6.2  Formal Definition of Extensive Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-example"><span class="nav-number">2.1.</span> <span class="nav-text">6.2.1 example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2-extensive-game-with-perfect-information"><span class="nav-number">2.2.</span> <span class="nav-text">6.2.2  extensive game with perfect information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-3-Ultimatum-Game"><span class="nav-number">2.3.</span> <span class="nav-text">6.2.3 Ultimatum Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-4-another-example"><span class="nav-number">2.4.</span> <span class="nav-text">6.2.4 another example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-Pure-strategies-%E6%B3%A8%E6%84%8F%E6%98%AF%E5%8F%89%E4%B9%98"><span class="nav-number">3.</span> <span class="nav-text">6.3  Pure strategies (注意是叉乘)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-%E4%BE%8B1"><span class="nav-number">3.1.</span> <span class="nav-text">6.3.1 例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-%E4%BE%8B2"><span class="nav-number">3.2.</span> <span class="nav-text">6.3.2 例2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-NE-%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">4.</span> <span class="nav-text">6.4 NE 纳什均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-1-a-strategy-game"><span class="nav-number">4.1.</span> <span class="nav-text">6.4.1  a strategy game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-2-Kuhn-Theorem-1953"><span class="nav-number">4.2.</span> <span class="nav-text">6.4.2 Kuhn Theorem (1953)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-3-Example"><span class="nav-number">4.3.</span> <span class="nav-text">6.4.3 Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-4-Subgame-%E5%AD%90%E5%8D%9A%E5%BC%88"><span class="nav-number">4.4.</span> <span class="nav-text">6.4.4 Subgame (子博弈)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#an-emample-of-Subgame"><span class="nav-number">4.4.1.</span> <span class="nav-text">an emample of Subgame</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-5-Subgame-Perfect-Equilibrium"><span class="nav-number">4.5.</span> <span class="nav-text">6.4.5 Subgame Perfect Equilibrium</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example"><span class="nav-number">4.5.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-6-Motivation"><span class="nav-number">4.6.</span> <span class="nav-text">6.4.6  Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-7-Back-Induction-%E5%90%8E%E5%90%91%E5%BD%92%E7%BA%B3"><span class="nav-number">4.7.</span> <span class="nav-text">6.4.7  Back Induction (后向归纳)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-1"><span class="nav-number">4.7.1.</span> <span class="nav-text">example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-Example"><span class="nav-number">5.</span> <span class="nav-text">6.5 Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-1-%E6%A5%BC%E7%9B%98%E5%BC%80%E5%8F%91"><span class="nav-number">5.1.</span> <span class="nav-text">6.5.1 楼盘开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-2-Multiple-Persons-Game-Pirate-Game"><span class="nav-number">5.2.</span> <span class="nav-text">6.5.2  Multiple-Persons Game: Pirate Game</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-Formal-Definition-of-Subgame"><span class="nav-number">6.</span> <span class="nav-text">6.6 Formal Definition of Subgame</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-1-Notations"><span class="nav-number">6.1.</span> <span class="nav-text">6.6.1 Notations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-2"><span class="nav-number">6.1.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-2-Formal-Definition"><span class="nav-number">6.2.</span> <span class="nav-text">6.6.2 Formal Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-3"><span class="nav-number">6.2.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-3-Subgame-Perfect-Equilibrium"><span class="nav-number">6.3.</span> <span class="nav-text">6.6.3 Subgame Perfect Equilibrium</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-7-One-Deviation-Principle-%E5%8D%95%E6%AD%A5%E5%81%8F%E7%A6%BB%E5%8E%9F%E5%88%99"><span class="nav-number">7.</span> <span class="nav-text">6.7 One Deviation Principle (单步偏离原则)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Example-One-Deviation-Principle"><span class="nav-number">7.0.1.</span> <span class="nav-text">Example: One Deviation Principle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-1-Infinite-Games-for-One-Deviation-Property"><span class="nav-number">7.1.</span> <span class="nav-text">6.7.1 Infinite Games for One Deviation Property</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-8-Kuhn%E2%80%99s-Theorem"><span class="nav-number">8.</span> <span class="nav-text">6.8 Kuhn’s Theorem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8-1-Proof"><span class="nav-number">8.1.</span> <span class="nav-text">6.8.1 Proof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8-2-Infinite-games"><span class="nav-number">8.2.</span> <span class="nav-text">6.8.2 Infinite games</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-9-Example"><span class="nav-number">9.</span> <span class="nav-text">6.9 Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-1-%E9%81%97%E4%BA%A7%E5%88%86%E5%89%B2%E9%97%AE%E9%A2%98"><span class="nav-number">9.1.</span> <span class="nav-text">6.9.1 遗产分割问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#analysis"><span class="nav-number">9.1.1.</span> <span class="nav-text">analysis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-2-Ultimatum-Game-%E6%9C%80%E5%90%8E%E9%80%9A%E7%89%92%E5%8D%9A%E5%BC%88"><span class="nav-number">9.2.</span> <span class="nav-text">6.9.2 Ultimatum Game (最后通牒博弈)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#analysis-1"><span class="nav-number">9.2.1.</span> <span class="nav-text">analysis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-3-Two-Period-Bargaining-Game-Ultimatum-Game"><span class="nav-number">9.3.</span> <span class="nav-text">6.9.3 Two-Period Bargaining Game (Ultimatum Game)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Discount-Factor"><span class="nav-number">9.3.1.</span> <span class="nav-text">Discount Factor</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-4-Three-Period-Bargaining-Game"><span class="nav-number">9.4.</span> <span class="nav-text">6.9.4 Three-Period Bargaining Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-5-Result-for-Four-Period-Bargaining-Game"><span class="nav-number">9.5.</span> <span class="nav-text">6.9.5 Result for Four-Period Bargaining Game</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Large-Number-of-Period-Bargaining-Game"><span class="nav-number">9.5.1.</span> <span class="nav-text">Large Number of Period Bargaining Game</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -873,7 +876,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -886,7 +889,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -936,7 +939,7 @@ u_i |_h (s_i^* |_h, s_{(-i)}^* |_h) \geq u_i |_h (s_i, s_{(-i)}^* |_h)</script><
     </div>
 <div class="theme-info">
     <div class="powered-by"></div>
-    <span class="post-count">全站共64.5k字</span>
+    <span class="post-count">全站共65.6k字</span>
   </div>
 
         

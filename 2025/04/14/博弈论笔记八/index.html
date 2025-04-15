@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="博弈论第八章的内容，主从博弈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第八章 Stackelberg Game - Applications to Seccurity">
+<meta property="og:url" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/index.html">
+<meta property="og:site_name" content="Resume">
+<meta property="og:description" content="博弈论第八章的内容，主从博弈">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415192932563.png">
+<meta property="og:image" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415193836975.png">
+<meta property="og:image" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415193929912.png">
+<meta property="og:image" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415193959488.png">
+<meta property="og:image" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415194116798.png">
+<meta property="og:image" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415194738815.png">
+<meta property="og:image" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415195848030.png">
+<meta property="article:published_time" content="2025-04-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-15T12:30:11.273Z">
+<meta property="article:author" content="markastrid">
+<meta property="article:tag" content="博弈论第八章">
+<meta property="article:tag" content="主从博弈">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415192932563.png">
+
+<link rel="canonical" href="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第八章 Stackelberg Game - Applications to Seccurity | Resume</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Resume</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Show yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第八章 Stackelberg Game - Applications to Seccurity
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-14 00:00:00" itemprop="dateCreated datePublished" datetime="2025-04-14T00:00:00+08:00">2025-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-15 20:30:11" itemprop="dateModified" datetime="2025-04-15T20:30:11+08:00">2025-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">博弈论第八章的内容，主从博弈</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="7-1-Supplements-for-Nash-Equilibrium"><a href="#7-1-Supplements-for-Nash-Equilibrium" class="headerlink" title="7.1 Supplements for Nash Equilibrium"></a>7.1 Supplements for Nash Equilibrium</h2><img src="/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415192932563.png" class="" title="image-20250415192932563">
+<p>Player 1: $P_1 = (p_{11}, p_{12})$</p>
+<p>Payoff for Player 1: $U_1 = P_1 L P_2^\top$</p>
+<p>Player 2: $P_1 = (p_{21}, p_{22})$</p>
+<p>Payoff for Player 2: $U_1 = P_1R P_2^\top$</p>
+<h3 id="7-1-1-NE"><a href="#7-1-1-NE" class="headerlink" title="7.1.1 NE"></a>7.1.1 NE</h3><p>$<br>\text{Two players with payoff matrices } L \text{ and } R \text{ of size } m \times n<br>$</p>
+<p>$<br>P_1 = (p_{11}, p_{12}, \dots, p_{1m})<br>$<br>$<br>P_2 = (p_{21}, p_{22}, \dots, p_{2n})<br>$</p>
+<p>$<br>(P_1, P_2) \text{ is a Nash equilibrium (NE) if and only if }<br>$</p>
+<p>$<br>P_1 L P_2^\top \geq P_1’ L P_2^\top \text{ for all mixed strategies } P_1’<br>$<br>$P_1 R P_2^\top \geq P_1 R [P_2’]^\top \text{ for all mixed strategies } P_2’$</p>
+<p>Or we can say:</p>
+<p>$<br>(P_1, P_2) \text{ is a NE if and only if}<br>$</p>
+<p>$<br>P_1 L P_2^\top \geq e_i L P_2^\top \text{ for every } i \in [m] \quad e_i = (0, \dots, 0, 1, 0, \dots, 0)<br>$<br>$<br>P_1 R P_2^\top \geq P_1 R e_i^\top \text{ for every } i \in [n] \quad e_i = (0, \dots, 0, 1, 0, \dots, 0)<br>$</p>
+<h3 id="7-1-2-Strategy-game"><a href="#7-1-2-Strategy-game" class="headerlink" title="7.1.2 Strategy game"></a>7.1.2 Strategy game</h3><img src="/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415193836975.png" class="" title="image-20250415193836975">
+<p>$<br>\text{Player 1’s mixed strategy: } \mathbf{x} = (x_1, 1 - x_1)<br>$<br>$<br>\text{Player 2’s mixed strategy: } \mathbf{y} = (y_1, 1 - y_1)<br>$<br>$<br>\text{Player 1’s payoff: } \mathbf{x} L \mathbf{y}^\top<br>$<br>$<br>\text{Player 2’s payoff: } \mathbf{x} R \mathbf{y}^\top<br>$</p>
+<h2 id="7-2-Stackelberg-game-主从博弈"><a href="#7-2-Stackelberg-game-主从博弈" class="headerlink" title="7.2 Stackelberg game (主从博弈)"></a>7.2 Stackelberg game (主从博弈)</h2><img src="/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415193929912.png" class="" title="image-20250415193929912">
+<p><strong>Player 1: “leader”</strong>     <strong>Player 2 “follower”</strong></p>
+<p>1)Leader selects a (possibly mixed) strategy $x_1$</p>
+<p>2)Follower learns about $x_1$, selects the best response $x_2$</p>
+<h3 id="7-2-1-如何表示主从博弈"><a href="#7-2-1-如何表示主从博弈" class="headerlink" title="7.2.1 如何表示主从博弈"></a>7.2.1 如何表示主从博弈</h3><img src="/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415193959488.png" class="" title="image-20250415193959488">
+<p>Mixed strategies are hard to visually represent</p>
+<ul>
+<li>Continuous spectrum of possible actions</li>
+<li>行动的连续谱</li>
+</ul>
+<h3 id="7-2-2-主从博弈的纳什均衡"><a href="#7-2-2-主从博弈的纳什均衡" class="headerlink" title="7.2.2  主从博弈的纳什均衡"></a>7.2.2  主从博弈的纳什均衡</h3><img src="/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415194116798.png" class="" title="image-20250415194116798">
+<p>Player 1 takes mixed strategies, the advantage is more:</p>
+<ul>
+<li>If Player 1 plays Up and Down with probabilities 0.49 and 0.51, respectively</li>
+<li>Player 2 is still better off playing Right than Left, in expectation</li>
+<li>The Reward of Player 1 &gt;2</li>
+</ul>
+<p>Can the leader lose in Stackelberg equilibrium compared to a Nash equilibrium?</p>
+<ul>
+<li>In Stackelberg, the leader must take action in advance, while in Nash, he can change his strategy at any point.</li>
+<li>The answer: No<ul>
+<li>The optimal reward for the leader in the Stackelberg game is always greater than or equal to his maximum reward under any Nash equilibrium.</li>
+</ul>
+</li>
+<li>If (x,y) is a NE, then Player 1 can always select x, ensure that Player 2 will play y and achieve the reward in NE<ul>
+<li>Player 1 may be able to select a better strategy than x</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-2-3-Stackelberg-vs-Nash"><a href="#7-2-3-Stackelberg-vs-Nash" class="headerlink" title="7.2.3  Stackelberg vs Nash"></a>7.2.3  Stackelberg vs Nash</h3><p>It is important to note that:</p>
+<ul>
+<li>the leader can take mixed strategies</li>
+<li>the follower knows (and trusts) the leader’s strategies</li>
+<li>the leader knows the follower’s reward structure </li>
+</ul>
+<h2 id="7-3-Stackelberg-in-zero-sum-game"><a href="#7-3-Stackelberg-in-zero-sum-game" class="headerlink" title="7.3 Stackelberg in zero-sum game"></a>7.3 Stackelberg in zero-sum game</h2><p>Recall the minimax theorem:</p>
+<script type="math/tex; mode=display">
+\max_{\mathbf{x}} \min_{\mathbf{y}} \mathbf{x} M \mathbf{y}^\top = \min_{\mathbf{y}} \max_{\mathbf{x}} \mathbf{x} M \mathbf{y}^\top</script><p>Player 1 goes first $\rightarrow$ Player 1 selects the maxmin strategy.</p>
+<p>Player 2 goes first $\rightarrow$ Player 2 selects the minmax strategy.</p>
+<p>The minimax theorem: make no difference.</p>
+<p><strong>Strategy game and Stackelberg game in zero-sum are essentially identical.</strong></p>
+<h3 id="7-3-1-Stackelberg-for-general-2-persons-game"><a href="#7-3-1-Stackelberg-for-general-2-persons-game" class="headerlink" title="7.3.1 Stackelberg for general 2-persons game"></a>7.3.1 Stackelberg for general 2-persons game</h3><p>2-persons game: the payoff matrices are L and R for player 1 and 2, respectively.  </p>
+<script type="math/tex; mode=display">
+\max_{\mathbf{x}} \mathbf{x} L \mathbf{y}_*^\top
+\\\text{subject \quad to}\\
+\mathbf{y}_* = \arg \max_{\mathbf{y}} \mathbf{x} R \mathbf{y}^\top</script><h3 id="7-3-2-example"><a href="#7-3-2-example" class="headerlink" title="7.3.2 example"></a>7.3.2 example</h3><img src="/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415194738815.png" class="" title="image-20250415194738815">
+<p>Mixed strategy <strong>x</strong>=(p,1-p) over ‘Up’ and ‘Down’. Consider two cases:</p>
+<ul>
+<li>Player 2 selects ‘Left’</li>
+<li>Player 2 selects ‘Right’</li>
+</ul>
+<h4 id="case-1"><a href="#case-1" class="headerlink" title="case 1"></a>case 1</h4><p>Player 2 selects ‘Left’ : $\max_{p \in [0, 1]} \left( 1p + 0(1 - p) \right)$<br>subject to $p \cdot 1 + 0 \cdot (1 - p) \geq 0 \cdot p + 1 \cdot (1 - p)$</p>
+<p>Player 2 selects ‘Left’ : $\max_{p \in [0, 1]} p$<br>subject to : $p \geq 1 - p$</p>
+<p><strong>Solution : p=1,the payoff : 1</strong></p>
+<h4 id="case-2"><a href="#case-2" class="headerlink" title="case 2"></a>case 2</h4><p>Player 2 selects ‘Right’ : $\max_{p \in [0, 1]} \left( 3p + 2(1 - p) \right)$<br>subject to : $p \cdot 1 + 0 \cdot (1 - p) \leq 0 \cdot p + 1 \cdot (1 - p)$</p>
+<p>Player 2 selects ‘Right’ : $\max_{p \in [0, 1]} \left( p + 2 \right)$<br>subject to : $p \leq 1 - p$</p>
+<p><strong>Solution : p=1/2,the payoff : 2.5</strong></p>
+<h3 id="7-3-3-Stackelberg-via-linear-programs"><a href="#7-3-3-Stackelberg-via-linear-programs" class="headerlink" title="7.3.3  Stackelberg via linear programs"></a>7.3.3  Stackelberg via linear programs</h3><p>High-level idea:</p>
+<ul>
+<li>Fix a strategy $ a_2^* \in A_2 $ for Player 2.</li>
+</ul>
+<ul>
+<li>Write a linear program with mixed strategy $\mathbf{x} $$ of Player 1.</li>
+</ul>
+<ul>
+<li>Maximize the payoff of Player 1 with respect to mixed strategy $\mathbf{x} $, and Player 2 selects the best response $ a_2^* $.</li>
+</ul>
+<ul>
+<li>Solve this linear program.</li>
+</ul>
+<p>Solve linear programs for every $ a_2^* \in A_2 $.</p>
+<h3 id="7-3-4-Stackelberg-via-linear-programs-formally"><a href="#7-3-4-Stackelberg-via-linear-programs-formally" class="headerlink" title="7.3.4 Stackelberg via linear programs (formally)"></a>7.3.4 Stackelberg via linear programs (formally)</h3><p>$A$, $B$ for player 1 (Leader) and player 2 (Follower)</p>
+<p>$|A| = m$, $|B| = n$</p>
+<p>$\mathbf{x}$ is a mixed strategy over $A$</p>
+<p>$\mathbf{x}(a_i)$ denotes the probability of Leader selecting $a_i \in A$</p>
+<p>$u_1(a, b)$ and $u_2(a, b)$: payoff for Leader and Follower</p>
+<p><strong>One LP for fixed $ b^* \in A_2 $</strong></p>
+<p>Fixed strategy $ b^* \in A_2 $ for player 2 (Follower)</p>
+<p>$U_1(b^<em>) = \max \sum_{a \in A} \mathbf{x}(a) u_1(a, b^</em>)$</p>
+<p>subject to</p>
+<ul>
+<li>$\forall b \in B, \sum_{a \in A} \mathbf{x}(a) u_2(a, b^*) \geq \sum_{a \in A} \mathbf{x}(a) u_2(a, b)$</li>
+</ul>
+<ul>
+<li>$\sum_{a \in A} \mathbf{x}(a) = 1, \quad \mathbf{x}(a) \geq 0$</li>
+</ul>
+<p><strong>Taking the maximum over $b \in A_2 $ :$\max_{b} U_1(b)$</strong></p>
+<h4 id="exercise"><a href="#exercise" class="headerlink" title="exercise"></a>exercise</h4><img src="/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/image-20250415195848030.png" class="" title="image-20250415195848030">
+<p><strong>2选择Left</strong></p>
+<script type="math/tex; mode=display">
+\max p+2q+3(1-p-q)
+\\\text{subject \quad to}\\
+2p\geq3q\\
+2p\geq1-p-q</script><p>结果：$[\frac{1}{3},0,\frac{7}{3}]$,payoff:$\frac{7}{3}$</p>
+<p><strong>2选择middle</strong></p>
+<script type="math/tex; mode=display">
+\max 3p+q+2(1-p-q)
+\\\text{subject \quad to}\\
+3q\geq2p\\
+3q\geq1-p-q</script><p>结果：$[\frac{3}{5},\frac{2}{5},0]$,payoff:$\frac{11}{5}$</p>
+<p><strong>2选择right</strong></p>
+<script type="math/tex; mode=display">
+\max p+2q+(1-p-q)
+\\\text{subject \quad to}\\
+1-p-q\geq p\\
+1-p-q\geq3q</script><p>结果：$[\frac{1}{3},0,\frac{2}{3}]$,payoff:$1$</p>
+<p>因此选择left有最大收益$\frac{7}{3}$</p>
+<h2 id="7-4-Computing-Stackelberg"><a href="#7-4-Computing-Stackelberg" class="headerlink" title="7.4 Computing Stackelberg"></a>7.4 Computing Stackelberg</h2>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>markastrid
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://example.com/2025/04/14/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/" title="第八章 Stackelberg Game - Applications to Seccurity">https://example.com/2025/04/14/博弈论笔记八/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E5%85%AB%E7%AB%A0/" rel="tag"># 博弈论第八章</a>
+              <a href="/tags/%E4%B8%BB%E4%BB%8E%E5%8D%9A%E5%BC%88/" rel="tag"># 主从博弈</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/06/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B8%83/" rel="prev" title="第六、七章 Extensive Game">
+      <i class="fa fa-chevron-left"></i> 第六、七章 Extensive Game
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-Supplements-for-Nash-Equilibrium"><span class="nav-number">1.</span> <span class="nav-text">7.1 Supplements for Nash Equilibrium</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-1-NE"><span class="nav-number">1.1.</span> <span class="nav-text">7.1.1 NE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-2-Strategy-game"><span class="nav-number">1.2.</span> <span class="nav-text">7.1.2 Strategy game</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-Stackelberg-game-%E4%B8%BB%E4%BB%8E%E5%8D%9A%E5%BC%88"><span class="nav-number">2.</span> <span class="nav-text">7.2 Stackelberg game (主从博弈)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-1-%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E4%B8%BB%E4%BB%8E%E5%8D%9A%E5%BC%88"><span class="nav-number">2.1.</span> <span class="nav-text">7.2.1 如何表示主从博弈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-2-%E4%B8%BB%E4%BB%8E%E5%8D%9A%E5%BC%88%E7%9A%84%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1"><span class="nav-number">2.2.</span> <span class="nav-text">7.2.2  主从博弈的纳什均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-3-Stackelberg-vs-Nash"><span class="nav-number">2.3.</span> <span class="nav-text">7.2.3  Stackelberg vs Nash</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-Stackelberg-in-zero-sum-game"><span class="nav-number">3.</span> <span class="nav-text">7.3 Stackelberg in zero-sum game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-1-Stackelberg-for-general-2-persons-game"><span class="nav-number">3.1.</span> <span class="nav-text">7.3.1 Stackelberg for general 2-persons game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-2-example"><span class="nav-number">3.2.</span> <span class="nav-text">7.3.2 example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#case-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">case 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#case-2"><span class="nav-number">3.2.2.</span> <span class="nav-text">case 2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-3-Stackelberg-via-linear-programs"><span class="nav-number">3.3.</span> <span class="nav-text">7.3.3  Stackelberg via linear programs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-4-Stackelberg-via-linear-programs-formally"><span class="nav-number">3.4.</span> <span class="nav-text">7.3.4 Stackelberg via linear programs (formally)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#exercise"><span class="nav-number">3.4.1.</span> <span class="nav-text">exercise</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-Computing-Stackelberg"><span class="nav-number">4.</span> <span class="nav-text">7.4 Computing Stackelberg</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="markastrid"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">markastrid</p>
+  <div class="site-description" itemprop="description">to be continued</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        </style>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">markastrid</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+<div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    </div>
+<div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共65.6k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
