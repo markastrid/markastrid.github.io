@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="博弈论第九章的内容，alpha-beta剪枝">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第九章 Game Tree Search">
+<meta property="og:url" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/index.html">
+<meta property="og:site_name" content="Resume">
+<meta property="og:description" content="博弈论第九章的内容，alpha-beta剪枝">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421193401924.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421193953675.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194049170.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194101720.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194140517.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194220990.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194226370.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194938359.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195101351.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195144535.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195159638.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195205591.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195612232.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195557136-17452366441891.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195839193.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195846566.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195855844.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195901974.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195909182.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421200428920.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421200443639.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421200456555.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201028981.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201051923.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201059594.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201108913.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201117959.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201133108.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201138910.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201201533.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201222156.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201232533.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201239719.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201247095.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201253484.png">
+<meta property="og:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201300371.png">
+<meta property="article:published_time" content="2025-04-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-21T12:13:16.811Z">
+<meta property="article:author" content="markastrid">
+<meta property="article:tag" content="博弈论第九章">
+<meta property="article:tag" content="树搜索">
+<meta property="article:tag" content="剪枝">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421193401924.png">
+
+<link rel="canonical" href="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第九章 Game Tree Search | Resume</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Resume</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Show yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第九章 Game Tree Search
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-21 00:00:00 / 修改时间：20:13:16" itemprop="dateCreated datePublished" datetime="2025-04-21T00:00:00+08:00">2025-04-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">博弈论第九章的内容，alpha-beta剪枝</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<h2 id="9-1-Introduction"><a href="#9-1-Introduction" class="headerlink" title="9.1 Introduction"></a>9.1 Introduction</h2><h3 id="9-1-1-Setting"><a href="#9-1-1-Setting" class="headerlink" title="9.1.1 Setting"></a>9.1.1 Setting</h3><ul>
+<li><p>Two players whose actions alternate</p>
+</li>
+<li><p>Utility values for each player are the opposite of the other</p>
+</li>
+<li><p>This creates the adversarial situation</p>
+</li>
+<li><p>Fully observable environments</p>
+</li>
+<li><p>Deterministic game: go, chess</p>
+</li>
+<li><p>Generalizes to stochastic games: backgammon(西洋双陆棋), monopoly(大富翁), yahtzee(雅兹骰子游戏), parcheesi(帕奇西棋), roulette(轮盘赌), craps(掷骰子赌博)</p>
+</li>
+</ul>
+<h3 id="9-1-2-A-brief-history"><a href="#9-1-2-A-brief-history" class="headerlink" title="9.1.2 A brief history"></a>9.1.2 A brief history</h3><p>1846: play tic-tac-toe</p>
+<p>1928: minimax theorem (von Neumann)</p>
+<p>1944: backward-induction algorithm to produce perfect play (von Neumann &amp; Morgenstern)</p>
+<p>1950: minimax algorithm -finite horizon, approximate evaluation (Shannon)</p>
+<p>1951: program (on paper) for playing chess (Turing)</p>
+<p>1956: pruning to allow deeper search</p>
+<p>1957: first complete chess program</p>
+<p>1967: first program to compete in human chess tournaments</p>
+<p>1997 (IBM): Deep Blue</p>
+<p>2017: (Deepmind): AlphaGo</p>
+<h2 id="9-2-Game-tree-2-player-deterministic-turns"><a href="#9-2-Game-tree-2-player-deterministic-turns" class="headerlink" title="9.2 Game tree (2-player, deterministic, turns)"></a>9.2 Game tree (2-player, deterministic, turns)</h2><img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421193401924.png" class="" title="image-20250421193401924">
+<p><strong>Root node</strong> = the initial state</p>
+<p><strong>Non-terminal node</strong> = the states a player can move to</p>
+<p><strong>Terminal node</strong> = a state where the game ends</p>
+<h3 id="9-2-1-Search-versus-Games"><a href="#9-2-1-Search-versus-Games" class="headerlink" title="9.2.1 Search versus Games"></a>9.2.1 Search versus Games</h3><p>Search – no adversary</p>
+<ul>
+<li><p>Solution is (heuristic) method for finding goal</p>
+</li>
+<li><p>Heuristics and techniques can find <em>optimal</em> solution</p>
+</li>
+<li><p>Evaluation function: estimate of cost from start to goal through given node</p>
+</li>
+</ul>
+<p>Games – adversary</p>
+<ul>
+<li>Solution is strategy <ul>
+<li>strategy specifies move for every possible opponent reply</li>
+</ul>
+</li>
+<li>Time limits force an <em>approximate</em> solution</li>
+<li>Evaluation function: evaluate “goodness” of game position</li>
+<li>Examples: chess, checkers, go…</li>
+</ul>
+<p><strong>无对手的搜索</strong>：通过启发式方法寻找从起点到目标的最优解，评估函数用于估算从当前节点到目标的成本。</p>
+<p><strong>有对手的博弈</strong>：解法是通过策略来应对对手的每一个可能反应。由于时间限制，博弈问题通常要求找到一个近似解。评估函数用于评估一个游戏局面的“好坏”，例如在国际象棋或围棋中的局势评估。</p>
+<h3 id="9-2-2-Two-players-MAX-and-MIN"><a href="#9-2-2-Two-players-MAX-and-MIN" class="headerlink" title="9.2.2 Two players: MAX and MIN"></a>9.2.2 Two players: MAX and MIN</h3><p>MAX moves first and take turns until the game is over</p>
+<ul>
+<li><p>Winner gets reward, loser gets penalty.</p>
+</li>
+<li><p>Zero sum means the sum of the reward and the penalty is a constant</p>
+</li>
+</ul>
+<p><strong>Formal definition as a search problem:</strong></p>
+<ul>
+<li><strong>Initial state:</strong> Set-up specified by the rules, e.g., initial board of chess</li>
+<li><strong>Player:</strong> Defines which player has the move in a state</li>
+<li><strong>Actions:</strong> the set of legal moves in a state</li>
+<li><strong>Result:</strong> Transition model defines the result state of a move</li>
+<li><strong>Successor function:</strong> list of (move,state) pairs specifying legal moves</li>
+<li><strong>Terminal-Test:</strong> Is the game finished? True if finished, false other.</li>
+<li><strong>Utility function:</strong> Gives numerical value of terminal state for player<ul>
+<li>E.g., win (+1), lose (-1), and draw (0) in tic-tac-toe.(井字棋)</li>
+<li>E.g., win (+1), lose (0), and draw (1/2) in chess.</li>
+</ul>
+</li>
+</ul>
+<p><strong>MAX</strong> uses search tree to determine next move.</p>
+<h3 id="9-2-3-An-optimal-procedure-The-Min-Max-method"><a href="#9-2-3-An-optimal-procedure-The-Min-Max-method" class="headerlink" title="9.2.3 An optimal procedure: The Min-Max method"></a>9.2.3 An optimal procedure: The Min-Max method</h3><p>Find the optimal strategy for Max:</p>
+<ol>
+<li>Generate the whole game tree, down to the leaves</li>
+<li>Apply utility (payoff) function to each leaf</li>
+<li>Back-up values from leaves through branch nodes:<ul>
+<li>Max node computes the maximum of its child values</li>
+<li>Min node computes the minimum of its child values</li>
+</ul>
+</li>
+<li>At root: choose the move leading to the child of highest value</li>
+</ol>
+<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421193953675.png" class="" title="image-20250421193953675">
+<p>A two-players game tree: two type nodes are moves by MAX and MIN, respectively. The terminal nodes show the payoff for MAX, whereas the payoffs of other nodes can be computed by the minimax algorithms. </p>
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194049170.png" class="" title="image-20250421194049170">
+<p><strong>Backward induction</strong></p>
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194101720.png" class="" title="image-20250421194101720">
+<p><strong>Maximizes the payoffs for MAX</strong></p>
+<h3 id="9-2-4-Pseudocode-for-Minimax-Algorithm"><a href="#9-2-4-Pseudocode-for-Minimax-Algorithm" class="headerlink" title="9.2.4 Pseudocode for Minimax Algorithm"></a>9.2.4 Pseudocode for Minimax Algorithm</h3><img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194140517.png" class="" title="image-20250421194140517">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194220990.png" class="" title="image-20250421194220990">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194226370.png" class="" title="image-20250421194226370">
+<h4 id="9-2-5-Properties-of-Minimax-Algorithm"><a href="#9-2-5-Properties-of-Minimax-Algorithm" class="headerlink" title="9.2.5 Properties of Minimax Algorithm"></a>9.2.5 Properties of Minimax Algorithm</h4><p>Complete?  </p>
+<ul>
+<li>Yes (if tree is finite).</li>
+</ul>
+<p>Optimal? </p>
+<ul>
+<li>Yes (against an optimal opponent).</li>
+<li>Can it be beaten by an opponent playing sub-optimally?<ul>
+<li>No. (Why not?)</li>
+</ul>
+</li>
+</ul>
+<p>Time complexity?</p>
+<ul>
+<li>O($b^m$) [b =max. number of child., m =max. depth of any node]</li>
+</ul>
+<p>Space complexity?</p>
+<ul>
+<li>O(m)  (depth-first search, generate all actions at once)</li>
+</ul>
+<h3 id="9-2-6-Game-Tree-Size"><a href="#9-2-6-Game-Tree-Size" class="headerlink" title="9.2.6 Game Tree Size"></a>9.2.6 Game Tree Size</h3><p>Tic-Tac-Toe</p>
+<ul>
+<li>b ≈ 5 legal actions per state on average, total of 9 depth in game</li>
+<li>$5^9$ = 1,953,125</li>
+</ul>
+<p><strong>exact solution quite reasonable</strong></p>
+<p>Chess</p>
+<ul>
+<li>b ≈ 35 (approximate average branching factor)</li>
+<li>d ≈ 100 (depth of game tree for “typical” game)</li>
+<li>$b^d$ ≈ 35100 ≈ 10154 nodes!!</li>
+</ul>
+<p><strong>exact solution completely infeasible</strong></p>
+<p><strong>It is usually impossible to search the whole tree</strong></p>
+<h2 id="9-3-Evaluation-Function"><a href="#9-3-Evaluation-Function" class="headerlink" title="9.3 Evaluation Function"></a>9.3 Evaluation Function</h2><h3 id="9-3-4-Static-Heuristic-Evaluation-Functions"><a href="#9-3-4-Static-Heuristic-Evaluation-Functions" class="headerlink" title="9.3.4 (Static) Heuristic Evaluation Functions"></a>9.3.4 (Static) Heuristic Evaluation Functions</h3><p>An Evaluation Function</p>
+<ul>
+<li>Estimates how good the current state is for a player</li>
+<li>Evaluate how good it is for the player, how good it is for the opponent, then subtract the opponent’s score from the player’s</li>
+<li>Called “static” because it is called on a static board position</li>
+<li>Chess: Value of all white pieces - Value of all black pieces</li>
+</ul>
+<p>Typical values from -∞  (loss) to +∞ (win) or [-1, +1]</p>
+<p>If the board evaluation is X for a player, it’s -X for the opponent e.g., zero-sum game</p>
+<h4 id="example-1"><a href="#example-1" class="headerlink" title="example"></a>example</h4><img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421194938359.png" class="" title="image-20250421194938359">
+<p>For chess, typical linear weighted sum of features:</p>
+<p>$Eval(s)=w_1 f_1 (s)+w_2 f_2 (s)+…+w_n f_n (s)$</p>
+<p>$e.g., w_1=9$ with $f_1 (s)$ = number of white queens - number of black queens, etc.</p>
+<h3 id="9-3-5-Applying-MiniMax-to-tic-tac-toe"><a href="#9-3-5-Applying-MiniMax-to-tic-tac-toe" class="headerlink" title="9.3.5 Applying MiniMax to tic-tac-toe"></a>9.3.5 Applying MiniMax to tic-tac-toe</h3><img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195101351.png" class="" title="image-20250421195101351">
+<p>The static heuristic evaluation function: current state n</p>
+<ul>
+<li>M(n): the number of my possible winning lines</li>
+<li>O(n): the number of the opponent’s possible winning lines</li>
+</ul>
+<p>Heuristic evaluation function : E(n)=M(n)-O(n)</p>
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195144535.png" class="" title="image-20250421195144535">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195159638.png" class="" title="image-20250421195159638">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195205591.png" class="" title="image-20250421195205591">
+<p>从这里发现：由于要max在当前节点的选择，而从第一个(最左边)发现的payoff为1，因此在其他的节点的子节点搜索的时候，搜索到$-\infty$这个阶段最大不超过$-\infty$，因此这个节点的子节点不再需要搜索，这就是剪枝。</p>
+<h2 id="9-4-Alpha-Beta-Pruning-Exploiting-the-fact-of-an-Adversary"><a href="#9-4-Alpha-Beta-Pruning-Exploiting-the-fact-of-an-Adversary" class="headerlink" title="9.4 Alpha-Beta Pruning: Exploiting the fact of an Adversary"></a>9.4 Alpha-Beta Pruning: Exploiting the fact of an Adversary</h2><p>If a position is provably bad:</p>
+<ul>
+<li>It is NO USE expending search time to find out exactly how bad</li>
+</ul>
+<p>If the adversary can force a bad position:</p>
+<ul>
+<li>It is NO USE expending search time to find out the good positions that the adversary won’t let you achieve anyway</li>
+</ul>
+<p>Bad = not better than we already know we can achieve elsewhere (也就是上面所说的情况)</p>
+<h3 id="9-4-1-example"><a href="#9-4-1-example" class="headerlink" title="9.4.1 example"></a>9.4.1 example</h3><img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195612232.png" class="" title="image-20250421195612232">
+<p>这里就是上面说过的情况</p>
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195557136-17452366441891.png" class="" title="image-20250421195557136">
+<h3 id="9-4-2-Alpha-Beta-Example-typical"><a href="#9-4-2-Alpha-Beta-Example-typical" class="headerlink" title="9.4.2 Alpha-Beta Example (typical)"></a>9.4.2 Alpha-Beta Example (typical)</h3><p><strong>Do DF-search until first leaf</strong></p>
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195839193.png" class="" title="image-20250421195839193">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195846566.png" class="" title="image-20250421195846566">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195855844.png" class="" title="image-20250421195855844">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195901974.png" class="" title="image-20250421195901974">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421195909182.png" class="" title="image-20250421195909182">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421200428920.png" class="" title="image-20250421200428920">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421200443639.png" class="" title="image-20250421200443639">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421200456555.png" class="" title="image-20250421200456555">
+<h3 id="9-4-3-Alpha-beta-algorithm"><a href="#9-4-3-Alpha-beta-algorithm" class="headerlink" title="9.4.3 Alpha-beta algorithm"></a>9.4.3 Alpha-beta algorithm</h3><p>Depth first search</p>
+<ul>
+<li>only considers nodes along a single path from root at any time</li>
+<li>α = highest-value choice found at any choice point of path for MAX (initially, α=-∞)</li>
+<li>β = lowest-value choice found at any choice point of path for MIN (initially, β=+∞)</li>
+</ul>
+<p>Pass current values of α and β down to child nodes during search.</p>
+<p>Update values of α and β during search:</p>
+<ul>
+<li>MAX updates α at MAX nodes</li>
+<li>MIN updates β at MIN nodes</li>
+</ul>
+<p>Prune remaining branches at a node when α≥β</p>
+<ul>
+<li>Prune below a MAX node whose α value becomes greater than or equal to the β value of its ancestors<ul>
+<li><strong>Max nodes update</strong> α based on children’s returned values.</li>
+</ul>
+</li>
+<li>Prune below a Min node whose β value becomes less than or equal to the α value of its ancestors<ul>
+<li><strong>Min nodes update</strong> β based on children’s returned values.</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-4-4-Pseudocode-for-Alpha-Beta-Algorithm"><a href="#9-4-4-Pseudocode-for-Alpha-Beta-Algorithm" class="headerlink" title="9.4.4 Pseudocode for Alpha-Beta Algorithm"></a>9.4.4 Pseudocode for Alpha-Beta Algorithm</h3><img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201028981.png" class="" title="image-20250421201028981">
+<h4 id="9-4-5-example-revisited"><a href="#9-4-5-example-revisited" class="headerlink" title="9.4.5 example revisited"></a>9.4.5 example revisited</h4><img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201051923.png" class="" title="image-20250421201051923">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201059594.png" class="" title="image-20250421201059594">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201108913.png" class="" title="image-20250421201108913">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201117959.png" class="" title="image-20250421201117959">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201133108.png" class="" title="image-20250421201133108">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201138910.png" class="" title="image-20250421201138910">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201201533.png" class="" title="image-20250421201201533">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201222156.png" class="" title="image-20250421201222156">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201232533.png" class="" title="image-20250421201232533">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201239719.png" class="" title="image-20250421201239719">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201247095.png" class="" title="image-20250421201247095">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201253484.png" class="" title="image-20250421201253484">
+<img src="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/image-20250421201300371.png" class="" title="image-20250421201300371">
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>markastrid
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://example.com/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/" title="第九章 Game Tree Search">https://example.com/2025/04/21/博弈论笔记九/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E4%B9%9D%E7%AB%A0/" rel="tag"># 博弈论第九章</a>
+              <a href="/tags/%E6%A0%91%E6%90%9C%E7%B4%A2/" rel="tag"># 树搜索</a>
+              <a href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag"># 剪枝</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/16/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%85%AB/" rel="prev" title="第八章 Stackelberg Game - Applications to Seccurity">
+      <i class="fa fa-chevron-left"></i> 第八章 Stackelberg Game - Applications to Seccurity
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">9.1 Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-1-Setting"><span class="nav-number">1.1.</span> <span class="nav-text">9.1.1 Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-2-A-brief-history"><span class="nav-number">1.2.</span> <span class="nav-text">9.1.2 A brief history</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-Game-tree-2-player-deterministic-turns"><span class="nav-number">2.</span> <span class="nav-text">9.2 Game tree (2-player, deterministic, turns)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-1-Search-versus-Games"><span class="nav-number">2.1.</span> <span class="nav-text">9.2.1 Search versus Games</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-2-Two-players-MAX-and-MIN"><span class="nav-number">2.2.</span> <span class="nav-text">9.2.2 Two players: MAX and MIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-3-An-optimal-procedure-The-Min-Max-method"><span class="nav-number">2.3.</span> <span class="nav-text">9.2.3 An optimal procedure: The Min-Max method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example"><span class="nav-number">2.3.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-4-Pseudocode-for-Minimax-Algorithm"><span class="nav-number">2.4.</span> <span class="nav-text">9.2.4 Pseudocode for Minimax Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-2-5-Properties-of-Minimax-Algorithm"><span class="nav-number">2.4.1.</span> <span class="nav-text">9.2.5 Properties of Minimax Algorithm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-6-Game-Tree-Size"><span class="nav-number">2.5.</span> <span class="nav-text">9.2.6 Game Tree Size</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-Evaluation-Function"><span class="nav-number">3.</span> <span class="nav-text">9.3 Evaluation Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-4-Static-Heuristic-Evaluation-Functions"><span class="nav-number">3.1.</span> <span class="nav-text">9.3.4 (Static) Heuristic Evaluation Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-5-Applying-MiniMax-to-tic-tac-toe"><span class="nav-number">3.2.</span> <span class="nav-text">9.3.5 Applying MiniMax to tic-tac-toe</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-Alpha-Beta-Pruning-Exploiting-the-fact-of-an-Adversary"><span class="nav-number">4.</span> <span class="nav-text">9.4 Alpha-Beta Pruning: Exploiting the fact of an Adversary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-1-example"><span class="nav-number">4.1.</span> <span class="nav-text">9.4.1 example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-2-Alpha-Beta-Example-typical"><span class="nav-number">4.2.</span> <span class="nav-text">9.4.2 Alpha-Beta Example (typical)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-3-Alpha-beta-algorithm"><span class="nav-number">4.3.</span> <span class="nav-text">9.4.3 Alpha-beta algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-4-Pseudocode-for-Alpha-Beta-Algorithm"><span class="nav-number">4.4.</span> <span class="nav-text">9.4.4 Pseudocode for Alpha-Beta Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-4-5-example-revisited"><span class="nav-number">4.4.1.</span> <span class="nav-text">9.4.5 example revisited</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="markastrid"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">markastrid</p>
+  <div class="site-description" itemprop="description">to be continued</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        </style>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">markastrid</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+<div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    </div>
+<div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共67.4k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
