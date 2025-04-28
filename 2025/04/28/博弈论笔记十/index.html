@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="博弈论第十章的内容，关于不完美信息的广义博弈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十章 Extensive Game with Imperfect Information">
+<meta property="og:url" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/index.html">
+<meta property="og:site_name" content="Resume">
+<meta property="og:description" content="博弈论第十章的内容，关于不完美信息的广义博弈">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428144345893.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428144402311.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428144904884.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428145109639.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428152426587.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153430055.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153626496.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153629754.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153732465.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153736327.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153802853.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428161250293.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428161314193.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428161346910.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428162432376.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428210424437.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428211503457.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428212434411.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250429011456122.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250429011540345.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250429011728410.png">
+<meta property="og:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250429011931791.png">
+<meta property="article:published_time" content="2025-04-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-28T17:41:35.588Z">
+<meta property="article:author" content="markastrid">
+<meta property="article:tag" content="广义博弈">
+<meta property="article:tag" content="博弈论第十章">
+<meta property="article:tag" content="不完美信息博弈">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428144345893.png">
+
+<link rel="canonical" href="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>第十章 Extensive Game with Imperfect Information | Resume</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Resume</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Show yourself</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="markastrid">
+      <meta itemprop="description" content="to be continued">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Resume">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第十章 Extensive Game with Imperfect Information
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-04-28 00:00:00" itemprop="dateCreated datePublished" datetime="2025-04-28T00:00:00+08:00">2025-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-29 01:41:35" itemprop="dateModified" datetime="2025-04-29T01:41:35+08:00">2025-04-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%BC%88%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">博弈论</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">博弈论第十章的内容，关于不完美信息的广义博弈</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="10-1-Motivation-动机"><a href="#10-1-Motivation-动机" class="headerlink" title="10.1 Motivation 动机"></a>10.1 Motivation 动机</h2><p>Extensive game with perfect information </p>
+<ul>
+<li>Know all previous strategies for all players</li>
+</ul>
+<p>Sometimes, players </p>
+<ul>
+<li><p>Don’t know all the strategies the other take or</p>
+<p>不知道其他人的策略</p>
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428144345893.png" class="" title="image-20250428144345893">
+<p><strong>Player 2 does not know the choice of player 1 over M or R</strong></p>
+</li>
+<li><p>Don’t recall all their own past actions</p>
+<p>记不清自己之前是否做过策略</p>
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428144402311.png" class="" title="image-20250428144402311">
+<p><strong>Player 1 does not know if he has made a choice or not</strong></p>
+</li>
+</ul>
+<p>Extensive game captures some of this unknown</p>
+<ul>
+<li>A later choice is made without knowledge of an earlier choice</li>
+</ul>
+<p>How to represent the case two players make choices at the same time, in mutual ignorance of each other</p>
+<p>上面的两种形式的详细说明：</p>
+<ol>
+<li><strong>贝叶斯博弈（Bayesian Game）</strong>：<ul>
+<li>在这种形式的博弈中，玩家并不知道其他玩家的确切行动，而是基于概率分布（信念）对其他玩家的状态或类型进行推测。</li>
+<li>玩家根据他们的信念选择策略，而不是完全的确定性信息。每个玩家在做出决策时会考虑到其他玩家可能的行动和类型。</li>
+</ul>
+</li>
+<li><strong>信息集博弈（Information Set Game）</strong>：<ul>
+<li>在这种形式的博弈中，玩家在某些决策节点上无法区分自己所处的历史路径，这些决策节点构成了玩家的<strong>信息集</strong>（information set）。</li>
+<li>每个信息集包含多个可能的历史节点，玩家只知道自己所处的某个信息集，但无法得知更具体的历史（例如，哪些行动已经被其他玩家采取）。</li>
+<li>玩家只能基于他们的当前信息集来选择策略。</li>
+</ul>
+</li>
+</ol>
+<h2 id="10-2-Definition-of-extensive-game-with-Perfect-Information"><a href="#10-2-Definition-of-extensive-game-with-Perfect-Information" class="headerlink" title="10.2 Definition of extensive game with Perfect Information"></a>10.2 Definition of extensive game with Perfect Information</h2><p>An extensive game with perfect information is defined by $G = \{ N, H, P, \{ u_i \} \}$, where:</p>
+<ul>
+<li>Players $N$ is the set of $N$ players</li>
+<li>Histories $H$ is a set of sequence $a^1, a^2, \dots, a^k$, with each component $a^i$ is a strategy</li>
+<li>Player function $P(h): H \to N$ is the player who takes action after history $h$,</li>
+<li>$u_i$ is the payoff function for player $i$,</li>
+<li>$A(h) = \{ a : (h, a) \in H \}$ is the set of available actions at a non-terminal history $h$.</li>
+</ul>
+<h3 id="10-2-1-Ultimatum-Game-最终通牒博弈"><a href="#10-2-1-Ultimatum-Game-最终通牒博弈" class="headerlink" title="10.2.1 Ultimatum Game 最终通牒博弈"></a>10.2.1 Ultimatum Game 最终通牒博弈</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428144904884.png" class="" title="image-20250428144904884">
+<p>$G = \{ N, H, P, \{ u_i \} \}$</p>
+<p>$N = \{ A, B \}$, where $A$ and $B$ are the two players.</p>
+<p>$H = \{\emptyset, (2, 0), (1, 1), (0, 2), ((2, 0), y), ((2, 0), n), ((1, 1), y), ((1, 1), n), ((0, 2), y), ((0, 2), n)\}$ is the set of histories:</p>
+<p>The <strong>player function</strong> $P$ is defined as:</p>
+<ul>
+<li>$P(\emptyset) = A$, meaning Player A moves first.</li>
+<li>$P((2, 0)) = B$, $P((1, 1)) = B$, $P((0, 2)) = B$, meaning Player B moves after the corresponding histories.</li>
+</ul>
+<p>The <strong>action set</strong> $A$ is defined as:</p>
+<ul>
+<li>$A(\emptyset) = \{(2, 0), (0, 2), (1, 1)\}$, the set of possible actions Player A can take from the starting point.</li>
+<li>$A((2, 0)) = A((0, 2)) = A((1, 1)) = \{ y, n \}$, the set of possible actions Player A can take after each of the respective histories.</li>
+</ul>
+<h3 id="10-2-2-Extensive-Game-with-Imperfect-Information"><a href="#10-2-2-Extensive-Game-with-Imperfect-Information" class="headerlink" title="10.2.2 Extensive Game with Imperfect Information"></a>10.2.2 Extensive Game with Imperfect Information</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428145109639.png" class="" title="image-20250428145109639">
+<p>Player 1 does not know the choice of player 2 over LA or LB</p>
+<p>Nonterminal histories:$ \{∅,L,LA,LB\} $</p>
+<ul>
+<li><p>Player 1 has information set $I_1=\{∅,\{LA,LB\}\}$</p>
+</li>
+<li><p>Player 2 has information set $I_2=\{\{L\}\}$</p>
+</li>
+</ul>
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428152426587.png" class="" title="image-20250428152426587">
+<ul>
+<li>Player 1 has the information set $I_{11} = \{\emptyset\}$.</li>
+<li>Player 2 has the information set $I_{21} = \{C\}$.</li>
+<li>Player 3 has the information set $I_{31} = \{D, Cd\}$.</li>
+</ul>
+<h2 id="10-3-Definition-of-Extensive-Game-with-Imperfect-Information"><a href="#10-3-Definition-of-Extensive-Game-with-Imperfect-Information" class="headerlink" title="10.3 Definition of Extensive Game with Imperfect Information"></a>10.3 Definition of Extensive Game with Imperfect Information</h2><p>An extensive game with imperfect information is defined by $G = \{ N, H, P, I, \{ u_i \} \}$.</p>
+<ul>
+<li><p>Information set $I = \{ I_1, I_2, \dots, I_N \}$ is the set of information partitions of all players’ strategy nodes, where the nodes in an information set are indistinguishable to the player.</p>
+<p>$I_i = \{ I_{i1}, \dots, I_{ik_i} \}$ is the information partition of player $i$.</p>
+<p>玩家$i$的所有信息集的集合，表示该玩家能够区分或无法区分的历史节点的分组。每个信息集内的节点对于玩家$i$来说是无法区分的。</p>
+<p>$I_{i1} \cup \dots \cup I_{ik_i} = \text{all nodes of player } i$.</p>
+<p>$I_{ij} \cap I_{ik} = \emptyset$ for all $j \neq k$.</p>
+<p>Action set $A(h) = A(h’)$ for $h, h’ \in I_{ij}$, denoted by $A(I_{ij})$.</p>
+<p>$P(I_{ij})$ is the player who plays at information set $I_{ij}$.</p>
+</li>
+</ul>
+<p>An extensive game with perfect information is a special case where each $I_{ij}$ contains only one node. 即完美信息博弈的时候：每个信息集$ I_{ij} $只包含一个节点，即玩家在任何时刻都可以完全了解所有之前的历史</p>
+<h2 id="10-4-Pure-Strategies"><a href="#10-4-Pure-Strategies" class="headerlink" title="10.4 Pure Strategies"></a>10.4 Pure Strategies</h2><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153430055.png" class="" title="image-20250428153430055">
+<p>A pure strategy for player $i$ selects an available action at each of player $i$’s information sets $I_{i1}, \dots, I_{im}$.</p>
+<p>All pure strategies for player $i$ are:</p>
+<script type="math/tex; mode=display">A(I_{i1}) \times A(I_{i2}) \times \dots \times A(I_{im})</script><p>where $A(I_{ij})$ denotes the strategies available in the information set $I_{ij}$.</p>
+<ul>
+<li>$I_1 = \{ I_{11}, I_{12} \} = \{\emptyset, \{ LA, LB \} \}$  </li>
+<li>$I_2 = \{ I_{21} \} = \{ L \}$  </li>
+<li>$A(I_{21}) = \{ A, B \}$  </li>
+<li>The pure strategy for player 2: $A$, $B$.</li>
+<li>$A(I_{11}) = \{ L, R \}$, $A(I_{12}) = \{ a, b \}$  </li>
+<li>The pure strategy for player 1: $La$, $Lb$, $Ra$, $Rb$.</li>
+</ul>
+<h2 id="10-5-Normal-Form-Representation-of-Extensive-Imperf-Game"><a href="#10-5-Normal-Form-Representation-of-Extensive-Imperf-Game" class="headerlink" title="10.5 Normal-Form Representation of Extensive Imperf. Game"></a>10.5 Normal-Form Representation of Extensive Imperf. Game</h2><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153626496.png" class="" title="image-20250428153626496">
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153629754.png" class="" title="image-20250428153629754">
+<p>The pure and mixed strategy Nash Equilibrium remains?</p>
+<p>What’s the difference from the extensive game with perfect information game?</p>
+<h3 id="10-5-1-A-strategy-game-rightarrow-An-extensive-game-with-imperfect-inf"><a href="#10-5-1-A-strategy-game-rightarrow-An-extensive-game-with-imperfect-inf" class="headerlink" title="10.5.1 A strategy game $\rightarrow$ An extensive game with imperfect inf."></a>10.5.1 A strategy game $\rightarrow$ An extensive game with imperfect inf.</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153732465.png" class="" title="image-20250428153732465">
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153736327.png" class="" title="image-20250428153736327">
+<h3 id="10-5-2-Exercise-3-Players-Game"><a href="#10-5-2-Exercise-3-Players-Game" class="headerlink" title="10.5.2 Exercise: 3-Players Game"></a>10.5.2 Exercise: 3-Players Game</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428153802853.png" class="" title="image-20250428153802853">
+<h2 id="10-6-Perfect-Recall-完美回忆-and-Imperfect-Recall"><a href="#10-6-Perfect-Recall-完美回忆-and-Imperfect-Recall" class="headerlink" title="10.6 Perfect Recall (完美回忆) and Imperfect Recall"></a>10.6 Perfect Recall (完美回忆) and Imperfect Recall</h2><p>An extensive game has perfect information if each information set consist of only one nodes</p>
+<p>An extensive game has perfect recall if each player recalls exactly what he did in the past</p>
+<ul>
+<li>otherwise, this game has imperfect recall</li>
+</ul>
+<h3 id="10-6-1-example"><a href="#10-6-1-example" class="headerlink" title="10.6.1 example"></a>10.6.1 example</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428161250293.png" class="" title="image-20250428161250293">
+<p><strong>Perfect recall</strong></p>
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428161314193.png" class="" title="image-20250428161314193">
+<p><strong>Imperfect recall</strong></p>
+<h3 id="10-6-2-Formal-Definition-of-Perfect-Recall"><a href="#10-6-2-Formal-Definition-of-Perfect-Recall" class="headerlink" title="10.6.2 Formal Definition of Perfect Recall"></a>10.6.2 Formal Definition of Perfect Recall</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428161346910.png" class="" title="image-20250428161346910">
+<p><strong>Definition (Experience record):</strong>  Given a history $h$ of an extensive game, the function $X_i(h)$ is the sequence consisting of information sets that player $i$ encounters in $h$ and the actions that player $i$ takes at them. $X_i$ is called the experience record of player $i$ in $h$.</p>
+<p><strong>经验记录</strong>是一个函数，记作 $X_i(h)$，其中：</p>
+<ul>
+<li>h是某个特定的历史（即游戏的某个状态或节点）。</li>
+<li>$X_i(h) $是一个序列，包含了玩家 i在历史 h所遇到的所有信息集，以及玩家 i在这些信息集中的所做的选择。</li>
+</ul>
+<p>经验记录的关键在于，<strong>信息集</strong>代表的是玩家对历史节点的“感知”。在不完全信息博弈中，同一个信息集中的所有节点对该玩家来说是无法区分的，玩家无法知道他所处的具体节点，只能知道他所处的某个信息集。</p>
+<p><strong>Example:</strong>  In our example game, Player 1 encounters two information sets in the history $h = LA$, namely $\emptyset$ and $\{ LA, LB \}$. In the first information set, he chooses $L$.  So, the experience record for player 1 is:  $ X_1(h) = \{\emptyset, L, \{ LA, LB \} \} $.</p>
+<p><strong>Definition (Perfect Recall)</strong>: An extensive game has perfect recall if for each player $i$, we have $X_i(h) = X_i(h’)$ whenever the histories $h$ and $ h’$ are in the same information set of player i. </p>
+<p><strong>完美记忆（Perfect Recall）的定义：</strong>在一个扩展博弈中，如果对于每个玩家 $i$，在同一信息集中的两个历史 $h$ 和 $h’$，都有 $X_i(h) = X_i(h’)$，那么这个博弈就被称为具有完美记忆。也就是说，如果玩家 $i$ 认为某两个历史是无法区分的（即它们属于同一个信息集），那么在这两个历史下，玩家的经验记录应当是相同的。</p>
+<p><strong>Example</strong>: In our example game, the only non-singleton information set satisfies the condition, since for $h = LA$ and $h’ = LB$ we have<br>$X_1(h) = X_1(h’) = \{\emptyset, L, \{ LA, LB \}\}. $ For the imperfect recall examples, the actions are different for the two histories ending up in the non-singleton information set.</p>
+<p>这两个同一信息集中的LA和LB的记忆记录相同，因此是完美回忆</p>
+<h2 id="10-7-Definition-of-Mixed-and-Behavioral-Strategies"><a href="#10-7-Definition-of-Mixed-and-Behavioral-Strategies" class="headerlink" title="10.7  Definition of Mixed and Behavioral Strategies"></a>10.7  Definition of Mixed and Behavioral Strategies</h2><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428162432376.png" class="" title="image-20250428162432376">
+<p><strong>Mixed Strategies</strong>: A mixed strategy of player i in an extensive game is a probability over the set of player i’s pure strategy</p>
+<p><strong>Behavioral strategies:</strong>  A behavioral strategy of player $i$ is a collection $\beta_{ik}(I_{ik})$ for each $I_{ik} \in I_i$ of independent probability measures, where $\beta_{ik}(I_{ik})$ is a probability measure over $A(I_{ik})$.</p>
+<p>行为策略：在每个信息集中做的决策，每个决策通过独立的概率分布来确定</p>
+<p>Behavioral strategies distinguish from mixed strategies：</p>
+<p>A behavioral strategy for player 1:</p>
+<ul>
+<li><p>Selects A with prob. 0.5, and B otherwise</p>
+</li>
+<li><p>choose G with prob. 0.3, and H otherwise</p>
+</li>
+</ul>
+<p>Here’s a mixed strategy that isn’t a behavioral strategy</p>
+<ul>
+<li><p>Pure Strategy AG with probability 0.6, pure strategy BH 0.4</p>
+</li>
+<li><p>The choices at the two nodes are not independent</p>
+</li>
+</ul>
+<p><strong>区别就是是否独立的问题</strong></p>
+<p>行为策略与混合策略的主要区别在于，行为策略是在每个信息集内进行概率选择的，而不是选择整场游戏中的某个纯策略</p>
+<h3 id="10-7-1-Behavioral-vs-Mixed-Strategies"><a href="#10-7-1-Behavioral-vs-Mixed-Strategies" class="headerlink" title="10.7.1 Behavioral vs. Mixed Strategies"></a>10.7.1 Behavioral vs. Mixed Strategies</h3><p>In imperfect-information games, mixed and behavioral strategies produce different sets of equilibria</p>
+<ul>
+<li>In some games, mixed strategies can achieve equilibria that aren’t achievable by any behavioral strategy</li>
+<li>In some games, behavioral strategies can achieve equilibria that aren’t achievable by any mixed strategy</li>
+</ul>
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428210424437.png" class="" title="image-20250428210424437">
+<p>Consider game</p>
+<ul>
+<li>Player 1 inform. set: $\{\{\emptyset, L\}\}$</li>
+</ul>
+<p>Player 1: R is a strictly dominant strategy</p>
+<p>因为不知道之前有没有做过决策，如果选择L可能直接获得1，但是选择R至少获得2</p>
+<p>还是没有完全理解这两者之间的关系</p>
+<p>Player 2: D is a strictly dominant strategy</p>
+<ul>
+<li><strong>(R, D) is the unique Nash equilibrium for mixed strategy</strong></li>
+</ul>
+<p>1: the information set is {(∅,L)}</p>
+<p>2: D is a strictly dominant strategy</p>
+<p>Player 1’ s best response to D:</p>
+<ul>
+<li><p>Player 1’ s the behavioral strategy [L, p;R, 1 - p] i.e., choose L with probability p</p>
+</li>
+<li><p>The expected payoff of player 1 is</p>
+</li>
+<li><p>$U_1=p^2+100p(1 - p)+2(1-p)=-99p^2+98p+2$</p>
+</li>
+<li><p>To find the maximum, we have p=49/99</p>
+</li>
+</ul>
+<p><strong>(R,D) is not an equilibrium for behavioral strategy</strong></p>
+<h3 id="10-7-2-Kuhn-Theorem-1953"><a href="#10-7-2-Kuhn-Theorem-1953" class="headerlink" title="10.7.2 Kuhn Theorem (1953)"></a>10.7.2 Kuhn Theorem (1953)</h3><p><strong>Theorem</strong> In an finite extensive game with perfect recall</p>
+<ul>
+<li><p>any mixed strategy of a player can be replaced by an equivalent behavioral strategy</p>
+</li>
+<li><p>any behavioral strategy can be replaced by an equivalent mixed strategy</p>
+</li>
+<li><p>Two strategies are equivalent</p>
+</li>
+</ul>
+<p><strong>Corollary</strong> In an finite extensive game with perfect recall, the set of Nash equilibrium does not change if we restrict ourselves to behavior strategies</p>
+<p>在完美信息博弈上这二者等同</p>
+<h3 id="10-7-3-example"><a href="#10-7-3-example" class="headerlink" title="10.7.3 example"></a>10.7.3 example</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428211503457.png" class="" title="image-20250428211503457">
+<p>What behavioral strategy is equivalent to mixed strategy $(p_{AC},p_{AD}, p_{BC}, p_{BD})$</p>
+<p>•$I_{11}=\{∅\}; I_{12}=\{AM,AR\}$</p>
+<p>•$A(I_{11} )=\{A,B\}$</p>
+<p>•$A(I_{12} )=\{C,D\}$</p>
+<script type="math/tex; mode=display">
+\beta_{11} (I_{11})(A) = p_{AC} + p_{AD}, \quad \beta_{11} (I_{11})(B) = p_{BC} + p_{BD}</script><script type="math/tex; mode=display">
+\beta_{12} (I_{12})(C) = \frac{p_{AC}}{p_{AC} + p_{AD}}, \quad \beta_{12} (I_{12})(D) = \frac{p_{AD}}{p_{AC} + p_{AD}}</script><p>What mixed strategy is equivalent to behavioral strategy of prob. p over A and q over C</p>
+<script type="math/tex; mode=display">
+(p_{AC}, p_{AD}, p_{BC}, p_{BD}) = (pq, p(1 - q), (1 - p)q, (1 - p)(1 - q))</script><h3 id="10-8-Extensive-Imperfect-Subgame"><a href="#10-8-Extensive-Imperfect-Subgame" class="headerlink" title="10.8 Extensive Imperfect Subgame"></a>10.8 Extensive Imperfect Subgame</h3><p><strong>Definition</strong> A subgame of an extensive imperfect game G is some node in the tree G and all the nodes that follow it, with the properties that any information set of G is either completely in or outside the subgame</p>
+<p>对于博弈树中的每个信息集，它要么完全包含在子博弈中，要么完全不包含在子博弈中，这确保了子博弈的结构是连贯的，且不涉及在子博弈之外的历史信息</p>
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250428212434411.png" class="" title="image-20250428212434411">
+<p><strong>Definition</strong> A subgame perfect Nash equilibrium of an extensive form game G with perfect recall is a outcome of behavior strategies $(β_1, β_2,…,β_N)$ such that it is a Nash Equilibrium for every subgame</p>
+<p><strong>Theorem</strong> Every finite extensive game with perfect recall has at least one subgame perfect Nash Equilibrium</p>
+<h3 id="10-8-1-example"><a href="#10-8-1-example" class="headerlink" title="10.8.1 example"></a>10.8.1 example</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250429011456122.png" class="" title="image-20250429011456122">
+<h2 id="10-9-Belief"><a href="#10-9-Belief" class="headerlink" title="10.9 Belief"></a>10.9 Belief</h2><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250429011540345.png" class="" title="image-20250429011540345">
+<p>A belief μ is a function that assigns to every information set a probability measure on the set of histories in the information set</p>
+<p>它为每个信息集分配一个概率测度，该测度定义在该信息集中的历史路径集合上</p>
+<p>The probability is 1 for the information set of size 1</p>
+<p>A behavior strategy β a collection of independent probability measure over the actions after information set</p>
+<p>Beliefs affect optimal strategies: For 2, a is the best strategies iff 2 assigns a belief $μ(M)≤1/2$</p>
+<p>Strategies affect reasonable beliefs: If 1 assigns to action (L,M,R) prob. (0.1,0.3,0.6), then Bayes rule requires the belief (1/3,2/3) of 2</p>
+<p>What are reasonable beliefs if 1 select L with prob. 1</p>
+<h3 id="10-9-1-Two-Requirements-to-Beliefs"><a href="#10-9-1-Two-Requirements-to-Beliefs" class="headerlink" title="10.9.1 Two Requirements to Beliefs"></a>10.9.1 Two Requirements to Beliefs</h3><p><strong>Bayes consistency</strong>: beliefs are determined by Bayes’ law in information sets of positive probability; otherwise, beliefs are allowed to be arbitrary for 0 probability.</p>
+<p><strong>Consistency</strong>: beliefs are determined as a limit of case</p>
+<img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250429011728410.png" class="" title="image-20250429011728410">
+<p>(L,M,R) with probability (1-ϵ,3ϵ/4,ϵ/4)</p>
+<h2 id="10-10-Assessment-评估"><a href="#10-10-Assessment-评估" class="headerlink" title="10.10 Assessment (评估)"></a>10.10 Assessment (评估)</h2><p>An assessment is a pair $(\beta, \mu)$</p>
+<ul>
+<li>$\beta$ is an outcome of behavioral strategies</li>
+<li>$\mu$ is a belief system</li>
+</ul>
+<p>An assessment $(\beta, \mu)$ is:</p>
+<ul>
+<li><p><strong>Bayesian consistent</strong> if beliefs in information sets reached with positive probability are determined by Bayes’ law:</p>
+<p>$<br>\mu_{(h,a)}(h,a) = \frac{\beta_{(h,a)}(h,a)}{\sum_a \beta_{(h,a)}(h,a)}<br>$</p>
+<p>for every information set.</p>
+</li>
+<li><p><strong>Consistent</strong> if there is a sequence of Bayesian consistent assessments $(\beta^n, \mu^n)$ such that:</p>
+<p>$<br>(\beta^n, \mu^n) \to (\beta, \mu) \quad \text{as} \quad n \to \infty,<br>$</p>
+<p>and $\beta^n$ is a completely mixed strategy.</p>
+</li>
+</ul>
+<p>$(\beta, \mu)$ is consistent $\implies$ $(\beta, \mu)$ is Bayesian consistent.</p>
+<h3 id="10-10-1-example"><a href="#10-10-1-example" class="headerlink" title="10.10.1 example"></a>10.10.1 example</h3><img src="/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/image-20250429011931791.png" class="" title="image-20250429011931791">
+<p>An assessment $(\beta, \mu)$ by a 4-tuple $(\beta_1, \beta_2, \mu_1, \mu_2) \in [0,1]^4$</p>
+<ul>
+<li>$\beta_1$ is the probability that 1 chooses In</li>
+<li>$\beta_2$ is the probability that 2 chooses In</li>
+<li>$\mu_1$ is the belief assigned to the left node in 1’ s info set</li>
+<li>$\mu_2$ is the belief assigned to the left node in 2’ s info set</li>
+</ul>
+<p>Two cases:</p>
+<p>i) If $\beta_1 \in (0,1]$, 2’ s information set is reached with positive probability. Bayes’ Law dictates that $\mu_1 = \mu_2 = \frac{1}{2}$.</p>
+<p>$<br>(\beta_1, \beta_2, \mu_1, \mu_2) = (0,1] \times [0,1] \times \left\{ \frac{1}{2} \right\} \times \left\{ \frac{1}{2} \right\}<br>$</p>
+<p>are Bayesian consistent.</p>
+<p>ii) If $\beta_1 = 0$, then 2’ s information set is reached with zero probability and $\mu_2 \in [0,1]$.</p>
+<p>$<br>(\beta_1, \beta_2, \mu_1, \mu_2) = \{ 0 \} \times [0,1] \times \left\{ \frac{1}{2} \right\} \times [0,1]<br>$</p>
+<p>are Bayesian consistent.</p>
+<p>Every complete outcome of behavioral strategies leads to $\mu_1 = \mu_2 = \frac{1}{2}$.</p>
+<p>For 2’ s information set, both nodes are reached with equal probability.</p>
+<p><strong>Conclusion:</strong></p>
+<p>$<br>(\beta_1, \beta_2, \mu_1, \mu_2) = [0,1] \times [0,1] \times \left\{ \frac{1}{2} \right\} \times \left\{ \frac{1}{2} \right\}<br>$</p>
+<p>are consistent.</p>
+<h2 id="10-11-Expected-Payoffs-in-Information-Sets"><a href="#10-11-Expected-Payoffs-in-Information-Sets" class="headerlink" title="10.11 Expected Payoffs in Information Sets"></a>10.11 Expected Payoffs in Information Sets</h2><p>Fix assessment $(\beta, \mu)$ and information set $I_{ij}$ of player $i$. We consider the expected payoff of player $i$ on $I_{ij}$ as:</p>
+<p>Given $I_{ij}$, the belief $\mu$ assigns probability over $I_{ij}$ with $\mu(h)$ for $h \in I_{ij}$.</p>
+<p>e: Terminal history</p>
+<p>For $h \in I_{ij}$, let $P(e|h, \beta)$ be the probability from $h$ to $e$ under the behavioral strategy $\beta$, and the payoff is $u_i(e)$.</p>
+<p>The expected payoff for player $i$ in the information $I_{ij}$ w.r.t. $(\beta, \mu)$ is:</p>
+<p>$<br>u_i(\beta_i, \beta_{-i} | I_{ij}, \mu) = \sum_{h \in I_{ij}} \mu(h) \left( \sum_e P(e | h, \beta) u_i(e) \right)<br>$</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>markastrid
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://example.com/2025/04/28/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E5%8D%81/" title="第十章 Extensive Game with Imperfect Information">https://example.com/2025/04/28/博弈论笔记十/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%BF%E4%B9%89%E5%8D%9A%E5%BC%88/" rel="tag"># 广义博弈</a>
+              <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%AC%E5%8D%81%E7%AB%A0/" rel="tag"># 博弈论第十章</a>
+              <a href="/tags/%E4%B8%8D%E5%AE%8C%E7%BE%8E%E4%BF%A1%E6%81%AF%E5%8D%9A%E5%BC%88/" rel="tag"># 不完美信息博弈</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/21/%E5%8D%9A%E5%BC%88%E8%AE%BA%E7%AC%94%E8%AE%B0%E4%B9%9D/" rel="prev" title="第九章 Game Tree Search">
+      <i class="fa fa-chevron-left"></i> 第九章 Game Tree Search
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-Motivation-%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">10.1 Motivation 动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-Definition-of-extensive-game-with-Perfect-Information"><span class="nav-number">2.</span> <span class="nav-text">10.2 Definition of extensive game with Perfect Information</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2-1-Ultimatum-Game-%E6%9C%80%E7%BB%88%E9%80%9A%E7%89%92%E5%8D%9A%E5%BC%88"><span class="nav-number">2.1.</span> <span class="nav-text">10.2.1 Ultimatum Game 最终通牒博弈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2-2-Extensive-Game-with-Imperfect-Information"><span class="nav-number">2.2.</span> <span class="nav-text">10.2.2 Extensive Game with Imperfect Information</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-Definition-of-Extensive-Game-with-Imperfect-Information"><span class="nav-number">3.</span> <span class="nav-text">10.3 Definition of Extensive Game with Imperfect Information</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-Pure-Strategies"><span class="nav-number">4.</span> <span class="nav-text">10.4 Pure Strategies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-Normal-Form-Representation-of-Extensive-Imperf-Game"><span class="nav-number">5.</span> <span class="nav-text">10.5 Normal-Form Representation of Extensive Imperf. Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-5-1-A-strategy-game-rightarrow-An-extensive-game-with-imperfect-inf"><span class="nav-number">5.1.</span> <span class="nav-text">10.5.1 A strategy game $\rightarrow$ An extensive game with imperfect inf.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-5-2-Exercise-3-Players-Game"><span class="nav-number">5.2.</span> <span class="nav-text">10.5.2 Exercise: 3-Players Game</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-Perfect-Recall-%E5%AE%8C%E7%BE%8E%E5%9B%9E%E5%BF%86-and-Imperfect-Recall"><span class="nav-number">6.</span> <span class="nav-text">10.6 Perfect Recall (完美回忆) and Imperfect Recall</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-1-example"><span class="nav-number">6.1.</span> <span class="nav-text">10.6.1 example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-2-Formal-Definition-of-Perfect-Recall"><span class="nav-number">6.2.</span> <span class="nav-text">10.6.2 Formal Definition of Perfect Recall</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-7-Definition-of-Mixed-and-Behavioral-Strategies"><span class="nav-number">7.</span> <span class="nav-text">10.7  Definition of Mixed and Behavioral Strategies</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-7-1-Behavioral-vs-Mixed-Strategies"><span class="nav-number">7.1.</span> <span class="nav-text">10.7.1 Behavioral vs. Mixed Strategies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-7-2-Kuhn-Theorem-1953"><span class="nav-number">7.2.</span> <span class="nav-text">10.7.2 Kuhn Theorem (1953)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-7-3-example"><span class="nav-number">7.3.</span> <span class="nav-text">10.7.3 example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-8-Extensive-Imperfect-Subgame"><span class="nav-number">7.4.</span> <span class="nav-text">10.8 Extensive Imperfect Subgame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-8-1-example"><span class="nav-number">7.5.</span> <span class="nav-text">10.8.1 example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-9-Belief"><span class="nav-number">8.</span> <span class="nav-text">10.9 Belief</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-9-1-Two-Requirements-to-Beliefs"><span class="nav-number">8.1.</span> <span class="nav-text">10.9.1 Two Requirements to Beliefs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-10-Assessment-%E8%AF%84%E4%BC%B0"><span class="nav-number">9.</span> <span class="nav-text">10.10 Assessment (评估)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-10-1-example"><span class="nav-number">9.1.</span> <span class="nav-text">10.10.1 example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-11-Expected-Payoffs-in-Information-Sets"><span class="nav-number">10.</span> <span class="nav-text">10.11 Expected Payoffs in Information Sets</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="markastrid"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">markastrid</p>
+  <div class="site-description" itemprop="description">to be continued</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/markastrid" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;markastrid" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+        <a target="_blank" rel="noopener" href="https://github.com/markastrid" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+        </style>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">markastrid</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+<div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    </div>
+<div class="theme-info">
+    <div class="powered-by"></div>
+    <span class="post-count">全站共70.9k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
